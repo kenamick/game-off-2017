@@ -82,10 +82,12 @@ window.onload = function() {
     if (game.input.keyboard.isDown(Phaser.Keyboard.W)) {
       keydown = true;
       hero.body.velocity.y = -SPEED;
+      hero.animations.play('walk');
     }
     if (game.input.keyboard.isDown(Phaser.Keyboard.S)) {
       keydown = true;      
       hero.body.velocity.y = SPEED;
+      hero.animations.play('walk');
     }
     if (game.input.keyboard.isDown(Phaser.Keyboard.A)) {
       keydown = true;
