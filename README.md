@@ -1,8 +1,6 @@
-Game-Off 2017
-========================
+# Game-Off 2017
 
 Team Kickpunch's rocking entry ...
-
 
 ## Development
 
