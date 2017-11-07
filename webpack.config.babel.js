@@ -44,7 +44,6 @@ const plugins = {
   development: [
     new DashboardPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
   ],
 
   production: [
