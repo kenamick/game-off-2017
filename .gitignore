@@ -57,3 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+# vscode workspace settings
+.vscode/
+
+# Build dir
+dist

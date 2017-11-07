@@ -1,0 +1,20 @@
+{
+  "globals": {
+    "IS_DEVELOPMENT": true
+  },
+  "rules": {
+
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "modules": true,
+      "destructuring": true,
+      "spread": true
+    }
+  },
+  "env": {
+    "browser": true
+  },
+  "parser": "babel-eslint"
+}
