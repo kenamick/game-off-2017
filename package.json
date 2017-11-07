@@ -1,0 +1,45 @@
+{
+  "name": "game-off-2017",
+  "version": "0.1.0",
+  "description": "Team Kickpunch's rocking entry",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/petarov/game-off-2017.git"
+  },
+  "contributors": [
+    "Alexey Vishnyakov <n3tn0de@gmail.com> (github.com/n3tn0de)",
+    "Petar Petrov <petar.petrov.georgiev@gmail.com> (github.com/petarov)"
+  ],
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "NODE_ENV=development webpack-dashboard -- webpack-dev-server",
+    "build": "NODE_ENV=production webpack",
+    "lint": "eslint . --quiet --format 'node_modules/eslint-friendly-formatter'",
+    "fix-lint": "eslint . --fix --format 'node_modules/eslint-friendly-formatter'",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "phaser": "^2.6.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.2",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "eslint": "4.10.0",
+    "eslint-friendly-formatter": "3.0.0",
+    "eslint-plugin-import": "2.8.0",
+    "expose-loader": "^0.7.3",
+    "file-loader": "^1.1.5",
+    "html-webpack-plugin": "^2.30.1",
+    "image-webpack-loader": "^3.4.2",
+    "imports-loader": "^0.7.1",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.8.1",
+    "webpack-dashboard": "^1.0.0",
+    "webpack-dev-server": "^2.9.4"
+  }
+}
