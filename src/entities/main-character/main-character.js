@@ -5,7 +5,7 @@ import Phaser from 'phaser';
 
 window.onload = function() {
   // aspec ratio - (160/400)= 0,4
-  var game = new Phaser.Game(400, 160, Phaser.CANVAS, '',
+  var game = new Phaser.Game(400, 160, Phaser.CANVAS, '', 
     { init: init, preload: preload, create: create, update: update, render: render });
 
   var pixel = { scale: 4, canvas: null, context: null, width: 0, height: 0 };
@@ -70,14 +70,14 @@ window.onload = function() {
       hero.animations.play('stand');
 
       game.physics.arcade.enable(hero);
-
+      
       // camera follows hero
       game.camera.follow(this.sprite);
   }
 
   function render() {
     //  Every loop we need to render the un-scaled game canvas to the displayed scaled canvas:
-    pixel.context.drawImage(game.canvas, 0, 0, game.width, game.height,
+    pixel.context.drawImage(game.canvas, 0, 0, game.width, game.height, 
       0, 0, pixel.width, pixel.height);
   }
 
@@ -86,46 +86,52 @@ window.onload = function() {
   function update() {
     fps.setText('FPS:' + game.time.fps);
 
-    var keydown = false;
+    var moving = false;
+    var combo = false;
 
     if (game.input.keyboard.isDown(Phaser.Keyboard.W)) {
-      keydown = true;
+      moving = true;
       hero.body.velocity.y = -SPEED;
       hero.animations.play('walk');
     }
     if (game.input.keyboard.isDown(Phaser.Keyboard.S)) {
-      keydown = true;
+      moving = true;      
       hero.body.velocity.y = SPEED;
       hero.animations.play('walk');
     }
     if (game.input.keyboard.isDown(Phaser.Keyboard.A)) {
-      keydown = true;
+      moving = true;
 
       hero.body.velocity.x = -SPEED;
       hero.scale.x = 1;
       hero.animations.play('walk');
     }
     if (game.input.keyboard.isDown(Phaser.Keyboard.D)) {
-      keydown = true;
+      moving = true;
 
       hero.body.velocity.x = SPEED;
       hero.scale.x = -1;
-      hero.animations.play('walk');
     }
 
     // this needs more work
     // once enter is pressed the animation stops
     if (game.input.keyboard.isDown(Phaser.Keyboard.ENTER)) {
-      keydown = true;
+      combo = true;
+    }
 
+    if(combo) {
       hero.animations.play('combo');
     }
 
-    if (!keydown) {
+    else if(moving) {
+      hero.animations.play('walk');
+    }
+    else {
       hero.body.velocity.x = 0;
       hero.body.velocity.y = 0;
       hero.animations.play('stand');
     }
 
   }
+
 };
