@@ -1,3 +1,3 @@
-import Phaser from 'phaser';
+import './entities/main-character/main-character'
 
-console.log(Phaser);
+console.log('test');

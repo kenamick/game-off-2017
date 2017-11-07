@@ -1,9 +1,14 @@
-const { resolve } = require(`path`);
+const { join, resolve } = require(`path`);
 const webpack = require(`webpack`);
 const HtmlWebpackPlugin = require(`html-webpack-plugin`);
 const DashboardPlugin = require(`webpack-dashboard/plugin`);
 
 const isDevelopment = process.env.NODE_ENV === `development`;
+
+const phaserModule = join(__dirname, './node_modules/phaser/')
+const phaser = join(phaserModule, 'build/custom/phaser-split.js')
+const pixi = join(phaserModule, 'build/custom/pixi.js')
+const p2 = join(phaserModule, 'build/custom/p2.js')
 
 const entry = {
   app: [resolve(__dirname, `./src/index.js`)],
@@ -59,7 +64,10 @@ const rules = {
     test: /\.jsx?$/,
     exclude: /(node_modules|bower_components)/,
     loader: `babel-loader`,
-    }, {
+  },
+  { test: /pixi\.js/, use: ['expose-loader?PIXI'] },
+  { test: /phaser-split\.js$/, use: ['expose-loader?Phaser'] },
+  { test: /p2\.js/, use: ['expose-loader?p2'] }, {
     test: /\.(mp3|ogg)$/,
     loader: `file-loader?name=assets/sounds/[name]-[hash].[ext]`,
   }],
@@ -118,7 +126,11 @@ module.exports = {
   } : entry,
   output,
   resolve: {
-    extensions: [`.js`],
+    alias: {
+      phaser,
+      pixi,
+      p2,
+    }
   },
   plugins: isDevelopment ?
     [...plugins.common, ...plugins.development] :
