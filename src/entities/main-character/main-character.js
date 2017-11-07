@@ -33,9 +33,15 @@ window.onload = function() {
     pixel.height = pixel.canvas.height;
   }
 
+  const url = require('../../assets/third-party/characters-sprites/characters-sprites.png');
+  const json = require('file-loader!../../assets/third-party/characters-sprites/characters-sprites.json')
+
   function preload() {
-    game.load.atlas('world', 'sprites.png',
-      'sprites.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+    game.load.atlas('world',
+      url,
+      json,
+      Phaser.Loader.TEXTURE_ATLAS_JSON_HASH
+    );
   }
 
   function create() {
