@@ -65,7 +65,9 @@ class Renderer {
   }
 
   update() {
-    fps.setText(this.game.time.fps + 'fps');
+    if (fps) {
+      fps.setText(this.game.time.fps + 'fps');
+    }
   }
 
 }
