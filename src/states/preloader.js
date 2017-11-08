@@ -1,4 +1,4 @@
-// preloader.js 
+// preloader.js
 // Loads all required assets - gfx & sfx
 
 import Renderer from './renderer';
@@ -14,9 +14,9 @@ class Preloader extends Renderer {
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
 
     // load sprites atlas
-    this.load.atlas('atlas_sprites', 
-      require('../assets/third-party/characters-sprites/characters-sprites.png'), 
-      require('file-loader!../assets/third-party/characters-sprites/characters-sprites.json'), 
+    this.load.atlas('atlas_sprites',
+      require('../assets/graphicriver/characters-sprites/characters-sprites.png'),
+      require('file-loader!../assets/graphicriver/characters-sprites/characters-sprites.json'),
       Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
 
   }
