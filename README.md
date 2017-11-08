@@ -40,4 +40,4 @@ Assets are under CC BY 4.0, if no other license present in subdirectories of [./
 
 Third party assets are under graphicriver (Envato Market)
 royalty free Regular License,
-see [./src/assets/third-party/LICENSE](./src/assets/LICENSE).
+see [./src/assets/third-party/LICENSE](./src/assets/third-party/LICENSE).
