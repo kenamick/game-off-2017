@@ -38,6 +38,6 @@ see [./node_modules/](./node_modules)*%dependency-name%/LICENSE* after installat
 
 Assets are under CC BY 4.0, if no other license present in subdirectories of [./src/assets/](./src/assets).
 
-Third party assets are under graphicriver (Envato Market)
-royalty free Regular License,
+Third party assets are under [graphicriver (Envato Market)
+royalty free Regular License](https://graphicriver.net/licenses/terms/regular),
 see [./src/assets/third-party/LICENSE](./src/assets/third-party/LICENSE).
