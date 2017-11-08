@@ -20,11 +20,29 @@ class Renderer {
   init() {
     // scale the game 2x (make game 480x320 wide, still 3:2 ratio)
     this.game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
-    this.game.scale.setUserScale(2, 2);
+
+    this.setScale();
+    window.onresize = () => {
+      this.setScale();
+      const scale = window.innerHeight / this.game.height;
+
+    }
 
     // enable crisp rendering
     this.game.renderer.renderSession.roundPixels = true;
     Phaser.Canvas.setImageRenderingCrisp(this.game.canvas);
+  }
+
+  setScale() {
+    let scale = window.innerHeight / this.game.height;
+
+    if (window.innerWidth < window.innerHeight * this.game.scale.aspectRatio) {
+      scale = window.innerWidth / this.game.width
+    }
+
+    console.log(scale)
+
+    this.game.scale.setUserScale(scale, scale);
   }
 
   enableFps() {
