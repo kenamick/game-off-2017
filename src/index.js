@@ -6,8 +6,8 @@ import Phaser from 'phaser';
 import { Bootstrap, Preloader, MainMenu, GamePlay } from './states';
 
 window.onload = function () {
-  // aspect ratio - (160/400)= 0,4
-  const game = new Phaser.Game(400, 160, Phaser.CANVAS, '');
+  // aspect ratio - (240/160)= 3:2
+  const game = new Phaser.Game(240, 160, Phaser.AUTO, '');
 
   game.state.add('bootstrap', new Bootstrap(game));
   game.state.add('preload', Preloader);
