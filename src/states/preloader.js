@@ -14,7 +14,7 @@ class Preloader extends Renderer {
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
 
     // load sprites atlas
-    this.load.atlas('world', 
+    this.load.atlas('atlas_sprites', 
       require('../assets/third-party/characters-sprites/characters-sprites.png'), 
       require('file-loader!../assets/third-party/characters-sprites/characters-sprites.json'), 
       Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);

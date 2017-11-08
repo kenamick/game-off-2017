@@ -10,6 +10,8 @@ const pixel = {
   height: 0 
 };
 
+let fps;
+
 class Renderer {
 
   constructor(game) {
@@ -46,6 +48,11 @@ class Renderer {
     pixel.height = pixel.canvas.height;
   }
 
+  enableFps() {
+    let font = { font: '11px Arial', fill: 'white' };
+    fps = this.add.text(5, 5, '', font);
+  }
+
   /**
    * Renders the unscaled canvas to the displayed canvas.
    * 
@@ -55,6 +62,10 @@ class Renderer {
   render() {
     pixel.context.drawImage(this.game.canvas, 0, 0, this.game.width, this.game.height, 
       0, 0, pixel.width, pixel.height);
+  }
+
+  update() {
+    fps.setText(this.game.time.fps + 'fps');
   }
 
 }

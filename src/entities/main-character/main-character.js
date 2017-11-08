@@ -1,3 +1,7 @@
+//
+// @DEPRECATED@
+//
+
 // https://phaser.io/examples/v2/bitmapdata/atlas
 import 'pixi';
 import 'p2';
