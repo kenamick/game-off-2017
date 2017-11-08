@@ -13,8 +13,35 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      width: 100vw;
+      height: 100vh;
+      /* display: flex;
+      justify-content: center;
+      align-items: center; */
+      /*
+        flex behaves strange with canvas, it's off the center horizontally
+        when Chrome's window resized to larger width
+      */
+      overflow: hidden;
+      background: url(<%= require('./assets/gameboy-plastic-texture/gameboy-plastic-texture.png') %>);
+    }
+
+    canvas {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-left: 4px solid rgb(100, 100, 100);
+      border-top: 4px solid rgb(100, 100, 100);
+      border-right: 4px solid rgb(150, 150, 150);
+      border-bottom: 4px solid rgb(150, 150, 150);
+    }
+  </style>
 </head>
 <body>
-  <div class="game"></div>
 </body>
 </html>
