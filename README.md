@@ -34,10 +34,8 @@ npm run build
 Source code is under MIT license, see [LICENSE](./LICENSE).
 
 Third party code dependencies are under their respective licenses,
-see [./node_modules/](./node_modules)*%dependency-name%/LICENSE* after installation.
+see [./node_modules/](./node_modules)*%dependency-name%/LICENSE* after their installation.
 
-Assets are under CC BY 4.0, if no other license present in subdirectories of [./src/assets/](./src/assets).
+Assets are under CC BY 4.0 license, if no respective LICENSE file is present in [./src/assets](./src/assets) subdirectories.
 
-Third party assets are under [graphicriver (Envato Market)
-royalty free Regular License](https://graphicriver.net/licenses/terms/regular),
-see [./src/assets/third-party/LICENSE](./src/assets/third-party/LICENSE).
+
