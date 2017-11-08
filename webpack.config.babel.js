@@ -79,12 +79,12 @@ const rules = {
   { test: /phaser-split\.js$/, use: ['expose-loader?Phaser'] },
   { test: /p2\.js/, use: ['expose-loader?p2'] }, {
     test: /\.(mp3|ogg)$/,
-    loader: `file-loader?name=assets/sounds/[name]-[hash].[ext]`,
+    loader: `file-loader?name=assets/audio/[name]-[hash].[ext]`,
   }],
 
   development: [{
     test: /\.(png|jpg|jpeg|gif)$/,
-    loader: `url-loader?limit=25000&name=assets/images/[name]-[hash].[ext]`,
+    loader: `url-loader?limit=25000&name=assets/graphics/[name]-[hash].[ext]`,
   }],
 
   production: [{
@@ -93,7 +93,7 @@ const rules = {
       loader: `url-loader`,
       options: {
         limit: 25000,
-        name: `assets/images/[name]-[hash].[ext]`,
+        name: `assets/graphics/[name]-[hash].[ext]`,
       },
     }, {
       loader: `image-webpack-loader`,
