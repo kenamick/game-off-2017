@@ -6,7 +6,8 @@ import Renderer from './renderer';
 class GamePlay extends Renderer {
 
   create() {
-    this.game.stage.backgroundColor = '#000';
+    // default sky color
+    this.game.stage.backgroundColor = '#c4cfa1';
     
     // Debug
     this.enableFps();
