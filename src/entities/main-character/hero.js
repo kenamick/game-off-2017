@@ -69,19 +69,17 @@ class Hero {
       get left () {
         return (
           game.input.keyboard.isDown(Phaser.Keyboard.A) ||
-          game.input.keyboard.isDown(Phaser.Keyboard.LEFT) || (
-            pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) ||
-            pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -stickThreshold
-          )
+          game.input.keyboard.isDown(Phaser.Keyboard.LEFT) ||
+          pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) ||
+          pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -stickThreshold
         );
       },
       get right () {
         return (
           game.input.keyboard.isDown(Phaser.Keyboard.D) ||
-          game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) || (
-            pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) ||
-            pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > stickThreshold
-          )
+          game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) ||
+          pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) ||
+          pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > stickThreshold
         );
       },
       get punch () {
