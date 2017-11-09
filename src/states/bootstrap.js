@@ -21,7 +21,7 @@ class Bootstrap extends Renderer {
   }
 
   init() {
-    super.init();
+    super.initOnce();
   }
 
   update() {

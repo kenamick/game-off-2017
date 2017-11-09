@@ -17,7 +17,7 @@ class Renderer {
    *
    * @see http://www.photonstorm.com/phaser/pixel-perfect-scaling-a-phaser-game
    */
-  init() {
+  initOnce() {
     // scale the game 2x (make game 480x320 wide, still 3:2 ratio)
     this.game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
 
