@@ -15,8 +15,8 @@ class Preloader extends Renderer {
 
     // load sprites atlas
     this.load.atlas('atlas_sprites',
-      require('../assets/graphicriver-fassous/characters-sprites/characters-sprites.png'),
-      require('file-loader!../assets/graphicriver-fassous/characters-sprites/characters-sprites.json'),
+      require('../assets/sprites/sprites.png'),
+      require('file-loader!../assets/sprites/sprites.json'),
       Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
 
   }
