@@ -120,13 +120,13 @@ class Hero {
       // The idea here is not to be able to move while fighting
       // Player has to attack from standing position.
 
-      if (this.controls.up) {
+      if (this.controls.up && !this.controls.down) {
         moving = true;
         this._sprite.body.velocity.y = -HeroConsts.SPEED;
         this._sprite.animations.play('walk');
       }
 
-      if (this.controls.down) {
+      if (this.controls.down && !this.controls.up) {
         moving = true;
         this._sprite.body.velocity.y = HeroConsts.SPEED;
         this._sprite.animations.play('walk');
