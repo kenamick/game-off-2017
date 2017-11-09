@@ -24,8 +24,6 @@ class Renderer {
     this.setScale();
     window.onresize = () => {
       this.setScale();
-      const scale = window.innerHeight / this.game.height;
-
     }
 
     // enable crisp rendering
@@ -39,8 +37,6 @@ class Renderer {
     if (window.innerWidth < window.innerHeight * this.game.scale.aspectRatio) {
       scale = window.innerWidth / this.game.width
     }
-
-    console.log(scale)
 
     this.game.scale.setUserScale(scale, scale);
   }
