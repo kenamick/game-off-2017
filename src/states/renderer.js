@@ -32,10 +32,12 @@ class Renderer {
   }
 
   setScale() {
-    let scale = window.innerHeight / this.game.height;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    let scale = height / this.game.height;
 
-    if (window.innerWidth < window.innerHeight * this.game.scale.aspectRatio) {
-      scale = window.innerWidth / this.game.width
+    if (width < height * this.game.scale.aspectRatio) {
+      scale = width / this.game.width
     }
 
     this.game.scale.setUserScale(scale, scale);
