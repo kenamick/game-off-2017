@@ -10,9 +10,9 @@ class Act1 extends GamePlay {
   create() {
     super.create();
 
-    //Add the tilemap and tileset image. The first parameter in addTilesetImage
-    //is the name you gave the tilesheet when importing it into Tiled, the second
-    //is the key to the asset in Phaser
+    // TODO: make this work when act1 is complete in Tiled
+    this.game.world.setBounds(0, 0, 10 * 48, 10 * 48);
+
     this.map = this.game.add.tilemap('act1');
     this.map.addTilesetImage('gd-tileset', 'gd-tiles');
 
