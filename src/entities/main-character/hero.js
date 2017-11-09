@@ -59,10 +59,9 @@ class Hero {
       get down () {
         return (
           game.input.keyboard.isDown(Phaser.Keyboard.S) ||
-          game.input.keyboard.isDown(Phaser.Keyboard.DOWN)|| (
-            pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_DOWN) ||
-            pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > stickThreshold
-          )
+          game.input.keyboard.isDown(Phaser.Keyboard.DOWN)||
+          pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_DOWN) ||
+          pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > stickThreshold
         );
       },
       get left () {
