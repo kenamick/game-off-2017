@@ -23,15 +23,15 @@ class GamePlay extends Renderer {
     this.game.stage.backgroundColor = '#c4cfa1';
     // this.game.stage.backgroundColor = '#4D533C'; @n3tn0de's
 
-    // the behind group is basically a layer in the level where the sidewalk is
-    // we need to put objects either in front or behind the sidewalk positioned
-    // sprites
+    // The 'behind' group is basically a layer in the level the contains sprites
+    // behind the sidewalk objects layer. We need to put objects either in front 
+    // or behind the sidewalk objects
     this.behindGroup = this.add.group();
 
     // front group contains all sprites that are 'in front' of the sidewalk
     this.frontGroup = this.add.group();
 
-    // obstacle AABB objects loaded from the game level will be placed here
+    // obstacles group - static AABB objects loaded from the game level
     this.obstaclesGroup = this.add.group();
   }
 
@@ -68,8 +68,9 @@ class GamePlay extends Renderer {
   }
 
   /**
-   * Checks positions of sprites in groups for constraints.
-   * This will swap a sprite from behind to front and vice versa groups.
+   * Checks position constraints of sprites in behind/front groups.
+   * This will move moveable bodies, ergo sprites, from 'behind' to 'front' 
+   * and vice versa.
    */
   updateZOrders() {
     // TODO: this could probably be further optimized
