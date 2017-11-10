@@ -21,7 +21,7 @@ class Act1 extends GamePlay {
     this.createLevel('act1', 20, 5);
 
     this.player = new Hero(this.game);
-    this.player.spawn(50, 144);
+    this.player.spawn(80, 164);
 
     this.frontGroup.add(this.player.sprite);
 
@@ -30,8 +30,6 @@ class Act1 extends GamePlay {
   }
 
   update() {
-    
-    
     this.player.update();
 
     super.update();
