@@ -2,7 +2,7 @@
 import Globals from '../../globals';
 
 const HeroConsts = {
-  SPEED: 60
+  SPEED: 40
 };
 
 class Hero {
