@@ -80,6 +80,9 @@ const rules = {
   { test: /p2\.js/, use: ['expose-loader?p2'] }, {
     test: /\.(mp3|ogg)$/,
     loader: `file-loader?name=assets/audio/[name]-[hash].[ext]`,
+  }, {
+    test: /\.(ttf|woff)$/,
+    loader: `file-loader?name=fonts/[name].[ext]`,
   }],
 
   development: [{
