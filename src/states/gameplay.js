@@ -13,6 +13,7 @@ const TileMapConsts = {
   LAYER_BG_ITEMS: 'background-items',
   LAYER_FG: 'foreground',
   FG_Y: 123, // y position where foreground sidewalk objects start,
+  WALK_CONSTRAINT_Y: 96
 };
 
 class GamePlay extends Renderer {
@@ -50,9 +51,46 @@ class GamePlay extends Renderer {
     this.frontGroup.add(this.layers.foreground);
   }
 
+  /**
+   * Checks positions of sprites in groups for constraints.
+   * This will swap a sprite from behind to front and vice versa groups.
+   */
+  updateZOrders() {
+    // TODO: this could probably be further optimized
+    for (let sprite of this.behindGroup.children) {
+      if (sprite.bottom > TileMapConsts.FG_Y) {
+        this.behindGroup.remove(this.player.sprite);
+        this.frontGroup.add(this.player.sprite);
+      }
+    }
+
+    for (let sprite of this.frontGroup.children) {
+      if (sprite.bottom < TileMapConsts.FG_Y) {
+        this.frontGroup.remove(this.player.sprite);
+        this.behindGroup.add(this.player.sprite);
+      }
+    }
+  }
+
+  updateCollisions(group) {
+    // TODO pass walk constraints as params, so that other levels
+    // can specify something different
+
+    for (let sprite of group.children) {
+      if (sprite.bottom - 5 < TileMapConsts.WALK_CONSTRAINT_Y && 
+        sprite.body.velocity.y < 0) {
+        //sprite.body.velocity.x = 0;
+        sprite.body.velocity.y = 0;
+      }
+    }
+  }
+
   update() {
     super.update();
     
+    this.updateZOrders();
+    this.updateCollisions(this.frontGroup);
+    this.updateCollisions(this.behindGroup);
   }
 
 }
