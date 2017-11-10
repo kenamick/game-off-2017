@@ -22,7 +22,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "phaser": "^2.6.2"
+    "phaser-ce": "^2.9.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

@@ -5,7 +5,7 @@ const DashboardPlugin = require(`webpack-dashboard/plugin`);
 
 const isDevelopment = process.env.NODE_ENV === `development`;
 
-const phaserModule = join(__dirname, './node_modules/phaser/')
+const phaserModule = join(__dirname, './node_modules/phaser-ce/')
 const phaser = join(phaserModule, 'build/custom/phaser-split.js')
 const pixi = join(phaserModule, 'build/custom/pixi.js')
 const p2 = join(phaserModule, 'build/custom/p2.js')
