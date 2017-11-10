@@ -1,5 +1,6 @@
 // renderer.js - Base class.
 // Each state needs to extend from the Renderer.
+import Globals from '../globals';
 
 let fps;
 
@@ -29,6 +30,13 @@ class Renderer {
     // enable crisp rendering
     this.game.renderer.renderSession.roundPixels = true;
     Phaser.Canvas.setImageRenderingCrisp(this.game.canvas);
+
+    // debug
+    if (Globals.showFps) {
+      let font = { font: '11px Arial', fill: 'white' };
+      fps = this.add.text(5, 5, '', font);
+    }
+
   }
 
   setScale() {
@@ -41,11 +49,6 @@ class Renderer {
     }
 
     this.game.scale.setUserScale(scale, scale);
-  }
-
-  enableFps() {
-    let font = { font: '11px Arial', fill: 'white' };
-    fps = this.add.text(5, 5, '', font);
   }
 
   update() {
