@@ -1,7 +1,8 @@
 // hero.js
+import Globals from '../../globals';
 
 const HeroConsts = {
-  SPEED: 40
+  SPEED: 60
 };
 
 class Hero {
@@ -32,7 +33,10 @@ class Hero {
 
     this._sprite.animations.play('stand');
 
+    // setup physics
+    // TODO: this is a simple bounding box
     game.physics.arcade.enable(this._sprite);
+    this._sprite.body.setSize(18, 8, 15, 40);
 
     // camera always follows the main player
     game.camera.follow(this._sprite);
@@ -160,6 +164,11 @@ class Hero {
       this._sprite.body.velocity.x = 0;
       this._sprite.body.velocity.y = 0;
       this._sprite.animations.play('stand');
+    }
+
+    // show physics body
+    if (Globals.debugPhysics) {
+      this.game.debug.body(this._sprite);
     }
   }
 
