@@ -9,15 +9,21 @@ class Bootstrap extends Renderer {
     super(game);
   }
 
+  preload() {
+    // load loading bar
+    this.game.load.image('loadingBar', require('../assets/images/loading.png'));
+  }
+
   create() {
     // enables fps counting
     this.time.advancedTiming = true;
-    
+
     // enables keyboard input
     this.cursors = this.input.keyboard.createCursorKeys();
 
     // enables simple physics engine
     this.physics.startSystem(Phaser.Physics.ARCADE);
+
   }
 
   init() {

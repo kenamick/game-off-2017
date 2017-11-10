@@ -13,6 +13,11 @@ class Preloader extends Renderer {
   preload() {
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
 
+    let loadingBar = this.game.add.sprite(this.game.world.centerX / 2, this.game.world.centerY, 'loadingBar');
+    loadingBar.center = this.world.centerX;
+    loadingBar.scale.setTo(0.5);
+    this.game.load.setPreloadSprite(loadingBar);
+
     // load levels
     this.game.load.tilemap('act1', 
       require('file-loader!../assets/levels/act1.json'), null,
