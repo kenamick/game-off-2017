@@ -3,7 +3,8 @@
 import Globals from '../globals';
 import Renderer from './renderer';
 
-const GamePlayConsts  ={
+const GamePlayConsts = {
+  COLORS: { SKY: '#c4cfa1' }
 };
 
 const TileMapConsts = {
@@ -12,16 +13,22 @@ const TileMapConsts = {
   LAYER_BG: 'background',
   LAYER_BG_ITEMS: 'background-items',
   LAYER_FG: 'foreground',
+  OBJECTS_COLLECT: 'collectables',
   FG_Y: 123, // y position where foreground sidewalk objects start,
-  WALK_CONSTRAINT_Y: 96
+  WALK_CONSTRAINT_Y: 96,
+  COLLECTABLES: {
+    'food25': { frame: 'chicken_01' },
+    'food50': { frame: 'steak_01' },
+    'food75': { frame: 'meatloaf_2' },
+    'food100': { frame: 'chicken_02' }
+  }
 };
 
 class GamePlay extends Renderer {
 
   create() {
     // default sky color
-    this.game.stage.backgroundColor = '#c4cfa1';
-    // this.game.stage.backgroundColor = '#4D533C'; @n3tn0de's
+    this.game.stage.backgroundColor = GamePlayConsts.COLORS.SKY; // '#4D533C'; @n3tn0de's
 
     // The 'behind' group is basically a layer in the level the contains sprites
     // behind the sidewalk objects layer. We need to put objects either in front 
@@ -31,8 +38,10 @@ class GamePlay extends Renderer {
     // front group contains all sprites that are 'in front' of the sidewalk
     this.frontGroup = this.add.group();
 
-    // obstacles group - static AABB objects loaded from the game level
+    // static AABB objects loaded from the game level
     this.obstaclesGroup = this.add.group();
+
+    this.collectablesGroup = this.add.group();
   }
 
   createLevel(name, tilesWidth, tilesHeight) {
@@ -50,7 +59,7 @@ class GamePlay extends Renderer {
       foreground: this.map.createLayer(TileMapConsts.LAYER_FG)
     };
 
-    for (let obj of this.map.objects.obstacles) {
+    for (const obj of this.map.objects.obstacles) {
       const sprite = this.game.add.sprite(obj.x, obj.y, null);
       
       this.game.physics.arcade.enable(sprite);
@@ -62,9 +71,21 @@ class GamePlay extends Renderer {
       this.obstaclesGroup.add(sprite);
     }
 
+    this._placeCollectables(this.map);
+
     // sidewalk items layer needs to be either behind or in-front 
     // of on-screen sprites
     this.frontGroup.add(this.layers.foreground);
+  }
+
+  _placeCollectables(map) {
+    for (const [k, v] of Object.entries(TileMapConsts.COLLECTABLES)) {
+      this.map.createFromObjects(TileMapConsts.OBJECTS_COLLECT, 
+        k, 'atlas_sprites', v.frame, true, true, this.collectablesGroup, 
+        Phaser.Sprite, true, false);
+    }
+
+    this.game.physics.arcade.enable(this.collectablesGroup);
   }
 
   /**
@@ -72,16 +93,16 @@ class GamePlay extends Renderer {
    * This will move moveable bodies, ergo sprites, from 'behind' to 'front' 
    * and vice versa.
    */
-  updateZOrders() {
+  _updateZOrders() {
     // TODO: this could probably be further optimized
-    for (let sprite of this.behindGroup.children) {
+    for (const sprite of this.behindGroup.children) {
       if (sprite.bottom > TileMapConsts.FG_Y) {
         this.behindGroup.remove(this.player.sprite);
         this.frontGroup.add(this.player.sprite);
       }
     }
 
-    for (let sprite of this.frontGroup.children) {
+    for (const sprite of this.frontGroup.children) {
       if (sprite.bottom < TileMapConsts.FG_Y) {
         this.frontGroup.remove(this.player.sprite);
         this.behindGroup.add(this.player.sprite);
@@ -89,13 +110,13 @@ class GamePlay extends Renderer {
     }
   }
 
-  updateCollisions(group) {
-    // TODO pass walk constraints as params, so that other levels
-    // can specify something different
-
+  _updateCollisions(group) {
     // show obstacles positions
     if (Globals.debugPhysics) {
       for (const obj of this.obstaclesGroup.children) {
+        this.game.debug.body(obj);
+      }
+      for (const obj of this.collectablesGroup.children) {
         this.game.debug.body(obj);
       }
     }
@@ -106,6 +127,8 @@ class GamePlay extends Renderer {
       if (sprite.body && !sprite.body.immovable) {
 
         // apply sidewalk constraint
+        // TODO pass walk constraints as params, so that other levels
+        // can specify something different
         if (sprite.bottom - 5 < TileMapConsts.WALK_CONSTRAINT_Y && 
           sprite.body.velocity.y < 0) {
   
@@ -115,6 +138,13 @@ class GamePlay extends Renderer {
 
         // check against obstacles in the loaded level 'obstacles' layer
         this.physics.arcade.collide(sprite, this.obstaclesGroup);
+
+        // check against obstacles in the loaded level 'obstacles' layer
+        this.physics.arcade.collide(sprite, this.collectablesGroup, (o1, o2) => {
+          // TODO add to player's health, show text, play sound
+          // 
+          o2.destroy();
+        });
       }
     }
   }
@@ -122,9 +152,9 @@ class GamePlay extends Renderer {
   update() {
     super.update();
     
-    this.updateZOrders();
-    this.updateCollisions(this.frontGroup);
-    this.updateCollisions(this.behindGroup);
+    this._updateZOrders();
+    this._updateCollisions(this.frontGroup);
+    this._updateCollisions(this.behindGroup);
   }
 
 }
