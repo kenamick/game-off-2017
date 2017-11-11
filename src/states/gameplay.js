@@ -99,25 +99,34 @@ class GamePlay extends Renderer {
     this.game.physics.arcade.enable(this.collectablesGroup);
   }
 
+  addSpriteToLayer(sprite) {
+    if (!sprite.immovable) {
+      const isInBehind = this.behindGroup.children.indexOf(sprite) > -1;
+      
+      if (sprite.bottom > TileMapConsts.FG_Y && isInBehind) {
+        this.behindGroup.remove(sprite);
+        this.frontGroup.add(sprite);
+        // console.log('move to front', sprite.name);
+      } else if (sprite.bottom < TileMapConsts.FG_Y && !isInBehind) {
+        this.frontGroup.remove(sprite);
+        this.behindGroup.add(sprite);
+        // console.log('move to back', sprite.name);
+      }
+    }
+  }
+
   /**
    * Checks position constraints of sprites in behind/front groups.
    * This will move moveable bodies, ergo sprites, from 'behind' to 'front' 
    * and vice versa.
    */
   _updateZOrders() {
-    // TODO: this could probably be further optimized
     for (const sprite of this.behindGroup.children) {
-      if (sprite.bottom > TileMapConsts.FG_Y) {
-        this.behindGroup.remove(this.player.sprite);
-        this.frontGroup.add(this.player.sprite);
-      }
+      this.addSpriteToLayer(sprite);
     }
 
     for (const sprite of this.frontGroup.children) {
-      if (sprite.bottom < TileMapConsts.FG_Y) {
-        this.frontGroup.remove(this.player.sprite);
-        this.behindGroup.add(this.player.sprite);
-      }
+      this.addSpriteToLayer(sprite);
     }
   }
 
@@ -152,7 +161,7 @@ class GamePlay extends Renderer {
 
         // check against obstacles in the loaded level 'obstacles' layer
         this.physics.arcade.collide(sprite, this.collectablesGroup, (o1, o2) => {
-          // TODO add to player's health, show text, play sound
+          // TODO add to player's health, play sound
           // 
           o2.destroy();
 
