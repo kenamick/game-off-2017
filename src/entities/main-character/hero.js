@@ -126,29 +126,46 @@ class Hero {
 
       if (this.controls.up && !this.controls.down) {
         moving = true;
-        this._sprite.body.velocity.y = -HeroConsts.SPEED;
         this._sprite.animations.play('walk');
+
+        this._sprite.body.velocity.x =
+          this.controls.left || this.controls.right ?
+            this._sprite.body.velocity.x : 0;
+        this._sprite.body.velocity.y = -HeroConsts.SPEED;
       }
 
       if (this.controls.down && !this.controls.up) {
         moving = true;
-        this._sprite.body.velocity.y = HeroConsts.SPEED;
         this._sprite.animations.play('walk');
+
+        this._sprite.body.velocity.x =
+          this.controls.left || this.controls.right ?
+            this._sprite.body.velocity.x : 0;
+        this._sprite.body.velocity.y = HeroConsts.SPEED;
       }
 
       if (this.controls.left && !this.controls.right) {
         moving = true;
 
-        this._sprite.body.velocity.x = -HeroConsts.SPEED;
         this._sprite.scale.x = 1;
         this._sprite.animations.play('walk');
+
+        this._sprite.body.velocity.x = -HeroConsts.SPEED;
+        this._sprite.body.velocity.y =
+          this.controls.up || this.controls.down ?
+            this._sprite.body.velocity.y : 0;
       }
 
       if (this.controls.right && !this.controls.left) {
         moving = true;
 
-        this._sprite.body.velocity.x = HeroConsts.SPEED;
         this._sprite.scale.x = -1;
+        this._sprite.animations.play('walk');
+
+        this._sprite.body.velocity.x = HeroConsts.SPEED;
+        this._sprite.body.velocity.y =
+          this.controls.up || this.controls.down ?
+            this._sprite.body.velocity.y : 0;
       }
     }
 
