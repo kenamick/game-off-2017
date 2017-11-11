@@ -18,7 +18,7 @@ const output = {
   path: resolve(__dirname, `./dist/`),
   filename: isDevelopment ?
     `assets/[name]-[hash].js` : `assets/[name]-[chunkhash].js`,
-  publicPath: `/`,
+  publicPath: isDevelopment ? `/` : `./`,
 };
 
 const plugins = {
