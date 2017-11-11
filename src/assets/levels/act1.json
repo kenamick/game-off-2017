@@ -189,8 +189,40 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "name":"collectables",
+         "objects":[
+                {
+                 "height":10,
+                 "id":16,
+                 "name":"food25",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":10,
+                 "x":485,
+                 "y":164
+                }, 
+                {
+                 "height":10,
+                 "id":18,
+                 "name":"food100",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":10,
+                 "x":77.6666666666666,
+                 "y":161.666666666667
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextobjectid":16,
+ "nextobjectid":19,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.0.3",
