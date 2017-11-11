@@ -44,6 +44,15 @@ class GamePlay extends Renderer {
     this.collectablesGroup = this.add.group();
   }
 
+  /**
+   * Brings game layers to their default arrangement positions
+   */
+  arrangeLayers() {
+    this.game.world.bringToTop(this.behindGroup);
+    this.game.world.bringToTop(this.collectablesGroup);
+    this.game.world.bringToTop(this.frontGroup);
+  }
+
   createLevel(name, tilesWidth, tilesHeight) {
     this.game.world.setBounds(0, 0, 
       tilesWidth * TileMapConsts.TILE_SIZE, 

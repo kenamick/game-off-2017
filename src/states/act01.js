@@ -25,13 +25,13 @@ class Act1 extends GamePlay {
 
     this.frontGroup.add(this.player.sprite);
 
-    this.game.world.bringToTop(this.behindGroup);
-    this.game.world.bringToTop(this.frontGroup);
+    this.arrangeLayers();
   }
 
   update() {
     this.player.update();
-
+    
+    // do collisions checks, etc. after player & NPC movements
     super.update();
   }
 
