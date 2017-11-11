@@ -2,6 +2,7 @@
 // Common game levels routines, mechanics, entities, etc.
 import Globals from '../globals';
 import Renderer from './renderer';
+import SpecialFx from '../specialfx';
 
 const GamePlayConsts = {
   COLORS: { SKY: '#c4cfa1' }
@@ -40,8 +41,9 @@ class GamePlay extends Renderer {
 
     // static AABB objects loaded from the game level
     this.obstaclesGroup = this.add.group();
-
     this.collectablesGroup = this.add.group();
+
+    this.specialFx = new SpecialFx(this.game);
   }
 
   /**
@@ -153,6 +155,8 @@ class GamePlay extends Renderer {
           // TODO add to player's health, show text, play sound
           // 
           o2.destroy();
+
+          this.specialFx.textdraw.fadingUp(o2.x, o2.y, 'YUMMY!');
         });
       }
     }

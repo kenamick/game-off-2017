@@ -1,4 +1,4 @@
-// globa.js - global game switches and consts
+// globals.js - global game switches and consts
 
 const checkStringBoolean = (item) => item === `true`;
 
@@ -16,6 +16,8 @@ const Globals = {
   // maybe add dev-* key to items' names so we can cycle through options
   // list and assign values automatically
   ...URLOptions, // url options override localSotrage values
-}
+
+  gameFont: 'Arial'
+};
 
 export default Globals;
