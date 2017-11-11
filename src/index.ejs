@@ -31,6 +31,8 @@
     }
 
     canvas {
+      pointer-events: none; /* fixes inability to regain keyboard focus
+        when game is loaded in iframe*/
       position: absolute;
       top: 50%;
       left: 50%;
