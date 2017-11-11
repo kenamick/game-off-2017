@@ -33,8 +33,9 @@ class TextDraw {
     msg.alpha = 1;
 
     const tween = this.game.add.tween(msg).to({ alpha: 0 },
-      TextConsts.FADE_OUT, Phaser.Easing.Quartic.In, true, 0, 0, false);
+      TextConsts.FADE_OUT, Phaser.Easing.Cubic.Out, true, 0, 0, false);
 
+    tween.onComplete.add(() => msg.destroy());
     // if (callback) {
     //   tween.onComplete.add(callback);
     // }
@@ -47,6 +48,8 @@ class TextDraw {
 
     const tween = this.game.add.tween(msg).to({ alpha: 0, y: toY }, 
       TextConsts.FADE_OUT, Phaser.Easing.Cubic.Out, true, 0, 0, false);
+
+    tween.onComplete.add(() => msg.destroy());
   }
 
 }
