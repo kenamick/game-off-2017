@@ -41,7 +41,7 @@ class GamePlay extends Renderer {
 
     // static AABB objects loaded from the game level
     this.obstaclesGroup = this.add.group();
-    this.collectablesGroup = this.add.group();
+    this.collectables = [];
 
     this.specialFx = new SpecialFx(this.game);
   }
@@ -51,7 +51,6 @@ class GamePlay extends Renderer {
    */
   arrangeLayers() {
     this.game.world.bringToTop(this.behindGroup);
-    this.game.world.bringToTop(this.collectablesGroup);
     this.game.world.bringToTop(this.frontGroup);
   }
 
@@ -90,28 +89,45 @@ class GamePlay extends Renderer {
   }
 
   _placeCollectables(map) {
+    const collectablesGroup = this.add.group();
+
     for (const [k, v] of Object.entries(TileMapConsts.COLLECTABLES)) {
       this.map.createFromObjects(TileMapConsts.OBJECTS_COLLECT, 
-        k, 'atlas_sprites', v.frame, true, true, this.collectablesGroup, 
+        k, 'atlas_sprites', v.frame, true, true, collectablesGroup, 
         Phaser.Sprite, true, false);
     }
 
-    this.game.physics.arcade.enable(this.collectablesGroup);
+    // XXX this is a bit crappy, but there does not seem to be away
+    // to put createFromObjects() sprites directly into an array instead of
+    // in a group
+    for (const sprite of collectablesGroup.children) {
+      this.collectables.push(sprite);
+    }
+    for (const sprite of this.collectables) {
+      this.addSpriteToLayer(sprite, true);
+    }
+    collectablesGroup.removeAll();
+
+    this.game.physics.arcade.enable(this.collectables);
   }
 
-  addSpriteToLayer(sprite) {
-    if (!sprite.immovable) {
-      const isInBehind = this.behindGroup.children.indexOf(sprite) > -1;
-      
-      if (sprite.bottom > TileMapConsts.FG_Y && isInBehind) {
-        this.behindGroup.remove(sprite);
-        this.frontGroup.add(sprite);
-        // console.log('move to front', sprite.name);
-      } else if (sprite.bottom < TileMapConsts.FG_Y && !isInBehind) {
-        this.frontGroup.remove(sprite);
-        this.behindGroup.add(sprite);
-        // console.log('move to back', sprite.name);
-      }
+  /**
+   * Adds a sprite to the appropriate layer based on it's coordinates.
+   * 
+   * @param {*} noParent true, if the sprite's neither in the behind 
+   * nor in the front group.
+   */
+  addSpriteToLayer(sprite, noParent) {
+    const isInBehind = this.behindGroup.children.indexOf(sprite) > -1;
+
+    if (sprite.bottom > TileMapConsts.FG_Y && (isInBehind || noParent)) {
+      this.behindGroup.remove(sprite);
+      this.frontGroup.add(sprite);
+      // console.log('move to front', sprite.name, sprite.y, sprite.bottom);
+    } else if (sprite.bottom < TileMapConsts.FG_Y && (!isInBehind || noParent)) {
+      this.frontGroup.remove(sprite);
+      this.behindGroup.add(sprite);
+      // console.log('move to back', sprite.name, sprite.y, sprite.bottom);
     }
   }
 
@@ -122,12 +138,20 @@ class GamePlay extends Renderer {
    */
   _updateZOrders() {
     for (const sprite of this.behindGroup.children) {
-      this.addSpriteToLayer(sprite);
+      if (!sprite.immovable) {
+        this.addSpriteToLayer(sprite);
+      }
     }
 
     for (const sprite of this.frontGroup.children) {
-      this.addSpriteToLayer(sprite);
+      if (!sprite.immovable) {
+        this.addSpriteToLayer(sprite);
+      }
     }
+
+    // sort all sprites by their bottom coords
+    // to make overlapping more realistic
+    this.behindGroup.sort('bottom', Phaser.Group.SORT_ASCENDING);
   }
 
   _updateCollisions(group) {
@@ -160,7 +184,7 @@ class GamePlay extends Renderer {
         this.physics.arcade.collide(sprite, this.obstaclesGroup);
 
         // check against obstacles in the loaded level 'obstacles' layer
-        this.physics.arcade.collide(sprite, this.collectablesGroup, (o1, o2) => {
+        this.physics.arcade.collide(sprite, this.collectables, (o1, o2) => {
           // TODO add to player's health, play sound
           // 
           o2.destroy();
