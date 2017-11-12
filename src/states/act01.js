@@ -7,7 +7,7 @@ import {
   GamePlayConsts,
   TileMapConsts
 } from './gameplay';
-import { Hero } from '../entities/main-character';
+import { Hero } from '../entities';
 
 const Consts = {
 

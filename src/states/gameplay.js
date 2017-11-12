@@ -3,6 +3,9 @@
 import Globals from '../globals';
 import Renderer from './renderer';
 import SpecialFx from '../specialfx';
+import { 
+  FoeP1
+} from '../entities';
 
 const GamePlayConsts = {
   COLORS: { SKY: '#c4cfa1' }
@@ -15,6 +18,7 @@ const TileMapConsts = {
   LAYER_BG_ITEMS: 'background-items',
   LAYER_FG: 'foreground',
   OBJECTS_COLLECT: 'collectables',
+  OBJECTS_ACTORS: 'actors',
   FG_Y: 123, // y position where foreground sidewalk objects start,
   WALK_CONSTRAINT_Y: 96,
   COLLECTABLES: {
@@ -22,7 +26,10 @@ const TileMapConsts = {
     'food50': { frame: 'steak_01' },
     'food75': { frame: 'meatloaf_2' },
     'food100': { frame: 'chicken_02' }
-  }
+  },
+  ACTORS: {
+    'p1': { classType: FoeP1 }
+  }  
 };
 
 class GamePlay extends Renderer {
@@ -30,6 +37,8 @@ class GamePlay extends Renderer {
   create() {
     // default sky color
     this.game.stage.backgroundColor = GamePlayConsts.COLORS.SKY; // '#4D533C'; @n3tn0de's
+
+    this.specialFx = new SpecialFx(this.game);
 
     // The 'behind' group is basically a layer in the level the contains sprites
     // behind the sidewalk objects layer. We need to put objects either in front 
@@ -43,7 +52,8 @@ class GamePlay extends Renderer {
     this.obstaclesGroup = this.add.group();
     this.collectables = [];
 
-    this.specialFx = new SpecialFx(this.game);
+    // all level NPC actors
+    this.actors = [];
   }
 
   /**
@@ -82,6 +92,7 @@ class GamePlay extends Renderer {
     }
 
     this._placeCollectables(this.map);
+    this._placeActors(this.map);
 
     // sidewalk items layer needs to be either behind or in-front 
     // of on-screen sprites
@@ -94,7 +105,7 @@ class GamePlay extends Renderer {
     for (const [k, v] of Object.entries(TileMapConsts.COLLECTABLES)) {
       this.map.createFromObjects(TileMapConsts.OBJECTS_COLLECT, 
         k, 'atlas_sprites', v.frame, true, true, collectablesGroup, 
-        Phaser.Sprite, true, false);
+        Phaser.Sprite, false, false);
     }
 
     // XXX this is a bit crappy, but there does not seem to be away
@@ -106,9 +117,26 @@ class GamePlay extends Renderer {
     for (const sprite of this.collectables) {
       this.addSpriteToLayer(sprite, true);
     }
-    collectablesGroup.removeAll();
+    //collectablesGroup.removeAll();
 
     this.game.physics.arcade.enable(this.collectables);
+  }
+
+  _placeActors(map) {
+    const actorsGroup = this.add.group();
+
+    for (const [k, v] of Object.entries(TileMapConsts.ACTORS)) {
+      this.map.createFromObjects(TileMapConsts.OBJECTS_ACTORS, 
+        k, 'atlas_sprites', '', true, true, actorsGroup, 
+        v.classType, false, false);
+    }
+
+    for (const sprite of actorsGroup.children) {
+      this.actors.push(sprite);
+    }
+    for (const sprite of this.actors) {
+      this.addSpriteToLayer(sprite, true);
+    }
   }
 
   /**
@@ -123,11 +151,11 @@ class GamePlay extends Renderer {
     if (sprite.bottom > TileMapConsts.FG_Y && (isInBehind || noParent)) {
       this.behindGroup.remove(sprite);
       this.frontGroup.add(sprite);
-      // console.log('move to front', sprite.name, sprite.y, sprite.bottom);
+      console.log('move to front', sprite.name, sprite.y, sprite.bottom);
     } else if (sprite.bottom < TileMapConsts.FG_Y && (!isInBehind || noParent)) {
       this.frontGroup.remove(sprite);
       this.behindGroup.add(sprite);
-      // console.log('move to back', sprite.name, sprite.y, sprite.bottom);
+      console.log('move to back', sprite.name, sprite.y, sprite.bottom);
     }
   }
 
@@ -152,6 +180,7 @@ class GamePlay extends Renderer {
     // sort all sprites by their bottom coords
     // to make overlapping more realistic
     this.behindGroup.sort('bottom', Phaser.Group.SORT_ASCENDING);
+    this.frontGroup.sort('bottom', Phaser.Group.SORT_ASCENDING);
   }
 
   _updateCollisions(group) {
@@ -160,7 +189,7 @@ class GamePlay extends Renderer {
       for (const obj of this.obstaclesGroup.children) {
         this.game.debug.body(obj);
       }
-      for (const obj of this.collectablesGroup.children) {
+      for (const obj of this.collectables) {
         this.game.debug.body(obj);
       }
     }
@@ -183,6 +212,7 @@ class GamePlay extends Renderer {
         // check against obstacles in the loaded level 'obstacles' layer
         this.physics.arcade.collide(sprite, this.obstaclesGroup);
 
+        // TODO: only check against the player's body
         // check against obstacles in the loaded level 'obstacles' layer
         this.physics.arcade.collide(sprite, this.collectables, (o1, o2) => {
           // TODO add to player's health, play sound
