@@ -15,9 +15,6 @@ class Preloader extends Renderer {
     this._loadingBar.scale.setTo(0.5);
     this.game.load.setPreloadSprite(this._loadingBar);
 
-    // load images
-    this.game.load.image('splash', require('../assets/images/splash.png'));
-
     // load bitmap font
     // TODO: change bitmap font name to a simpler and more reasonable one
     // after choosing the one we'll officially pick
