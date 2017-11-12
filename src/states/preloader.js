@@ -13,6 +13,13 @@ class Preloader extends Renderer {
   preload() {
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
 
+    // load bitmap font
+    // TODO: change bitmap font name to a simpler and more reasonable one
+    // after choosing the one we'll officially pick
+    this.game.load.bitmapFont('04b03', require('../assets/fonts/04b03/04b03.png'), require('file-loader!../assets/fonts/04b03/04b03.xml'));
+    this.game.load.bitmapFont('8bit', require('../assets/fonts/8bitoperator-jve/8bitoperator-jve.png'), require('file-loader!../assets/fonts/8bitoperator-jve/8bitoperator-jve.xml'));
+    this.game.load.bitmapFont('standard', require('../assets/fonts/standard-0753/standard-0753.png'), require('file-loader!../assets/fonts/standard-0753/standard-0753.xml'));
+
     // load levels
     this.game.load.image('gd-tiles', require('../assets/levels/gd-tileset.png'));
 
