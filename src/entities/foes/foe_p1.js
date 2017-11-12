@@ -12,6 +12,10 @@ class FoeP1 extends Phaser.Sprite {
   constructor(game, x, y, key, frame) {
     super(game, x, y, key, 'foe_stand_01');
 
+    // fixes Tiled x-offset - for some reason Phaser spawns the sprite left 
+    // from the top x coordinate specified in the map
+    this.x += 48;
+
     // this.anchor.set(0.5, 0.5);
     console.log('foe', this.x, this.y, this.width, this.height);
 
