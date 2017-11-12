@@ -30,6 +30,7 @@ class Act1 extends GamePlay {
 
   update() {
     this.player.update();
+    this.updatePlayerCollisions(this.player.sprite);
     
     // do collisions checks, etc. after player & NPC movements
     super.update();

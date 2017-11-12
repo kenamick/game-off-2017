@@ -211,18 +211,20 @@ class GamePlay extends Renderer {
 
         // check against obstacles in the loaded level 'obstacles' layer
         this.physics.arcade.collide(sprite, this.obstaclesGroup);
-
-        // TODO: only check against the player's body
-        // check against obstacles in the loaded level 'obstacles' layer
-        this.physics.arcade.collide(sprite, this.collectables, (o1, o2) => {
-          // TODO add to player's health, play sound
-          // 
-          o2.destroy();
-
-          this.specialFx.textdraw.fadingUp(o2.x, o2.y, 'YUMMY!');
-        });
       }
     }
+  }
+
+  // TODO: maybe move this in the hero.js class and also 
+  // only check against the player's movement body and not the complete/rigid body
+  updatePlayerCollisions(sprite) {
+    this.physics.arcade.collide(sprite, this.collectables, (o1, o2) => {
+      // TODO add to player's health, play sound
+      // 
+      o2.destroy();
+
+      this.specialFx.textdraw.fadingUp(o2.x, o2.y, 'YUMMY!');
+    });
   }
 
   update() {
