@@ -59,64 +59,64 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":30.6666666666667,
+                 "width":30.6667,
                  "x":4,
                  "y":112
                 }, 
                 {
-                 "height":5.33333333333336,
+                 "height":5.33333,
                  "id":4,
                  "name":"bench",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":30.6666666666667,
-                 "x":55.3333333333333,
-                 "y":111.333333333333
+                 "width":30.6667,
+                 "x":55.3333,
+                 "y":111.333
                 }, 
                 {
-                 "height":2.66666666666664,
+                 "height":2.66667,
                  "id":5,
                  "name":"sign",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":30.6666666666667,
-                 "x":152.333333333333,
+                 "width":30.6667,
+                 "x":152.333,
                  "y":122
                 }, 
                 {
-                 "height":3.33333333333333,
+                 "height":3.33333,
                  "id":7,
                  "name":"trash2",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":30.6667,
-                 "x":393.333316666667,
-                 "y":117.666666666667
+                 "x":393.333,
+                 "y":117.667
                 }, 
                 {
-                 "height":7.99999666666667,
+                 "height":8,
                  "id":8,
                  "name":"flowers",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":36.0000333333333,
-                 "x":439.999983333333,
-                 "y":113.333335
+                 "width":36,
+                 "x":440,
+                 "y":113.333
                 }, 
                 {
-                 "height":1.99999999999999,
+                 "height":2,
                  "id":9,
                  "name":"sign",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":33.3333666666666,
-                 "x":535.66665,
-                 "y":122.333333333333
+                 "width":33.3334,
+                 "x":535.667,
+                 "y":122.333
                 }, 
                 {
                  "height":8,
@@ -126,7 +126,7 @@
                  "type":"",
                  "visible":true,
                  "width":36,
-                 "x":629.333333333333,
+                 "x":629.333,
                  "y":118
                 }, 
                 {
@@ -137,8 +137,8 @@
                  "type":"",
                  "visible":true,
                  "width":36,
-                 "x":868.666666666667,
-                 "y":116.666666666667
+                 "x":868.667,
+                 "y":116.667
                 }, 
                 {
                  "height":8,
@@ -148,19 +148,19 @@
                  "type":"",
                  "visible":true,
                  "width":36,
-                 "x":1108.66666666667,
+                 "x":1108.67,
                  "y":118
                 }, 
                 {
                  "height":3.33333,
                  "id":13,
-                 "name":"tras3",
+                 "name":"trash3",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":30.6667,
-                 "x":1154.66665,
-                 "y":119.666668333333
+                 "x":1154.67,
+                 "y":119.667
                 }, 
                 {
                  "height":16,
@@ -213,8 +213,8 @@
                  "type":"",
                  "visible":true,
                  "width":10,
-                 "x":77.6666666666666,
-                 "y":161.666666666667
+                 "x":77.6667,
+                 "y":161.667
                 }, 
                 {
                  "height":10,
@@ -224,8 +224,95 @@
                  "type":"",
                  "visible":true,
                  "width":10,
-                 "x":1123,
-                 "y":110
+                 "x":1128,
+                 "y":102
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "name":"actors",
+         "objects":[
+                {
+                 "height":48,
+                 "id":21,
+                 "name":"p1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":210,
+                 "y":200
+                }, 
+                {
+                 "height":48,
+                 "id":25,
+                 "name":"p1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":260,
+                 "y":120
+                }, 
+                {
+                 "height":48,
+                 "id":27,
+                 "name":"p1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":844,
+                 "y":129.333
+                }, 
+                {
+                 "height":48,
+                 "id":28,
+                 "name":"p1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":880.667,
+                 "y":156
+                }, 
+                {
+                 "height":48,
+                 "id":29,
+                 "name":"p1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":927.333,
+                 "y":72.6667
+                }, 
+                {
+                 "height":48,
+                 "id":30,
+                 "name":"p1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":628,
+                 "y":150.667
+                }, 
+                {
+                 "height":48,
+                 "id":31,
+                 "name":"p1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":974,
+                 "y":176.667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -233,7 +320,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":21,
+ "nextobjectid":32,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.0.3",

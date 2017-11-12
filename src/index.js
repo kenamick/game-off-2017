@@ -6,7 +6,8 @@ import {
   Bootstrap, 
   Preloader, 
   MainMenu,
-  Act1, 
+  Act1,
+  Act2
 } from './states';
 
 window.onload = function () {
@@ -17,7 +18,8 @@ window.onload = function () {
   game.state.add('bootstrap', new Bootstrap(game));
   game.state.add('preload', Preloader);
   game.state.add('mainmenu', MainMenu);
-  game.state.add('play', Act1);
+  game.state.add('act1', Act1);
+  game.state.add('act2', Act2);
 
   game.state.start('bootstrap');
 };
