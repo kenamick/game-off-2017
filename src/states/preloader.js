@@ -47,18 +47,17 @@ class Preloader extends Renderer {
     // remove loading bar from screen
     this._loadingBar.kill();
 
-    // set background to white (optional)
-    this.game.stage.backgroundColor = '#ffffff';
+    // set background to the game average color (optional)
+    this.game.stage.backgroundColor = '#4c583d';
 
     // create splash screen
-    let splash = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'splash');
-    splash.scale.setTo(0.2);
-    splash.anchor.setTo(0.5, 0.5);
-    splash.alpha = 0;
+    let splashText = this.game.add.bitmapText(this.game.world.centerX, this.game.world.centerY, 'standard', 'KICKPUNCH', 32);
+    splashText.anchor.setTo(0.5);
+    splashText.alpha = 0;
 
     // add some cool effects
-    let tween = this.game.add.tween(splash).to({ alpha: 1 }, 2000, Phaser.Easing.Linear.None, true, 0, 0, true);
-    tween.onComplete.add(function(splash, tween) {
+    let tween = this.game.add.tween(splashText).to({ alpha: 1 }, 2000, Phaser.Easing.Linear.None, true, 0, 0, true);
+    tween.onComplete.add(function(splashText, tween) {
       // TODO: change this to menu in production
       this.state.start('act1');
     }, this);
