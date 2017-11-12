@@ -42,10 +42,12 @@ class GamePlay extends Renderer {
 
     // The 'behind' group is basically a layer in the level the contains sprites
     // behind the sidewalk objects layer. We need to put objects either in front 
-    // or behind the sidewalk objects
+    // or behind the sidewalk layer
     this.behindGroup = this.add.group();
-
-    // front group contains all sprites that are 'in front' of the sidewalk
+    // The 'middle' group IS the sidewalk layer objects. This is just a static
+    // image that Tiled gives us
+    this.middleGroup = this.add.group();
+    // Te 'front' group contains all sprites that are 'in front' of the sidewalk
     this.frontGroup = this.add.group();
 
     // static AABB objects loaded from the game level
@@ -61,6 +63,7 @@ class GamePlay extends Renderer {
    */
   arrangeLayers() {
     this.game.world.bringToTop(this.behindGroup);
+    this.game.world.bringToTop(this.middleGroup);
     this.game.world.bringToTop(this.frontGroup);
   }
 
@@ -96,7 +99,7 @@ class GamePlay extends Renderer {
 
     // sidewalk items layer needs to be either behind or in-front 
     // of on-screen sprites
-    this.frontGroup.add(this.layers.foreground);
+    this.middleGroup.add(this.layers.foreground);
   }
 
   _placeCollectables(map) {
@@ -151,11 +154,11 @@ class GamePlay extends Renderer {
     if (sprite.bottom > TileMapConsts.FG_Y && (isInBehind || noParent)) {
       this.behindGroup.remove(sprite);
       this.frontGroup.add(sprite);
-      console.log('move to front', sprite.name, sprite.y, sprite.bottom);
+      // console.log('move to front', sprite.name, sprite.y, sprite.bottom);
     } else if (sprite.bottom < TileMapConsts.FG_Y && (!isInBehind || noParent)) {
       this.frontGroup.remove(sprite);
       this.behindGroup.add(sprite);
-      console.log('move to back', sprite.name, sprite.y, sprite.bottom);
+      // console.log('move to back', sprite.name, sprite.y, sprite.bottom);
     }
   }
 
