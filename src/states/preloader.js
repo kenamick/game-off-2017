@@ -7,11 +7,16 @@ class Preloader extends Renderer {
 
   constructor() {
     super();
-    this._ready = false;
   }
 
   preload() {
-    this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
+    this._loadingBar = this.game.add.sprite(this.game.world.centerX / 2, this.game.world.centerY, 'loadingBar');
+    this._loadingBar.centerX = this.world.centerX;
+    this._loadingBar.scale.setTo(0.5);
+    this.game.load.setPreloadSprite(this._loadingBar);
+
+    // load images
+    this.game.load.image('splash', require('../assets/images/splash.png'));
 
     // load bitmap font
     // TODO: change bitmap font name to a simpler and more reasonable one
@@ -23,10 +28,10 @@ class Preloader extends Renderer {
     // load levels
     this.game.load.image('gd-tiles', require('../assets/levels/gd-tileset.png'));
 
-    this.game.load.tilemap('act1', 
+    this.game.load.tilemap('act1',
       require('file-loader!../assets/levels/act1.json'), null,
       Phaser.Tilemap.TILED_JSON);
-    this.game.load.tilemap('act2', 
+    this.game.load.tilemap('act2',
       require('file-loader!../assets/levels/act2.json'), null,
       Phaser.Tilemap.TILED_JSON);
 
@@ -38,15 +43,24 @@ class Preloader extends Renderer {
 
   }
 
-  update() {
-    if (this._ready) {
+  create() {
+    // remove loading bar from screen
+    this._loadingBar.kill();
+
+    // set background to the game average color (optional)
+    this.game.stage.backgroundColor = '#4c583d';
+
+    // create splash screen
+    let splashText = this.game.add.bitmapText(this.game.world.centerX, this.game.world.centerY, 'standard', 'KICKPUNCH', 32);
+    splashText.anchor.setTo(0.5);
+    splashText.alpha = 0;
+
+    // add some cool effects
+    let tween = this.game.add.tween(splashText).to({ alpha: 1 }, 2000, Phaser.Easing.Linear.None, true, 0, 0, true);
+    tween.onComplete.add(function(splashText, tween) {
       // TODO: change this to menu in production
       this.state.start('act1');
-    }
-  }
-
-  onLoadComplete() {
-    this._ready = true;
+    }, this);
   }
 
 }
