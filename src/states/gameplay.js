@@ -38,6 +38,8 @@ class GamePlay extends Renderer {
     // default sky color
     this.game.stage.backgroundColor = GamePlayConsts.COLORS.SKY; // '#4D533C'; @n3tn0de's
 
+    this.game.world.setBounds(0, 0, 500, 500);
+
     this.specialFx = new SpecialFx(this.game);
 
     // The 'behind' group is basically a layer in the level the contains sprites
@@ -65,12 +67,14 @@ class GamePlay extends Renderer {
     this.game.world.bringToTop(this.behindGroup);
     this.game.world.bringToTop(this.middleGroup);
     this.game.world.bringToTop(this.frontGroup);
+
+    this.game.physics.arcade.setBoundsToWorld();
   }
 
   createLevel(name, tilesWidth, tilesHeight) {
-    this.game.world.setBounds(0, 0, 
-      tilesWidth * TileMapConsts.TILE_SIZE, 
-      tilesHeight * TileMapConsts.TILE_SIZE);
+    // this.game.world.setBounds(0, 0, 
+    //   tilesWidth * TileMapConsts.TILE_SIZE, 
+    //   tilesHeight * TileMapConsts.TILE_SIZE);
     
     this.map = this.game.add.tilemap(name);
     this.map.addTilesetImage('gd-tileset', 'gd-tiles');
@@ -81,6 +85,8 @@ class GamePlay extends Renderer {
       backgroundItems: this.map.createLayer(TileMapConsts.LAYER_BG_ITEMS),
       foreground: this.map.createLayer(TileMapConsts.LAYER_FG)
     };
+    // set size of world
+    this.layers.background.resizeWorld();
 
     for (const obj of this.map.objects.obstacles) {
       const sprite = this.game.add.sprite(obj.x, obj.y, null);

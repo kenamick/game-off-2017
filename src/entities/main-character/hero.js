@@ -38,6 +38,8 @@ class Hero {
     game.physics.arcade.enable(this._sprite);
     this._sprite.body.setSize(18, 8, 15, 40);
 
+    this._sprite.body.collideWorldBounds = true;
+
     // camera always follows the main player
     game.camera.follow(this._sprite);
 

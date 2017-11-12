@@ -18,7 +18,7 @@ class Act1 extends GamePlay {
   create() {
     super.create();
 
-    this.createLevel('act1', 25, 5);
+    this.createLevel('act1');
 
     this.player = new Hero(this.game);
     this.player.spawn(50, 144);
