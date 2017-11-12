@@ -38,8 +38,6 @@ class GamePlay extends Renderer {
     // default sky color
     this.game.stage.backgroundColor = GamePlayConsts.COLORS.SKY; // '#4D533C'; @n3tn0de's
 
-    this.game.world.setBounds(0, 0, 500, 500);
-
     this.specialFx = new SpecialFx(this.game);
 
     // The 'behind' group is basically a layer in the level the contains sprites
@@ -71,11 +69,7 @@ class GamePlay extends Renderer {
     this.game.physics.arcade.setBoundsToWorld();
   }
 
-  createLevel(name, tilesWidth, tilesHeight) {
-    // this.game.world.setBounds(0, 0, 
-    //   tilesWidth * TileMapConsts.TILE_SIZE, 
-    //   tilesHeight * TileMapConsts.TILE_SIZE);
-    
+  createLevel(name) {
     this.map = this.game.add.tilemap(name);
     this.map.addTilesetImage('gd-tileset', 'gd-tiles');
 
