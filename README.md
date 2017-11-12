@@ -20,6 +20,14 @@ npm i
 ```
 npm start
 ```
+
+or
+
+```
+npm run dash
+```
+_(you'll need extra RAM)_
+
 Default address is <http://0.0.0.0:3000>
 
 ### Get a production build
