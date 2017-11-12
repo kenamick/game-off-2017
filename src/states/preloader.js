@@ -7,16 +7,16 @@ class Preloader extends Renderer {
 
   constructor() {
     super();
-    this._ready = false;
   }
 
   preload() {
-    this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
+    this._loadingBar = this.game.add.sprite(this.game.world.centerX / 2, this.game.world.centerY, 'loadingBar');
+    this._loadingBar.centerX = this.world.centerX;
+    this._loadingBar.scale.setTo(0.5);
+    this.game.load.setPreloadSprite(this._loadingBar);
 
-    let loadingBar = this.game.add.sprite(this.game.world.centerX / 2, this.game.world.centerY, 'loadingBar');
-    loadingBar.center = this.world.centerX;
-    loadingBar.scale.setTo(0.5);
-    this.game.load.setPreloadSprite(loadingBar);
+    // load images
+    this.game.load.image('splash', require('../assets/images/splash.png'));
 
     // load levels
     this.game.load.tilemap('act1', 
@@ -32,15 +32,25 @@ class Preloader extends Renderer {
 
   }
 
-  update() {
-    if (this._ready) {
+  create() {
+    // remove loading bar from screen
+    this._loadingBar.kill();
+
+    // set background to white (optional)
+    this.game.stage.backgroundColor = '#ffffff';
+
+    // create splash screen
+    let splash = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'splash');
+    splash.scale.setTo(0.2);
+    splash.anchor.setTo(0.5, 0.5);
+    splash.alpha = 0;
+
+    // add some cool effects
+    let tween = this.game.add.tween(splash).to({ alpha: 1 }, 2000, Phaser.Easing.Linear.None, true, 0, 0, true);
+    tween.onComplete.add(function(splash, tween) {
       // TODO: change this to menu in production
       this.state.start('play');
-    }
-  }
-
-  onLoadComplete() {
-    this._ready = true;
+    }, this);
   }
 
 }
