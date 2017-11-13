@@ -1,6 +1,7 @@
 // preloader.js
 // Loads all required assets - gfx & sfx
 
+import Globals from '../globals';
 import Renderer from './renderer';
 
 const PreloaderConsts = {
@@ -49,7 +50,7 @@ class Preloader extends Renderer {
     this._loadingBar.kill();
 
     // set background to the game average color (optional)
-    this.game.stage.backgroundColor = '#4c583d';
+    this.game.stage.backgroundColor = Globals.palette.bricks2.hex; //'#4c583d';
 
     // create splash screen
     let splashText = this.game.add.bitmapText(this.game.world.centerX, this.game.world.centerY, 'standard', 'KICKPUNCH', 32);
