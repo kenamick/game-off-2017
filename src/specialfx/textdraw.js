@@ -3,6 +3,8 @@
 import Globals from '../globals';
 
 const TextConsts = {
+  DEFAULT_FONT: 'standard',
+  DEFAULT_SIZE: 8,
   FADE_OUT: 2000, // ms
   FADE_UP_STEP: 50 // pixels
 };
@@ -11,16 +13,12 @@ class TextDraw {
 
   constructor(game) {
     this.game = game;
-    this.font = {
-      font: '8px ' + Globals.gameFont,
-      fill: '#ffffff'
-    };
   }
 
-  _createText(x, y, text) {
-    const msg = this.game.add.text(x, y, '', this.font);
-    msg.anchor.set(.5, .5);
-    msg.setShadow(3, 3, 'rgba(0,0,0,0.5)', 5);
+  _createText(x, y, text, size = TextConsts.DEFAULT_SIZE) {
+    const msg = this.game.add.bitmapText(x, y, TextConsts.DEFAULT_FONT, text, 
+      size);
+    msg.anchor.set(.5);
     msg.setText(text);
 
     this.game.world.bringToTop(msg);
