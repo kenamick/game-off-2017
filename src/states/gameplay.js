@@ -7,6 +7,10 @@ import {
   FoeP1
 } from '../entities';
 
+// Ui components
+import Hud from '../ui/containers/hud';
+
+
 const GamePlayConsts = {
   COLORS: { SKY: '#c4cfa1' }
 };
@@ -41,18 +45,21 @@ class GamePlay extends Renderer {
     this.specialFx = new SpecialFx(this.game);
 
     // The 'behind' group is basically a layer in the level the contains sprites
-    // behind the sidewalk objects layer. We need to put objects either in front 
+    // behind the sidewalk objects layer. We need to put objects either in front
     // or behind the sidewalk layer
     this.behindGroup = this.add.group();
     // The 'middle' group IS the sidewalk layer objects. This is just a static
     // image that Tiled gives us
     this.middleGroup = this.add.group();
-    // Te 'front' group contains all sprites that are 'in front' of the sidewalk
+    // The 'front' group contains all sprites that are 'in front' of the sidewalk
     this.frontGroup = this.add.group();
 
     // static AABB objects loaded from the game level
     this.obstaclesGroup = this.add.group();
     this.collectables = [];
+
+    // The HUD group contains all hud ui
+    this.playerHud = new Hud(this.game);
 
     // all level NPC actors
     this.actors = [];
@@ -232,10 +239,12 @@ class GamePlay extends Renderer {
 
   update() {
     super.update();
-    
+
     this._updateZOrders();
     this._updateCollisions(this.frontGroup);
     this._updateCollisions(this.behindGroup);
+
+    this.playerHud.update();
   }
 
 }
