@@ -17,6 +17,8 @@ const Globals = {
   // list and assign values automatically
   ...URLOptions, // url options override localSotrage values
 
+  bitmapFont: 'standard',
+
   palette: {
    sky: { hex: '#c4cfa1', rgb: {r: 196, g: 207, b: 161} }, // lighter
    bricks1: { hex: '#8b956d', rgb: {r: 139, g: 149, b: 109} }, // light

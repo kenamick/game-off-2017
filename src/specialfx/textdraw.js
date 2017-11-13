@@ -3,7 +3,6 @@
 import Globals from '../globals';
 
 const TextConsts = {
-  DEFAULT_FONT: 'standard',
   DEFAULT_SIZE: 8,
   FADE_OUT: 2000, // ms
   FADE_UP_STEP: 50 // pixels
@@ -16,9 +15,9 @@ class TextDraw {
   }
 
   _createText(x, y, text, size = TextConsts.DEFAULT_SIZE) {
-    const msg = this.game.add.bitmapText(x, y, TextConsts.DEFAULT_FONT, text, 
+    const msg = this.game.add.bitmapText(x, y, Globals.bitmapFont, text,
       size);
-    msg.anchor.set(.5);
+    msg.anchor.set(0.5);
     msg.setText(text);
 
     this.game.world.bringToTop(msg);
@@ -44,7 +43,7 @@ class TextDraw {
     msg.alpha = 1;
     const toY = msg.y - TextConsts.FADE_UP_STEP;
 
-    const tween = this.game.add.tween(msg).to({ alpha: 0, y: toY }, 
+    const tween = this.game.add.tween(msg).to({ alpha: 0, y: toY },
       TextConsts.FADE_OUT, Phaser.Easing.Cubic.Out, true, 0, 0, false);
 
     tween.onComplete.add(() => msg.destroy());
