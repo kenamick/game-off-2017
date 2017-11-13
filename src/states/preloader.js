@@ -15,7 +15,8 @@ class Preloader extends Renderer {
   }
 
   preload() {
-    this._loadingBar = this.game.add.sprite(this.game.world.centerX / 2, this.game.world.centerY, 'loadingBar');
+    this._loadingBar = this.game.add.sprite(this.game.world.centerX / 2, 
+      this.game.world.centerY, 'loadingBar');
     this._loadingBar.centerX = this.world.centerX;
     this._loadingBar.scale.setTo(0.5);
     this.game.load.setPreloadSprite(this._loadingBar);
@@ -23,9 +24,14 @@ class Preloader extends Renderer {
     // load bitmap font
     // TODO: change bitmap font name to a simpler and more reasonable one
     // after choosing the one we'll officially pick
-    this.game.load.bitmapFont('04b03', require('../assets/fonts/04b03/04b03.png'), require('file-loader!../assets/fonts/04b03/04b03.xml'));
-    this.game.load.bitmapFont('8bit', require('../assets/fonts/8bitoperator-jve/8bitoperator-jve.png'), require('file-loader!../assets/fonts/8bitoperator-jve/8bitoperator-jve.xml'));
-    this.game.load.bitmapFont('standard', require('../assets/fonts/standard-0753/standard-0753.png'), require('file-loader!../assets/fonts/standard-0753/standard-0753.xml'));
+    this.game.load.bitmapFont('04b03', require('../assets/fonts/04b03/04b03.png'), 
+      require('file-loader!../assets/fonts/04b03/04b03.xml'));
+    this.game.load.bitmapFont('8bit', 
+      require('../assets/fonts/8bitoperator-jve/8bitoperator-jve.png'), 
+      require('file-loader!../assets/fonts/8bitoperator-jve/8bitoperator-jve.xml'));
+    this.game.load.bitmapFont('standard', 
+      require('../assets/fonts/standard-0753/standard-0753.png'), 
+      require('file-loader!../assets/fonts/standard-0753/standard-0753.xml'));
 
     // load levels
     this.game.load.image('gd-tiles', require('../assets/levels/gd-tileset.png'));
@@ -53,12 +59,14 @@ class Preloader extends Renderer {
     this.game.stage.backgroundColor = Globals.palette.bricks2.hex; //'#4c583d';
 
     // create splash screen
-    let splashText = this.game.add.bitmapText(this.game.world.centerX, this.game.world.centerY, 'standard', 'KICKPUNCH', 32);
+    let splashText = this.game.add.bitmapText(this.game.world.centerX, 
+      this.game.world.centerY, 'standard', 'KICKPUNCH', 32);
     splashText.anchor.setTo(0.5);
     splashText.alpha = 0;
 
     // add some cool effects
-    let tween = this.game.add.tween(splashText).to({ alpha: 1 }, PreloaderConsts.SPLASH_FADE, Phaser.Easing.Linear.None, true, 0, 0, true);
+    let tween = this.game.add.tween(splashText).to({ alpha: 1 }, 
+      PreloaderConsts.SPLASH_FADE, Phaser.Easing.Linear.None, true, 0, 0, true);
     tween.onComplete.add(function(splashText, tween) {
       // TODO: change this to menu in production
       this.state.start('act1');
