@@ -3,6 +3,10 @@
 
 import Renderer from './renderer';
 
+const PreloaderConsts = {
+  SPLASH_FADE: 2000, // ms
+}
+
 class Preloader extends Renderer {
 
   constructor() {
@@ -53,7 +57,7 @@ class Preloader extends Renderer {
     splashText.alpha = 0;
 
     // add some cool effects
-    let tween = this.game.add.tween(splashText).to({ alpha: 1 }, 2000, Phaser.Easing.Linear.None, true, 0, 0, true);
+    let tween = this.game.add.tween(splashText).to({ alpha: 1 }, PreloaderConsts.SPLASH_FADE, Phaser.Easing.Linear.None, true, 0, 0, true);
     tween.onComplete.add(function(splashText, tween) {
       // TODO: change this to menu in production
       this.state.start('act1');
