@@ -12,7 +12,7 @@ import Hud from '../ui/containers/hud';
 
 
 const GamePlayConsts = {
-  COLORS: { SKY: '#c4cfa1' }
+  // TODO
 };
 
 const TileMapConsts = {
@@ -40,7 +40,7 @@ class GamePlay extends Renderer {
 
   create() {
     // default sky color
-    this.game.stage.backgroundColor = GamePlayConsts.COLORS.SKY; // '#4D533C'; @n3tn0de's
+    this.game.stage.backgroundColor = Globals.palette.sky.hex;
 
     this.specialFx = new SpecialFx(this.game);
 
