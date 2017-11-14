@@ -1,6 +1,6 @@
 // hud.js - Container for showing player stats
 
-import LifeBar from '../components/life-bar';
+import HealthBar from '../components/health-bar';
 
 class Hud {
 
@@ -12,11 +12,11 @@ class Hud {
         y: 10,
         fixedToCamera: true
     };
-    this._lifebar = new LifeBar(game, sprite, options);
+    this._healthbar = new HealthBar(game, sprite, options);
   }
 
   update() {
-    this._lifebar.update();
+    this._healthbar.update();
   }
 
 }

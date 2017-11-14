@@ -1,4 +1,4 @@
-// lifebar.js - ui for showing character health
+// healthbar.js - ui for showing character health
 
 import Globals from '../../globals';
 
