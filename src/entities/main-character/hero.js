@@ -19,6 +19,9 @@ class Hero {
     // when moving left/right
     this._sprite.anchor.set(0.5, 0.5);
 
+    // Set player's health to max
+    this._sprite.health = this._sprite.maxHealth;
+
     // bind animation frames (check the json file for details/adjustments)
     this._sprite.animations.add('stand',
       Phaser.Animation.generateFrameNames('hero_stand_', 1, 3, '', 2), 5, true);

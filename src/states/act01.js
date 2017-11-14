@@ -8,6 +8,10 @@ import {
 } from './gameplay';
 import { Hero } from '../entities';
 
+// Ui components
+import Hud from '../ui/containers/hud';
+
+
 const Consts = {
 
 };
@@ -25,9 +29,13 @@ class Act1 extends GamePlay {
     this.addSpriteToLayer(this.player.sprite, true);
 
     this.arrangeLayers();
+
+    // The HUD group contains all hud ui
+    this.playerHud = new Hud(this.game, this.player.sprite);
   }
 
   update() {
+    this.playerHud.update();
     this.player.update();
     this.updatePlayerCollisions(this.player.sprite);
 

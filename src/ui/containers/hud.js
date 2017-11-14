@@ -4,10 +4,15 @@ import LifeBar from '../components/life-bar';
 
 class Hud {
 
-  constructor(game) {
+  constructor(game, sprite) {
     this.game = game;
 
-    this._lifebar = new LifeBar(game, 10, 10);
+    const options = {
+        x: 10,
+        y: 10,
+        fixedToCamera: true
+    };
+    this._lifebar = new LifeBar(game, sprite, options);
   }
 
   update() {

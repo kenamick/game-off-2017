@@ -7,10 +7,6 @@ import {
   FoeP1
 } from '../entities';
 
-// Ui components
-import Hud from '../ui/containers/hud';
-
-
 const GamePlayConsts = {
   // TODO
 };
@@ -57,9 +53,6 @@ class GamePlay extends Renderer {
     // static AABB objects loaded from the game level
     this.obstaclesGroup = this.add.group();
     this.collectables = [];
-
-    // The HUD group contains all hud ui
-    this.playerHud = new Hud(this.game);
 
     // all level NPC actors
     this.actors = [];
@@ -243,8 +236,6 @@ class GamePlay extends Renderer {
     this._updateZOrders();
     this._updateCollisions(this.frontGroup);
     this._updateCollisions(this.behindGroup);
-
-    this.playerHud.update();
   }
 
 }

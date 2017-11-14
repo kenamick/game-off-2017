@@ -1,48 +1,62 @@
 // lifebar.js - ui for showing character health
 
+import Globals from '../../globals';
+
 class HealthBar {
 
-  constructor(game, x, y) {
+  constructor(game, sprite, options = null) {
     this.game = game;
-    this._health = 20;
-    this._spriteGroup = null;
-    this._spriteBorder = null;
-    this._createHealthBar(x, y);
+    this._health = sprite.maxHealth;
+    this._sprite = null;
+    this._backgroundSprite = null;
+    this._objectSprite = sprite;
+    this._options = {
+      x: sprite.left - 5,
+      y: sprite.top - 5,
+      width: 50,
+      height: 8,
+      bar: {
+        color: '#ffffff',
+        background: Globals.palette.bricks2.hex
+      },
+      fixedToCamera: false,
+      ...options
+    };
+    this._createHealthBar();
   }
 
-  _createHealthBar(x, y) {
-    const width = 1;
-    const height = 4;
+  _createHealthBar() {
+    const healthBarBackgroundSprite = this.game.add.graphics();
+    healthBarBackgroundSprite.beginFill(Phaser.Color.hexToRGB(this._options.bar.background),  1)
+                             .drawRect(0, 0, this._options.width, this._options.height)
+                             .endFill();
 
-    const healthBarSprite = new Phaser.Graphics(this.game);
-    healthBarSprite.beginFill(Phaser.Color.hexToRGB('#ffffff'),  1)
-                 .drawRect(0, 0, width, height)
-                 .endFill();
+    const healthBarBackgroundSpriteTexture = healthBarBackgroundSprite.generateTexture();
+    this._backgroundSprite = this.game.add.sprite(this._options.x, this._options.y, healthBarBackgroundSpriteTexture);
+    this._backgroundSprite.fixedToCamera = this._options.fixedToCamera;
+
+    const healthBarSprite = this.game.add.graphics();
+    healthBarSprite.beginFill(Phaser.Color.hexToRGB(this._options.bar.color),  1)
+                   .drawRect(0, 0, this._options.width, this._options.height)
+                   .endFill();
 
     const healthBarSpriteTexture = healthBarSprite.generateTexture();
-    this._spriteGroup = this.game.add.group();
-    this._spriteGroup.createMultiple(this._health, healthBarSpriteTexture, 0, true);
-
-    this._spriteGroup.align(this._health, 1, 2, 1);
-    this._spriteGroup.x = x;
-    this._spriteGroup.y = y;
-    this._spriteGroup.fixedToCamera = true;
-    this._spriteGroup.cameraOffset.setTo(x, y);
-
-    const testing = new Phaser.Graphics(this.game);
-    testing.lineStyle(1, Phaser.Color.hexToRGB('#ffffff'),  1)
-                 .drawRect(0, 0, this._health * width * 2 + 1, height + 1)
-                 .endFill();
-    const test = testing.generateTexture();
-    this.t = this.game.add.sprite(x - 1, y - 1, test);
-    this.t.fixedToCamera = true;
-    this.game.world.bringToTop(this.t);
+    this._sprite = this.game.add.sprite(this._options.x, this._options.y, healthBarSpriteTexture);
+    this._sprite.fixedToCamera = true;
+    this.game.world.bringToTop(this._sprite);
 
   }
 
   update() {
-    this.game.world.bringToTop(this.t);
-    this.game.world.bringToTop(this._spriteGroup);
+    if(this._health != this._objectSprite.health) {
+      // move this to a function maybe?
+      this._health = this._objectSprite._health;
+      this.game.add.tween(this._sprite).to({ width: this._backgroundSprite.width * this._objectSprite.health / this._objectSprite.maxHealth },
+        200, Phaser.Easing.Linear.None, true);
+    }
+
+    this.game.world.bringToTop(this._backgroundSprite);
+    this.game.world.bringToTop(this._sprite);
   }
 
 }
