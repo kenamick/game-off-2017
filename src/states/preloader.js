@@ -59,17 +59,17 @@ class Preloader extends Renderer {
     this.game.stage.backgroundColor = Globals.palette.bricks2.hex; //'#4c583d';
 
     // create splash screen
-    let splashText = this.game.add.bitmapText(this.game.world.centerX, 
+    let splashText = this.game.add.bitmapText(this.game.world.centerX,
       this.game.world.centerY, 'standard', 'KICKPUNCH', 32);
     splashText.anchor.setTo(0.5);
     splashText.alpha = 0;
 
     // add some cool effects
-    let tween = this.game.add.tween(splashText).to({ alpha: 1 }, 
+    let tween = this.game.add.tween(splashText).to({ alpha: 1 },
       PreloaderConsts.SPLASH_FADE, Phaser.Easing.Linear.None, true, 0, 0, true);
     tween.onComplete.add(function(splashText, tween) {
       // TODO: change this to menu in production
-      this.state.start('act1');
+      this.state.start('mainmenu');
     }, this);
   }
 
