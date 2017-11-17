@@ -234,8 +234,8 @@
                  "type":"",
                  "visible":true,
                  "width":48,
-                 "x":121.333333333333,
-                 "y":133.666666666667
+                 "x":121.333,
+                 "y":133.667
                 }, 
                 {
                  "height":48,
@@ -246,7 +246,7 @@
                  "visible":true,
                  "width":48,
                  "x":135,
-                 "y":152.666666666667
+                 "y":152.667
                 }, 
                 {
                  "height":48,
@@ -256,8 +256,62 @@
                  "type":"",
                  "visible":true,
                  "width":48,
-                 "x":167.333333333333,
+                 "x":167.333,
                  "y":158
+                }, 
+                {
+                 "height":48,
+                 "id":43,
+                 "name":"hero",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":41.6666666666667,
+                 "y":83
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "name":"hotpoints",
+         "objects":[
+                {
+                 "height":144.333333333333,
+                 "id":35,
+                 "name":"hotpoint",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":6.33333333333334,
+                 "x":219.666666666667,
+                 "y":95.6666666666667
+                }, 
+                {
+                 "height":144.333,
+                 "id":40,
+                 "name":"hotpoint",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":6.33333,
+                 "x":416.166668333333,
+                 "y":94.5001666666667
+                }, 
+                {
+                 "height":144.333,
+                 "id":41,
+                 "name":"hotpoint",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":6.33333,
+                 "x":1191.833335,
+                 "y":94.1668333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -265,7 +319,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":35,
+ "nextobjectid":44,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.0.3",

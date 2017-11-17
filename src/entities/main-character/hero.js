@@ -9,14 +9,15 @@ const HeroConsts = {
 
 class Hero extends Actor {
 
-  constructor(game, x, y) {
-    super(game, 
-      game.add.sprite(x, y, 'atlas_sprites', 'hero_stand_01'), 
-      Globals.hitpoints.player);
-    
+  constructor(game, sprite) {
+    super(game, sprite, Globals.hitpoints.player);
+
     // sets anchor in the middle of the sprite, so that we can flip it
     // when moving left/right
     this._sprite.anchor.set(0.5, 0.5);
+
+    // face right by default
+    this._sprite.scale.x = -1;
 
     // bind animation frames (check the json file for details/adjustments)
     this._sprite.animations.add('stand',

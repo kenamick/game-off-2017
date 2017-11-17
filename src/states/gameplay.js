@@ -4,12 +4,8 @@ import Globals from '../globals';
 import Renderer from './renderer';
 import SpecialFx from '../specialfx';
 import { 
-  FoeP1
+  Hero, FoeP1
 } from '../entities';
-
-const GamePlayConsts = {
-  // TODO
-};
 
 const TileMapConsts = {
   TILE_SIZE: 48,
@@ -27,7 +23,9 @@ const TileMapConsts = {
     'food75': { frame: 'meatloaf_2' },
     'food100': { frame: 'chicken_02' }
   },
+  // mapping of tiled actors to objects
   ACTORS: {
+    'hero': {classType: Hero },
     'p1': { classType: FoeP1 }
   }  
 };
@@ -135,7 +133,15 @@ class GamePlay extends Renderer {
     }
 
     for (const sprite of actorsGroup.children) {
-      this.actors.push(new FoeP1(this.game, sprite));
+      const actor = new TileMapConsts.ACTORS[sprite.name].classType(this.game, 
+        sprite);
+      
+      // just an ugly special case here, nothing to see folks, move on ...
+      if (sprite.name === 'hero') {
+        this.player = actor;
+      }
+
+      this.actors.push(actor);
     }
     for (const actor of this.actors) {
       this.addSpriteToLayer(actor.sprite, true);
@@ -244,4 +250,4 @@ class GamePlay extends Renderer {
 
 }
 
-export { GamePlay, GamePlayConsts, TileMapConsts };
+export { GamePlay, TileMapConsts };

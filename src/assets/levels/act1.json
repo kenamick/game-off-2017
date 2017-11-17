@@ -313,6 +313,17 @@
                  "width":48,
                  "x":974,
                  "y":176.667
+                }, 
+                {
+                 "height":48,
+                 "id":33,
+                 "name":"hero",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":28.6666666666667,
+                 "y":123.333333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -320,7 +331,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":32,
+ "nextobjectid":34,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.0.3",

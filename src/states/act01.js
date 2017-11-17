@@ -22,10 +22,6 @@ class Act1 extends GamePlay {
     super.create();
 
     this.createLevel('act1');
-
-    this.player = new Hero(this.game, 50, 144);
-    this.addSpriteToLayer(this.player.sprite, true);
-
     this.arrangeLayers();
 
     // The HUD group contains all hud ui
