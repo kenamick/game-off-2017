@@ -1,20 +1,7 @@
 // act01.js - level 1 implementation
 
 import Renderer from './renderer';
-import { 
-  GamePlay, 
-  GamePlayConsts,
-  TileMapConsts
-} from './gameplay';
-import { Hero } from '../entities';
-
-// Ui components
-import Hud from '../ui/containers/hud';
-
-
-const Consts = {
-
-};
+import { GamePlay} from './gameplay';
 
 class Act1 extends GamePlay {
 
@@ -23,16 +10,10 @@ class Act1 extends GamePlay {
 
     this.createLevel('act1');
     this.arrangeLayers();
-
-    // The HUD group contains all hud ui
-    this.playerHud = new Hud(this.game, this.player.sprite);
+    this.attachHud();
   }
 
   update() {
-    this.playerHud.update();
-    this.player.update();
-    this.updatePlayerCollisions(this.player.sprite);
-
     // TODO
     // go to level 2
     if (this.player.sprite.x > 24 * 48 + 24) {

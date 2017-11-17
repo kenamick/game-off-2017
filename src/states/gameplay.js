@@ -6,6 +6,8 @@ import SpecialFx from '../specialfx';
 import { 
   Hero, FoeP1
 } from '../entities';
+// Ui components
+import Hud from '../ui/containers/hud';
 
 const TileMapConsts = {
   TILE_SIZE: 48,
@@ -54,6 +56,11 @@ class GamePlay extends Renderer {
 
     // all level NPC actors
     this.actors = [];
+  }
+
+  attachHud() {
+    // The HUD group contains all hud ui
+    this.playerHud = new Hud(this.game, this.player.sprite);
   }
 
   /**
@@ -238,6 +245,12 @@ class GamePlay extends Renderer {
 
   update() {
     super.update();
+
+    if (this.player) {
+      this.playerHud.update();
+      this.player.update();
+      this.updatePlayerCollisions(this.player.sprite);
+    }
 
     for (const actor of this.actors) {
       actor.update();
