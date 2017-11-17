@@ -1,27 +1,22 @@
 // hero.js
 import Globals from '../../globals';
 import Controls from '../../controls';
+import Actor from '../actor';
 
 const HeroConsts = {
   SPEED: 40
 };
 
-class Hero {
+class Hero extends Actor {
 
-  constructor(game) {
-    this.game = game;
-  }
-
-  spawn(x, y) {
-    const game = this.game;
-    this._sprite = this.game.add.sprite(x, y, 'atlas_sprites', 'hero_stand_01');
-
+  constructor(game, x, y) {
+    super(game, 
+      game.add.sprite(x, y, 'atlas_sprites', 'hero_stand_01'), 
+      Globals.hitpoints.player);
+    
     // sets anchor in the middle of the sprite, so that we can flip it
     // when moving left/right
     this._sprite.anchor.set(0.5, 0.5);
-
-    // Set player's health to max
-    this._sprite.health = this._sprite.maxHealth;
 
     // bind animation frames (check the json file for details/adjustments)
     this._sprite.animations.add('stand',
@@ -52,11 +47,11 @@ class Hero {
     this.controls = new Controls(game);
   }
 
-  get sprite() {
-    return this._sprite;
-  }
-
   update() {
+    if (!super.update()) {
+      return false;
+    }
+
     const game = this.game;
 
     let moving = false;

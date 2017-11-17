@@ -23,9 +23,7 @@ class Act1 extends GamePlay {
 
     this.createLevel('act1');
 
-    this.player = new Hero(this.game);
-    this.player.spawn(50, 144);
-
+    this.player = new Hero(this.game, 50, 144);
     this.addSpriteToLayer(this.player.sprite, true);
 
     this.arrangeLayers();

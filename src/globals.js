@@ -24,6 +24,15 @@ const Globals = {
    bricks1: { hex: '#8b956d', rgb: {r: 139, g: 149, b: 109} }, // light
    bricks2: { hex: '#4d533c', rgb: {r: 77, g: 83, b: 60} }, // darker
    background: { hex: '#1f1f1f', rgb: {r: 31, g: 31, b: 31} }, // dark
+  },
+
+  // various gameplay defaults
+  hitpoints: {
+    player: 100,
+    enemies: {
+      p1: 10,
+      k1: 10
+    }
   }
 };
 

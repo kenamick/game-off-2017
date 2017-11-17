@@ -131,14 +131,14 @@ class GamePlay extends Renderer {
     for (const [k, v] of Object.entries(TileMapConsts.ACTORS)) {
       this.map.createFromObjects(TileMapConsts.OBJECTS_ACTORS, 
         k, 'atlas_sprites', '', true, true, actorsGroup, 
-        v.classType, false, false);
+        Phaser.Sprite, false, false);
     }
 
     for (const sprite of actorsGroup.children) {
-      this.actors.push(sprite);
+      this.actors.push(new FoeP1(this.game, sprite));
     }
-    for (const sprite of this.actors) {
-      this.addSpriteToLayer(sprite, true);
+    for (const actor of this.actors) {
+      this.addSpriteToLayer(actor.sprite, true);
     }
   }
 
@@ -232,6 +232,10 @@ class GamePlay extends Renderer {
 
   update() {
     super.update();
+
+    for (const actor of this.actors) {
+      actor.update();
+    }
 
     this._updateZOrders();
     this._updateCollisions(this.frontGroup);
