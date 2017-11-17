@@ -24,6 +24,8 @@ class Bootstrap extends Renderer {
     // enables simple physics engine
     this.physics.startSystem(Phaser.Physics.ARCADE);
 
+    // fire up the game pad
+    this.input.gamepad.start()
   }
 
   init() {

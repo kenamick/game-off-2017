@@ -1,5 +1,6 @@
 // hero.js
 import Globals from '../../globals';
+import Controls from '../../controls';
 
 const HeroConsts = {
   SPEED: 40
@@ -24,7 +25,7 @@ class Hero {
 
     // bind animation frames (check the json file for details/adjustments)
     this._sprite.animations.add('stand',
-      Phaser.Animation.generateFrameNames('hero_stand_', 1, 3, '', 2), 5, true);
+      Phaser.Animation.generateFrameNames('hero_stand_', 1, 3, '', 2), 8, true);
     this._sprite.animations.add('walk',
       Phaser.Animation.generateFrameNames('hero_walk_', 1, 6, '', 2), 10, true);
     this._sprite.animations.add('combo',
@@ -48,62 +49,7 @@ class Hero {
 
     // game.input.addKeys API is not sufficient since
     // character needs to be aslo controlled by gamepad and AI
-
-    game.input.gamepad.start()
-    const pad1 = game.input.gamepad.pad1
-    const stickThreshold = 0.1;
-
-    // TODO: Get controls scheme from separatre config
-    // Maybe move to a separate class
-
-    this.controls = {
-      get up () {
-        return (
-          game.input.keyboard.isDown(Phaser.Keyboard.W) ||
-          game.input.keyboard.isDown(Phaser.Keyboard.UP) ||
-          pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_UP) ||
-          pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < -stickThreshold
-        );
-      },
-      get down () {
-        return (
-          game.input.keyboard.isDown(Phaser.Keyboard.S) ||
-          game.input.keyboard.isDown(Phaser.Keyboard.DOWN)||
-          pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_DOWN) ||
-          pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > stickThreshold
-        );
-      },
-      get left () {
-        return (
-          game.input.keyboard.isDown(Phaser.Keyboard.A) ||
-          game.input.keyboard.isDown(Phaser.Keyboard.LEFT) ||
-          pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) ||
-          pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -stickThreshold
-        );
-      },
-      get right () {
-        return (
-          game.input.keyboard.isDown(Phaser.Keyboard.D) ||
-          game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) ||
-          pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) ||
-          pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > stickThreshold
-        );
-      },
-      get punch () {
-        return (
-          game.input.keyboard.isDown(Phaser.Keyboard.H) ||
-          game.input.keyboard.isDown(Phaser.Keyboard.ENTER) ||
-          pad1.isDown(Phaser.Gamepad.XBOX360_X)
-        );
-      },
-      get jump () {
-        return (
-          game.input.keyboard.isDown(Phaser.Keyboard.J) ||
-          game.input.keyboard.isDown(Phaser.Keyboard.SPACE) ||
-          pad1.isDown(Phaser.Gamepad.XBOX360_A)
-        );
-      },
-    }
+    this.controls = new Controls(game);
   }
 
   get sprite() {

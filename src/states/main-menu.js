@@ -2,6 +2,8 @@
 // Game main menu options screen.
 
 import Globals from '../globals';
+import Controls from '../controls';
+
 import Renderer from './renderer';
 
 const MainMenuConsts = {
@@ -30,7 +32,7 @@ class MainMenu extends Renderer {
       this.optionTexts.push(text);
     }
 
-    this.keys = this.game.input.keyboard.addKeys({ up: Phaser.Keyboard.W, down: Phaser.Keyboard.S, enter: Phaser.Keyboard.ENTER });
+    this.controls = new Controls(this.game, true);
   }
 
   update() {
@@ -44,14 +46,12 @@ class MainMenu extends Renderer {
     this.handleInput();
   }
 
-  // TODO: change this to controller class
-  // or something like this
   handleInput() {
-    if(this.keys.up.justPressed())
+    if(this.controls.up)
       this.selectedOption--;
-    else if(this.keys.down.justPressed())
+    else if(this.controls.down)
       this.selectedOption++;
-    else if(this.keys.enter.justPressed())
+    else if(this.controls.punch || this.controls.jump)
       this.chooseOption();
 
     if(this.selectedOption < 0)
