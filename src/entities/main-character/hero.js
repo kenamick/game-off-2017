@@ -14,10 +14,8 @@ class Hero extends Actor {
 
     // sets anchor in the middle of the sprite, so that we can flip it
     // when moving left/right
-    this._sprite.anchor.set(0.5, 0.5);
-
-    // face right by default
-    this._sprite.scale.x = -1;
+    this._sprite.anchor.set(0.5);
+    this.faceRight();
 
     // bind animation frames (check the json file for details/adjustments)
     this._sprite.animations.add('stand',
@@ -46,6 +44,14 @@ class Hero extends Actor {
     // game.input.addKeys API is not sufficient since
     // character needs to be aslo controlled by gamepad and AI
     this.controls = new Controls(game);
+  }
+
+  faceLeft() {
+    this._sprite.scale.x = 1;
+  }
+
+  faceRight() {
+    this._sprite.scale.x = -1;
   }
 
   update() {
@@ -94,7 +100,7 @@ class Hero extends Actor {
       if (this.controls.left && !this.controls.right) {
         moving = true;
 
-        this._sprite.scale.x = 1;
+        this.faceLeft();
         this._sprite.animations.play('walk');
 
         this._sprite.body.velocity.x = -HeroConsts.SPEED;
@@ -106,7 +112,7 @@ class Hero extends Actor {
       if (this.controls.right && !this.controls.left) {
         moving = true;
 
-        this._sprite.scale.x = -1;
+        this.faceRight();
         this._sprite.animations.play('walk');
 
         this._sprite.body.velocity.x = HeroConsts.SPEED;

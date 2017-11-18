@@ -157,15 +157,15 @@ class GamePlay extends Renderer {
     }
 
     for (const sprite of actorsGroup.children) {
-      // TODO: add enemy AI level
-      const actor = new TileMapConsts.ACTORS[sprite.name.toUpperCase()].classType(
-        this.game, sprite);
-
       /**
        * Correct Tiled spawn position.
        */
       sprite.x += sprite.width * 0.5;
       sprite.y += sprite.height * 0.5;
+
+      // TODO: add enemy AI level
+      const actor = new TileMapConsts.ACTORS[sprite.name.toUpperCase()].classType(
+        this.game, sprite);
       
       // just an ugly special case here, nothing to see folks, move on ...
       if (sprite.name === TileMapConsts.ACTORS.HERO.name) {
