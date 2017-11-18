@@ -6,6 +6,7 @@ class Actor {
     this.game = game;
     this._sprite = sprite;
 
+    this._dying = false;
     this._maxHealth = maxHealth;
     this._sprite.health = maxHealth;
   }
@@ -13,6 +14,7 @@ class Actor {
   spawn(x, y) {
     this._sprite.x = x;
     this._sprite.y = y;
+    this._dying = false;
     this._sprite.revive(this._maxHealth);
   }
 
@@ -22,6 +24,17 @@ class Actor {
 
   get maxHealth() {
     return this._maxHealth;
+  }
+
+  kill() {
+    // set dying flag
+    // hit collisions check for 'dying' actors should be disabled!
+    this._dying = true;
+
+    const tween = this.game.add.tween(this._sprite).to({ alpha: 0 }, 
+      80, Phaser.Easing.Linear.None , true, 0, 7, true);
+
+    tween.onComplete.add(() => this._sprite.kill());
   }
 
   update() {

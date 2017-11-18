@@ -22,11 +22,17 @@ class FoeP1 extends Actor {
     this._sprite.animations.add('walk',
       Phaser.Animation.generateFrameNames('foe_walk_', 1, 4, '', 2), 10, true);
     this._sprite.animations.add('hit',
-      Phaser.Animation.generateFrameNames('foe_hit', 1, 2, '', 2), 5, true);
+      Phaser.Animation.generateFrameNames('foe_hit_', 1, 2, '', 2), 5, true);
     this._sprite.animations.add('attack',
       Phaser.Animation.generateFrameNames('foe_attack_', 1, 3, '', 2), 10, true);
 
     this._sprite.animations.play('stand');
+  }
+
+  kill() {
+    this._sprite.animations.stop();
+    this._sprite.frameName = 'foe_hit_02';
+    super.kill();
   }
 
   update() {

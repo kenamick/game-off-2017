@@ -11,7 +11,7 @@ class GoHand {
     const hand = specialFx.signals.hand(game.width - 25, 15, 'right');
     hand.fixedToCamera = true;
     
-    // TODO: add sound tween
+    // TODO: add sfx tween
   }
 
   get sprite() {
