@@ -30,9 +30,9 @@ const TileMapConsts = {
   pos: (x) => x * 48,
   // mapping of tiled actors to objects
   ACTORS: {
-    HERO: { name: 'hero', classType: Hero },
-    P1: { name: 'p1', classType: FoeP1 },
-    K1: { name: 'k1', classType: FoeK1 }
+    HERO: { name: 'hero', classType: Hero, frame: 'hero_stand_01' },
+    P1: { name: 'p1', classType: FoeP1, frame: 'foe_stand_01' },
+    K1: { name: 'k1', classType: FoeK1, frame: 'hero_stand_02' }
   }
 };
 
@@ -152,7 +152,7 @@ class GamePlay extends Renderer {
 
     for (const [k, v] of Object.entries(TileMapConsts.ACTORS)) {
       this.map.createFromObjects(TileMapConsts.OBJECTS_ACTORS, 
-        v.name, 'atlas_sprites', '', true, true, actorsGroup, 
+        v.name, 'atlas_sprites', v.frame, true, true, actorsGroup, 
         Phaser.Sprite, false, false);
     }
 
@@ -160,6 +160,12 @@ class GamePlay extends Renderer {
       // TODO: add enemy AI level
       const actor = new TileMapConsts.ACTORS[sprite.name.toUpperCase()].classType(
         this.game, sprite);
+
+      /**
+       * Correct Tiled spawn position.
+       */
+      sprite.x += sprite.width * 0.5;
+      sprite.y += sprite.height * 0.5;
       
       // just an ugly special case here, nothing to see folks, move on ...
       if (sprite.name === TileMapConsts.ACTORS.HERO.name) {

@@ -8,14 +8,8 @@ class FoeK1 extends Actor {
   constructor(game, sprite, levelAI = 1) {
     super(game, sprite, Globals.hitpoints.enemies.p1);
 
-    // fixes Tiled x-offset - for some reason Phaser spawns the sprite left 
-    // from the top x coordinate specified in the map
-    this._sprite.x += 48;
-
-    // default 'look at' direction
-    this._sprite.scale.x = -1;
-
     game.physics.arcade.enable(this._sprite);
+    this.faceLeft();
 
     // this.anchor.set(0.5, 0.5);
     //console.log('foe', this.x, this.y, this.width, this.height);

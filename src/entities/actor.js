@@ -43,6 +43,14 @@ class Actor {
     tween.onComplete.add(() => this._sprite.kill());
   }
 
+  faceLeft() {
+    this._sprite.scale.x = -1;
+  }
+
+  faceRight() {
+    this._sprite.scale.x = 1;
+  }
+
   update() {
     if (!this._sprite.alive) {
       // dead space
