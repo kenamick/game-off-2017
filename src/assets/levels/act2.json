@@ -283,7 +283,7 @@
                 {
                  "height":144.333333333333,
                  "id":35,
-                 "name":"hotpoint",
+                 "name":"hotpoint1",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -294,7 +294,7 @@
                 {
                  "height":144.333,
                  "id":40,
-                 "name":"hotpoint",
+                 "name":"hotpoint2",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -305,13 +305,24 @@
                 {
                  "height":144.333,
                  "id":41,
-                 "name":"hotpoint",
+                 "name":"hotpoint3",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":6.33333,
                  "x":1191.833335,
                  "y":94.1668333333333
+                }, 
+                {
+                 "height":26,
+                 "id":45,
+                 "name":"hotpoint4",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":23,
+                 "x":1312,
+                 "y":24
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -319,7 +330,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":44,
+ "nextobjectid":46,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.0.3",

@@ -26,12 +26,14 @@ const TileMapConsts = {
     'food75': { frame: 'meatloaf_2' },
     'food100': { frame: 'chicken_02' }
   },
+  // tile coordinates helpers
+  pos: (x) => x * 48,
   // mapping of tiled actors to objects
   ACTORS: {
     HERO: { name: 'hero', classType: Hero },
     P1: { name: 'p1', classType: FoeP1 },
     K1: { name: 'k1', classType: FoeK1 }
-  }  
+  }
 };
 
 class GamePlay extends Renderer {
