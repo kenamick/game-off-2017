@@ -5,7 +5,7 @@ import Controls from '../controls';
 import Renderer from './renderer';
 import SpecialFx from '../specialfx';
 import { 
-  Hero, FoeP1
+  Hero, FoeP1, FoeK1
 } from '../entities';
 // Ui components
 import Hud from '../ui/containers/hud';
@@ -28,8 +28,9 @@ const TileMapConsts = {
   },
   // mapping of tiled actors to objects
   ACTORS: {
-    'hero': {classType: Hero },
-    'p1': { classType: FoeP1 }
+    HERO: { name: 'hero', classType: Hero },
+    P1: { name: 'p1', classType: FoeP1 },
+    K1: { name: 'k1', classType: FoeK1 }
   }  
 };
 
@@ -60,6 +61,9 @@ class GamePlay extends Renderer {
     this.actors = [];
     // enemy actors only
     this.enemies = [];
+
+    // hotpoints - stuff happens when the player crosses them
+    this.hotpoints = {};
   }
 
   attachHud() {
@@ -103,6 +107,11 @@ class GamePlay extends Renderer {
       this.obstaclesGroup.add(sprite);
     }
 
+    // map all level hotpoints
+    for (const hot of this.map.objects.hotpoints) {
+      this.hotpoints[hot.name] = hot;
+    }
+
     this._placeCollectables(this.map);
     this._placeActors(this.map);
 
@@ -139,16 +148,17 @@ class GamePlay extends Renderer {
 
     for (const [k, v] of Object.entries(TileMapConsts.ACTORS)) {
       this.map.createFromObjects(TileMapConsts.OBJECTS_ACTORS, 
-        k, 'atlas_sprites', '', true, true, actorsGroup, 
+        v.name, 'atlas_sprites', '', true, true, actorsGroup, 
         Phaser.Sprite, false, false);
     }
 
     for (const sprite of actorsGroup.children) {
-      const actor = new TileMapConsts.ACTORS[sprite.name].classType(this.game, 
-        sprite);
+      // TODO: add enemy AI level
+      const actor = new TileMapConsts.ACTORS[sprite.name.toUpperCase()].classType(
+        this.game, sprite);
       
       // just an ugly special case here, nothing to see folks, move on ...
-      if (sprite.name === 'hero') {
+      if (sprite.name === TileMapConsts.ACTORS.HERO.name) {
         this.player = actor;
       } else {
         this.enemies.push(actor);
@@ -160,6 +170,14 @@ class GamePlay extends Renderer {
     for (const actor of this.actors) {
       this.addSpriteToLayer(actor.sprite, true);
     }
+  }
+
+  spawnEnemy(ACTOR, x, y, level) {
+    const actor = new ACTOR.classType(this.game, this.game.add.sprite(x, y, 
+      'atlas_sprites', ''), level);
+    this.actors.push(actor);
+    this.enemies.push(actor);
+    this.addSpriteToLayer(actor.sprite, true);
   }
 
   /**

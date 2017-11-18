@@ -1,4 +1,5 @@
 // actor.js - base class for the player/hero and NPCs
+import Globals from '../globals';
 
 class Actor {
 
@@ -46,6 +47,10 @@ class Actor {
     if (!this._sprite.alive) {
       // dead space
       return false;
+    }
+
+    if (Globals.debugPhysics) {
+      this.game.debug.body(this._sprite);
     }
 
     return true;

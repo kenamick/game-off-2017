@@ -3,7 +3,7 @@
 import Globals from '../../globals';
 import Actor from '../actor';
 
-class FoeP1 extends Actor {
+class FoeK1 extends Actor {
 
   constructor(game, sprite, levelAI = 1) {
     super(game, sprite, Globals.hitpoints.enemies.p1);
@@ -22,16 +22,16 @@ class FoeP1 extends Actor {
 
     // binds all foe animation frames
     this._sprite.animations.add('stand',
-      Phaser.Animation.generateFrameNames('foe_stand_', 1, 4, '', 2), 5, true);
+      Phaser.Animation.generateFrameNames('foe2_stand_', 1, 4, '', 2), 5, true);
     this._sprite.animations.add('walk',
-      Phaser.Animation.generateFrameNames('foe_walk_', 1, 4, '', 2), 10, true);
+      Phaser.Animation.generateFrameNames('foe2_walk_', 1, 4, '', 2), 10, true);
     this._sprite.animations.add('hit',
-      Phaser.Animation.generateFrameNames('foe_hit_', 1, 2, '', 2), 5, true);
+      Phaser.Animation.generateFrameNames('foe2_hit_', 1, 2, '', 2), 5, true);
     this._sprite.animations.add('attack',
-      Phaser.Animation.generateFrameNames('foe_attack_', 1, 3, '', 2), 10, true);
+      Phaser.Animation.generateFrameNames('foe2_attack_', 1, 3, '', 2), 10, true);
 
     // this is what is being shown when the actor die+flicker activates
-    this.dyingFrameName = 'foe_hit_02';
+    this.dyingFrameName = 'foe2_hit_02';
 
     this._sprite.animations.play('stand');
   }
@@ -46,4 +46,4 @@ class FoeP1 extends Actor {
 
 }
 
-export { FoeP1 };
+export { FoeK1 };
