@@ -110,8 +110,10 @@ class GamePlay extends Renderer {
     }
 
     // map all level hotpoints
-    for (const hot of this.map.objects.hotpoints) {
-      this.hotpoints[hot.name] = hot;
+    if (this.map.objects.hotpoints) {
+      for (const hot of this.map.objects.hotpoints) {
+        this.hotpoints[hot.name] = hot;
+      }
     }
 
     this._placeCollectables(this.map);
