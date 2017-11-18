@@ -21,6 +21,10 @@ class Signals {
       case 'down':
         hand.scale.y = -hand.scale.y;
       break;
+      case 'right':
+        hand.anchor.setTo(0.5);
+        hand.angle += 90;
+      break;
       // more ...?
     }
 
@@ -28,6 +32,8 @@ class Signals {
 
     const tween = this.game.add.tween(hand).to({ alpha: .25, y: toY }, 
       500, Phaser.Easing.Linear.None , true, 0, -1, true);
+
+    return hand;
   }
 
 }

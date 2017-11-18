@@ -11,6 +11,8 @@ class Act1 extends GamePlay {
     this.createLevel('act1');
     this.arrangeLayers();
     this.attachHud();
+
+    this.playerHud.showThisWay();
   }
 
   update() {
