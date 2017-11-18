@@ -1,4 +1,5 @@
 // foe_p1.js - Type 'P1' NPC
+
 import Globals from '../../globals';
 import Actor from '../actor';
 
@@ -26,13 +27,10 @@ class FoeP1 extends Actor {
     this._sprite.animations.add('attack',
       Phaser.Animation.generateFrameNames('foe_attack_', 1, 3, '', 2), 10, true);
 
-    this._sprite.animations.play('stand');
-  }
+    // this is what is being shown when the actor die+flicker activates
+    this.dyingFrameName = 'foe_hit_02';
 
-  kill() {
-    this._sprite.animations.stop();
-    this._sprite.frameName = 'foe_hit_02';
-    super.kill();
+    this._sprite.animations.play('stand');
   }
 
   update() {

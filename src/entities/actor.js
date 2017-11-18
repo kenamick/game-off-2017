@@ -27,6 +27,11 @@ class Actor {
   }
 
   kill() {
+    if (this.dyingFrameName) {
+      this._sprite.animations.stop();
+      this._sprite.frameName = 'foe_hit_02';
+    }
+
     // set dying flag
     // hit collisions check for 'dying' actors should be disabled!
     this._dying = true;
