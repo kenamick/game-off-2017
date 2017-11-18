@@ -40,6 +40,16 @@ class Controls {
         game.input.keyboard.addKey(Phaser.Keyboard.SPACE) 
       ]
     };
+
+    // allow for testing game stuff
+    // these should be disabled in production builds
+    if (Globals.debug) {
+      this.keys = {
+        ...this.keys,
+        killAll: game.input.keyboard.addKey(Phaser.Keyboard.V),
+        warpAtEnd: game.input.keyboard.addKey(Phaser.Keyboard.B)
+      };
+    }
   }
 
   _keyPressed(keys) {
@@ -110,6 +120,13 @@ class Controls {
       this._padPressed(Phaser.Gamepad.XBOX360_A)
     );
   }
+
+  // DEBUG 
+
+  debug(what) {
+    return this.keys[what].justPressed();
+  }
+
 }
 
 export default Controls;

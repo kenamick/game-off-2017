@@ -1,6 +1,7 @@
 // gameplay.js 
 // Common game levels routines, mechanics, entities, etc.
 import Globals from '../globals';
+import Controls from '../controls';
 import Renderer from './renderer';
 import SpecialFx from '../specialfx';
 import { 
@@ -39,6 +40,7 @@ class GamePlay extends Renderer {
     this.game.stage.backgroundColor = Globals.palette.sky.hex;
 
     this.specialFx = new SpecialFx(this.game);
+    this.controls = new Controls(this.game);
 
     // The 'behind' group is basically a layer in the level the contains sprites
     // behind the sidewalk objects layer. We need to put objects either in front
@@ -54,8 +56,10 @@ class GamePlay extends Renderer {
     this.obstaclesGroup = this.add.group();
     this.collectables = [];
 
-    // all level NPC actors
+    // all level npcs
     this.actors = [];
+    // enemy actors only
+    this.enemies = [];
   }
 
   attachHud() {
@@ -146,10 +150,13 @@ class GamePlay extends Renderer {
       // just an ugly special case here, nothing to see folks, move on ...
       if (sprite.name === 'hero') {
         this.player = actor;
+      } else {
+        this.enemies.push(actor);
       }
 
       this.actors.push(actor);
     }
+
     for (const actor of this.actors) {
       this.addSpriteToLayer(actor.sprite, true);
     }
@@ -235,7 +242,7 @@ class GamePlay extends Renderer {
   // only check against the player's movement body and not the complete/rigid body
   updatePlayerCollisions(sprite) {
     this.physics.arcade.collide(sprite, this.collectables, (o1, o2) => {
-      // TODO add to player's health, play sound
+      // TODO add to player's health, play sfx
       // 
       o2.destroy();
 
@@ -245,6 +252,17 @@ class GamePlay extends Renderer {
 
   update() {
     super.update();
+
+    // debug keys/events
+    if (Globals.debug) {
+      if (this.controls.debug('warpAtEnd')) {
+        // teleport player at the end of the level
+        this.player.sprite.x = this.game.world.width - TileMapConsts.TILE_SIZE * 1.5;
+      } else if (this.controls.debug('killAll')) {
+        // kill all existing enemies on the map
+        this.enemies.forEach(o => o.kill());
+      }
+    }
 
     if (this.player) {
       this.playerHud.update();
@@ -259,6 +277,13 @@ class GamePlay extends Renderer {
     this._updateZOrders();
     this._updateCollisions(this.frontGroup);
     this._updateCollisions(this.behindGroup);
+
+    // all enemies dead => show 'go to next level' flag
+    if (!this.isComplete && 
+      this.enemies.reduce((s, o) => s += o.sprite.alive ? 1 : 0, 0) === 0) {
+      this.playerHud.showThisWay();
+      this.isComplete = true;
+    }
   }
 
 }
