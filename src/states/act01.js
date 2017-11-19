@@ -17,7 +17,9 @@ class Act1 extends GamePlay {
   }
 
   update() {
-    // go to act2 if everything's completed
+    /**
+     * All enemies dead => go to Act #2
+     */
     if (this.isComplete && this.player.sprite.x > this.nextLevelOffset) {
       this.state.start('act2');
     }

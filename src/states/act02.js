@@ -24,10 +24,11 @@ class Act2 extends GamePlay {
     // TODO: add sfx
   }
 
-  _addEnemy(tx, ty, offsetX = 0, offsetY = 0) {
-    this.spawnEnemy(TileMapConsts.ACTORS.K1, 
-      TileMapConsts.pos(tx) + offsetX, 
-      TileMapConsts.pos(ty) + offsetY, 
+  _addEnemy(type, tx, ty, offsetX = 0, offsetY = 0) {
+    const halfSize = TileMapConsts.TILE_SIZE * 0.5;
+    this.spawnEnemy(type, 
+      TileMapConsts.pos(tx) - halfSize + offsetX, 
+      TileMapConsts.pos(ty) + halfSize + offsetY, 
       this.enemyAILevel);
   }
 
@@ -42,9 +43,87 @@ class Act2 extends GamePlay {
       // door opens
       this._addDoor(3, 1);
       // spawn enemies
-      this._addEnemy(3, 1);
-      this._addEnemy(3, 1, -5, 1);
-      this._addEnemy(3, 1, 4, 2);
+      this._addEnemy(TileMapConsts.ACTORS.K1, 4, 1);
+      this._addEnemy(TileMapConsts.ACTORS.K1, 4, 1, -5, 1);
+      this._addEnemy(TileMapConsts.ACTORS.K1, 4, 1, 4, 2);
+    }
+
+    /**
+     * Hotpoint #2
+     * Spawn even more enemies from door #1
+     */
+    if (!this.hotpoints.hotpoint2.active && 
+      this.player.sprite.x > this.hotpoints.hotpoint2.x) {
+      this.hotpoints.hotpoint2.active = true;
+      // spawn enemies
+      this._addEnemy(TileMapConsts.ACTORS.K1, 4, 1, -2);
+      this._addEnemy(TileMapConsts.ACTORS.K1, 4, 1, -4, 4);
+      this._addEnemy(TileMapConsts.ACTORS.P1, 4, 1, 3, 3);
+    }
+
+    /**
+     * Hotpoint #3
+     */
+    if (!this.hotpoints.hotpoint3.active && 
+      this.player.sprite.x > this.hotpoints.hotpoint3.x) {
+      this.hotpoints.hotpoint3.active = true;
+      // door opens
+      this._addDoor(7, 1);
+      // spawn enemies
+      this._addEnemy(TileMapConsts.ACTORS.P1, 8, 1, -1);
+      this._addEnemy(TileMapConsts.ACTORS.K1, 8, 1, 4, 8);
+      this._addEnemy(TileMapConsts.ACTORS.P1, 8, 1, 5, 2);
+    }
+
+    /**
+     * Hotpoint #5
+     */
+    if (!this.hotpoints.hotpoint5.active && 
+      this.player.sprite.x > this.hotpoints.hotpoint5.x) {
+      this.hotpoints.hotpoint5.active = true;
+      // door opens
+      this._addDoor(16, 1);
+      // spawn enemies
+      this._addEnemy(TileMapConsts.ACTORS.P1, 17, 1, 5, 2);
+      this._addEnemy(TileMapConsts.ACTORS.K1, 17, 1, -3, 4);
+    }
+
+    /**
+     * Hotpoint #6
+     */
+    if (!this.hotpoints.hotpoint6.active && 
+      this.player.sprite.x > this.hotpoints.hotpoint6.x) {
+      this.hotpoints.hotpoint6.active = true;
+      // door opens
+      this._addDoor(24, 1);
+      // spawn enemies
+      this._addEnemy(TileMapConsts.ACTORS.K1, 25, 1, 7, 1);
+      this._addEnemy(TileMapConsts.ACTORS.K1, 25, 1, -4, 2);
+      this._addEnemy(TileMapConsts.ACTORS.K1, 25, 1, 1, 1);
+    }
+
+    /**
+     * All bad guys dead => get the exit open
+     */
+    if (this.isComplete) {
+      if (!this.isGoHand) {
+        this.isGoHand = true;
+        this.specialFx.signals.hand(TileMapConsts.pos(27) + 12,
+          TileMapConsts.pos(1), 'down');
+        // door opens
+        this._addDoor(27, 1);
+      } else if (this.isGoHand && this.player.sprite.x > TileMapConsts.pos(27)) {
+        // hide signal hand, if pass the exit door
+        this.playerHud.hideThisWay();
+      }
+
+      // warp dat dude
+      if (this.isGoHand && 
+        this.player.sprite.bottom < TileMapConsts.WALK_CONSTRAINT_Y + 4 && 
+        this.player.sprite.x > TileMapConsts.pos(27) + 14 &&
+        this.player.sprite.x < TileMapConsts.pos(28) - 14) {
+        this.state.start('act1');
+      }
     }
 
     // do collisions checks, etc. after player & NPC movements

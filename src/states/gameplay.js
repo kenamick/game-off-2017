@@ -24,7 +24,7 @@ const TileMapConsts = {
     // HP added is in %
     'food25': { frame: 'chicken_01', hp: 25, text: '+25%' },
     'food50': { frame: 'steak_01', hp: 50, text: '+50%' },
-    'food75': { frame: 'meatloaf_2', hp: 75, text: '+75%' },
+    'food75': { frame: 'meatloaf_02', hp: 75, text: '+75%' },
     'food100': { frame: 'chicken_02', hp: 100, text: '+100%' }
   },
   // tile coordinates helpers
