@@ -28,6 +28,7 @@ const Globals = {
 
   // various gameplay defaults
   hitpoints: {
+    debugRatio: 25,
     player: 100,
     enemies: {
       p1: 10,

@@ -21,10 +21,11 @@ const TileMapConsts = {
   FG_Y: 123, // y position where foreground sidewalk objects start,
   WALK_CONSTRAINT_Y: 96,
   COLLECTABLES: {
-    'food25': { frame: 'chicken_01' },
-    'food50': { frame: 'steak_01' },
-    'food75': { frame: 'meatloaf_2' },
-    'food100': { frame: 'chicken_02' }
+    // HP added is in %
+    'food25': { frame: 'chicken_01', hp: 25, text: '+25%' },
+    'food50': { frame: 'steak_01', hp: 50, text: '+50%' },
+    'food75': { frame: 'meatloaf_2', hp: 75, text: '+75%' },
+    'food100': { frame: 'chicken_02', hp: 100, text: '+100%' }
   },
   // tile coordinates helpers
   pos: (x) => x * 48,
@@ -270,11 +271,13 @@ class GamePlay extends Renderer {
   // only check against the player's movement body and not the complete/rigid body
   updatePlayerCollisions(sprite) {
     this.physics.arcade.collide(sprite, this.collectables, (o1, o2) => {
-      // TODO add to player's health, play sfx
-      // 
+      const food = TileMapConsts.COLLECTABLES[o2.name];
+      this.specialFx.textdraw.fadingUp(o2.x, o2.y, food.text);
+      // 'eat' that food
       o2.destroy();
-
-      this.specialFx.textdraw.fadingUp(o2.x, o2.y, 'YUMMY!');
+      // heal player
+      this.player.sprite.heal(food.hp);
+      // TODO add sfx
     });
   }
 
@@ -289,6 +292,10 @@ class GamePlay extends Renderer {
       } else if (this.controls.debug('killAll')) {
         // kill all existing enemies on the map
         this.enemies.forEach(o => o.kill());
+      } else if (this.controls.debug('hurtHero')) {
+        this.player.sprite.damage(Globals.hitpoints.debugRatio);
+      } else if (this.controls.debug('healHero')) {
+        this.player.sprite.heal(Globals.hitpoints.debugRatio);
       }
     }
 

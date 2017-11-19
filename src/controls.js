@@ -47,7 +47,9 @@ class Controls {
       this.keys = {
         ...this.keys,
         killAll: game.input.keyboard.addKey(Phaser.Keyboard.V),
-        warpAtEnd: game.input.keyboard.addKey(Phaser.Keyboard.B)
+        warpAtEnd: game.input.keyboard.addKey(Phaser.Keyboard.B),
+        hurtHero: game.input.keyboard.addKey(Phaser.Keyboard.N),
+        healHero: game.input.keyboard.addKey(Phaser.Keyboard.M)
       };
     }
   }
