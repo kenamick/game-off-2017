@@ -26,9 +26,16 @@ class FoeP1 extends Actor {
     this._sprite.animations.play('stand');
   }
 
-  update() {
+  update(player) {
     if (!super.update()) {
       return false;
+    }
+
+    // always face the player
+    if (this._sprite.x < player.sprite.x) {
+      this.faceRight();
+    } else {
+      this.faceLeft();
     }
 
     // TODO: add AI

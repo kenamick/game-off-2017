@@ -306,8 +306,8 @@ class GamePlay extends Renderer {
       this.updatePlayerCollisions(this.player.sprite);
     }
 
-    for (const actor of this.actors) {
-      actor.update();
+    for (const actor of this.enemies) {
+      actor.update(this.player);
     }
 
     this._updateZOrders();

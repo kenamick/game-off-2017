@@ -6,7 +6,7 @@ import Actor from '../actor';
 class FoeK1 extends Actor {
 
   constructor(game, sprite, levelAI = 1) {
-    super(game, sprite, Globals.hitpoints.enemies.p1, 'foe2_hit_02');
+    super(game, sprite, Globals.hitpoints.enemies.p1, 'foe2_hit_01');
 
     this._sprite.anchor.set(0.5);
     this.faceLeft();
@@ -26,9 +26,16 @@ class FoeK1 extends Actor {
     this._sprite.animations.play('stand');
   }
 
-  update() {
+  update(player) {
     if (!super.update()) {
       return false;
+    }
+
+    // always face the player
+    if (this._sprite.x < player.sprite.x) {
+      this.faceRight();
+    } else {
+      this.faceLeft();
     }
 
     // TODO: add AI
