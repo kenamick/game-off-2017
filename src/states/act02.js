@@ -14,6 +14,15 @@ class Act2 extends GamePlay {
     this.attachHud();
 
     this.enemyAILevel = 2;
+
+    // reset state
+    this.isGoHand = false;
+    this.hotpointsDone = 0;
+    this.hotpoints.hotpoint1.active = false;
+    this.hotpoints.hotpoint2.active = false;
+    this.hotpoints.hotpoint3.active = false;
+    this.hotpoints.hotpoint5.active = false;
+    this.hotpoints.hotpoint6.active = false;
   }
 
   _addDoor(tx, ty) {
@@ -40,6 +49,7 @@ class Act2 extends GamePlay {
     if (!this.hotpoints.hotpoint1.active && 
       this.player.sprite.x > this.hotpoints.hotpoint1.x) {
       this.hotpoints.hotpoint1.active = true;
+      this.hotpointsDone += 1;
       // door opens
       this._addDoor(3, 1);
       // spawn enemies
@@ -55,6 +65,7 @@ class Act2 extends GamePlay {
     if (!this.hotpoints.hotpoint2.active && 
       this.player.sprite.x > this.hotpoints.hotpoint2.x) {
       this.hotpoints.hotpoint2.active = true;
+      this.hotpointsDone += 1;
       // spawn enemies
       this._addEnemy(TileMapConsts.ACTORS.K1, 4, 1, -2);
       this._addEnemy(TileMapConsts.ACTORS.K1, 4, 1, -4, 4);
@@ -67,6 +78,7 @@ class Act2 extends GamePlay {
     if (!this.hotpoints.hotpoint3.active && 
       this.player.sprite.x > this.hotpoints.hotpoint3.x) {
       this.hotpoints.hotpoint3.active = true;
+      this.hotpointsDone += 1;
       // door opens
       this._addDoor(7, 1);
       // spawn enemies
@@ -81,6 +93,7 @@ class Act2 extends GamePlay {
     if (!this.hotpoints.hotpoint5.active && 
       this.player.sprite.x > this.hotpoints.hotpoint5.x) {
       this.hotpoints.hotpoint5.active = true;
+      this.hotpointsDone += 1;
       // door opens
       this._addDoor(16, 1);
       // spawn enemies
@@ -94,6 +107,7 @@ class Act2 extends GamePlay {
     if (!this.hotpoints.hotpoint6.active && 
       this.player.sprite.x > this.hotpoints.hotpoint6.x) {
       this.hotpoints.hotpoint6.active = true;
+      this.hotpointsDone += 1;
       // door opens
       this._addDoor(24, 1);
       // spawn enemies
@@ -105,8 +119,10 @@ class Act2 extends GamePlay {
     /**
      * All bad guys dead => get the exit open
      */
-    if (this.isComplete) {
+    if (super.isEnemiesDead() && this.hotpointsDone === 5) {
       if (!this.isGoHand) {
+        this.playerHud.showThisWay();
+        // fixe a go hand to exit door
         this.isGoHand = true;
         this.specialFx.signals.hand(TileMapConsts.pos(27) + 12,
           TileMapConsts.pos(1), 'down');

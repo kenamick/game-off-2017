@@ -191,6 +191,10 @@ class GamePlay extends Renderer {
     this.addSpriteToLayer(actor.sprite, true);
   }
 
+  isEnemiesDead() {
+    return this.enemies.reduce((s, o) => s += o.sprite.alive ? 1 : 0, 0) === 0;
+  }
+
   /**
    * Adds a sprite to the appropriate layer based on it's coordinates.
    * 
@@ -285,21 +289,6 @@ class GamePlay extends Renderer {
   update() {
     super.update();
 
-    // debug keys/events
-    if (Globals.debug) {
-      if (this.controls.debug('warpAtEnd')) {
-        // teleport player at the end of the level
-        this.player.sprite.x = this.game.world.width - TileMapConsts.TILE_SIZE * 1.5;
-      } else if (this.controls.debug('killAll')) {
-        // kill all existing enemies on the map
-        this.enemies.forEach(o => o.kill());
-      } else if (this.controls.debug('hurtHero')) {
-        this.player.damage(Globals.hitpoints.debugRatio);
-      } else if (this.controls.debug('healHero')) {
-        this.player.heal(Globals.hitpoints.debugRatio);
-      }
-    }
-
     if (this.player) {
       this.playerHud.update();
       this.player.update();
@@ -314,11 +303,19 @@ class GamePlay extends Renderer {
     this._updateCollisions(this.frontGroup);
     this._updateCollisions(this.behindGroup);
 
-    // all enemies dead => show 'go to next level' flag
-    if (!this.isComplete && 
-      this.enemies.reduce((s, o) => s += o.sprite.alive ? 1 : 0, 0) === 0) {
-      this.playerHud.showThisWay();
-      this.isComplete = true;
+    // debug keys/events
+    if (Globals.debug) {
+      if (this.controls.debug('warpAtEnd')) {
+        // teleport player at the end of the level
+        this.player.sprite.x = this.game.world.width - TileMapConsts.TILE_SIZE * 1.5;
+      } else if (this.controls.debug('killAll')) {
+        // kill all existing enemies on the map
+        this.enemies.forEach(o => o.kill());
+      } else if (this.controls.debug('hurtHero')) {
+        this.player.damage(Globals.hitpoints.debugRatio);
+      } else if (this.controls.debug('healHero')) {
+        this.player.heal(Globals.hitpoints.debugRatio);
+      }
     }
   }
 

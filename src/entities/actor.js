@@ -64,9 +64,7 @@ class Actor {
     const tween = this.game.add.tween(this._sprite).to({ alpha: 0 }, 
       80, Phaser.Easing.Linear.None , true, 0, 7, true);
 
-    tween.onComplete.add(() => {
-      this._sprite.kill()
-    });
+    tween.onComplete.add(() => this._sprite.kill());
   }
 
   faceLeft() {
