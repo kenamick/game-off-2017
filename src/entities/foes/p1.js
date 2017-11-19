@@ -13,12 +13,9 @@ class FoeP1 extends Actor {
 
     game.physics.arcade.enable(this._sprite);
 
-    // this.anchor.set(0.5, 0.5);
-    //console.log('foe', this.x, this.y, this.width, this.height);
-
     // binds all foe animation frames
     this._sprite.animations.add('stand',
-      Phaser.Animation.generateFrameNames('foe_stand_', 1, 4, '', 2), 5, true);
+      Phaser.Animation.generateFrameNames('foe_stand_', 1, 4, '', 2), 8, true);
     this._sprite.animations.add('walk',
       Phaser.Animation.generateFrameNames('foe_walk_', 1, 4, '', 2), 10, true);
     this._sprite.animations.add('hit',

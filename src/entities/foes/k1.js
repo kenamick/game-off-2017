@@ -8,15 +8,14 @@ class FoeK1 extends Actor {
   constructor(game, sprite, levelAI = 1) {
     super(game, sprite, Globals.hitpoints.enemies.p1, 'foe2_hit_02');
 
-    game.physics.arcade.enable(this._sprite);
+    this._sprite.anchor.set(0.5);
     this.faceLeft();
 
-    // this.anchor.set(0.5, 0.5);
-    //console.log('foe', this.x, this.y, this.width, this.height);
+    game.physics.arcade.enable(this._sprite);
 
     // binds all foe animation frames
     this._sprite.animations.add('stand',
-      Phaser.Animation.generateFrameNames('foe2_stand_', 1, 4, '', 2), 5, true);
+      Phaser.Animation.generateFrameNames('foe2_stand_', 1, 4, '', 2), 8, true);
     this._sprite.animations.add('walk',
       Phaser.Animation.generateFrameNames('foe2_walk_', 1, 4, '', 2), 10, true);
     this._sprite.animations.add('hit',
