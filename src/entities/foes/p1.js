@@ -6,7 +6,7 @@ import Actor from '../actor';
 class FoeP1 extends Actor {
 
   constructor(game, sprite, levelAI = 1) {
-    super(game, sprite, Globals.hitpoints.enemies.p1);
+    super(game, sprite, Globals.hitpoints.enemies.p1, 'foe_hit_02');
 
     this._sprite.anchor.set(0.5);
     this.faceLeft();
@@ -25,9 +25,6 @@ class FoeP1 extends Actor {
       Phaser.Animation.generateFrameNames('foe_hit_', 1, 2, '', 2), 5, true);
     this._sprite.animations.add('attack',
       Phaser.Animation.generateFrameNames('foe_attack_', 1, 3, '', 2), 10, true);
-
-    // this is what is being shown when the actor die+flicker activates
-    this.dyingFrameName = 'foe_hit_02';
 
     this._sprite.animations.play('stand');
   }

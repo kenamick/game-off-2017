@@ -273,10 +273,11 @@ class GamePlay extends Renderer {
     this.physics.arcade.collide(sprite, this.collectables, (o1, o2) => {
       const food = TileMapConsts.COLLECTABLES[o2.name];
       this.specialFx.textdraw.fadingUp(o2.x, o2.y, food.text);
+
       // 'eat' that food
       o2.destroy();
-      // heal player
-      this.player.sprite.heal(food.hp);
+      this.player.heal(food.hp);
+
       // TODO add sfx
     });
   }
@@ -293,9 +294,9 @@ class GamePlay extends Renderer {
         // kill all existing enemies on the map
         this.enemies.forEach(o => o.kill());
       } else if (this.controls.debug('hurtHero')) {
-        this.player.sprite.damage(Globals.hitpoints.debugRatio);
+        this.player.damage(Globals.hitpoints.debugRatio);
       } else if (this.controls.debug('healHero')) {
-        this.player.sprite.heal(Globals.hitpoints.debugRatio);
+        this.player.heal(Globals.hitpoints.debugRatio);
       }
     }
 

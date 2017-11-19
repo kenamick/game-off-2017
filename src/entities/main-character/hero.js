@@ -10,7 +10,7 @@ const HeroConsts = {
 class Hero extends Actor {
 
   constructor(game, sprite) {
-    super(game, sprite, Globals.hitpoints.player);
+    super(game, sprite, Globals.hitpoints.player, 'hero_stand_01');
 
     // sets anchor in the middle of the sprite, so that we can flip it
     // when moving left/right
@@ -44,6 +44,15 @@ class Hero extends Actor {
     // game.input.addKeys API is not sufficient since
     // character needs to be aslo controlled by gamepad and AI
     this.controls = new Controls(game);
+  }
+
+  kill() {
+    // make the player sprite kind of lying on the ground
+    // TODO: maybe detatch the camera here
+    this._sprite.angle = -90;
+    this._sprite.y += this._sprite.height * 0.5;
+
+    super.kill();
   }
 
   faceLeft() {

@@ -3,13 +3,16 @@ import Globals from '../globals';
 
 class Actor {
 
-  constructor(game, sprite, maxHealth) {
+  constructor(game, sprite, maxHealth, dyingFrameName) {
     this.game = game;
     this._sprite = sprite;
 
     this._dying = false;
     this._maxHealth = maxHealth;
     this._sprite.health = maxHealth;
+
+    // this is what is being shown when the actor die+blink activates
+    this._dyingFrameName = dyingFrameName;
   }
 
   spawn(x, y) {
@@ -27,20 +30,43 @@ class Actor {
     return this._maxHealth;
   }
 
-  kill() {
-    if (this.dyingFrameName) {
-      this._sprite.animations.stop();
-      this._sprite.frameName = 'foe_hit_02';
+  /**
+   * Damages actor.
+   * Custom method, so we can display the blinking animations before killing
+   * the actor sprite.
+   * @param {*} amount 
+   */
+  damage(amount) {
+    if (this._sprite.health - amount <= 0) {
+      this._sprite.health = 1;
+      this.kill();
+    } else {
+      this._sprite.damage(amount);
     }
+  }
 
+  heal(amount) {
+    if (this._sprite.alive) {
+      this._sprite.heal(amount);
+    }
+  }
+
+  kill() {
     // set dying flag
     // hit collisions check for 'dying' actors should be disabled!
     this._dying = true;
+    
+    if (this._dyingFrameName) {
+      this._sprite.animations.stop();
+      this._sprite.frameName = this._dyingFrameName;
+    }
 
     const tween = this.game.add.tween(this._sprite).to({ alpha: 0 }, 
       80, Phaser.Easing.Linear.None , true, 0, 7, true);
 
-    tween.onComplete.add(() => this._sprite.kill());
+    tween.onComplete.add(() => {
+      this._sprite.kill()
+    });
   }
 
   faceLeft() {
@@ -52,7 +78,7 @@ class Actor {
   }
 
   update() {
-    if (!this._sprite.alive) {
+    if (!this._sprite.alive || this._dying) {
       // dead space
       return false;
     }
