@@ -21,7 +21,9 @@ class Hud {
   }
 
   hideThisWay() {
-    this.hand.sprite.destroy();
+    if (this.hand) {
+      this.hand.sprite.destroy();
+    }
   }
 
   update() {
