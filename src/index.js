@@ -3,9 +3,11 @@ import 'p2';
 import Phaser from 'phaser';
 
 import { 
-  Bootstrap, 
-  Preloader, 
+  Bootstrap,
+  Preloader,
   MainMenu,
+  Options,
+  Credits,
   Act1,
   Act2,
   Act5
@@ -19,6 +21,8 @@ window.onload = function () {
   game.state.add('bootstrap', new Bootstrap(game));
   game.state.add('preload', Preloader);
   game.state.add('mainmenu', MainMenu);
+  game.state.add('options', Options);
+  game.state.add('credits', Credits);
   game.state.add('act1', Act1);
   game.state.add('act2', Act2);
   game.state.add('act5', Act5);

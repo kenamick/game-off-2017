@@ -67,7 +67,7 @@ class MainMenu extends Renderer {
 
     // start option state
     if(this.selectedOption == 1)
-      this.state.start('option');
+      this.state.start('options');
 
     // start credits state
     if(this.selectedOption == 2)
