@@ -16,7 +16,7 @@ class HealthBar {
       width: 50,
       height: 8,
       bar: {
-        color: '#ffffff',
+        color: Globals.palette.sky.hex, // '#ffffff',
         background: Globals.palette.background.hex
       },
       fixedToCamera: false,
