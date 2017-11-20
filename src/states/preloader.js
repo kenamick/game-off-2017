@@ -59,7 +59,7 @@ class Preloader extends Renderer {
 
     // create splash screen
     let splashText = this.game.add.bitmapText(this.game.world.centerX,
-      this.game.world.centerY, 'standard', 'KICKPUNCH', 32);
+      this.game.world.centerY, Globals.bitmapFont, 'KICKPUNCH', 32);
     splashText.anchor.setTo(0.5);
     splashText.alpha = 0;
 

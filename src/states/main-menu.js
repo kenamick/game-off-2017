@@ -19,7 +19,7 @@ class MainMenu extends Renderer {
   create() {
     const screenCenter = this.game.world.centerX;
 
-    const menuTitle = this.game.add.bitmapText(screenCenter, 24, 'standard', 'MAIN MENU', 24);
+    const menuTitle = this.game.add.bitmapText(screenCenter, 24, Globals.bitmapFont, 'MAIN MENU', 24);
     menuTitle.anchor.setTo(0.5);
     
     // create a text for each option
@@ -27,7 +27,7 @@ class MainMenu extends Renderer {
     this.optionTexts = [];
     let ypos = this.game.world.height / MainMenuConsts.options.length + 24;
     for(const [i, option] of MainMenuConsts.options.entries()) {
-      const text = this.game.add.bitmapText(screenCenter, ypos + 24 * i, 'standard', option, 12);
+      const text = this.game.add.bitmapText(screenCenter, ypos + 24 * i, Globals.bitmapFont, option, 12);
       text.anchor.setTo(0.5);
       this.optionTexts.push(text);
     }
