@@ -42,6 +42,9 @@ class Preloader extends Renderer {
     this.game.load.tilemap('act2',
       require('file-loader!../assets/levels/act2.json'), null,
       Phaser.Tilemap.TILED_JSON);
+    this.game.load.tilemap('act5',
+      require('file-loader!../assets/levels/act5.json'), null,
+      Phaser.Tilemap.TILED_JSON);
 
     // load sprites atlas
     this.load.atlas('atlas_sprites',
