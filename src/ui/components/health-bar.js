@@ -17,7 +17,7 @@ class HealthBar {
       height: 8,
       bar: {
         color: '#ffffff',
-        background: Globals.palette.bricks2.hex
+        background: Globals.palette.background.hex
       },
       fixedToCamera: false,
       ...options
@@ -28,11 +28,11 @@ class HealthBar {
   _createHealthBar() {
     const healthBarBackgroundSprite = this.game.add.graphics();
     healthBarBackgroundSprite.beginFill(Phaser.Color.hexToRGB(this._options.bar.background),  1)
-                             .drawRect(0, 0, this._options.width, this._options.height)
+                             .drawRect(0, 0, this._options.width + 2, this._options.height + 2)
                              .endFill();
 
     const healthBarBackgroundSpriteTexture = healthBarBackgroundSprite.generateTexture();
-    this._backgroundSprite = this.game.add.sprite(this._options.x, this._options.y, healthBarBackgroundSpriteTexture);
+    this._backgroundSprite = this.game.add.sprite(this._options.x - 1, this._options.y - 1, healthBarBackgroundSpriteTexture);
     this._backgroundSprite.fixedToCamera = this._options.fixedToCamera;
 
     const healthBarSprite = this.game.add.graphics();
@@ -50,8 +50,8 @@ class HealthBar {
   update() {
     if(this._health != this._objectSprite.health) {
       // move this to a function maybe?
-      this._health = this._objectSprite._health;
-      this.game.add.tween(this._sprite).to({ width: this._backgroundSprite.width * this._objectSprite.health / this._objectSprite.maxHealth },
+      this._health = this._objectSprite.health;
+      this.game.add.tween(this._sprite).to({ width: this._options.width * this._objectSprite.health / this._objectSprite.maxHealth },
         200, Phaser.Easing.Linear.None, true);
     }
 
