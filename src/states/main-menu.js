@@ -19,8 +19,7 @@ class MainMenu extends Renderer {
   create() {
     const screenCenter = this.game.world.centerX;
 
-    const menuTitle = this.game.add.bitmapText(screenCenter, 24, Globals.bitmapFont, 'MAIN MENU', 24);
-    menuTitle.anchor.setTo(0.5);
+    this.playIntro(screenCenter);
     
     // create a text for each option
     this.selectedOption = 0;
@@ -33,6 +32,12 @@ class MainMenu extends Renderer {
     }
 
     this.controls = new Controls(this.game, true);
+  }
+
+  playIntro(screenCenter) {
+    // TODO: add some cool fx when the real game name is set
+    const menuTitle = this.game.add.bitmapText(screenCenter, 24, Globals.bitmapFont, 'GAME NAME', 24);
+    menuTitle.anchor.setTo(0.5);
   }
 
   update() {

@@ -5,7 +5,7 @@ import Globals from '../globals';
 import Renderer from './renderer';
 
 const PreloaderConsts = {
-  SPLASH_FADE: 2000, // ms
+  SPLASH_FADE: 1500, // ms
 }
 
 class Preloader extends Renderer {
@@ -55,20 +55,29 @@ class Preloader extends Renderer {
     this._loadingBar.kill();
 
     // set background to the game average color (optional)
-    this.game.stage.backgroundColor = Globals.palette.bricks2.hex; //'#4c583d';
+    this.game.stage.backgroundColor = Globals.palette.bricks2.hex;
 
     // create splash screen
-    let splashText = this.game.add.bitmapText(this.game.world.centerX,
-      this.game.world.centerY, Globals.bitmapFont, 'KICKPUNCH', 32);
+    const splashText = this.game.add.bitmapText(this.game.world.centerX,
+      this.game.world.centerY, Globals.bitmapFont, 'TEAM KICKPUNCH', 20);
     splashText.anchor.setTo(0.5);
     splashText.alpha = 0;
 
     // add some cool effects
-    let tween = this.game.add.tween(splashText).to({ alpha: 1 },
+    const tween = this.game.add.tween(splashText).to({ alpha: 1 },
       PreloaderConsts.SPLASH_FADE, Phaser.Easing.Linear.None, true, 0, 0, true);
-    tween.onComplete.add(function(splashText, tween) {
-      // TODO: change this to menu in production
-      this.state.start('mainmenu');
+
+    tween.onComplete.add((splashText, tween) => {
+      const presentsText = this.game.add.bitmapText(this.game.world.centerX,
+        this.game.world.centerY, Globals.bitmapFont, 'PRESENTS', 18);
+        presentsText.anchor.setTo(0.5);
+        presentsText.alpha = 0;
+
+      const tween2 = this.game.add.tween(presentsText).to({ alpha: 1 },
+        PreloaderConsts.SPLASH_FADE, Phaser.Easing.Linear.None, true, 0, 0, true);
+        tween2.onComplete.add(() => {
+        this.state.start('mainmenu');
+      });
     }, this);
   }
 
