@@ -71,7 +71,7 @@ class Controls {
 
   _padPressed(button) {
     if (this.justPressed) {
-      return this.pad1.justPressed(button);
+      return this.pad1.justPressed(button, 25);
     }
 
     return this.pad1.isDown(button);
