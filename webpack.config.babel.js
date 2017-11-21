@@ -78,7 +78,7 @@ const rules = {
   { test: /pixi\.js/, use: ['expose-loader?PIXI'] },
   { test: /phaser-split\.js$/, use: ['expose-loader?Phaser'] },
   { test: /p2\.js/, use: ['expose-loader?p2'] }, {
-    test: /\.(mp3|ogg)$/,
+    test: /\.(mp3|ogg|m4a|aac)$/,
     loader: `file-loader?name=assets/audio/[name]-[hash].[ext]`,
   }, {
     test: /\.(ttf|woff)$/,
