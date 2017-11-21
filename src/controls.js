@@ -10,34 +10,34 @@ class Controls {
     this.game = game;
     // This might need a better way of being passed to the class!
     this.justPressed = justPressed;
-    
+
     this.pad1 = game.input.gamepad.pad1;
 
     // add all possible keyboard inputs
     this.keys = {
-      ups: [ 
+      ups: [
         game.input.keyboard.addKey(Phaser.Keyboard.UP),
-        game.input.keyboard.addKey(Phaser.Keyboard.W) 
+        game.input.keyboard.addKey(Phaser.Keyboard.W)
       ],
       downs: [
         game.input.keyboard.addKey(Phaser.Keyboard.DOWN),
-        game.input.keyboard.addKey(Phaser.Keyboard.S) 
+        game.input.keyboard.addKey(Phaser.Keyboard.S)
       ],
       lefts: [
         game.input.keyboard.addKey(Phaser.Keyboard.A),
-        game.input.keyboard.addKey(Phaser.Keyboard.LEFT) 
+        game.input.keyboard.addKey(Phaser.Keyboard.LEFT)
       ],
       rights: [
         game.input.keyboard.addKey(Phaser.Keyboard.D),
-        game.input.keyboard.addKey(Phaser.Keyboard.RIGHT) 
+        game.input.keyboard.addKey(Phaser.Keyboard.RIGHT)
       ],
       punches: [
         game.input.keyboard.addKey(Phaser.Keyboard.H),
-        game.input.keyboard.addKey(Phaser.Keyboard.ENTER) 
+        game.input.keyboard.addKey(Phaser.Keyboard.ENTER)
       ],
       jumps: [
         game.input.keyboard.addKey(Phaser.Keyboard.J),
-        game.input.keyboard.addKey(Phaser.Keyboard.SPACE) 
+        game.input.keyboard.addKey(Phaser.Keyboard.SPACE)
       ]
     };
 
@@ -76,7 +76,7 @@ class Controls {
 
     return this.pad1.isDown(button);
   }
-  
+
   get up () {
     return (
       this._keyPressed(this.keys.ups) ||
@@ -123,7 +123,7 @@ class Controls {
     );
   }
 
-  // DEBUG 
+  // DEBUG
 
   debug(what) {
     return this.keys[what].justPressed();
