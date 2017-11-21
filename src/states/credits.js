@@ -1,4 +1,4 @@
-// credits.js 
+// credits.js
 // Show game credits
 
 import Renderer from './renderer';
@@ -17,7 +17,7 @@ class Credits extends Renderer {
     this.game.add.bitmapText(this.game.world.width / 3, 100, 'standard', 'LampEight', 10);
 
     this.game.add.bitmapText(10, 120, 'standard', 'Programmers: ', 12);
-    this.game.add.bitmapText(this.game.world.width / 3, 135, 'standard', 'Alex, Carlos, Petarov', 10);
+    this.game.add.bitmapText(this.game.world.width / 3, 135, 'standard', 'Alexey, Carlos, Petarov', 10);
 
     // leave text
     const leaveText = this.game.add.bitmapText(this.game.world.centerX, 155, 'standard', '(Press Enter or Space to leave)', 8);
