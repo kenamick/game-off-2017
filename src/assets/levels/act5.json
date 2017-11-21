@@ -13,7 +13,7 @@
          "y":0
         }, 
         {
-         "data":"SwAAAEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAEoAAABKAAAASgAAAEoAAABKAAAASgAAAEoAAABKAAAASgAAAAwAAAANAAAASgAAAEoAAABKAAAASgAAAEoAAABKAAAASgAAAEoAAABKAAAASgAAAA0AAABKAAAASgAAAEoAAABKAAAADAAAAA0AAABKAAAAFQAAAEkAAABHAAAARwAAAEgAAABHAAAARwAAAEcAAABHAAAARwAAABYAAAAXAAAARwAAAEcAAABHAAAASAAAAEcAAABHAAAARwAAAEcAAABHAAAASQAAABcAAABHAAAARwAAAEcAAABHAAAAFgAAABcAAAAPAAAAKwAAACsAAAArAAAAKwAAACsAAAArAAAAKwAAACsAAAArAAAAKwAAACsAAAArAAAALAAAACwAAAAsAAAAKwAAACsAAAArAAAAKwAAACwAAAAsAAAALAAAACwAAAAsAAAALAAAACwAAAAsAAAALAAAACwAAAAsAAAAKwAAACsAAAArAAAALgAAACsAAAArAAAAKwAAACsAAAArAAAAKwAAAC0AAAArAAAAKwAAACsAAAArAAAAKwAAACsAAAAuAAAAKwAAACwAAAAsAAAALAAAACwAAAAsAAAALAAAAC0AAAAsAAAALAAAACwAAAAsAAAA",
+         "data":"SwAAAEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAEoAAABKAAAASgAAAEoAAABKAAAASgAAAEoAAABKAAAASgAAAAwAAAANAAAASgAAAEoAAABKAAAASgAAAEoAAABKAAAASgAAAEoAAABKAAAASgAAAA0AAABKAAAASgAAAEoAAABKAAAADAAAAA0AAABKAAAAFQAAAEkAAABHAAAARwAAAEgAAABHAAAARwAAAEcAAABHAAAARwAAABYAAAAXAAAARwAAAEcAAABHAAAASAAAAEcAAABHAAAARwAAAEcAAABHAAAASQAAABcAAABHAAAARwAAAEgAAABHAAAAFgAAABcAAAAPAAAAKwAAACsAAAArAAAAKwAAACsAAAArAAAAKwAAACsAAAArAAAAKwAAACsAAAArAAAALAAAACwAAAAsAAAAKwAAACsAAAArAAAAKwAAACwAAAAsAAAALAAAACwAAAAsAAAALAAAACwAAAAsAAAALAAAACwAAAAuAAAAKwAAACsAAAArAAAALgAAACsAAAArAAAAKwAAACsAAAArAAAAKwAAAC0AAAArAAAAKwAAACsAAAArAAAAKwAAACsAAAAuAAAAKwAAACwAAAAsAAAALAAAACwAAAAsAAAALAAAAC0AAAAsAAAALAAAACwAAAAsAAAA",
          "encoding":"base64",
          "height":5,
          "name":"background",
@@ -226,7 +226,51 @@
         {
          "draworder":"topdown",
          "name":"collectables",
-         "objects":[],
+         "objects":[
+                {
+                 "height":10,
+                 "id":24,
+                 "name":"food100",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":10,
+                 "x":1123.5,
+                 "y":96
+                }, 
+                {
+                 "height":10,
+                 "id":28,
+                 "name":"food25",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":10,
+                 "x":66,
+                 "y":97
+                }, 
+                {
+                 "height":10,
+                 "id":29,
+                 "name":"food75",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":10,
+                 "x":1381,
+                 "y":217.5
+                }, 
+                {
+                 "height":10,
+                 "id":30,
+                 "name":"food50",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":10,
+                 "x":816,
+                 "y":98.5
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -247,6 +291,171 @@
                  "width":48,
                  "x":5.66667,
                  "y":112.667
+                }, 
+                {
+                 "height":48,
+                 "id":34,
+                 "name":"p1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":170.5,
+                 "y":174.5
+                }, 
+                {
+                 "height":48,
+                 "id":35,
+                 "name":"p1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":156.5,
+                 "y":185.5
+                }, 
+                {
+                 "height":48,
+                 "id":36,
+                 "name":"k1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":166.5,
+                 "y":149
+                }, 
+                {
+                 "height":48,
+                 "id":37,
+                 "name":"p1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":189,
+                 "y":72.5
+                }, 
+                {
+                 "height":48,
+                 "id":38,
+                 "name":"k1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":235.5,
+                 "y":101
+                }, 
+                {
+                 "height":48,
+                 "id":39,
+                 "name":"k1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":415,
+                 "y":139.5
+                }, 
+                {
+                 "height":48,
+                 "id":40,
+                 "name":"k1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":459,
+                 "y":151.5
+                }, 
+                {
+                 "height":48,
+                 "id":41,
+                 "name":"k1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":418.5,
+                 "y":169.5
+                }, 
+                {
+                 "height":48,
+                 "id":42,
+                 "name":"k1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":609.5,
+                 "y":61
+                }, 
+                {
+                 "height":48,
+                 "id":43,
+                 "name":"p1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":636,
+                 "y":186
+                }, 
+                {
+                 "height":48,
+                 "id":44,
+                 "name":"p1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":644.5,
+                 "y":169
+                }, 
+                {
+                 "height":48,
+                 "id":45,
+                 "name":"p1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":910.5,
+                 "y":109.5
+                }, 
+                {
+                 "height":48,
+                 "id":46,
+                 "name":"k1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":905.5,
+                 "y":142.5
+                }, 
+                {
+                 "height":48,
+                 "id":47,
+                 "name":"k1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":1054,
+                 "y":184
+                }, 
+                {
+                 "height":48,
+                 "id":50,
+                 "name":"p1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":1243.5,
+                 "y":62.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -257,14 +466,36 @@
         {
          "draworder":"topdown",
          "name":"hotpoints",
-         "objects":[],
+         "objects":[
+                {
+                 "height":144.333,
+                 "id":20,
+                 "name":"hotpoint1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":6.33333,
+                 "x":1000.333335,
+                 "y":96.3335
+                }, 
+                {
+                 "height":144.333,
+                 "id":21,
+                 "name":"hotpoint2",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":6.33333,
+                 "x":1140.833335,
+                 "y":95.8335
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
          "x":0,
          "y":0
         }],
- "nextobjectid":20,
+ "nextobjectid":51,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.0.3",
