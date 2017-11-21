@@ -7,3 +7,4 @@ export * from './credits';
 export * from './act01';
 export * from './act02';
 export * from './act05';
+export * from './game-over';
