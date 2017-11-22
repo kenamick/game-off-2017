@@ -56,6 +56,8 @@ class GameOver extends Renderer {
   }
 
   update() {
+    super.update();
+
     if ((this.controls.punch || this.controls.jump) && this.isOverOver) {
       this.state.start('mainmenu');
     }

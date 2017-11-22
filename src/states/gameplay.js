@@ -40,6 +40,8 @@ const TileMapConsts = {
 class GamePlay extends Renderer {
 
   create() {
+    super.create();
+
     // default sky color
     this.game.stage.backgroundColor = Globals.palette.sky.hex;
 
