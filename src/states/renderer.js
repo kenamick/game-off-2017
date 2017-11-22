@@ -13,11 +13,15 @@ class Renderer {
     // default background color
     this.game.stage.backgroundColor = Globals.palette.menuBackground.hex;
 
-    // debug
+    this.showFps();
+  }
+
+  showFps() {
     if (Globals.debug || Globals.showFps) {
       this.fps = this.game.add.bitmapText(7, 5, Globals.bitmapFont, '-1', 7);
       this.fps.anchor.setTo(0.5);
       this.fps.fixedToCamera = true;
+      this.game.world.bringToTop(this.fps);
     }
   }
 

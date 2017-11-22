@@ -40,8 +40,6 @@ const TileMapConsts = {
 class GamePlay extends Renderer {
 
   create() {
-    super.create();
-
     // default sky color
     this.game.stage.backgroundColor = Globals.palette.sky.hex;
 
@@ -85,6 +83,9 @@ class GamePlay extends Renderer {
     this.game.world.bringToTop(this.frontGroup);
 
     this.game.physics.arcade.setBoundsToWorld();
+
+    // a bit stupid to call this here, but that's the easiest way atm
+    this.showFps();
   }
 
   createLevel(name) {
