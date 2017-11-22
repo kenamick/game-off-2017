@@ -22,7 +22,7 @@ class Preloader extends Renderer {
     this.game.load.setPreloadSprite(this._loadingBar);
 
     // load bitmap font
-    this.game.load.bitmapFont('standard', 
+    this.game.load.bitmapFont(Globals.bitmapFont, 
       require('../assets/fonts/standard-0753/standard-0753.png'), 
       require('file-loader!../assets/fonts/standard-0753/standard-0753.xml'));
 
@@ -55,7 +55,7 @@ class Preloader extends Renderer {
     this._loadingBar.kill();
 
     // set background to the game average color (optional)
-    this.game.stage.backgroundColor = Globals.palette.bricks2.hex;
+    this.game.stage.backgroundColor = Globals.palette.menuBackground.hex;
 
     // create splash screen
     const splashText = this.game.add.bitmapText(this.game.world.centerX,

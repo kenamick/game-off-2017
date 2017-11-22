@@ -2,6 +2,7 @@
 // Show and edit game options
 
 import Renderer from './renderer';
+import Globals from '../globals';
 import Controls from '../controls';
 
 class Options extends Renderer {
@@ -10,7 +11,7 @@ class Options extends Renderer {
     super.create();
 
     // state title
-    const controlsTitle = this.game.add.bitmapText(this.game.world.centerX, 24, 'standard', 'CONTROLS', 24);
+    const controlsTitle = this.game.add.bitmapText(this.game.world.centerX, 24, Globals.bitmapFont, 'CONTROLS', 24);
     controlsTitle.anchor.setTo(0.5);
 
     // add movement instructions
@@ -33,21 +34,21 @@ class Options extends Renderer {
     leftArrow.angle = -90;
     leftArrow.scale.setTo(0.035);
 
-    const arrowLegend = this.game.add.bitmapText(this.game.world.width / 3, 60, 'standard', 'MOVEMENT', 12);
+    const arrowLegend = this.game.add.bitmapText(this.game.world.width / 3, 60, Globals.bitmapFont, 'MOVEMENT', 12);
 
     
     // add hit jump instructions
-    const hitKey = this.game.add.bitmapText(6, 105, 'standard', 'H / ENTER', 10);
+    const hitKey = this.game.add.bitmapText(6, 105, Globals.bitmapFont, 'H / ENTER', 10);
     hitKey.tint = 0x000000;
-    const kitKeyLegend = this.game.add.bitmapText(this.game.world.width / 3, 105, 'standard', 'PUNCH AND KICK', 12)
+    const kitKeyLegend = this.game.add.bitmapText(this.game.world.width / 3, 105, Globals.bitmapFont, 'PUNCH AND KICK', 12)
 
-    const jumpKey = this.game.add.bitmapText(6, 130, 'standard', 'J / SPACE', 10);
+    const jumpKey = this.game.add.bitmapText(6, 130, Globals.bitmapFont, 'J / SPACE', 10);
     jumpKey.tint = 0x000000;
-    const jumpKeyLegend = this.game.add.bitmapText(this.game.world.width / 3, 130, 'standard', 'JUMP', 12)
+    const jumpKeyLegend = this.game.add.bitmapText(this.game.world.width / 3, 130, Globals.bitmapFont, 'JUMP', 12)
 
 
     // leave text
-    const leaveText = this.game.add.bitmapText(this.game.world.centerX, 155, 'standard', '(Press Enter or Space to leave)', 8);
+    const leaveText = this.game.add.bitmapText(this.game.world.centerX, 155, Globals.bitmapFont, '(Press Enter or Space to leave)', 8);
     leaveText.anchor.setTo(0.5);
     leaveText.alpha = 0;
 
