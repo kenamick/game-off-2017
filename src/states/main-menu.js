@@ -17,6 +17,8 @@ const MainMenuConsts = {
 class MainMenu extends Renderer {
 
   create() {
+    super.create();
+
     const screenCenter = this.game.world.centerX;
 
     this.playIntro(screenCenter);

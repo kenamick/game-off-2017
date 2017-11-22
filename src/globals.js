@@ -20,10 +20,11 @@ const Globals = {
   bitmapFont: 'standard',
 
   palette: {
-   sky: { hex: '#c4cfa1', rgb: {r: 196, g: 207, b: 161} }, // lighter
+   sky: { hex: '#c4cfa1', rgb: {r: 196, g: 207, b: 161} },
    bricks1: { hex: '#8b956d', rgb: {r: 139, g: 149, b: 109} }, // light
-   bricks2: { hex: '#4d533c', rgb: {r: 77, g: 83, b: 60} }, // darker
-   background: { hex: '#1f1f1f', rgb: {r: 31, g: 31, b: 31} }, // dark
+   bricks2: { hex: '#4d533c', rgb: {r: 77, g: 83, b: 60} }, // dark
+   background: { hex: '#1f1f1f', rgb: {r: 31, g: 31, b: 31} },
+   menuBackground: { hex: '#4d533c', rgb: {r: 31, g: 31, b: 31} }
   },
 
   // various gameplay defaults

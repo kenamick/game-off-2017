@@ -10,6 +10,23 @@ class Renderer {
     this.game = game;
   }
 
+  create() {
+    this.resetWorld();
+    // default background color
+    this.game.stage.backgroundColor = Globals.palette.menuBackground.hex;
+  }
+
+  /**
+   * Resets world bounds
+   *
+   * Needed when we change from a Tiled loaded level state back to menu
+   * states.
+   */
+  resetWorld() {
+    this.game.world.setBounds(0, 0, this.game.width, this.game.height);
+    //console.log(this.game.world.width, this.game.world.height);
+  }
+
   /**
    * Scales game screen.
    *

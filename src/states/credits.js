@@ -7,6 +7,8 @@ import Controls from '../controls';
 class Credits extends Renderer {
 
   create() {
+    super.create();
+
     const creditsTitle = this.game.add.bitmapText(this.game.world.centerX, 24, 'standard', 'CREDITS', 24);
     creditsTitle.anchor.setTo(0.5);
 

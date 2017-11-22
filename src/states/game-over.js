@@ -7,10 +7,10 @@ import Renderer from './renderer';
 class GameOver extends Renderer {
 
   create() {
+    super.create();
+
     this.controls = new Controls(this.game, true);
     this.isOverOver = false;
-
-    // TODO: add game over music
 
     const screenCenter = this.game.world.centerX;
     const ANIM_SPEED = 3500;

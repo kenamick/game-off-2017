@@ -7,6 +7,8 @@ import Controls from '../controls';
 class Options extends Renderer {
 
   create() {
+    super.create();
+
     // state title
     const controlsTitle = this.game.add.bitmapText(this.game.world.centerX, 24, 'standard', 'CONTROLS', 24);
     controlsTitle.anchor.setTo(0.5);
