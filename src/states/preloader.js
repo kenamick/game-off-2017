@@ -1,6 +1,7 @@
 // preloader.js
 // Loads all required assets - gfx & sfx
 
+import Audio from '../audio';
 import Globals from '../globals';
 import Renderer from './renderer';
 
@@ -15,15 +16,18 @@ class Preloader extends Renderer {
   }
 
   preload() {
-    this._loadingBar = this.game.add.sprite(this.game.world.centerX / 2, 
+    this._loadingBar = this.game.add.sprite(this.game.world.centerX / 2,
       this.game.world.centerY, 'loadingBar');
     this._loadingBar.centerX = this.world.centerX;
     this._loadingBar.scale.setTo(0.5);
     this.game.load.setPreloadSprite(this._loadingBar);
 
+    // load audios
+    Audio.loadSfx(this.game);
+
     // load bitmap font
-    this.game.load.bitmapFont('standard', 
-      require('../assets/fonts/standard-0753/standard-0753.png'), 
+    this.game.load.bitmapFont('standard',
+      require('../assets/fonts/standard-0753/standard-0753.png'),
       require('file-loader!../assets/fonts/standard-0753/standard-0753.xml'));
 
     // load images
