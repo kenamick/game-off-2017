@@ -44,13 +44,17 @@ class Hero extends Actor {
     // game.input.addKeys API is not sufficient since
     // character needs to be aslo controlled by gamepad and AI
     this.controls = new Controls(game);
+
+    // game ends when the player's killed
+    this._sprite.events.onKilled.add(() => this.game.state.start('gameover'));
   }
 
   kill() {
     // make the player sprite kind of lying on the ground
-    // TODO: maybe detatch the camera here
     this._sprite.angle = -90;
-    this._sprite.y += this._sprite.height * 0.5;
+    this._sprite.y += this._sprite.height * 0.35;
+    // detach camera
+    this.game.camera.follow(null);
 
     super.kill();
   }
