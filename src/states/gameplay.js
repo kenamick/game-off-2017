@@ -195,6 +195,14 @@ class GamePlay extends Renderer {
     return this.enemies.reduce((s, o) => s += o.sprite.alive ? 1 : 0, 0) === 0;
   }
 
+  addDoor(tx, ty) {
+    const door = this.game.add.sprite(TileMapConsts.pos(tx), 
+      TileMapConsts.pos(ty), 'atlas_sprites', 'door');
+    this.addSpriteToLayer(door, true);
+
+    // TODO: add sfx
+  }
+
   /**
    * Adds a sprite to the appropriate layer based on it's coordinates.
    * 

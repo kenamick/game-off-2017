@@ -2,7 +2,6 @@
 
 import Renderer from './renderer';
 import { GamePlay, TileMapConsts} from './gameplay';
-import { FoeP1, FoeK1 } from '../entities';
 
 class Act2 extends GamePlay {
 
@@ -25,14 +24,6 @@ class Act2 extends GamePlay {
     this.hotpoints.hotpoint6.active = false;
   }
 
-  _addDoor(tx, ty) {
-    const door = this.game.add.sprite(TileMapConsts.pos(tx), 
-      TileMapConsts.pos(ty), 'atlas_sprites', 'door');
-    this.addSpriteToLayer(door, true);
-
-    // TODO: add sfx
-  }
-
   _addEnemy(type, tx, ty, offsetX = 0, offsetY = 0) {
     const halfSize = TileMapConsts.TILE_SIZE * 0.5;
     this.spawnEnemy(type, 
@@ -51,7 +42,7 @@ class Act2 extends GamePlay {
       this.hotpoints.hotpoint1.active = true;
       this.hotpointsDone += 1;
       // door opens
-      this._addDoor(3, 1);
+      this.addDoor(3, 1);
       // spawn enemies
       this._addEnemy(TileMapConsts.ACTORS.K1, 4, 1);
       this._addEnemy(TileMapConsts.ACTORS.K1, 4, 1, -5, 1);
@@ -80,7 +71,7 @@ class Act2 extends GamePlay {
       this.hotpoints.hotpoint3.active = true;
       this.hotpointsDone += 1;
       // door opens
-      this._addDoor(7, 1);
+      this.addDoor(7, 1);
       // spawn enemies
       this._addEnemy(TileMapConsts.ACTORS.P1, 8, 1, -1);
       this._addEnemy(TileMapConsts.ACTORS.K1, 8, 1, 4, 8);
@@ -95,7 +86,7 @@ class Act2 extends GamePlay {
       this.hotpoints.hotpoint5.active = true;
       this.hotpointsDone += 1;
       // door opens
-      this._addDoor(16, 1);
+      this.addDoor(16, 1);
       // spawn enemies
       this._addEnemy(TileMapConsts.ACTORS.P1, 17, 1, 5, 2);
       this._addEnemy(TileMapConsts.ACTORS.K1, 17, 1, -3, 4);
@@ -109,7 +100,7 @@ class Act2 extends GamePlay {
       this.hotpoints.hotpoint6.active = true;
       this.hotpointsDone += 1;
       // door opens
-      this._addDoor(24, 1);
+      this.addDoor(24, 1);
       // spawn enemies
       this._addEnemy(TileMapConsts.ACTORS.K1, 25, 1, 7, 1);
       this._addEnemy(TileMapConsts.ACTORS.K1, 25, 1, -4, 2);
@@ -127,7 +118,7 @@ class Act2 extends GamePlay {
         this.specialFx.signals.hand(TileMapConsts.pos(27) + 12,
           TileMapConsts.pos(1), 'down');
         // door opens
-        this._addDoor(27, 1);
+        this.addDoor(27, 1);
       } else if (this.isGoHand && this.player.sprite.x > TileMapConsts.pos(27)) {
         // hide signal hand, if pass the exit door
         this.playerHud.hideThisWay();
