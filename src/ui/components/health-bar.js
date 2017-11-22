@@ -45,6 +45,8 @@ class HealthBar {
     this._sprite.fixedToCamera = true;
     this.game.world.bringToTop(this._sprite);
 
+    healthBarBackgroundSprite.destroy();
+    healthBarSprite.destroy();
   }
 
   update() {
