@@ -31,6 +31,11 @@ class FoeK1 extends Actor {
     this._sprite.animations.play('stand');
   }
 
+  isCanEngage() {
+    // TODO
+    return false;
+  }
+
   update(player) {
     if (!super.update()) {
       return false;

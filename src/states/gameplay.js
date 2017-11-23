@@ -10,10 +10,6 @@ import {
 // Ui components
 import Hud from '../ui/containers/hud';
 
-const AiConsts = {
-  ATTACK_RANGE: 24
-};
-
 const TileMapConsts = {
   TILE_SIZE: 48,
   LAYER_PARALAX: 'paralax',
@@ -301,15 +297,25 @@ class GamePlay extends Renderer {
     });
   }
   
-  collectEnemiesSurround() {
+  collectEnemiesEngaging() {
     let result = [];
-    const RANGE = AiConsts.ATTACK_RANGE * AiConsts.ATTACK_RANGE;
+    let engagedCount = 0;
 
     for (const actor of this.enemies) {
-      if (this.game.math.distanceSq(this.player.sprite.x, this.player.sprite.y,
-        actor.sprite.x, actor.sprite.y) < RANGE) {
+
+      if (actor.engaged) {
+        // count of enemies already attacking
+        engagedCount += 1;
+      } else if (actor.isCanEngage(engagedCount) && 
+        actor.isInEngageRange(this.player.sprite.x, this.player.sprite.y)) {
+
+        // count of enemies already attacking
+        engagedCount += 1;
+
+        actor.engaged = true;
         result.push(actor);
       }
+      
     }
 
     return result;
@@ -325,11 +331,11 @@ class GamePlay extends Renderer {
     }
 
     // update NPCs & AI
-    const surround = this.collectEnemiesSurround();
-    //console.log(surround.length)
+    const engaging = this.collectEnemiesEngaging();
+    //console.log(engaging.length)
 
     for (const actor of this.enemies) {
-      actor.update(this.player, surround);
+      actor.update(this.player, engaging);
     }
 
     this._updateZOrders();
@@ -354,4 +360,4 @@ class GamePlay extends Renderer {
 
 }
 
-export { GamePlay, TileMapConsts, AiConsts };
+export { GamePlay, TileMapConsts };
