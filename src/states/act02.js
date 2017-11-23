@@ -12,6 +12,7 @@ class Act2 extends GamePlay {
     this.createLevel('act2');
     this.arrangeLayers();
     this.attachHud();
+    this.audio.musics.act2.play();
 
     this.enemyAILevel = 2;
 

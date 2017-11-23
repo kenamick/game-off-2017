@@ -11,9 +11,10 @@ class Act1 extends GamePlay {
     this.createLevel('act1');
     this.arrangeLayers();
     this.attachHud();
+    this.audio.musics.maintheme.play();
 
     this.isGoHand = false;
-    
+
     // edge of the screen
     this.nextLevelOffset = 24 * TileMapConsts.TILE_SIZE + TileMapConsts.TILE_SIZE / 2;
   }
@@ -28,10 +29,12 @@ class Act1 extends GamePlay {
         this.playerHud.showThisWay();
       }
       if (this.player.sprite.x > this.nextLevelOffset) {
-        this.state.start('act2');
+        // TODO: find a way to move this to the Transition
+        this.audio.musics.maintheme.stop();
+        this.state.start('loading', true, false, 'act2');
       }
     }
-    
+
     // do collisions checks, etc. after player & NPC movements
     super.update();
   }
