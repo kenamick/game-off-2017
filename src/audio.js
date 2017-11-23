@@ -40,15 +40,14 @@ class Audio {
   static loadMusic(game, level) {
       const path = './assets/musics/';
       const musics = {
-        level2: 'GO17-Act2_aac.m4a',
-        level3: 'GO17-Act3_aac.m4a',
+        act2: 'GO17-Act2_aac.m4a',
+        act3: 'GO17-Act3_aac.m4a',
         boss: 'GO17-Boss_aac.m4a',
         maintheme: 'GO17-MainTheme_aac.m4a',
         fanfare: 'GO17-Fanfare_aac.m4a'
       };
 
-      console.log('file-loader!' + path + musics[level]);
-      game.load.sound(level, require('file-loader!' + path + musics[level]));
+      game.load.audio(level, require('file-loader!./assets/musics/' + musics[level]));
   }
 
   constructor(game) {
@@ -56,7 +55,8 @@ class Audio {
 
     // add all possible musics
     this.musics = {
-        maintheme: game.add.sound('maintheme', 1, true)
+        maintheme: game.add.audio('maintheme', 1, true),
+        act2: game.add.audio('act2', 1, true),
     };
 
     // add all possible sfx
