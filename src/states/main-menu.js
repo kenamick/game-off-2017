@@ -72,7 +72,7 @@ class MainMenu extends Renderer {
 
     // start play state
     if(this.selectedOption == 0)
-      this.state.start('act1');
+      this.state.start('loading', true, false, 'act1');
 
     // start option state
     if(this.selectedOption == 1)

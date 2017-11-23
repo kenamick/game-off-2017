@@ -44,9 +44,6 @@ class GamePlay extends Renderer {
     // default sky color
     this.game.stage.backgroundColor = Globals.palette.sky.hex;
 
-    // TODO: add this to the act transition state
-    Audio.loadMusic(this.game, 'maintheme');
-
     this.audio = new Audio(this.game);
     this.specialFx = new SpecialFx(this.game);
     this.controls = new Controls(this.game);
