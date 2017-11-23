@@ -10,6 +10,10 @@ import {
 // Ui components
 import Hud from '../ui/containers/hud';
 
+const AiConsts = {
+  ATTACK_RANGE: 24
+};
+
 const TileMapConsts = {
   TILE_SIZE: 48,
   LAYER_PARALAX: 'paralax',
@@ -296,6 +300,20 @@ class GamePlay extends Renderer {
       // TODO add sfx
     });
   }
+  
+  collectEnemiesSurround() {
+    let result = [];
+    const RANGE = AiConsts.ATTACK_RANGE * AiConsts.ATTACK_RANGE;
+
+    for (const actor of this.enemies) {
+      if (this.game.math.distanceSq(this.player.sprite.x, this.player.sprite.y,
+        actor.sprite.x, actor.sprite.y) < RANGE) {
+        result.push(actor);
+      }
+    }
+
+    return result;
+  }
 
   update() {
     super.update();
@@ -306,8 +324,12 @@ class GamePlay extends Renderer {
       this.updatePlayerCollisions(this.player.sprite);
     }
 
+    // update NPCs & AI
+    const surround = this.collectEnemiesSurround();
+    //console.log(surround.length)
+
     for (const actor of this.enemies) {
-      actor.update(this.player);
+      actor.update(this.player, surround);
     }
 
     this._updateZOrders();
@@ -332,4 +354,4 @@ class GamePlay extends Renderer {
 
 }
 
-export { GamePlay, TileMapConsts };
+export { GamePlay, TileMapConsts, AiConsts };
