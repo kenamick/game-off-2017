@@ -9,6 +9,11 @@ class FoeK1 extends Actor {
     super(game, sprite, Globals.hitpoints.enemies.p1, 'foe2_hit_01');
 
     this._sprite.anchor.set(0.5);
+
+    // testing sizes
+    //this.sprite.scale.x = 1.25;
+    //this.sprite.scale.y = 1.25;
+    
     this.faceLeft();
 
     game.physics.arcade.enable(this._sprite);
