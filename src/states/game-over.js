@@ -13,7 +13,7 @@ class GameOver extends Renderer {
     this.isOverOver = false;
 
     const screenCenter = this.game.world.centerX;
-    const ANIM_SPEED = 3500;
+    const ANIM_SPEED = 2500;
     const FONT_SIZE = 24;
 
     const textLeft = this.game.add.bitmapText(screenCenter - FONT_SIZE * 6, 
