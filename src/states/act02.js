@@ -126,10 +126,10 @@ class Act2 extends GamePlay {
 
       // warp dat dude
       if (this.isGoHand && 
-        this.player.sprite.bottom < TileMapConsts.WALK_CONSTRAINT_Y + 4 && 
+        this.player.sprite.bottom < TileMapConsts.WALK_CONSTRAINT_Y + 6 && 
         this.player.sprite.x > TileMapConsts.pos(27) + 14 &&
         this.player.sprite.x < TileMapConsts.pos(28) - 14) {
-        this.state.start('act1');
+        this.state.start('act5');
       }
     }
 
