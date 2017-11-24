@@ -7,13 +7,13 @@ import Renderer from './renderer';
 class GameOver extends Renderer {
 
   create() {
+    super.create();
+
     this.controls = new Controls(this.game, true);
     this.isOverOver = false;
 
-    // TODO: add game over music
-
     const screenCenter = this.game.world.centerX;
-    const ANIM_SPEED = 3500;
+    const ANIM_SPEED = 2500;
     const FONT_SIZE = 24;
 
     const textLeft = this.game.add.bitmapText(screenCenter - FONT_SIZE * 6, 
@@ -56,6 +56,8 @@ class GameOver extends Renderer {
   }
 
   update() {
+    super.update();
+
     if ((this.controls.punch || this.controls.jump) && this.isOverOver) {
       this.state.start('mainmenu');
     }

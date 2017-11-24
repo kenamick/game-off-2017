@@ -18,6 +18,8 @@ const MainMenuConsts = {
 class MainMenu extends Renderer {
 
   create() {
+    super.create();
+
     const screenCenter = this.game.world.centerX;
 
     this.playIntro(screenCenter);
@@ -43,6 +45,8 @@ class MainMenu extends Renderer {
   }
 
   update() {
+    super.update();
+
     for(const [i, option] of this.optionTexts.entries()) {
       if(i == this.selectedOption)
         option.tint = 0x000000;

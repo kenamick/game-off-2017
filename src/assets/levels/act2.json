@@ -225,7 +225,7 @@
                  "visible":true,
                  "width":10,
                  "x":454.333,
-                 "y":94.6663333333333
+                 "y":94.6663
                 }, 
                 {
                  "height":10,
@@ -289,7 +289,7 @@
                  "type":"",
                  "visible":true,
                  "width":48,
-                 "x":27.3333666666667,
+                 "x":27.3334,
                  "y":59
                 }, 
                 {
@@ -406,12 +406,12 @@
          "columns":10,
          "firstgid":1,
          "image":"..\/..\/..\/..\/game-off_RES\/level-edit\/gd-tileset.png",
-         "imageheight":336,
+         "imageheight":384,
          "imagewidth":480,
          "margin":0,
          "name":"gd-tileset",
          "spacing":0,
-         "tilecount":70,
+         "tilecount":80,
          "tileheight":48,
          "tilewidth":48,
          "transparentcolor":"#000000"

@@ -2,12 +2,38 @@
 // Each state needs to extend from the Renderer.
 import Globals from '../globals';
 
-let fps;
-
 class Renderer {
 
   constructor(game) {
     this.game = game;
+  }
+
+  create() {
+    this.resetWorld();
+    // default background color
+    this.game.stage.backgroundColor = Globals.palette.menuBackground.hex;
+
+    this.showFps();
+  }
+
+  showFps() {
+    if (Globals.debug || Globals.showFps) {
+      this.fps = this.game.add.bitmapText(7, 5, Globals.bitmapFont, '-1', 7);
+      this.fps.anchor.setTo(0.5);
+      this.fps.fixedToCamera = true;
+      this.game.world.bringToTop(this.fps);
+    }
+  }
+
+  /**
+   * Resets world bounds
+   *
+   * Needed when we change from a Tiled loaded level state back to menu
+   * states.
+   */
+  resetWorld() {
+    this.game.world.setBounds(0, 0, this.game.width, this.game.height);
+    //console.log(this.game.world.width, this.game.world.height);
   }
 
   /**
@@ -30,13 +56,6 @@ class Renderer {
     // enable crisp rendering
     this.game.renderer.renderSession.roundPixels = true;
     Phaser.Canvas.setImageRenderingCrisp(this.game.canvas);
-
-    // debug
-    if (Globals.showFps) {
-      let font = { font: '11px Arial', fill: 'white' };
-      fps = this.add.text(5, 5, '', font);
-    }
-
   }
 
   setScale() {
@@ -52,8 +71,8 @@ class Renderer {
   }
 
   update() {
-    if (fps) {
-      fps.setText(this.game.time.fps + 'fps');
+    if (this.fps) {
+      this.fps.text = this.game.time.fps;
     }
   }
 

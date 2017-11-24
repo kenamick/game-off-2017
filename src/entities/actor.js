@@ -8,11 +8,15 @@ class Actor {
     this._sprite = sprite;
 
     this._dying = false;
-    this._maxHealth = maxHealth;
-    this._sprite.health = maxHealth;
+    this.resetHealth(maxHealth);
 
     // this is what is being shown when the actor die+blink activates
     this._dyingFrameName = dyingFrameName;
+  }
+
+  resetHealth(amount) {
+    this._maxHealth = amount;
+    this._sprite.health = amount;
   }
 
   spawn(x, y) {
@@ -68,11 +72,15 @@ class Actor {
   }
 
   faceLeft() {
-    this._sprite.scale.x = -1;
+    if (this._sprite.scale.x > 0) {
+      this._sprite.scale.x = -this._sprite.scale.x;
+    }
   }
 
   faceRight() {
-    this._sprite.scale.x = 1;
+    if (this._sprite.scale.x < 0) {
+      this._sprite.scale.x = -this._sprite.scale.x;
+    }
   }
 
   update() {

@@ -85,6 +85,9 @@ class GamePlay extends Renderer {
     this.game.world.bringToTop(this.frontGroup);
 
     this.game.physics.arcade.setBoundsToWorld();
+
+    // a bit stupid to call this here, but that's the easiest way atm
+    this.showFps();
   }
 
   createLevel(name) {
@@ -195,6 +198,14 @@ class GamePlay extends Renderer {
 
   isEnemiesDead() {
     return this.enemies.reduce((s, o) => s += o.sprite.alive ? 1 : 0, 0) === 0;
+  }
+
+  addDoor(tx, ty) {
+    const door = this.game.add.sprite(TileMapConsts.pos(tx), 
+      TileMapConsts.pos(ty), 'atlas_sprites', 'door');
+    this.addSpriteToLayer(door, true);
+
+    // TODO: add sfx
   }
 
   /**
