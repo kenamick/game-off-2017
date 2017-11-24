@@ -5,36 +5,36 @@ import Globals from './globals';
 class Audio {
 
   static loadSfx(game) {
-    game.load.audio('hero-dive', require('file-loader!./assets/sfx/BrianDive.m4a'));
-    game.load.audio('hero-jump', require('file-loader!./assets/sfx/BrianJump.m4a'));
-    game.load.audio('hero-kick1', require('file-loader!./assets/sfx/BrianKick1.m4a'));
-    game.load.audio('hero-kick2', require('file-loader!./assets/sfx/BrianKick2.m4a'));
-    game.load.audio('hero-kick3', require('file-loader!./assets/sfx/BrianKick3.m4a'));
-    game.load.audio('hero-punch1', require('file-loader!./assets/sfx/BrianPunch1.m4a'));
-    game.load.audio('hero-punch2', require('file-loader!./assets/sfx/BrianPunch2.m4a'));
-    game.load.audio('hero-punch3', require('file-loader!./assets/sfx/BrianPunch3.m4a'));
-    game.load.audio('death1', require('file-loader!./assets/sfx/Death1.m4a'));
-    game.load.audio('death2', require('file-loader!./assets/sfx/Death2.m4a'));
-    game.load.audio('death3', require('file-loader!./assets/sfx/Death3.m4a'));
-    game.load.audio('death4', require('file-loader!./assets/sfx/Death4.m4a'));
-    game.load.audio('door1', require('file-loader!./assets/sfx/Door1.m4a'));
-    game.load.audio('door2', require('file-loader!./assets/sfx/Door2.m4a'));
-    game.load.audio('door3', require('file-loader!./assets/sfx/Door3.m4a'));
-    game.load.audio('foodpickup', require('file-loader!./assets/sfx/FoodPickup.m4a'));
-    game.load.audio('gameover', require('file-loader!./assets/sfx/GameOver.m4a'));
-    game.load.audio('go', require('file-loader!./assets/sfx/Go.m4a'));
-    game.load.audio('npcdespawn', require('file-loader!./assets/sfx/NPCDespawn.m4a'));
-    game.load.audio('npc-hit1', require('file-loader!./assets/sfx/NPCHit1.m4a'));
-    game.load.audio('npc-hit2', require('file-loader!./assets/sfx/NPCHit3.m4a'));
-    game.load.audio('npc-hit3', require('file-loader!./assets/sfx/NPCHit2.m4a'));
-    game.load.audio('breakglass1', require('file-loader!./assets/sfx/PropBreakGlass1.m4a'));
-    game.load.audio('breakglass2', require('file-loader!./assets/sfx/PropBreakGlass2.m4a'));
-    game.load.audio('breakglass3', require('file-loader!./assets/sfx/PropBreakGlass3.m4a'));
-    game.load.audio('breakmetal1', require('file-loader!./assets/sfx/PropBreakMetal1.m4a'));
-    game.load.audio('breakmetal2', require('file-loader!./assets/sfx/PropBreakMetal2.m4a'));
-    game.load.audio('breakmetal3', require('file-loader!./assets/sfx/PropBreakMetal3.m4a'));
-    game.load.audio('ready', require('file-loader!./assets/sfx/Ready.m4a'));
-    game.load.audio('thisway', require('file-loader!./assets/sfx/ThisWayMix.m4a'));
+    game.load.audio('hero-dive', require('./assets/sfx/BrianDive.m4a'));
+    game.load.audio('hero-jump', require('./assets/sfx/BrianJump.m4a'));
+    game.load.audio('hero-kick1', require('./assets/sfx/BrianKick1.m4a'));
+    game.load.audio('hero-kick2', require('./assets/sfx/BrianKick2.m4a'));
+    game.load.audio('hero-kick3', require('./assets/sfx/BrianKick3.m4a'));
+    game.load.audio('hero-punch1', require('./assets/sfx/BrianPunch1.m4a'));
+    game.load.audio('hero-punch2', require('./assets/sfx/BrianPunch2.m4a'));
+    game.load.audio('hero-punch3', require('./assets/sfx/BrianPunch3.m4a'));
+    game.load.audio('death1', require('./assets/sfx/Death1.m4a'));
+    game.load.audio('death2', require('./assets/sfx/Death2.m4a'));
+    game.load.audio('death3', require('./assets/sfx/Death3.m4a'));
+    game.load.audio('death4', require('./assets/sfx/Death4.m4a'));
+    game.load.audio('door1', require('./assets/sfx/Door1.m4a'));
+    game.load.audio('door2', require('./assets/sfx/Door2.m4a'));
+    game.load.audio('door3', require('./assets/sfx/Door3.m4a'));
+    game.load.audio('foodpickup', require('./assets/sfx/FoodPickup.m4a'));
+    game.load.audio('gameover', require('./assets/sfx/GameOver.m4a'));
+    game.load.audio('go', require('./assets/sfx/Go.m4a'));
+    game.load.audio('npcdespawn', require('./assets/sfx/NPCDespawn.m4a'));
+    game.load.audio('npc-hit1', require('./assets/sfx/NPCHit1.m4a'));
+    game.load.audio('npc-hit2', require('./assets/sfx/NPCHit3.m4a'));
+    game.load.audio('npc-hit3', require('./assets/sfx/NPCHit2.m4a'));
+    game.load.audio('breakglass1', require('./assets/sfx/PropBreakGlass1.m4a'));
+    game.load.audio('breakglass2', require('./assets/sfx/PropBreakGlass2.m4a'));
+    game.load.audio('breakglass3', require('./assets/sfx/PropBreakGlass3.m4a'));
+    game.load.audio('breakmetal1', require('./assets/sfx/PropBreakMetal1.m4a'));
+    game.load.audio('breakmetal2', require('./assets/sfx/PropBreakMetal2.m4a'));
+    game.load.audio('breakmetal3', require('./assets/sfx/PropBreakMetal3.m4a'));
+    game.load.audio('ready', require('./assets/sfx/Ready.m4a'));
+    game.load.audio('thisway', require('./assets/sfx/ThisWayMix.m4a'));
   }
 
   static loadMusic(game, level) {
@@ -47,7 +47,7 @@ class Audio {
         fanfare: 'GO17-Fanfare_aac.m4a'
       };
 
-      game.load.audio(level, require('file-loader!./assets/musics/' + musics[level]));
+      game.load.audio(level, require('./assets/musics/' + musics[level]));
   }
 
   constructor(game) {
