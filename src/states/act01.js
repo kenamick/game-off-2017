@@ -3,10 +3,12 @@
 import Renderer from './renderer';
 import { GamePlay, TileMapConsts } from './gameplay';
 
+const DIFFICULTY_LEVEL = 1;
+
 class Act1 extends GamePlay {
 
   create() {
-    super.create();
+    super.create(DIFFICULTY_LEVEL);
 
     this.createLevel('act1');
     this.arrangeLayers();

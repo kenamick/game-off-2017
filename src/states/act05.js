@@ -3,17 +3,17 @@
 import Renderer from './renderer';
 import { GamePlay, TileMapConsts } from './gameplay';
 
+const DIFFICULTY_LEVEL = 3;
+
 class Act5 extends GamePlay {
 
   create() {
-    super.create();
+    super.create(DIFFICULTY_LEVEL);
 
     this.createLevel('act5');
     this.arrangeLayers();
     this.attachHud();
 
-    this.enemyAILevel = 2;
-    
     // reset state
     this.isGoHand = false;
     this.hotpointsDone = 0;
@@ -26,7 +26,7 @@ class Act5 extends GamePlay {
     this.spawnEnemy(type, 
       TileMapConsts.pos(tx) - halfSize + offsetX, 
       TileMapConsts.pos(ty) + halfSize + offsetY, 
-      this.enemyAILevel);
+      this.level);
   }
 
   update() {

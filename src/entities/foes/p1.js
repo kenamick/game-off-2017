@@ -1,44 +1,39 @@
-// foe_p1.js - Type 'P1' NPC
-
+// p1.js - Type P1 foe
 import Globals from '../../globals';
-import Actor from '../actor';
+import { Npc } from './npc';
+import { Animations } from './animations';
 
-class FoeP1 extends Actor {
+class FoeP1 extends Npc {
 
-  constructor(game, sprite, levelAI = 1) {
-    super(game, sprite, Globals.hitpoints.enemies.p1, 'foe_hit_02');
+  constructor(game, sprite, level = 1) {
+    super(game, sprite, {
+      // entity health
+      maxHealth: 50,
+      // entity AI behavior & control
+      ai: {
+        LEVEL: level,
+        SPEED: 35,
+        ENGAGE_RANGE: 72 * 72, // 72 pixels
+        ATTACK_RANGE: 8 * 8, // 8 pixels,
+        ATTACK_SPEED: 1100, // ms
+        ENGAGE_TRESHOLD: 2, // engage even less than X enemies are already engaging
 
-    this._sprite.anchor.set(0.5);
-    this.faceLeft();
-
-    game.physics.arcade.enable(this._sprite);
-
-    // binds all foe animation frames
-    this._sprite.animations.add('stand',
-      Phaser.Animation.generateFrameNames('foe_stand_', 1, 4, '', 2), 8, true);
-    this._sprite.animations.add('walk',
-      Phaser.Animation.generateFrameNames('foe_walk_', 1, 4, '', 2), 10, true);
-    this._sprite.animations.add('hit',
-      Phaser.Animation.generateFrameNames('foe_hit_', 1, 2, '', 2), 5, true);
-    this._sprite.animations.add('attack',
-      Phaser.Animation.generateFrameNames('foe_attack_', 1, 3, '', 2), 10, true);
-
-    this._sprite.animations.play('stand');
-  }
-
-  update(player) {
-    if (!super.update()) {
-      return false;
-    }
-
-    // always face the player
-    if (this._sprite.x < player.sprite.x) {
-      this.faceRight();
-    } else {
-      this.faceLeft();
-    }
-
-    // TODO: add AI
+        // x and y offset to stop before approaching the player
+        // plus random positioning offsets
+        EPSILON_X: 4 + game.math.random(0, 6),
+        EPSILON_Y: 2 + game.math.random(0, 2),
+      },
+      // AABB walking collision boxes
+      collisions: {
+        walkbody: [16, 8, 15, 40] 
+      },
+      // entity specific animations
+      anims: Animations.p1(sprite),
+      // entity specific audio
+      sfx: {
+        // TODO sfx
+      }
+    });
   }
 
 }
