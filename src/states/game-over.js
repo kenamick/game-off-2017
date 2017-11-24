@@ -2,6 +2,7 @@
 
 import Globals from '../globals';
 import Controls from '../controls';
+import Audio from '../audio';
 import Renderer from './renderer';
 
 class GameOver extends Renderer {
@@ -11,6 +12,10 @@ class GameOver extends Renderer {
 
     this.controls = new Controls(this.game, true);
     this.isOverOver = false;
+
+    // play sfx
+    this.audio = new Audio(this.game);
+    this.audio.play(this.audio.sfx.gameover);
 
     const screenCenter = this.game.world.centerX;
     const ANIM_SPEED = 2500;

@@ -4,8 +4,9 @@ import Globals from '../globals';
 
 class Signals {
 
-  constructor(game) {
+  constructor(game, audio) {
     this.game = game;
+    this.audio = audio;
   }
 
   /**
@@ -31,7 +32,14 @@ class Signals {
     const toY = hand.y + 15;
 
     const tween = this.game.add.tween(hand).to({ alpha: .25, y: toY }, 
-      500, Phaser.Easing.Linear.None , true, 0, -1, true);
+      800, Phaser.Easing.Linear.None , true, 0, -1, true);
+
+    // tween.onLoop.add(() => {
+    //   console.log('text')
+    //   if (this.audio) {
+    //     this.audio.play(this.audio.sfx.go);
+    //   }
+    // });
 
     return hand;
   }

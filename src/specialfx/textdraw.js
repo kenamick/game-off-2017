@@ -25,12 +25,12 @@ class TextDraw {
     return msg;
   }
 
-  fading(x, y, text) {
+  fading(x, y, text, fadeOutTime = TextConsts.FADE_OUT) {
     const msg = this._createText(x, y, text);
     msg.alpha = 1;
 
     const tween = this.game.add.tween(msg).to({ alpha: 0 },
-      TextConsts.FADE_OUT, Phaser.Easing.Cubic.Out, true, 0, 0, false);
+      fadeOutTime, Phaser.Easing.Cubic.Out, true, 0, 0, false);
 
     tween.onComplete.add(() => msg.destroy());
     // if (callback) {
@@ -38,13 +38,13 @@ class TextDraw {
     // }
   }
 
-  fadingUp(x, y, text) {
+  fadingUp(x, y, text, fadeOutTime = TextConsts.FADE_OUT) {
     const msg = this._createText(x, y, text);
     msg.alpha = 1;
     const toY = msg.y - TextConsts.FADE_UP_STEP;
 
     const tween = this.game.add.tween(msg).to({ alpha: 0, y: toY },
-      TextConsts.FADE_OUT, Phaser.Easing.Cubic.Out, true, 0, 0, false);
+      fadeOutTime, Phaser.Easing.Cubic.Out, true, 0, 0, false);
 
     tween.onComplete.add(() => msg.destroy());
   }

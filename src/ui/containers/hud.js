@@ -5,8 +5,9 @@ import GoHand from '../components/go-hand';
 
 class Hud {
 
-  constructor(game, sprite) {
+  constructor(game, audio, sprite) {
     this.game = game;
+    this.audio = audio;
 
     const options = {
         x: 10,
@@ -16,8 +17,8 @@ class Hud {
     this._healthbar = new HealthBar(game, sprite, options);
   }
 
-  showThisWay() {
-    this.hand = new GoHand(this.game);
+  showThisWay(audio) {
+    this.hand = new GoHand(this.game, this.audio);
   }
 
   hideThisWay() {

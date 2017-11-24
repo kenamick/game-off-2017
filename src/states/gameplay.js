@@ -79,13 +79,20 @@ class GamePlay extends Renderer {
     this.hotpoints = {};
   }
 
+  ready() {
+    // play ready sound
+    this.audio.play(this.audio.sfx.ready);
+    this.specialFx.textdraw.fadingUp(this.player.sprite.x, 
+      this.player.sprite.y - TileMapConsts.TILE_SIZE * 0.5, 'Ready!', 4000);
+  }
+
   get level() {
     return this._level;
   }
 
   attachHud() {
     // The HUD group contains all hud ui
-    this.playerHud = new Hud(this.game, this.player.sprite);
+    this.playerHud = new Hud(this.game, this.audio, this.player.sprite);
   }
 
   /**
@@ -221,7 +228,8 @@ class GamePlay extends Renderer {
       TileMapConsts.pos(ty), 'atlas_sprites', 'door');
     this.addSpriteToLayer(door, true);
 
-    // TODO: add sfx
+    // play sfx
+    this.audio.play(this.audio.sfx.door, true);
   }
 
   /**
@@ -306,12 +314,11 @@ class GamePlay extends Renderer {
     this.physics.arcade.collide(sprite, this.collectables, (o1, o2) => {
       const food = TileMapConsts.COLLECTABLES[o2.name];
       this.specialFx.textdraw.fadingUp(o2.x, o2.y, food.text);
-
       // 'eat' that food
       o2.destroy();
       this.player.heal(food.hp);
-
-      // TODO add sfx
+      // play sfx
+      this.audio.play(this.audio.sfx.foodpickup);
     });
   }
   

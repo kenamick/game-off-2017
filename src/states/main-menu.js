@@ -34,7 +34,10 @@ class MainMenu extends Renderer {
       this.optionTexts.push(text);
     }
 
+    // stop all sfx in menu
     this.audio = new Audio(this.game);
+    this.audio.stop();
+
     this.controls = new Controls(this.game, true);
   }
 

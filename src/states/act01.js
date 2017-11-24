@@ -13,12 +13,16 @@ class Act1 extends GamePlay {
     this.createLevel('act1');
     this.arrangeLayers();
     this.attachHud();
-    this.audio.play(this.audio.musics.maintheme);
 
     this.isGoHand = false;
 
     // edge of the screen
     this.nextLevelOffset = 24 * TileMapConsts.TILE_SIZE + TileMapConsts.TILE_SIZE / 2;
+
+    // hit the juke box
+    this.audio.play(this.audio.musics.maintheme);
+
+    this.ready();
   }
 
   update() {
