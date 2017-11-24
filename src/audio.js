@@ -127,10 +127,17 @@ class Audio {
   }
 
   play(audio, key = 0) {
-    if(Array.isArray(audio))
-      this._current = audio[key];
-    else
+    if(Array.isArray(audio)) {
+      if (key === true) {
+        const idx = this.game.rnd.integerInRange(0, audio.length - 1);
+        this._current = audio[idx];
+      } else {
+        this._current = audio[key];
+      }
+    }
+    else {
       this._current = audio;
+    }
 
     this._current.play();
   }
