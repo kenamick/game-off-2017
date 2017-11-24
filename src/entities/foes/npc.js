@@ -135,6 +135,10 @@ class Npc extends Actor {
 
     if (moving) {
       this._sprite.animations.play('walk');
+      // stop chasing, if too far
+      if (!this.isInEngageRange(actor.sprite.x, actor.sprite.y)) {
+        this.idle = true;
+      }
     } else {
       this._sprite.animations.play('stand');
       // target must have been reached
@@ -148,7 +152,12 @@ class Npc extends Actor {
       this.ai.canAttack = false;
       // play the hitting animation
       this.anims.attack.play(null, false);
-    } 
+    }
+
+    // stop chasing, if too far
+    if (!this.isInEngageRange(actor.sprite.x, actor.sprite.y)) {
+      this.idle = true;
+    }
   }
 
   faceTo(actor) {

@@ -20,8 +20,8 @@ class FoeP1 extends Npc {
 
         // x and y offset to stop before approaching the player
         // plus random positioning offsets
-        EPSILON_X: 4 + game.math.random(0, 6),
-        EPSILON_Y: 2 + game.math.random(0, 2),
+        EPSILON_X: 4 + game.rnd.integerInRange(0, 6),
+        EPSILON_Y: 2 + game.rnd.integerInRange(0, 2),
       },
       // AABB walking collision boxes
       collisions: {

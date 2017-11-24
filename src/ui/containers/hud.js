@@ -17,7 +17,7 @@ class Hud {
     this._healthbar = new HealthBar(game, sprite, options);
   }
 
-  showThisWay(audio) {
+  showThisWay() {
     this.hand = new GoHand(this.game, this.audio);
   }
 
