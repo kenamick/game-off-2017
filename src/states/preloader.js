@@ -57,8 +57,11 @@ class Preloader extends Renderer {
   create() {
     // remove loading bar from screen
     this._loadingBar.kill();
-    // TODO
-    this.state.start('act5');
+
+    // debug - start directly a game state
+    if (Globals.debug && Globals.state) {
+      this.state.start(Globals.state);
+    }
 
     // set background to the game average color (optional)
     this.game.stage.backgroundColor = Globals.palette.menuBackground.hex;
