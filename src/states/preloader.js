@@ -7,7 +7,7 @@ import Renderer from './renderer';
 
 const PreloaderConsts = {
   SPLASH_FADE: 1500, // ms
-}
+};
 
 class Preloader extends Renderer {
 

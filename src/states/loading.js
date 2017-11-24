@@ -34,12 +34,22 @@ class Loading extends Renderer {
     this.timer.add(Phaser.Timer.SECOND * LoadingConsts.LOAD_TIME, this.changeState, this);
 
     // load audios
-    if(this.nextState == 'act1')
+    let nextStateText = '';
+    if(this.nextState == 'act1') {
       Audio.loadMusic(this.game, 'maintheme');
-    else if(this.nextState == 'act2')
+      nextStateText = 'ACT 1';
+    }
+    else if(this.nextState == 'act2') {
       Audio.loadMusic(this.game, 'act2');
+      nextStateText = 'ACT 2';
+    }
 
     // add text to screen
+    const stateText = this.game.add.bitmapText(this.game.world.centerX - 10, this.game.world.centerY - 32, Globals.bitmapFont, nextStateText, 16);
+    stateText.anchor.setTo(0.5);
+    stateText.scale.setTo(0);
+    this.game.add.tween(stateText.scale).to({ x: 1, y: 1 }, 500, Phaser.Easing.Linear.None, true);
+
     this.text = this.game.add.bitmapText(this.game.world.centerX, this.game.world.centerY, Globals.bitmapFont, '', 16);
     this.text.anchor.setTo(0.5);
 
