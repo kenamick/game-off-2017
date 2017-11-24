@@ -3,19 +3,20 @@ import Globals from '../globals';
 
 class Actor {
 
-  constructor(game, sprite, maxHealth, dyingFrameName) {
+  constructor(game, sprite, dyingFrameName) {
     this.game = game;
     this._sprite = sprite;
 
     this._dying = false;
-    this.resetHealth(maxHealth);
+    //this.resetHealth(sprite.maxHealth);
 
     // this is what is being shown when the actor die+blink activates
     this._dyingFrameName = dyingFrameName;
   }
 
   resetHealth(amount) {
-    this._maxHealth = amount;
+    // alter sprite attributes
+    this._sprite.maxHealth = amount;
     this._sprite.health = amount;
   }
 
@@ -23,7 +24,7 @@ class Actor {
     this._sprite.x = x;
     this._sprite.y = y;
     this._dying = false;
-    this._sprite.revive(this._maxHealth);
+    this._sprite.revive(this._sprite.maxHealth);
   }
 
   get sprite() {
@@ -31,7 +32,7 @@ class Actor {
   }
 
   get maxHealth() {
-    return this._maxHealth;
+    return this._sprite.maxHealth;
   }
 
   /**
@@ -80,6 +81,15 @@ class Actor {
   faceRight() {
     if (this._sprite.scale.x < 0) {
       this._sprite.scale.x = -this._sprite.scale.x;
+    }
+  }
+
+  stop(anim = 'stand') {
+    this._sprite.body.velocity.x = 0;
+    this._sprite.body.velocity.y = 0;
+
+    if (anim) {
+      this._sprite.animations.play(anim);
     }
   }
 

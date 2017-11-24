@@ -4,9 +4,7 @@ import Globals from '../globals';
 import Controls from '../controls';
 import Renderer from './renderer';
 import SpecialFx from '../specialfx';
-import { 
-  Hero, FoeP1, FoeK1
-} from '../entities';
+import { Hero, FoeP1, FoeK1, FoeP2, FoeK2 } from '../entities';
 // Ui components
 import Hud from '../ui/containers/hud';
 
@@ -33,13 +31,18 @@ const TileMapConsts = {
   ACTORS: {
     HERO: { name: 'hero', classType: Hero, frame: 'hero_stand_01' },
     P1: { name: 'p1', classType: FoeP1, frame: 'foe_stand_01' },
-    K1: { name: 'k1', classType: FoeK1, frame: 'hero_stand_02' }
+    P2: { name: 'p2', classType: FoeP2, frame: 'foe_stand_01' },
+    K1: { name: 'k1', classType: FoeK1, frame: 'foe2_stand_01' },
+    K2: { name: 'k2', classType: FoeK2, frame: 'foe2_stand_01' }
   }
 };
 
 class GamePlay extends Renderer {
 
-  create() {
+  create(level) {
+    // difficulty level (atm, each act should increase this by one)
+    this._level = level;
+
     // default sky color
     this.game.stage.backgroundColor = Globals.palette.sky.hex;
 
@@ -67,6 +70,10 @@ class GamePlay extends Renderer {
 
     // hotpoints - stuff happens when the player crosses them
     this.hotpoints = {};
+  }
+
+  get level() {
+    return this._level;
   }
 
   attachHud() {
@@ -167,9 +174,9 @@ class GamePlay extends Renderer {
       sprite.x += sprite.width * 0.5;
       sprite.y += sprite.height * 0.5;
 
-      // TODO: add enemy AI level
+      // new enemy entity with corresponding difficulty level
       const actor = new TileMapConsts.ACTORS[sprite.name.toUpperCase()].classType(
-        this.game, sprite);
+        this.game, sprite, this.level);
       
       // just an ugly special case here, nothing to see folks, move on ...
       if (sprite.name === TileMapConsts.ACTORS.HERO.name) {
@@ -267,7 +274,7 @@ class GamePlay extends Renderer {
       if (sprite.body && !sprite.body.immovable) {
 
         // apply sidewalk constraint
-        // TODO pass walk constraints as params, so that other levels
+        // XXX Maybe pass walk constraints as params, so that other levels
         // can specify something different
         if (sprite.bottom - 5 < TileMapConsts.WALK_CONSTRAINT_Y && 
           sprite.body.velocity.y < 0) {
@@ -299,23 +306,20 @@ class GamePlay extends Renderer {
   
   collectEnemiesEngaging() {
     let result = [];
-    let engagedCount = 0;
+
+    let engagedCount = this.enemies.reduce(
+      (s, actor) => s += actor.engaged ? 1 : 0, 
+    0);
 
     for (const actor of this.enemies) {
-
-      if (actor.engaged) {
-        // count of enemies already attacking
-        engagedCount += 1;
-      } else if (actor.isCanEngage(engagedCount) && 
+      if (actor.isCanEngage(engagedCount) && 
         actor.isInEngageRange(this.player.sprite.x, this.player.sprite.y)) {
-
-        // count of enemies already attacking
-        engagedCount += 1;
 
         actor.engaged = true;
         result.push(actor);
+        // count of enemies already attacking
+        engagedCount += 1;
       }
-      
     }
 
     return result;
@@ -351,9 +355,9 @@ class GamePlay extends Renderer {
         // kill all existing enemies on the map
         this.enemies.forEach(o => o.kill());
       } else if (this.controls.debug('hurtHero')) {
-        this.player.damage(Globals.hitpoints.debugRatio);
+        this.player.damage(25);
       } else if (this.controls.debug('healHero')) {
-        this.player.heal(Globals.hitpoints.debugRatio);
+        this.player.heal(25);
       }
     }
   }

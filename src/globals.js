@@ -27,15 +27,6 @@ const Globals = {
    menuBackground: { hex: '#4d533c', rgb: {r: 31, g: 31, b: 31} }
   },
 
-  // various gameplay defaults
-  hitpoints: {
-    debugRatio: 25,
-    player: 100,
-    enemies: {
-      p1: 10,
-      k1: 10
-    }
-  }
 };
 
 export default Globals;

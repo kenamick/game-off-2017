@@ -10,7 +10,9 @@ const HeroConsts = {
 class Hero extends Actor {
 
   constructor(game, sprite) {
-    super(game, sprite, Globals.hitpoints.player, 'hero_stand_01');
+    super(game, sprite, 'hero_stand_01');
+
+    this.resetHealth(100);
 
     // sets anchor in the middle of the sprite, so that we can flip it
     // when moving left/right
