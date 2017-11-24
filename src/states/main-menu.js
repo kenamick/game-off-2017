@@ -68,7 +68,7 @@ class MainMenu extends Renderer {
   }
 
   chooseOption() {
-    this.audio.sfx.hero.punch[2].play();
+    this.audio.play(this.audio.sfx.hero.punch, 2);
 
     // start play state
     if(this.selectedOption == 0)

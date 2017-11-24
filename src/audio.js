@@ -53,6 +53,8 @@ class Audio {
   constructor(game) {
     this.game = game;
 
+    this._current = null;
+
     // add all possible musics
     this.musics = {
         maintheme: game.add.audio('maintheme', 1, true),
@@ -124,6 +126,27 @@ class Audio {
     };
   }
 
+  play(audio, key = 0) {
+    if(Array.isArray(audio))
+      this._current = audio[key];
+    else
+      this._current = audio;
+
+    this._current.play();
+  }
+
+  stop(audio = null, key = 0) {
+    if(audio) {
+      if(Array.isArray(audio))
+        audio[key].stop();
+      else
+        audio.stop();
+    }
+    else if(this._current)
+      this._current.stop();
+    else
+      this.game.sound.stopAll();
+  }
 }
 
 export default Audio;

@@ -19,6 +19,10 @@ class Loading extends Renderer {
 
   init(nextState) {
     this.nextState = nextState;
+
+    // stop all audios
+    const audio = new Audio(this.game);
+    audio.stop();
   }
 
   preload() {

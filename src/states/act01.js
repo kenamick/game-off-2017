@@ -11,7 +11,7 @@ class Act1 extends GamePlay {
     this.createLevel('act1');
     this.arrangeLayers();
     this.attachHud();
-    this.audio.musics.maintheme.play();
+    this.audio.play(this.audio.musics.maintheme);
 
     this.isGoHand = false;
 
@@ -29,8 +29,6 @@ class Act1 extends GamePlay {
         this.playerHud.showThisWay();
       }
       if (this.player.sprite.x > this.nextLevelOffset) {
-        // TODO: find a way to move this to the Transition
-        this.audio.musics.maintheme.stop();
         this.state.start('loading', true, false, 'act2');
       }
     }
