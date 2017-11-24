@@ -1,6 +1,7 @@
-// main-menu.js 
+// main-menu.js
 // Game main menu options screen.
 
+import Audio from '../audio';
 import Globals from '../globals';
 import Controls from '../controls';
 
@@ -22,7 +23,7 @@ class MainMenu extends Renderer {
     const screenCenter = this.game.world.centerX;
 
     this.playIntro(screenCenter);
-    
+
     // create a text for each option
     this.selectedOption = 0;
     this.optionTexts = [];
@@ -33,6 +34,7 @@ class MainMenu extends Renderer {
       this.optionTexts.push(text);
     }
 
+    this.audio = new Audio(this.game);
     this.controls = new Controls(this.game, true);
   }
 
@@ -70,9 +72,11 @@ class MainMenu extends Renderer {
   }
 
   chooseOption() {
+    this.audio.play(this.audio.sfx.hero.punch, 2);
+
     // start play state
     if(this.selectedOption == 0)
-      this.state.start('act1');
+      this.state.start('loading', true, false, 'act1');
 
     // start option state
     if(this.selectedOption == 1)

@@ -1,10 +1,11 @@
-// gameplay.js 
+// gameplay.js
 // Common game levels routines, mechanics, entities, etc.
+import Audio from '../audio';
 import Globals from '../globals';
 import Controls from '../controls';
 import Renderer from './renderer';
 import SpecialFx from '../specialfx';
-import { 
+import {
   Hero, FoeP1, FoeK1
 } from '../entities';
 // Ui components
@@ -43,6 +44,7 @@ class GamePlay extends Renderer {
     // default sky color
     this.game.stage.backgroundColor = Globals.palette.sky.hex;
 
+    this.audio = new Audio(this.game);
     this.specialFx = new SpecialFx(this.game);
     this.controls = new Controls(this.game);
 
@@ -103,7 +105,7 @@ class GamePlay extends Renderer {
 
     for (const obj of this.map.objects.obstacles) {
       const sprite = this.game.add.sprite(obj.x, obj.y, null);
-      
+
       this.game.physics.arcade.enable(sprite);
       sprite.body.setSize(obj.width, obj.height);
       // this is a non-moveable sprite
@@ -123,7 +125,7 @@ class GamePlay extends Renderer {
     this._placeCollectables(this.map);
     this._placeActors(this.map);
 
-    // sidewalk items layer needs to be either behind or in-front 
+    // sidewalk items layer needs to be either behind or in-front
     // of on-screen sprites
     this.middleGroup.add(this.layers.foreground);
   }
@@ -132,8 +134,8 @@ class GamePlay extends Renderer {
     const collectablesGroup = this.add.group();
 
     for (const [k, v] of Object.entries(TileMapConsts.COLLECTABLES)) {
-      this.map.createFromObjects(TileMapConsts.OBJECTS_COLLECT, 
-        k, 'atlas_sprites', v.frame, true, true, collectablesGroup, 
+      this.map.createFromObjects(TileMapConsts.OBJECTS_COLLECT,
+        k, 'atlas_sprites', v.frame, true, true, collectablesGroup,
         Phaser.Sprite, false, false);
     }
 
@@ -155,8 +157,8 @@ class GamePlay extends Renderer {
     const actorsGroup = this.add.group();
 
     for (const [k, v] of Object.entries(TileMapConsts.ACTORS)) {
-      this.map.createFromObjects(TileMapConsts.OBJECTS_ACTORS, 
-        v.name, 'atlas_sprites', v.frame, true, true, actorsGroup, 
+      this.map.createFromObjects(TileMapConsts.OBJECTS_ACTORS,
+        v.name, 'atlas_sprites', v.frame, true, true, actorsGroup,
         Phaser.Sprite, false, false);
     }
 
@@ -170,7 +172,7 @@ class GamePlay extends Renderer {
       // TODO: add enemy AI level
       const actor = new TileMapConsts.ACTORS[sprite.name.toUpperCase()].classType(
         this.game, sprite);
-      
+
       // just an ugly special case here, nothing to see folks, move on ...
       if (sprite.name === TileMapConsts.ACTORS.HERO.name) {
         this.player = actor;
@@ -187,7 +189,7 @@ class GamePlay extends Renderer {
   }
 
   spawnEnemy(ACTOR, x, y, level) {
-    const actor = new ACTOR.classType(this.game, this.game.add.sprite(x, y, 
+    const actor = new ACTOR.classType(this.game, this.game.add.sprite(x, y,
       'atlas_sprites', ''), level);
     this.actors.push(actor);
     this.enemies.push(actor);
@@ -208,8 +210,8 @@ class GamePlay extends Renderer {
 
   /**
    * Adds a sprite to the appropriate layer based on it's coordinates.
-   * 
-   * @param {*} noParent true, if the sprite's neither in the behind 
+   *
+   * @param {*} noParent true, if the sprite's neither in the behind
    * nor in the front group.
    */
   addSpriteToLayer(sprite, noParent) {
@@ -228,7 +230,7 @@ class GamePlay extends Renderer {
 
   /**
    * Checks position constraints of sprites in behind/front groups.
-   * This will move moveable bodies, ergo sprites, from 'behind' to 'front' 
+   * This will move moveable bodies, ergo sprites, from 'behind' to 'front'
    * and vice versa.
    */
   _updateZOrders() {
@@ -269,9 +271,9 @@ class GamePlay extends Renderer {
         // apply sidewalk constraint
         // TODO pass walk constraints as params, so that other levels
         // can specify something different
-        if (sprite.bottom - 5 < TileMapConsts.WALK_CONSTRAINT_Y && 
+        if (sprite.bottom - 5 < TileMapConsts.WALK_CONSTRAINT_Y &&
           sprite.body.velocity.y < 0) {
-  
+
           //sprite.body.velocity.x = 0;
           sprite.body.velocity.y = 0;
         }
@@ -282,7 +284,7 @@ class GamePlay extends Renderer {
     }
   }
 
-  // TODO: maybe move this in the hero.js class and also 
+  // TODO: maybe move this in the hero.js class and also
   // only check against the player's movement body and not the complete/rigid body
   updatePlayerCollisions(sprite) {
     this.physics.arcade.collide(sprite, this.collectables, (o1, o2) => {
