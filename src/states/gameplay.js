@@ -5,11 +5,12 @@ import Globals from '../globals';
 import Controls from '../controls';
 import Renderer from './renderer';
 import SpecialFx from '../specialfx';
-import { 
+import {
   Hero, Gloria, Dido,
-  FoeP1, FoeK1, FoeP2, FoeK2 
+  FoeP1, FoeK1, FoeP2, FoeK2
 } from '../entities';
 // Ui components
+import DialogBox from '../ui/containers/dialogBox';
 import Hud from '../ui/containers/hud';
 
 const TileMapConsts = {
@@ -184,7 +185,7 @@ class GamePlay extends Renderer {
       // new enemy entity with corresponding difficulty level
       const actor = new TileMapConsts.ACTORS[sprite.name.toUpperCase()].classType(
         this.game, sprite, this.level);
-      
+
       // just an ugly special case here, nothing to see folks, move on ...
       if (sprite.name === TileMapConsts.ACTORS.HERO.name) {
         this.player = actor;
@@ -217,7 +218,7 @@ class GamePlay extends Renderer {
   }
 
   addDoor(tx, ty) {
-    const door = this.game.add.sprite(TileMapConsts.pos(tx), 
+    const door = this.game.add.sprite(TileMapConsts.pos(tx),
       TileMapConsts.pos(ty), 'atlas_sprites', 'door');
     this.addSpriteToLayer(door, true);
 
@@ -314,16 +315,16 @@ class GamePlay extends Renderer {
       // TODO add sfx
     });
   }
-  
+
   collectEnemiesEngaging() {
     let result = [];
 
     let engagedCount = this.enemies.reduce(
-      (s, actor) => s += actor.engaged ? 1 : 0, 
+      (s, actor) => s += actor.engaged ? 1 : 0,
     0);
 
     for (const actor of this.enemies) {
-      if (actor.isCanEngage(engagedCount) && 
+      if (actor.isCanEngage(engagedCount) &&
         actor.isInEngageRange(this.player.sprite.x, this.player.sprite.y)) {
 
         actor.engaged = true;
@@ -369,6 +370,8 @@ class GamePlay extends Renderer {
         this.player.damage(25);
       } else if (this.controls.debug('healHero')) {
         this.player.heal(25);
+      } else if (this.controls.debug('showDialog')) {
+        new DialogBox(this.game, 'Test');
       }
     }
   }
