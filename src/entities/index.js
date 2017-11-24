@@ -4,3 +4,5 @@ export * from './foes/p2';
 export * from './foes/k1';
 export * from './foes/k2';
 export * from './main-character';
+export * from './others/gloria';
+export * from './others/dido';

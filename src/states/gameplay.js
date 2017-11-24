@@ -4,7 +4,10 @@ import Globals from '../globals';
 import Controls from '../controls';
 import Renderer from './renderer';
 import SpecialFx from '../specialfx';
-import { Hero, FoeP1, FoeK1, FoeP2, FoeK2 } from '../entities';
+import { 
+  Hero, Gloria, Dido,
+  FoeP1, FoeK1, FoeP2, FoeK2 
+} from '../entities';
 // Ui components
 import Hud from '../ui/containers/hud';
 
@@ -30,10 +33,12 @@ const TileMapConsts = {
   // mapping of tiled actors to objects
   ACTORS: {
     HERO: { name: 'hero', classType: Hero, frame: 'hero_stand_01' },
+    GLORIA: { name: 'gloria', classType: Gloria, frame: 'gloria_stand_01' },
+    DIDO: { name: 'dido', classType: Dido, frame: 'dog_stand_01' },
     P1: { name: 'p1', classType: FoeP1, frame: 'foe_stand_01' },
     P2: { name: 'p2', classType: FoeP2, frame: 'foe_stand_01' },
     K1: { name: 'k1', classType: FoeK1, frame: 'foe2_stand_01' },
-    K2: { name: 'k2', classType: FoeK2, frame: 'foe2_stand_01' }
+    K2: { name: 'k2', classType: FoeK2, frame: 'foe2_stand_01' },
   }
 };
 
@@ -181,6 +186,10 @@ class GamePlay extends Renderer {
       // just an ugly special case here, nothing to see folks, move on ...
       if (sprite.name === TileMapConsts.ACTORS.HERO.name) {
         this.player = actor;
+      } else if (sprite.name === TileMapConsts.ACTORS.GLORIA.name) {
+        this.gloria = actor;
+      } else if (sprite.name === TileMapConsts.ACTORS.DIDO.name) {
+        this.dido = actor;
       } else {
         this.enemies.push(actor);
       }

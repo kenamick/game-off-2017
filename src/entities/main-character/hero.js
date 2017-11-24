@@ -1,4 +1,4 @@
-// hero.js
+// hero.js - Brian Freezby 
 import Globals from '../../globals';
 import Controls from '../../controls';
 import Actor from '../actor';

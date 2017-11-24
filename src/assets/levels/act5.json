@@ -327,17 +327,6 @@
                 }, 
                 {
                  "height":48,
-                 "id":36,
-                 "name":"p2",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":48,
-                 "x":92,
-                 "y":143
-                }, 
-                {
-                 "height":48,
                  "id":37,
                  "name":"p1",
                  "rotation":0,
@@ -467,6 +456,28 @@
                  "width":48,
                  "x":30,
                  "y":184
+                }, 
+                {
+                 "height":48,
+                 "id":55,
+                 "name":"gloria",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":1384.66666666667,
+                 "y":134
+                }, 
+                {
+                 "height":48,
+                 "id":56,
+                 "name":"dido",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":1371.66666666667,
+                 "y":147.333333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -506,7 +517,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":55,
+ "nextobjectid":57,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.0.3",
