@@ -6,8 +6,14 @@ import Signals from './signals';
 class SpecialFx {
 
   constructor(game, audio) {
+    this.game = game;
     this._textdraw = new TextDraw(game, audio);
     this._signals = new Signals(game, audio);
+  }
+
+  screenFade(callback, time = 1500) {
+    this.game.camera.fade(0x000000, time);
+    this.game.camera.onFadeComplete.add(callback);
   }
 
   get textdraw() {

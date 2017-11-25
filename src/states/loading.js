@@ -22,10 +22,19 @@ class Loading extends Renderer {
 
     // stop all audios
     const audio = new Audio(this.game);
-    audio.stop();
+
+    if (nextState !== 'act1') {
+      audio.stop();
+    }
+
+    // play transition tune
+    audio.play(audio.musics.fanfare);
   }
 
   preload() {
+    this.resetWorld();
+    // default background color
+    this.game.stage.backgroundColor = Globals.palette.menuBackground.hex;
 
     this.game.load.onLoadComplete.add(this.loadComplete, this);
 
@@ -43,14 +52,20 @@ class Loading extends Renderer {
       Audio.loadMusic(this.game, 'act2');
       nextStateText = 'ACT 2';
     }
+    else if(this.nextState == 'act5') {
+      // XXX actually this is Act 5 - Fnale
+      Audio.loadMusic(this.game, 'act3');
+      nextStateText = 'ACT 3';
+    }
 
     // add text to screen
-    const stateText = this.game.add.bitmapText(this.game.world.centerX - 10, this.game.world.centerY - 32, Globals.bitmapFont, nextStateText, 16);
+    const stateText = this.game.add.bitmapText(this.game.world.centerX, 
+      this.game.world.centerY - 48, Globals.bitmapFont, nextStateText, 24);
     stateText.anchor.setTo(0.5);
     stateText.scale.setTo(0);
     this.game.add.tween(stateText.scale).to({ x: 1, y: 1 }, 500, Phaser.Easing.Linear.None, true);
 
-    this.text = this.game.add.bitmapText(this.game.world.centerX, this.game.world.centerY, Globals.bitmapFont, '', 16);
+    this.text = this.game.add.bitmapText(this.game.world.centerX, this.game.world.centerY + 8, Globals.bitmapFont, '', 12);
     this.text.anchor.setTo(0.5);
 
     this.timer.start();

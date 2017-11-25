@@ -19,6 +19,9 @@ class Act5 extends GamePlay {
     this.hotpointsDone = 0;
     this.hotpoints.hotpoint1.active = false;
     this.hotpoints.hotpoint2.active = false;
+
+    // hit the juke box
+    this.jukebox(this.audio.musics.act3);
   }
 
   _addEnemy(type, tx, ty, offsetX = 0, offsetY = 0) {

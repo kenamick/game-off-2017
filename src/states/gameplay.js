@@ -80,7 +80,10 @@ class GamePlay extends Renderer {
     this.hotpoints = {};
   }
 
-  ready() {
+  jukebox(music) {
+    this.audio.stop();
+    // play level music
+    this.audio.play(music);
     // play ready sound
     this.audio.play(this.audio.sfx.ready);
     this.specialFx.textdraw.fadingUp(this.player.sprite.x, 

@@ -24,6 +24,7 @@ class Preloader extends Renderer {
 
     // load audios
     Audio.loadSfx(this.game);
+    Audio.loadMusic(this.game, 'fanfare');
 
     // load bitmap font
     this.game.load.bitmapFont(Globals.bitmapFont,

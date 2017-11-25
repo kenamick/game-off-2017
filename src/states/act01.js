@@ -20,9 +20,7 @@ class Act1 extends GamePlay {
     this.nextLevelOffset = 24 * TileMapConsts.TILE_SIZE + TileMapConsts.TILE_SIZE / 2;
 
     // hit the juke box
-    this.audio.play(this.audio.musics.maintheme);
-
-    this.ready();
+    this.jukebox(this.audio.musics.maintheme);
   }
 
   update() {
@@ -35,7 +33,8 @@ class Act1 extends GamePlay {
         this.playerHud.showThisWay();
       }
       if (this.player.sprite.x > this.nextLevelOffset) {
-        this.state.start('loading', true, false, 'act2');
+        this.specialFx.screenFade(
+          () => this.state.start('loading', true, false, 'act2'));
       }
     }
 

@@ -59,6 +59,9 @@ class Audio {
     this.musics = {
         maintheme: game.add.audio('maintheme', 1, true),
         act2: game.add.audio('act2', 1, true),
+        act3: game.add.audio('act3', 1, true),
+        boss: game.add.audio('boss', 1, true),
+        fanfare: game.add.audio('fanfare', 1, false),
     };
 
     // add all possible sfx

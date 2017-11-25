@@ -13,7 +13,6 @@ class Act2 extends GamePlay {
     this.createLevel('act2');
     this.arrangeLayers();
     this.attachHud();
-    this.audio.play(this.audio.musics.act2);
 
     // reset state
     this.isGoHand = false;
@@ -23,6 +22,9 @@ class Act2 extends GamePlay {
     this.hotpoints.hotpoint3.active = false;
     this.hotpoints.hotpoint5.active = false;
     this.hotpoints.hotpoint6.active = false;
+
+    // hit the juke box
+    this.jukebox(this.audio.musics.act2);
   }
 
   _addEnemy(type, tx, ty, offsetX = 0, offsetY = 0) {
@@ -130,7 +132,8 @@ class Act2 extends GamePlay {
         this.player.sprite.bottom < TileMapConsts.WALK_CONSTRAINT_Y + 6 && 
         this.player.sprite.x > TileMapConsts.pos(27) + 14 &&
         this.player.sprite.x < TileMapConsts.pos(28) - 14) {
-        this.state.start('act5');
+          this.specialFx.screenFade(
+            () => this.state.start('loading', true, false, 'act5'));
       }
     }
 

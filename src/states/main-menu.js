@@ -61,11 +61,15 @@ class MainMenu extends Renderer {
   }
 
   handleInput() {
-    if(this.controls.up)
+    if(this.controls.up) {
       this.selectedOption--;
-    else if(this.controls.down)
+      this.audio.play(this.audio.sfx.hero.punch, 2);
+    }
+    else if(this.controls.down) {
       this.selectedOption++;
-    else if(this.controls.punch || this.controls.jump)
+      this.audio.play(this.audio.sfx.hero.punch, 1);
+    }
+    else if(this.controls.punch || this.controls.jump) 
       this.chooseOption();
 
     if(this.selectedOption < 0)
@@ -75,19 +79,25 @@ class MainMenu extends Renderer {
   }
 
   chooseOption() {
-    this.audio.play(this.audio.sfx.hero.punch, 2);
-
     // start play state
-    if(this.selectedOption == 0)
+    if(this.selectedOption == 0) {
+      // play sfx
+      this.audio.play(this.audio.sfx.go);
+
       this.state.start('loading', true, false, 'act1');
+    }
 
     // start option state
-    if(this.selectedOption == 1)
+    if(this.selectedOption == 1) {
+      this.audio.play(this.audio.sfx.hero.punch, 2);
       this.state.start('options');
+    }
 
     // start credits state
-    if(this.selectedOption == 2)
+    if(this.selectedOption == 2) {
+      this.audio.play(this.audio.sfx.hero.punch, 2);
       this.state.start('credits');
+    }
   }
 
 }
