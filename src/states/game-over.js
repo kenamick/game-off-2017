@@ -15,6 +15,7 @@ class GameOver extends Renderer {
 
     // play sfx
     this.audio = new Audio(this.game);
+    this.audio.stop();
     this.audio.play(this.audio.sfx.gameover);
 
     const screenCenter = this.game.world.centerX;

@@ -174,6 +174,14 @@ class GamePlay extends Renderer {
     //collectablesGroup.removeAll();
 
     this.game.physics.arcade.enable(this.collectables);
+
+    // define foods physics bodies
+    for (const sprite of this.collectables) {
+      if (sprite.name.indexOf('food') > -1) {
+        sprite.body.setSize(sprite.width - 4, sprite.height * 0.6, 
+          2, sprite.height * 0.4);
+      }
+    }
   }
 
   _placeActors(map) {
