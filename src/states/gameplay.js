@@ -53,9 +53,11 @@ class GamePlay extends Renderer {
     // default sky color
     this.game.stage.backgroundColor = Globals.palette.sky.hex;
 
-    this.audio = new Audio(this.game);
     this.specialFx = new SpecialFx(this.game);
     this.controls = new Controls(this.game);
+    this.audio = new Audio(this.game);
+    // short cut to our custom audio manager
+    this.game.audio = this.audio;
 
     // The 'behind' group is basically a layer in the level the contains sprites
     // behind the sidewalk objects layer. We need to put objects either in front
@@ -96,7 +98,7 @@ class GamePlay extends Renderer {
 
   attachHud() {
     // The HUD group contains all hud ui
-    this.playerHud = new Hud(this.game, this.audio, this.player.sprite);
+    this.playerHud = new Hud(this.game, this.player.sprite);
   }
 
   /**
@@ -384,6 +386,13 @@ class GamePlay extends Renderer {
       } else if (this.controls.debug('killAll')) {
         // kill all existing enemies on the map
         this.enemies.forEach(o => o.kill());
+      } else if (this.controls.debug('killNearby')) {
+        // kill nearest enemy
+        this.enemies.forEach((actor) => {
+          if (actor.isInAttackRange(this.player.sprite.x, this.player.sprite.y)) {
+            actor.kill();
+          }
+        });
       } else if (this.controls.debug('hurtHero')) {
         this.player.damage(25);
       } else if (this.controls.debug('healHero')) {

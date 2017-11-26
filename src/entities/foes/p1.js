@@ -29,10 +29,6 @@ class FoeP1 extends Npc {
       },
       // entity specific animations
       anims: Animations.p1(sprite),
-      // entity specific audio
-      sfx: {
-        // TODO sfx
-      }
     });
   }
 

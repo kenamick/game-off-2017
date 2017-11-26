@@ -4,17 +4,14 @@ import SpecialFx from '../../specialfx';
 
 class GoHand {
 
-  constructor(game, audio) {
-    this.audio = audio;
-
-    this.hand = new SpecialFx(game, audio).signals.hand(
-      game.width - 25, 15, 'right');
+  constructor(game) {
+    this.hand = new SpecialFx(game).signals.hand(game.width - 25, 15, 'right');
     this.hand.fixedToCamera = true;
 
     // play sfx
     game.time.events.loop(800, () => {
-      if (this.audio) {
-        this.audio.play(this.audio.sfx.go);
+      if (game.audio) {
+        game.audio.play(game.audio.sfx.go);
       }
     });
   }

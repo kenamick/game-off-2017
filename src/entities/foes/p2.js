@@ -31,10 +31,6 @@ class FoeP2 extends Npc {
       anims: Animations.p1(sprite),
       // make entity bigger in size
       scale: 1.25,
-      // entity specific audio
-      sfx: {
-        // TODO sfx
-      }
     });
   }
 

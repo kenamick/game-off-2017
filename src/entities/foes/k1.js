@@ -29,10 +29,6 @@ class FoeK1 extends Npc {
       },
       // entity specific animations
       anims: Animations.k1(sprite),
-      // entity specific audio
-      sfx: {
-        // TODO sfx
-      }
     });
   }
 }

@@ -1,17 +1,19 @@
 // npc.js - Base Foe NPC routines
 import Globals from '../../globals';
 import Actor from '../actor';
+import { Sounds } from './sounds';
 
 const AIStates = {
   IDLE: 1,
   MOVE: 2,
-  ATTACK: 3
+  ATTACK: 3,
+  DEAD: 4
 };
 
 class Npc extends Actor {
 
   constructor(game, sprite, options) {
-    super(game, sprite, options.dyingFrame);
+    super(game, sprite, options.anims.dyingFrame);
 
     // setup sprite
     this._sprite.anchor.set(0.5);
@@ -40,6 +42,13 @@ class Npc extends Actor {
 
     // default is always idle
     this.idle = true;
+
+    // bind sfx
+    if (options.sfx) {
+      this.sfx = options.sfx;
+    } else {
+      this.sfx = Sounds.default(this.game.audio);
+    }
   }
 
   _attachAnimEvents() {
@@ -47,7 +56,9 @@ class Npc extends Actor {
       // reset animation frame to start
       this.anims.attack.stop(true);
 
-      // TODO: play sfx
+      // play sfx
+      this.game.audio.play(this.sfx.attack, true);
+
       // TODO: notify player collision detection!
       
       // go to idle mode as soon as animation ends
@@ -58,7 +69,7 @@ class Npc extends Actor {
         this.ai.canAttack = true;
       });
     });
-  }  
+  }
 
   isInEngageRange(x, y) {
     // if (this.ai.state === AIStates.IDLE) {
@@ -79,7 +90,7 @@ class Npc extends Actor {
   }
 
   get engaged() {
-    return this.ai.state !== AIStates.IDLE;
+    return this.ai.state !== AIStates.IDLE && this.ai.state !== AIStates.DEAD;
   }
 
   set engaged(value) {
@@ -168,6 +179,14 @@ class Npc extends Actor {
     }
   }
 
+  kill() {
+    this.ai.state = AIStates.DEAD;
+    // play sfx
+    this.game.audio.play(this.sfx.death, true);
+    // he disappeared mysteriously...
+    super.kill();
+  }
+
   update(player, engaging) {
     if (!super.update()) {
       // stop movement, but don't play stand animation
@@ -189,6 +208,7 @@ class Npc extends Actor {
       break;
 
       case AIStates.IDLE:
+      case AIStates.DEAD:
       default:
         // Doh! Do nothing. Stay there like a goon.
       break;

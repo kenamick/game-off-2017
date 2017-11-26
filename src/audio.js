@@ -79,13 +79,8 @@ class Audio {
           game.add.audio('hero-punch2'),
           game.add.audio('hero-punch3')
         ],
+        death: game.add.audio('death1')
       },
-      death: [
-        game.add.audio('death1'),
-        game.add.audio('death2'),
-        game.add.audio('death3'),
-        game.add.audio('death4')
-      ],
       door: [
         game.add.audio('door1'),
         game.add.audio('door2'),
@@ -109,6 +104,11 @@ class Audio {
           game.add.audio('npc-hit2'),
           game.add.audio('npc-hit3')
         ],
+        death: [
+          game.add.audio('death2'),
+          game.add.audio('death3'),
+          game.add.audio('death4')
+        ]
       },
       breakglass: [
         game.add.audio('breakglass1'),

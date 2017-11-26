@@ -5,9 +5,8 @@ import GoHand from '../components/go-hand';
 
 class Hud {
 
-  constructor(game, audio, sprite) {
+  constructor(game, sprite) {
     this.game = game;
-    this.audio = audio;
 
     const options = {
         x: 10,
@@ -18,7 +17,7 @@ class Hud {
   }
 
   showThisWay() {
-    this.hand = new GoHand(this.game, this.audio);
+    this.hand = new GoHand(this.game);
   }
 
   hideThisWay() {

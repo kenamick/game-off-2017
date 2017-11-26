@@ -4,9 +4,8 @@ import Globals from '../globals';
 
 class Signals {
 
-  constructor(game, audio) {
+  constructor(game) {
     this.game = game;
-    this.audio = audio;
   }
 
   /**
