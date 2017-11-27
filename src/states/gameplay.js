@@ -373,7 +373,7 @@ class GamePlay extends Renderer {
 
     if (this.player) {
       this.playerHud.update();
-      this.player.update();
+      this.player.update(this.enemies);
       this.updatePlayerCollisions(this.player.sprite);
     }
 

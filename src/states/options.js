@@ -60,7 +60,7 @@ class Options extends Renderer {
   update() {
     super.update();
 
-    if(this.controls.punch || this.controls.jump)
+    if(this.controls.punch || this.controls.jump || controls.kick)
       this.state.start('mainmenu');
   }
 

@@ -7,7 +7,8 @@ const AIStates = {
   IDLE: 1,
   MOVE: 2,
   ATTACK: 3,
-  DEAD: 4
+  HIT: 4,
+  DEAD: 5
 };
 
 class Npc extends Actor {
@@ -19,14 +20,14 @@ class Npc extends Actor {
     this._sprite.anchor.set(0.5);
     this.faceLeft();
 
+    this.resetHealth(options.maxHealth);
+
     // binds all foe animation frames
     this.anims = options.anims;
     this._attachAnimEvents();
 
     // setup physics body
-    game.physics.arcade.enable(this._sprite);
-    this._sprite.body.setSize(...options.collisions.walkbody);
-    // this._sprite.body.collideWorldBounds = true;
+    this._setupBody(options);
 
     if (options.scale) {
       this.sprite.scale.x = options.scale;
@@ -38,6 +39,7 @@ class Npc extends Actor {
       ...options.ai,
       state: AIStates.IDLE, // default
       canAttack: true, // default
+      isHit: false, // default
     };
 
     // default is always idle
@@ -49,6 +51,34 @@ class Npc extends Actor {
     } else {
       this.sfx = Sounds.default(this.game.audio);
     }
+  }
+
+  _setupBody(options) {
+    this.game.physics.arcade.enable(this._sprite);
+    this._sprite.body.setSize(...options.collisions.walkbody);
+    // this._sprite.body.collideWorldBounds = true;
+
+    // fight hit boxes
+    const hitboxes = this.game.add.group();
+    hitboxes.enableBody = true;
+    this.game.physics.arcade.enable(hitboxes);
+
+    // torso
+    const hitbox1 = hitboxes.create(0, 0, null);
+    hitbox1.anchor.set(0.5);
+    hitbox1.body.setSize(15, 22, 10, 9);
+    hitbox1.name = 'torso';
+
+    for (const h of hitboxes.children) {
+      h.reset(0, 0);
+    }
+
+    this._sprite.addChild(hitboxes);
+    this.hitboxes = hitboxes;
+  }
+
+  hitboxes() {
+    return this.hitboxes;
   }
 
   _attachAnimEvents() {
@@ -67,6 +97,23 @@ class Npc extends Actor {
       // reset the canAttack timer, so animation can be played again in attack()
       this.game.time.events.add(this.ai.ATTACK_SPEED, () => {
         this.ai.canAttack = true;
+      });
+    });
+
+    this.anims.hit.onComplete.add(() => {
+      // play sfx
+      //this.game.audio.play(this.sfx.attack, true);
+      // reset the canAttack timer, so animation can be played again in attack()
+      this.game.time.events.add(this.ai.COOLDOWN, () => {
+        // reset animation frame to start
+        this.anims.hit.stop(true);
+        this.anims.attack.stop(true);
+
+        this.ai.canAttack = true;
+        this.ai.isHit = false;
+
+        // go to idle mode as soon as animation ends
+        this.idle = true;
       });
     });
   }
@@ -90,7 +137,9 @@ class Npc extends Actor {
   }
 
   get engaged() {
-    return this.ai.state !== AIStates.IDLE && this.ai.state !== AIStates.DEAD;
+    return this.ai.state !== AIStates.IDLE && 
+      this.ai.state !== AIStates.DEAD && 
+      this.ai.state != AIStates.HIT;
   }
 
   set engaged(value) {
@@ -108,6 +157,10 @@ class Npc extends Actor {
 
   get dead() {
     return this.ai.state === AIStates.DEAD;
+  }
+
+  get hit() {
+    return this.ai.state === AIStates.HIT;
   }
 
   moveTo(actor) {
@@ -162,6 +215,7 @@ class Npc extends Actor {
   }
 
   attack(actor) {
+    // console.log(this.ai.canAttack, this.anims.attack.isPlaying)
     if (this.ai.canAttack && !this.anims.attack.isPlaying) {
       // set flag that this NPC attacks atm
       this.ai.canAttack = false;
@@ -172,6 +226,23 @@ class Npc extends Actor {
     // stop chasing, if too far
     if (!this.isInEngageRange(actor.sprite.x, actor.sprite.y)) {
       this.idle = true;
+    }
+  }
+
+  doHit(damage) {
+    this.ai.state = AIStates.HIT;
+    super.stop(null);
+
+    if (this.damage(damage)) {
+      this.kill();
+    }
+
+    if (!this.dying && !this.anims.hit.isPlaying) {
+      // set flag that this NPC attacks atm
+      this.ai.canAttack = false;
+      this.ai.isHit = true;
+      // play the hitting animation
+      this.anims.hit.play(null, false);
     }
   }
 
@@ -200,7 +271,9 @@ class Npc extends Actor {
     }
 
     // always face the player
-    this.faceTo(player);
+    if (!this.ai.isHit) {
+      this.faceTo(player);
+    }
 
     switch (this.ai.state) {
       case AIStates.MOVE:
@@ -212,6 +285,7 @@ class Npc extends Actor {
       break;
 
       case AIStates.IDLE:
+      case AIStates.HIT:
       case AIStates.DEAD:
       default:
         // Doh! Do nothing. Stay there like a goon.

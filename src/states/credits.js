@@ -35,7 +35,7 @@ class Credits extends Renderer {
   update() {
     super.update();
 
-    if(this.controls.punch || this.controls.jump)
+    if(this.controls.punch || this.controls.jump || this.controls.kick)
       this.state.start('mainmenu');
   }
 

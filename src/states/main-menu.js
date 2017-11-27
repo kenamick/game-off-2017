@@ -69,7 +69,7 @@ class MainMenu extends Renderer {
       this.selectedOption++;
       this.audio.play(this.audio.sfx.hero.punch, 1);
     }
-    else if(this.controls.punch || this.controls.jump) 
+    else if(this.controls.punch || this.controls.jump || this.controls.kick) 
       this.chooseOption();
 
     if(this.selectedOption < 0)

@@ -4,7 +4,13 @@ import Controls from '../../controls';
 import Actor from '../actor';
 
 const HeroConsts = {
-  SPEED: 40
+  PUNCH_DAMAGE: 20,
+  KICK_DAMAGE: 20,
+  HEALTH: 100,
+  SPEED: 40,
+  NO_HIT: false,
+  PUNCH_HIT: 1,
+  KICK_HIT: 2,
 };
 
 class Hero extends Actor {
@@ -12,33 +18,34 @@ class Hero extends Actor {
   constructor(game, sprite) {
     super(game, sprite, 'hero_stand_01'); 
 
-    this.resetHealth(100);
+    this.resetHealth(HeroConsts.HEALTH);
+
+    // bind animation frames
+    const anims = this._sprite.animations;
+    this.anims = {
+      stand: anims.add('stand', Phaser.Animation.generateFrameNames(
+        'hero_stand_', 1, 3, '', 2), 8, true),
+      walk: anims.add('walk', Phaser.Animation.generateFrameNames(
+        'hero_walk_', 1, 6, '', 2), 14, true),
+      punch: anims.add('punch', Phaser.Animation.generateFrameNames(
+        'hero_combo_', 1, 4, '', 2), 10, false),
+      kick: anims.add('kick', Phaser.Animation.generateFrameNames(
+        'hero_combo_', 5, 6, '', 2), 8, false),
+      jump: anims.add('jump', Phaser.Animation.generateFrameNames(
+        'hero_jump_', 1, 3, '', 2), 10, false),
+      airkick: anims.add('airkick', Phaser.Animation.generateFrameNames(
+        'hero_airkick_', 1, 1, '', 2), 10, false)
+    };
+    this._attachAnimEvents();
+    this._sprite.animations.play('stand');
+
+    // setup physics
+    this._setupBody();
 
     // sets anchor in the middle of the sprite, so that we can flip it
     // when moving left/right
     this._sprite.anchor.set(0.5);
     this.faceRight();
-
-    // bind animation frames (check the json file for details/adjustments)
-    this._sprite.animations.add('stand',
-      Phaser.Animation.generateFrameNames('hero_stand_', 1, 3, '', 2), 8, true);
-    this._sprite.animations.add('walk',
-      Phaser.Animation.generateFrameNames('hero_walk_', 1, 6, '', 2), 10, true);
-    this._sprite.animations.add('combo',
-      Phaser.Animation.generateFrameNames('hero_combo_', 1, 6, '', 2), 10, true);
-    this._sprite.animations.add('jump',
-      Phaser.Animation.generateFrameNames('hero_jump_', 1, 3, '', 2), 10, true);
-    this._sprite.animations.add('airkick',
-      Phaser.Animation.generateFrameNames('hero_airkick_', 1, 1, '', 2), 10, true);
-
-    this._sprite.animations.play('stand');
-
-    // setup physics
-    // TODO: this is a simple bounding box
-    game.physics.arcade.enable(this._sprite);
-    this._sprite.body.setSize(18, 8, 15, 40);
-
-    this._sprite.body.collideWorldBounds = true;
 
     // camera always follows the main player
     game.camera.follow(this._sprite);
@@ -50,6 +57,75 @@ class Hero extends Actor {
 
     // game ends when the player's killed
     this._sprite.events.onKilled.add(() => this.game.state.start('gameover'));
+
+    // reset actions
+    this.attack = {
+      isAttacking: false,
+      damage: 0,
+      checkHits: HeroConsts.NO_HIT
+    };
+  }
+
+  _setupBody() {
+    // walk body
+    this.game.physics.arcade.enable(this._sprite);
+    this._sprite.body.setSize(18, 8, 15, 40);
+    this._sprite.body.collideWorldBounds = true;
+
+    // fight hit boxes
+    const hitboxes = this.game.add.group();
+    hitboxes.enableBody = true;
+    this.game.physics.arcade.enable(hitboxes);
+
+    // punch
+    const hitbox2 = hitboxes.create(0, 0, null);
+    hitbox2.anchor.set(0.5);
+    hitbox2.body.setSize(16, 12, 24, 12); // reach=40
+    hitbox2.name = 'punch';
+
+    // kick
+    const hitbox3 = hitboxes.create(0, 0, null);
+    hitbox3.anchor.set(0.5);
+    hitbox3.body.setSize(17, 10, 22, 18); // reach=39
+    hitbox3.name = 'kick';
+
+    // torso
+    // const hitbox1 = hitboxes.create(0, 0, null);
+    // hitbox1.anchor.set(0.5);
+    // hitbox1.body.setSize(16, 30, 7, 5);
+    // hitbox1.name = 'torso';
+
+    for (const h of hitboxes.children) {
+      h.reset(0, 0);
+    }
+
+    this._sprite.addChild(hitboxes);
+    this.hitboxes = hitboxes;
+  }
+
+  _attachAnimEvents() {
+    this.anims.punch.onComplete.add(() => {
+      // reset animation frame to start
+      this.anims.punch.stop(true);
+
+      // play sfx
+      this.game.audio.play(this.game.audio.sfx.hero.punch, true);
+      
+      this.attack.isAttacking = false;
+      this.attack.damage = HeroConsts.PUNCH_DAMAGE;
+      this.attack.checkHits = HeroConsts.PUNCH_HIT;
+    });
+    this.anims.kick.onComplete.add(() => {
+      // reset animation frame to start
+      this.anims.kick.stop(true);
+
+      // play sfx
+      this.game.audio.play(this.game.audio.sfx.hero.kick, true);
+
+      this.attack.isAttacking = false;
+      this.attack.damage = HeroConsts.KICK_DAMAGE;
+      this.attack.checkHits = HeroConsts.KICK_HIT;
+    });
   }
 
   kill() {
@@ -69,10 +145,18 @@ class Hero extends Actor {
 
   faceLeft() {
     this._sprite.scale.x = 1;
+    // mirror hitboxes
+    for (const h of this.hitboxes.children) {
+      h.scale.x = -1;
+    }
   }
 
   faceRight() {
     this._sprite.scale.x = -1;
+    // mirror hitboxes
+    for (const h of this.hitboxes.children) {
+      h.scale.x = 1;
+    }
   }
 
   get controlsEnabled() {
@@ -86,14 +170,9 @@ class Hero extends Actor {
     }
   }
 
-  update() {
+  update(enemies) {
     if (!super.update()) {
       return false;
-    }
-
-    // show physics body
-    if (Globals.debugPhysics) {
-      this.game.debug.body(this._sprite);
     }
 
     if (!this._controlsEnabled) {
@@ -102,19 +181,45 @@ class Hero extends Actor {
 
     const game = this.game;
 
-    let moving = false;
-    let combo = false;
+    if (this.attack.checkHits !== HeroConsts.NO_HIT) {
+      // test against punch or kick hit box
+      // XXX don't use array indexes but constants or object names
+      const hitbox = this.attack.checkHits === HeroConsts.PUNCH_HIT ? 
+        this.hitboxes.children[0] : this.hitboxes.children[1];
 
-    // console.log(this.controls.punch, this.controls.up)
+      // test enemies
+      // TODO: maybe only test those that are in close proximity
+      for (const actor of enemies) {
+        if (!actor.hit && !actor.dead) {
+          game.physics.arcade.collide(hitbox, actor.hitboxes, (o1, o2) => {
+            actor.doHit(this.attack.damage);
+          });
+        }
+      }
 
-    if (this.controls.punch) {
-      combo = true;
-
-      // TODO: Pressing the fight key once needs to play the first
-      // few frames of the combo. Right now it is a bit choppy, needs more work.
+      // reset test
+      this.attack.checkHits = HeroConsts.NO_HIT;
     }
 
-    if (!combo) {
+    if (!this.attack.isAttacking) {
+      if (this.controls.punch) {
+        this.attack.isAttacking = true;
+        this.anims.punch.play();
+      } else if (this.controls.kick) {
+        this.attack.isAttacking = true;
+        this.anims.kick.play();
+      }
+
+      if (this.attack.isAttacking) {
+        // reset movement vector when attacking
+        this._sprite.body.velocity.x = 0;
+        this._sprite.body.velocity.y = 0;
+      }
+    }
+
+    if (!this.attack.isAttacking) {
+      let moving = false;
+
       // The idea here is not to be able to move while fighting
       // Player has to attack from standing position.
 
@@ -161,23 +266,18 @@ class Hero extends Actor {
           this.controls.up || this.controls.down ?
             this._sprite.body.velocity.y : 0;
       }
-    }
 
-    if (combo) {
-      this._sprite.animations.play('combo');
+      if (moving) {
+        this._sprite.animations.play('walk');
+      } else {
+        this._sprite.body.velocity.x = 0;
+        this._sprite.body.velocity.y = 0;
+        this._sprite.animations.play('stand');
+      }
 
-      // reset movement vector when attacking
-      this._sprite.body.velocity.x = 0;
-      this._sprite.body.velocity.y = 0;
-    } else if (moving) {
-      this._sprite.animations.play('walk');
-    } else {
-      this._sprite.body.velocity.x = 0;
-      this._sprite.body.velocity.y = 0;
-      this._sprite.animations.play('stand');
     }
   }
 
 }
 
-export { Hero };
+export { Hero, HeroConsts };

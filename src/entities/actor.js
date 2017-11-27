@@ -35,8 +35,13 @@ class Actor {
     return this._sprite.maxHealth;
   }
 
+  get dying() {
+    return this._dying;
+  }
+
   /**
    * Damages actor.
+   * 
    * Custom method, so we can display the blinking animations before killing
    * the actor sprite.
    * @param {*} amount 
@@ -44,10 +49,13 @@ class Actor {
   damage(amount) {
     if (this._sprite.health - amount <= 0) {
       this._sprite.health = 1;
-      this.kill();
+      //this.kill();
+      return true;
     } else {
       this._sprite.damage(amount);
     }
+
+    return false;
   }
 
   heal(amount) {
@@ -101,6 +109,11 @@ class Actor {
 
     if (Globals.debugPhysics) {
       this.game.debug.body(this._sprite);
+      if (this.hitboxes) {
+        for (const hb of this.hitboxes.children) {
+          this.game.debug.body(hb);
+        }
+      }
     }
 
     return true;

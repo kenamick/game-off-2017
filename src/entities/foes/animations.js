@@ -16,7 +16,7 @@ class Animations {
       hit: sprite.animations.add('hit', Phaser.Animation.generateFrameNames(
         'foe_hit_', 1, 2, '', 2), 5, false),
       attack: sprite.animations.add('attack', Phaser.Animation.generateFrameNames(
-        'foe_attack_', 1, 3, '', 2), 8, false)
+        'foe_attack_', 1, 3, '', 2), 6, false)
     };
   }
   
@@ -26,7 +26,7 @@ class Animations {
 
   static k1(sprite) {
     return {
-      dyingFrame: 'foe2_hit_01',
+      dyingFrame: 'foe2_hit_02',
       stand: sprite.animations.add('stand', Phaser.Animation.generateFrameNames(
         'foe2_stand_', 1, 4, '', 2), 8, true),
       walk: sprite.animations.add('walk', Phaser.Animation.generateFrameNames(

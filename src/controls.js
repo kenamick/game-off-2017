@@ -35,6 +35,10 @@ class Controls {
         game.input.keyboard.addKey(Phaser.Keyboard.H),
         game.input.keyboard.addKey(Phaser.Keyboard.ENTER)
       ],
+      kicks: [
+        game.input.keyboard.addKey(Phaser.Keyboard.J),
+        game.input.keyboard.addKey(Phaser.Keyboard.SPACE)
+      ],
       jumps: [
         game.input.keyboard.addKey(Phaser.Keyboard.J),
         game.input.keyboard.addKey(Phaser.Keyboard.SPACE)
@@ -118,11 +122,19 @@ class Controls {
     );
   }
 
-  get jump () {
+  get kick () {
     return (
-      this._keyPressed(this.keys.jumps) ||
+      this._keyPressed(this.keys.kicks) ||
       this._padPressed(Phaser.Gamepad.XBOX360_A)
     );
+  }
+
+  get jump () {
+    return false;
+    // return (
+    //   this._keyPressed(this.keys.jumps) ||
+    //   this._padPressed(Phaser.Gamepad.XBOX360_A)
+    // );
   }
 
   // DEBUG

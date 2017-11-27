@@ -12,15 +12,16 @@ class FoeP1 extends Npc {
       // entity AI behavior & control
       ai: {
         LEVEL: level,
-        SPEED: 35,
+        SPEED: 32,
         ENGAGE_RANGE: 72 * 72, // 72 pixels
         ATTACK_RANGE: 8 * 8, // 8 pixels,
         ATTACK_SPEED: 1100, // ms
+        COOLDOWN: 1500, // ms
         ENGAGE_TRESHOLD: 2, // engage even less than X enemies are already engaging
 
         // x and y offset to stop before approaching the player
         // plus random positioning offsets
-        EPSILON_X: 4 + game.rnd.integerInRange(0, 6),
+        EPSILON_X: 12 + game.rnd.integerInRange(0, 8),
         EPSILON_Y: 2 + game.rnd.integerInRange(0, 2),
       },
       // AABB walking collision boxes
@@ -31,7 +32,6 @@ class FoeP1 extends Npc {
       anims: Animations.p1(sprite),
     });
   }
-
 }
 
 export { FoeP1 };
