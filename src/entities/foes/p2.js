@@ -14,7 +14,7 @@ class FoeP2 extends Npc {
         LEVEL: level,
         SPEED: 30,
         ENGAGE_RANGE: 72 * 72, // 72 pixels
-        ATTACK_RANGE: 10 * 10, // 8 pixels,
+        ATTACK_RANGE: 10 * 10, // 10 pixels,
         ATTACK_SPEED: 2000, // ms
         ENGAGE_TRESHOLD: 3, // engage even less than X enemies are already engaging
 
