@@ -4,8 +4,8 @@ import Controls from '../../controls';
 import Actor from '../actor';
 
 const HeroConsts = {
-  PUNCH_DAMAGE: 20,
-  KICK_DAMAGE: 20,
+  PUNCH_DAMAGE: 10,
+  KICK_DAMAGE: 15,
   HEALTH: 100,
   SPEED: 40,
   KNOCKOUT_TIME: 600, // ms

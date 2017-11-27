@@ -8,13 +8,13 @@ class FoeP1 extends Npc {
   constructor(game, sprite, level = 1) {
     super(game, sprite, {
       // entity health
-      maxHealth: 50,
+      maxHealth: 30,
       // entity AI behavior & control
       ai: {
         LEVEL: level,
         SPEED: 30,
         DAMAGE: 10,
-        ENGAGE_RANGE: 72 * 72, // 72 pixels
+        ENGAGE_RANGE: 84 * 84, // 72 pixels
         ATTACK_RANGE: 8 * 8, // 8 pixels,
         ATTACK_SPEED: 1300, // ms
         COOLDOWN: 1500, // ms
