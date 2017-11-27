@@ -35,6 +35,9 @@ class Audio {
     game.load.audio('breakmetal3', require('./assets/sfx/PropBreakMetal3.m4a'));
     game.load.audio('ready', require('./assets/sfx/Ready.m4a'));
     game.load.audio('thisway', require('./assets/sfx/ThisWayMix.m4a'));
+    game.load.audio('dog1', require('./assets/sfx/Dog1.m4a'));
+    game.load.audio('dog2', require('./assets/sfx/Dog2.m4a'));
+    game.load.audio('dog3', require('./assets/sfx/Dog3.m4a'));
   }
 
   static loadMusic(game, level) {
@@ -126,6 +129,13 @@ class Audio {
       thisway: [
         game.add.audio('thisway')
       ],
+      dog: {
+        bark: [ 
+          game.add.audio('dog1'),
+          game.add.audio('dog2')
+        ],
+        goodboy: game.add.audio('dog3')
+      }
     };
   }
 

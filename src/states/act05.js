@@ -78,6 +78,8 @@ class Act5 extends GamePlay {
       // change music
       this.audio.fadeOut(this.audio.musics.act3);
       this.audio.play(this.audio.musics.boss);
+      // start barking Dido
+      this.dido.stand();
       // spawn enemies
       // TODO
     }
@@ -113,7 +115,9 @@ class Act5 extends GamePlay {
           });
         };
 
+        // stop world
         this.audio.fadeOut(this.audio.musics.boss);
+        this.player.controlsEnabled = false;
 
         this.game.time.events.add(3000, () => {
 
@@ -131,7 +135,6 @@ class Act5 extends GamePlay {
 
             this.player.sprite.x = this.gloria.sprite.x;
             this.player.sprite.y = this.gloria.sprite.y + TileMapConsts.TILE_SIZE * 0.5;
-            this.player.controlsEnabled = false;
             this.player.faceLeft();
             this.player.stand();
 

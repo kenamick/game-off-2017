@@ -7,21 +7,23 @@ class Dido extends Actor {
   constructor(game, sprite) {
     super(game, sprite);
 
-      this.moving = false;
-      this.target = false;
-    
-      this._sprite.anchor.set(0.5);
-      this.faceRight();
-
-      const anims = this._sprite.animations;
-      anims.add('stand', ['dog_stand_01', 'dog_sniff_01'], 0.75, true);
-      anims.add('run', Phaser.Animation.generateFrameNames(
-        'dog_run_', 1, 3, '', 2), 8, true);
-      anims.add('pee', ['dog_takeleak_01', 'dog_takeleak_02'], 2, true);
+    this.moving = false;
+    this.target = false;
   
-      game.physics.arcade.enable(this._sprite);
+    this._sprite.anchor.set(0.5);
+    this.faceRight();
 
-      this.stand();
+    const anims = this._sprite.animations;
+    this.anims = {
+      stand: anims.add('stand', ['dog_stand_01', 'dog_sniff_01'], 0.75, true),
+      run: anims.add('run', Phaser.Animation.generateFrameNames(
+        'dog_run_', 1, 3, '', 2), 8, true),
+      pee: anims.add('pee', ['dog_takeleak_01', 'dog_takeleak_02'], 2, true)
+    }; 
+
+    game.physics.arcade.enable(this._sprite);
+
+    //this.stand();
   }
 
   moveTo(actor, callback) {
@@ -91,9 +93,18 @@ class Dido extends Actor {
 
   stand() {
     this._sprite.animations.play('stand');
+    if (this.anims.stand.onLoop) {
+      this.anims.stand.onLoop.removeAll();
+    }
+    this.anims.stand.onLoop.add(() => {
+      if (this.game.rnd.integerInRange(0, 10) > 4) {
+        this.game.audio.play(this.game.audio.sfx.dog.bark, true);
+      }
+    });
   }
 
   naughty() {
+    this.game.audio.play(this.game.audio.sfx.dog.goodboy);
     this._sprite.animations.play('pee');
   }
 

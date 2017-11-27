@@ -81,6 +81,9 @@ class Hero extends Actor {
 
   set controlsEnabled(value) {
     this._controlsEnabled = value;
+    if (!value) {
+      this.stop();
+    }
   }
 
   update() {
