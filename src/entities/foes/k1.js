@@ -12,12 +12,13 @@ class FoeK1 extends Npc {
       // entity AI behavior & control
       ai: {
         LEVEL: level,
-        SPEED: 28,
+        SPEED: 25,
+        DAMAGE: 12,
         ENGAGE_RANGE: 72 * 72, // 72 pixels
         ATTACK_RANGE: 12 * 12, // 12 pixels,
         ATTACK_SPEED: 1500, // ms
         COOLDOWN: 1300, // ms
-        ENGAGE_TRESHOLD: 2, // engage even less than X enemies are already engaging,
+        ENGAGE_TRESHOLD: 2, // engage only when no more than X enemies are already engaging
 
         // x and y offset to stop before approaching the player
         // plus random positioning offsets

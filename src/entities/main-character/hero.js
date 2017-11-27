@@ -8,6 +8,9 @@ const HeroConsts = {
   KICK_DAMAGE: 20,
   HEALTH: 100,
   SPEED: 40,
+  KNOCKOUT_TIME: 600, // ms
+  KNOCKBACK: 5, // pixels
+  // types
   NO_HIT: false,
   PUNCH_HIT: 1,
   KICK_HIT: 2,
@@ -34,7 +37,8 @@ class Hero extends Actor {
       jump: anims.add('jump', Phaser.Animation.generateFrameNames(
         'hero_jump_', 1, 3, '', 2), 10, false),
       airkick: anims.add('airkick', Phaser.Animation.generateFrameNames(
-        'hero_airkick_', 1, 1, '', 2), 10, false)
+        'hero_airkick_', 1, 1, '', 2), 10, false),
+      hit: anims.add('hit', ['hero_hit_01'], 1, true)
     };
     this._attachAnimEvents();
     this._sprite.animations.play('stand');
@@ -64,6 +68,8 @@ class Hero extends Actor {
       damage: 0,
       checkHits: HeroConsts.NO_HIT
     };
+
+    this._isHit = false;
   }
 
   _setupBody() {
@@ -78,22 +84,22 @@ class Hero extends Actor {
     this.game.physics.arcade.enable(hitboxes);
 
     // punch
-    const hitbox2 = hitboxes.create(0, 0, null);
-    hitbox2.anchor.set(0.5);
-    hitbox2.body.setSize(16, 12, 24, 12); // reach=40
-    hitbox2.name = 'punch';
+    const punch = hitboxes.create(0, 0, null);
+    punch.anchor.set(0.5);
+    punch.body.setSize(16, 12, 24, 12); // reach=40
+    punch.name = 'punch';
 
     // kick
-    const hitbox3 = hitboxes.create(0, 0, null);
-    hitbox3.anchor.set(0.5);
-    hitbox3.body.setSize(17, 10, 22, 18); // reach=39
-    hitbox3.name = 'kick';
+    const kick = hitboxes.create(0, 0, null);
+    kick.anchor.set(0.5);
+    kick.body.setSize(17, 10, 22, 18); // reach=39
+    kick.name = 'kick';
 
     // torso
-    // const hitbox1 = hitboxes.create(0, 0, null);
-    // hitbox1.anchor.set(0.5);
-    // hitbox1.body.setSize(16, 30, 7, 5);
-    // hitbox1.name = 'torso';
+    const torso = hitboxes.create(0, 0, null);
+    torso.anchor.set(0.5);
+    torso.body.setSize(15, 22, 8, 9);
+    torso.name = 'torso';
 
     for (const h of hitboxes.children) {
       h.reset(0, 0);
@@ -101,6 +107,11 @@ class Hero extends Actor {
 
     this._sprite.addChild(hitboxes);
     this.hitboxes = hitboxes;
+  }
+
+  get torso() {
+    // torso
+    return this.hitboxes.children[2];
   }
 
   _attachAnimEvents() {
@@ -129,6 +140,8 @@ class Hero extends Actor {
   }
 
   kill() {
+    this.stop(null);
+
     // make the player sprite kind of lying on the ground
     this._sprite.angle = -90;
     this._sprite.y += this._sprite.height * 0.35;
@@ -138,9 +151,61 @@ class Hero extends Actor {
     super.kill();
   }
 
+  damage(amount) {
+    if (super.damage(amount)) {
+      this.kill();
+    } else {
+      this.stop(null)
+      this._sprite.animations.play('hit');
+
+      // don't move
+      this._controlsEnabled = false;
+      this._isHit = true;
+
+      // respawn move
+      this.game.time.events.add(HeroConsts.KNOCKOUT_TIME, () => {
+        this._controlsEnabled = true;
+        // player can hit again
+        this.attack.isAttacking = false;
+
+        // leave the player some time to move out of the mele
+        const tween = this.game.add.tween(this._sprite).to({ alpha: 0 }, 
+          HeroConsts.KNOCKOUT_TIME / 5, Phaser.Easing.Linear.None, true, 0, 
+          HeroConsts.KNOCKOUT_TIME / 100, true);
+
+        tween.onComplete.add(() => {
+          this._isHit = false;
+        });
+      });
+    }
+  }
+
+  get isHit() {
+    return this._isHit;
+  }
+
+  get controlsEnabled() {
+    return this._controlsEnabled;
+  }
+
+  set controlsEnabled(value) {
+    this._controlsEnabled = value;
+    if (!value) {
+      this.stop();
+    }
+  }
+
   stand() {
     this._sprite.animations.stop();
     this._sprite.frameName = 'hero_stand_01';
+  }
+
+  knockBack(xpos, distance = HeroConsts.KNOCKBACK) {
+    if (xpos < this._sprite.x) {
+      this._sprite.x += distance;
+    } else {
+      this._sprite.x -= distance;
+    }
   }
 
   faceLeft() {
@@ -156,17 +221,6 @@ class Hero extends Actor {
     // mirror hitboxes
     for (const h of this.hitboxes.children) {
       h.scale.x = 1;
-    }
-  }
-
-  get controlsEnabled() {
-    return this._controlsEnabled;
-  }
-
-  set controlsEnabled(value) {
-    this._controlsEnabled = value;
-    if (!value) {
-      this.stop();
     }
   }
 
@@ -191,8 +245,8 @@ class Hero extends Actor {
       // TODO: maybe only test those that are in close proximity
       for (const actor of enemies) {
         if (!actor.hit && !actor.dead) {
-          game.physics.arcade.collide(hitbox, actor.hitboxes, (o1, o2) => {
-            actor.doHit(this.attack.damage);
+          game.physics.arcade.collide(hitbox, actor.torso, (o1, o2) => {
+            actor.damage(this.attack.damage);
           });
         }
       }

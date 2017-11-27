@@ -30,16 +30,20 @@ class Npc extends Actor {
     this._setupBody(options);
 
     if (options.scale) {
+      this.scale = options.scale;
       this.sprite.scale.x = options.scale;
       this.sprite.scale.y = options.scale;
+    } else {
+      this.scale = 1;
     }
 
-    // setup AI
+    // setup AI defaults
     this.ai = {
       ...options.ai,
-      state: AIStates.IDLE, // default
-      canAttack: true, // default
-      isHit: false, // default
+      state: AIStates.IDLE, 
+      canAttack: true,
+      isHit: false, 
+      isAttacking: false
     };
 
     // default is always idle
@@ -63,11 +67,17 @@ class Npc extends Actor {
     hitboxes.enableBody = true;
     this.game.physics.arcade.enable(hitboxes);
 
+    // attack
+    const attack = hitboxes.create(0, 0, null);
+    attack.anchor.set(0.5);
+    attack.body.setSize(14, 10, 21, 14);
+    attack.name = 'attack';
+
     // torso
-    const hitbox1 = hitboxes.create(0, 0, null);
-    hitbox1.anchor.set(0.5);
-    hitbox1.body.setSize(15, 22, 10, 9);
-    hitbox1.name = 'torso';
+    const torso = hitboxes.create(0, 0, null);
+    torso.anchor.set(0.5);
+    torso.body.setSize(14, 22, 8, 9);
+    torso.name = 'torso';
 
     for (const h of hitboxes.children) {
       h.reset(0, 0);
@@ -77,8 +87,9 @@ class Npc extends Actor {
     this.hitboxes = hitboxes;
   }
 
-  hitboxes() {
-    return this.hitboxes;
+  get torso() {
+    // torso
+    return this.hitboxes.children[1];
   }
 
   _attachAnimEvents() {
@@ -89,7 +100,8 @@ class Npc extends Actor {
       // play sfx
       this.game.audio.play(this.sfx.attack, true);
 
-      // TODO: notify player collision detection!
+      // check hits
+      this.ai.isAttacking = true;
       
       // go to idle mode as soon as animation ends
       this.idle = true;
@@ -229,11 +241,11 @@ class Npc extends Actor {
     }
   }
 
-  doHit(damage) {
+  damage(amount) {
     this.ai.state = AIStates.HIT;
     super.stop(null);
 
-    if (this.damage(damage)) {
+    if (super.damage(amount)) {
       this.kill();
     }
 
@@ -249,8 +261,15 @@ class Npc extends Actor {
   faceTo(actor) {
     if (this._sprite.x < actor.sprite.x) {
       this.faceRight();
+      // mirror hitboxes
+      for (const h of this.hitboxes.children) {
+        h.scale.x = this.scale;
+      }
     } else {
       this.faceLeft();
+      for (const h of this.hitboxes.children) {
+        h.scale.x = -this.scale;
+      }
     }
   }
 
@@ -268,6 +287,20 @@ class Npc extends Actor {
       // this is usually the case when this actor's dying
       this.stop(null);
       return false;
+    }
+
+    // test hit boxes
+    if (this.ai.isAttacking) {
+      // don't kick a dead horse
+      if (!player.dying && !player.isHit) {
+        this.game.physics.arcade.collide(this.hitboxes.children[0], 
+          player.torso, (o1, o2) => {
+            player.damage(this.ai.DAMAGE, this._sprite.x);
+            player.knockBack(this._sprite.x);
+        });
+      }
+
+      this.ai.isAttacking = false;
     }
 
     // always face the player
