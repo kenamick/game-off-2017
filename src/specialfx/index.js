@@ -13,7 +13,14 @@ class SpecialFx {
 
   screenFade(callback, time = 1500) {
     this.game.camera.fade(0x000000, time);
+    this.game.camera.onFadeComplete.removeAll();
     this.game.camera.onFadeComplete.add(callback);
+  }
+
+  screenFadeIn(callback, time = 1500) {
+    this.game.camera.flash(0xffffff, time, true);
+    this.game.camera.onFlashComplete.removeAll();
+    this.game.camera.onFlashComplete.add(callback);
   }
 
   get textdraw() {

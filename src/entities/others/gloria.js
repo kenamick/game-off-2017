@@ -11,12 +11,21 @@ class Gloria extends Actor {
     this.faceLeft();
 
     const anims = this._sprite.animations;
-    anims.add('stand', ['gloria_stand_01', 'gloria_angry_01'], 0.5, true);
+    anims.add('stand', ['gloria_stand_01', 'gloria_stand_02'], 0.5, true);
 
-    this.standAngry();
+    this.stand();
+  }
+
+  _stopTimer() {
+    if (this.animsEvent) {
+      //this.animsEvent.timer.stop();
+      // this.animsEvent.destroy();
+      this.game.time.events.remove(this.animsEvent);
+    }
   }
 
   lifted() {
+    this._stopTimer();
     this._sprite.animations.stop();
     this._sprite.frameName = 'gloria_lifted_01';
 
@@ -25,12 +34,24 @@ class Gloria extends Actor {
   }
 
   stand() {
+    this._stopTimer();
+    this._sprite.animations.play('stand');
+  }
+
+  angry() {
+    this._stopTimer();
     this._sprite.animations.stop();
-    this._sprite.frameName = 'gloria_stand_01';
+    this._sprite.frameName = 'gloria_angry_01';
   }
 
   standAngry() {
-    this._sprite.animations.play('stand');
+    this._stopTimer();
+    this._sprite.animations.stop();
+    this._sprite.frameName = 'gloria_angry_01';
+
+    this.animsEvent = this.game.time.events.loop(2000, () => {
+      this._sprite.frameName = 'gloria_angry_0' + this.game.rnd.integerInRange(1, 4);
+    });
   }
 
 }

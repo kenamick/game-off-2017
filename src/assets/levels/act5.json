@@ -476,8 +476,19 @@
                  "type":"",
                  "visible":true,
                  "width":48,
-                 "x":1371.66666666667,
-                 "y":147.333333333333
+                 "x":1368,
+                 "y":124.666666666667
+                }, 
+                {
+                 "height":48,
+                 "id":57,
+                 "name":"arkian",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":1302.66666666667,
+                 "y":130.666666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -510,6 +521,17 @@
                  "width":6.33333,
                  "x":1135.83,
                  "y":95.8335
+                }, 
+                {
+                 "height":144.333,
+                 "id":58,
+                 "name":"hotpoint3",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":6.33333,
+                 "x":1242.833335,
+                 "y":96.5001666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -517,7 +539,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":57,
+ "nextobjectid":59,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.0.3",

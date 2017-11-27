@@ -14,11 +14,14 @@ class Act5 extends GamePlay {
     this.arrangeLayers();
     this.attachHud();
 
+    this.gloria.standAngry();
+
     // reset state
     this.isGoHand = false;
     this.hotpointsDone = 0;
     this.hotpoints.hotpoint1.active = false;
     this.hotpoints.hotpoint2.active = false;
+    this.hotpoints.hotpoint3.active = false;
 
     // hit the juke box
     this.jukebox(this.audio.musics.act3);
@@ -65,11 +68,83 @@ class Act5 extends GamePlay {
     }
 
     /**
+     * Hotpoint #3
+     * Boss Fight
+     */
+    if (!this.hotpoints.hotpoint3.active && 
+      this.player.sprite.x > this.hotpoints.hotpoint3.x) {
+      this.hotpoints.hotpoint3.active = true;
+      this.hotpointsDone += 1;
+      // change music
+      this.audio.fadeOut(this.audio.musics.act3);
+      this.audio.play(this.audio.musics.boss);
+      // spawn enemies
+      // TODO
+    }
+
+    /**
      * All bad guys dead => get the exit open
      */
-    if (super.isEnemiesDead() && this.hotpointsDone === 2) {
-      // TODO: End Game
+    if (!this.isGoHand && super.isEnemiesDead() && this.hotpointsDone === 3) {
+        this.isGoHand = true;
+
+        // This whole think below is held by ducktape
+        // But yeah, ...just ship it! ;)
+
+        const part1 = () => {
+          // move dog to boss and get naughty
+          this.dido.moveTo(this.arkian, () => this.dido.naughty());
+          // dog goes back
+          this.game.time.events.add(6000, part2);
+        };
+        const part2 = () => {
+          this.audio.play(this.audio.musics.maintheme);
+
+          this.dido.moveTo(this.player, () => this.dido.stand());
+          this.game.time.events.add(4000, part3);
+        };
+        const part3 = () => {
+          this.player.faceRight();
+          this.gloria.stand();
+          this.gloria.faceRight();
+
+          this.specialFx.screenFade(() => {
+            this.state.start('credits');
+          });
+        };
+
+        this.audio.fadeOut(this.audio.musics.boss);
+
+        this.game.time.events.add(3000, () => {
+
+          this.specialFx.screenFade(() => {
+            // align actors
+            this.frontGroup.remove(this.arkian.sprite);
+            this.frontGroup.remove(this.dido.sprite);
+            this.game.world.add(this.arkian.sprite);
+            this.game.world.add(this.dido.sprite);
+            this.dido.sprite.x -= 12;
+            this.game.world.bringToTop(this.dido.sprite);
+
+            this.arkian.sprite.x = 27 * TileMapConsts.TILE_SIZE;
+            this.arkian.sprite.y = 3.5 * TileMapConsts.TILE_SIZE;
+
+            this.player.sprite.x = this.gloria.sprite.x;
+            this.player.sprite.y = this.gloria.sprite.y + TileMapConsts.TILE_SIZE * 0.5;
+            this.player.controlsEnabled = false;
+            this.player.faceLeft();
+            this.player.stand();
+
+            this.gloria.stand();
+
+            //this.game.camera.resetFX();
+            this.specialFx.screenFadeIn(part1);
+          });
+        });
     }
+
+    this.dido.update();
+    this.gloria.update();
     
     // do collisions checks, etc. after player & NPC movements
     super.update();

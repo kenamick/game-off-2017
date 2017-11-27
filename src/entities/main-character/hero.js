@@ -10,7 +10,7 @@ const HeroConsts = {
 class Hero extends Actor {
 
   constructor(game, sprite) {
-    super(game, sprite, 'hero_stand_01');
+    super(game, sprite, 'hero_stand_01'); 
 
     this.resetHealth(100);
 
@@ -46,6 +46,7 @@ class Hero extends Actor {
     // game.input.addKeys API is not sufficient since
     // character needs to be aslo controlled by gamepad and AI
     this.controls = new Controls(game);
+    this._controlsEnabled = true;
 
     // game ends when the player's killed
     this._sprite.events.onKilled.add(() => this.game.state.start('gameover'));
@@ -61,6 +62,11 @@ class Hero extends Actor {
     super.kill();
   }
 
+  stand() {
+    this._sprite.animations.stop();
+    this._sprite.frameName = 'hero_stand_01';
+  }
+
   faceLeft() {
     this._sprite.scale.x = 1;
   }
@@ -69,8 +75,25 @@ class Hero extends Actor {
     this._sprite.scale.x = -1;
   }
 
+  get controlsEnabled() {
+    return this._controlsEnabled;
+  }
+
+  set controlsEnabled(value) {
+    this._controlsEnabled = value;
+  }
+
   update() {
     if (!super.update()) {
+      return false;
+    }
+
+    // show physics body
+    if (Globals.debugPhysics) {
+      this.game.debug.body(this._sprite);
+    }
+
+    if (!this._controlsEnabled) {
       return false;
     }
 
@@ -149,11 +172,6 @@ class Hero extends Actor {
       this._sprite.body.velocity.x = 0;
       this._sprite.body.velocity.y = 0;
       this._sprite.animations.play('stand');
-    }
-
-    // show physics body
-    if (Globals.debugPhysics) {
-      this.game.debug.body(this._sprite);
     }
   }
 

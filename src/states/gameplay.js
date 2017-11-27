@@ -7,7 +7,7 @@ import Renderer from './renderer';
 import SpecialFx from '../specialfx';
 import {
   Hero, Gloria, Dido,
-  FoeP1, FoeK1, FoeP2, FoeK2
+  FoeP1, FoeK1, FoeP2, FoeK2, Arkian
 } from '../entities';
 // Ui components
 import DialogBox from '../ui/containers/dialogBox';
@@ -41,6 +41,7 @@ const TileMapConsts = {
     P2: { name: 'p2', classType: FoeP2, frame: 'foe_stand_01' },
     K1: { name: 'k1', classType: FoeK1, frame: 'foe2_stand_01' },
     K2: { name: 'k2', classType: FoeK2, frame: 'foe2_stand_01' },
+    ARKIAN: { name: 'arkian', classType: Arkian, frame: 'foe2_stand_01' },
   }
 };
 
@@ -213,6 +214,9 @@ class GamePlay extends Renderer {
         this.gloria = actor;
       } else if (sprite.name === TileMapConsts.ACTORS.DIDO.name) {
         this.dido = actor;
+      } else if (sprite.name === TileMapConsts.ACTORS.ARKIAN.name) {
+        this.arkian = actor;
+        this.enemies.push(actor);
       } else {
         this.enemies.push(actor);
       }
@@ -234,7 +238,8 @@ class GamePlay extends Renderer {
   }
 
   isEnemiesDead() {
-    return this.enemies.reduce((s, o) => s += o.sprite.alive ? 1 : 0, 0) === 0;
+    return this.enemies.reduce(
+      (s, o) => s += !o.dead && o.sprite.alive ? 1 : 0, 0) === 0;
   }
 
   addDoor(tx, ty) {

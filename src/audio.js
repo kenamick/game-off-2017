@@ -130,6 +130,8 @@ class Audio {
   }
 
   play(audio, key = 0) {
+    if (Globals.noSfx) return;
+
     if(Array.isArray(audio)) {
       if (key === true) {
         const idx = this.game.rnd.integerInRange(0, audio.length - 1);
@@ -146,6 +148,8 @@ class Audio {
   }
 
   stop(audio = null, key = 0) {
+    if (Globals.noSfx) return;
+
     if(audio) {
       if(Array.isArray(audio))
         audio[key].stop();
@@ -156,6 +160,23 @@ class Audio {
       this._current.stop();
     else
       this.game.sound.stopAll();
+  }
+
+  fadeOut(audio, key = 0) {
+    if (Globals.noSfx) return;
+
+    const FADEOUT = 2500;
+
+    if(audio) {
+      if(Array.isArray(audio))
+        audio[key].stop();
+      else
+        audio.fadeOut(FADEOUT);
+    }
+    else if(this._current) {
+      this._current.fadeOut(FADEOUT);
+    }
+
   }
 }
 

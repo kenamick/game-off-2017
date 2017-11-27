@@ -106,12 +106,16 @@ class Npc extends Actor {
     this.ai.state = AIStates.IDLE;
   }
 
+  get dead() {
+    return this.ai.state === AIStates.DEAD;
+  }
+
   moveTo(actor) {
     // target's location
     const x = actor.sprite.x;
     const y = actor.sprite.y;
 
-    const {ATTACK_RANGE, EPSILON_X, EPSILON_Y, SPEED } = this.ai;
+    const { ATTACK_RANGE, EPSILON_X, EPSILON_Y, SPEED } = this.ai;
 
     let moving = false;
 
