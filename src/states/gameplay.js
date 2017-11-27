@@ -88,9 +88,9 @@ class GamePlay extends Renderer {
     // play level music
     this.audio.play(music);
     // play ready sound
-    this.audio.play(this.audio.sfx.ready);
+    this.audio.play(this.audio.sfx.go);
     this.specialFx.textdraw.fadingUp(this.player.sprite.x, 
-      this.player.sprite.y - TileMapConsts.TILE_SIZE * 0.5, 'Ready!', 4000);
+      this.player.sprite.y - TileMapConsts.TILE_SIZE * 0.5, 'Go!', 4000);
   }
 
   get level() {

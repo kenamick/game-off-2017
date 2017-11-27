@@ -11,7 +11,7 @@ class GoHand {
     // play sfx
     game.time.events.loop(800, () => {
       if (game.audio) {
-        game.audio.play(game.audio.sfx.go);
+        game.audio.play(game.audio.sfx.thisway);
       }
     });
   }

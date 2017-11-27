@@ -29,6 +29,8 @@ class Loading extends Renderer {
 
     // play transition tune
     audio.play(audio.musics.fanfare);
+
+    this.audio = audio;
   }
 
   preload() {
@@ -91,6 +93,9 @@ class Loading extends Renderer {
     this.game.add.tween(skipText).to({ alpha: 1 }, 1000, Phaser.Easing.Linear.None, true, 0, -1, true);
 
     this.controls = new Controls(this.game, true);
+
+    // ready to go
+    this.game.time.events.add(3000, () => this.audio.play(this.audio.sfx.ready));
   }
 
   changeState() {
