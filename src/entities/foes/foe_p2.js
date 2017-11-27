@@ -1,4 +1,4 @@
-// p1.js - Type P2 foe
+// p2.js - Type P2 foe
 import Globals from '../../globals';
 import { Npc } from './npc';
 import { Animations } from './animations';

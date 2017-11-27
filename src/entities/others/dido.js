@@ -97,7 +97,7 @@ class Dido extends Actor {
       this.anims.stand.onLoop.removeAll();
     }
     this.anims.stand.onLoop.add(() => {
-      if (this.game.rnd.integerInRange(0, 10) > 4) {
+      if (this.game.rnd.integerInRange(0, 10) > 3) {
         this.game.audio.play(this.game.audio.sfx.dog.bark, true);
       }
     });

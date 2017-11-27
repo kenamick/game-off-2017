@@ -33,7 +33,6 @@ class FoeK2 extends Npc {
       scale: 1.25,
     });
 
-
   }
 
 }
