@@ -53,7 +53,7 @@ class Loading extends Renderer {
       nextStateText = 'ACT 2';
     }
     else if(this.nextState == 'act5') {
-      // XXX actually this is Act 5 - Fnale
+      // XXX actually this is Act 5 - Finale
       Audio.loadMusic(this.game, 'act3');
       nextStateText = 'ACT 3';
     }

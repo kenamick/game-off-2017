@@ -350,6 +350,12 @@ class GamePlay extends Renderer {
   update() {
     super.update();
 
+    // Hangs everything else updates dialog box only
+    if(this.dialogBox) {
+      this.dialogBox.update();
+      return;
+    }
+
     if (this.player) {
       this.playerHud.update();
       this.player.update();
@@ -381,7 +387,7 @@ class GamePlay extends Renderer {
       } else if (this.controls.debug('healHero')) {
         this.player.heal(25);
       } else if (this.controls.debug('showDialog')) {
-        new DialogBox(this.game, 'Test');
+        this.dialogBox = new DialogBox(this.game, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt veritatis mollitia, sed eveniet veniam impedit cupiditate molestiae, numquam consequuntur aliquam similique reiciendis earum distinctio dolorem velit quia nam! Placeat, inventore.');
       }
     }
   }
