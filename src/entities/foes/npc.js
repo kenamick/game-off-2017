@@ -3,6 +3,8 @@ import Globals from '../../globals';
 import Actor from '../actor';
 import { Sounds } from './sounds';
 
+const KNOCKBACK = 5;
+
 const AIStates = {
   IDLE: 1,
   MOVE: 2,
@@ -15,6 +17,7 @@ class Npc extends Actor {
 
   constructor(game, sprite, options) {
     super(game, sprite, options.anims.dyingFrame);
+    //console.log(options);
 
     // setup sprite
     this._sprite.anchor.set(0.5);
@@ -100,9 +103,6 @@ class Npc extends Actor {
       // reset animation frame to start
       this.anims.attack.stop(true);
 
-      // play sfx
-      this.game.audio.play(this.sfx.attack, true);
-
       // check hits
       this.ai.isAttacking = true;
       
@@ -113,12 +113,12 @@ class Npc extends Actor {
       this.game.time.events.add(this.ai.ATTACK_SPEED, () => {
         this.ai.canAttack = true;
       });
+
+      // play sfx
+      this.game.audio.play(this.sfx.attack, true);
     });
 
     this.anims.hit.onComplete.add(() => {
-      // TODO: play sfx
-      //this.game.audio.play(this.sfx.attack, true);
-
       // reset the canAttack timer, so animation can be played again in attack()
       this.game.time.events.add(this.ai.COOLDOWN, () => {
         // reset animation frame to start
@@ -131,6 +131,9 @@ class Npc extends Actor {
         // go to idle mode as soon as animation ends
         this.idle = true;
       });
+
+      // TODO: play sfx
+      //this.game.audio.play(this.sfx.attack, true);
     });
   }
 
@@ -231,7 +234,6 @@ class Npc extends Actor {
   }
 
   attack(actor) {
-    // console.log(this.ai.canAttack, this.anims.attack.isPlaying)
     if (this.ai.canAttack && !this.anims.attack.isPlaying) {
       // set flag that this NPC attacks atm
       this.ai.canAttack = false;
@@ -295,16 +297,20 @@ class Npc extends Actor {
 
     // test hit boxes
     if (this.ai.isAttacking) {
+      this.ai.isAttacking = false;
+
       // don't kick a dead horse
       if (!player.dying && !player.isHit) {
-        this.game.physics.arcade.collide(this.hitboxes.children[0], 
-          player.torso, (o1, o2) => {
-            player.damage(this.ai.DAMAGE, this._sprite.x);
-            player.knockBack(this._sprite.x, 5 * this.weight);
-        });
+        const yDist = this.game.math.distanceSq(0, this._sprite.y, 
+          0, player.sprite.y);
+        if (yDist < 25) { // 5 pixels distance
+          this.game.physics.arcade.collide(this.hitboxes.children[0], 
+            player.torso, (o1, o2) => {
+              player.damage(this.ai.DAMAGE, this._sprite.x);
+              player.knockBack(this._sprite.x, KNOCKBACK * this.weight);
+          });
+        }
       }
-
-      this.ai.isAttacking = false;
     }
 
     // always face the player

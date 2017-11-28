@@ -5,25 +5,29 @@ import { Animations } from './animations';
 
 class FoeP1 extends Npc {
 
-  constructor(game, sprite, level = 1) {
+  constructor(game, sprite, level = 1, options = {}) {
     super(game, sprite, {
-      // entity health
+      // entity health (3 punches or 2 kicks)
       maxHealth: 30,
+
       // entity AI behavior & control
       ai: {
         LEVEL: level,
         SPEED: 30,
         DAMAGE: 10,
-        ENGAGE_RANGE: 84 * 84, // 84 pixels
+        ENGAGE_RANGE: 96 * 96, // default 96 pixels
         ATTACK_RANGE: 20 * 20, // 8 pixels,
         ATTACK_SPEED: 1500, // ms
         COOLDOWN: 1300, // ms (pause after they get hit)
-        ENGAGE_TRESHOLD: 2, // engage only when no more than X enemies are already engaging
+        ENGAGE_TRESHOLD: 5, // engage only when no more than X enemies are already engaging
 
         // x and y offset to stop before approaching the player
         // plus random positioning offsets
         EPSILON_X: 16 + game.rnd.integerInRange(0, 10),
         EPSILON_Y: 2 + game.rnd.integerInRange(0, 2),
+
+        // custom options override
+        ...options.ai
       },
       // AABB walking collision boxes
       collisions: {

@@ -124,23 +124,23 @@ class Hero extends Actor {
       // reset animation frame to start
       this.anims.punch.stop(true);
 
-      // play sfx
-      this.game.audio.play(this.game.audio.sfx.hero.punch, true);
-      
       this.state.isAttacking = false;
       this.state.damage = HeroConsts.PUNCH_DAMAGE;
       this.state.checkHits = HeroConsts.PUNCH_HIT;
+
+      // play sfx
+      this.game.audio.play(this.game.audio.sfx.hero.punch, true);
     });
     this.anims.kick.onComplete.add(() => {
       // reset animation frame to start
       this.anims.kick.stop(true);
 
-      // play sfx
-      this.game.audio.play(this.game.audio.sfx.hero.kick, true);
-
       this.state.isAttacking = false;
       this.state.damage = HeroConsts.KICK_DAMAGE;
       this.state.checkHits = HeroConsts.KICK_HIT;
+
+      // play sfx
+      this.game.audio.play(this.game.audio.sfx.hero.kick, true);
     });
   }
 
@@ -153,7 +153,7 @@ class Hero extends Actor {
     // detach camera
     this.game.camera.follow(null);
 
-    super.kill();
+    super.kill(false);
   }
 
   damage(amount) {
@@ -174,6 +174,7 @@ class Hero extends Actor {
         this.state.isAttacking = false;
 
         // leave the player some time to move out of the mele
+        this._sprite.alpha = 1;
         const tween = this.game.add.tween(this._sprite).to({ alpha: 0 }, 
           HeroConsts.KNOCKOUT_TIME / 5, Phaser.Easing.Linear.None, true, 0, 
           HeroConsts.KNOCKOUT_TIME / 100, true);
@@ -233,6 +234,9 @@ class Hero extends Actor {
     const game = this.game;
 
     if (this.state.checkHits !== HeroConsts.NO_HIT && !this.state.isHit) {
+      // reset test
+      this.state.checkHits = HeroConsts.NO_HIT;
+
       // test against punch or kick hit box
       // XXX don't use array indexes but constants or object names
       let knockbackFactor = HeroConsts.KNOCKBACK;
@@ -244,19 +248,20 @@ class Hero extends Actor {
         knockbackFactor = 2 * HeroConsts.KNOCKBACK;
       }
 
-      // test enemies
-      // TODO: maybe only test those that are in close proximity
+      // hit test enemies
       for (const actor of enemies) {
         if (!actor.hit && !actor.dead) {
-          game.physics.arcade.collide(hitbox, actor.torso, (o1, o2) => {
-            actor.damage(this.state.damage);
-            actor.knockBack(this._sprite.x, knockbackFactor);
-          });
+          // only register hits at enemies in close proximity
+          const yDist = this.game.math.distanceSq(0, this._sprite.y, 
+            0, actor.sprite.y);
+          if (yDist < 16) { // 4 pixels distance
+            game.physics.arcade.collide(hitbox, actor.torso, (o1, o2) => {
+              actor.damage(this.state.damage);
+              actor.knockBack(this._sprite.x, knockbackFactor);
+            });
+          }
         }
       }
-
-      // reset test
-      this.state.checkHits = HeroConsts.NO_HIT;
     }
 
     if (!this.state.isAttacking) {

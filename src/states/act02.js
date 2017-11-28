@@ -21,8 +21,10 @@ class Act2 extends GamePlay {
     this.hotpoints.hotpoint1.active = false;
     this.hotpoints.hotpoint2.active = false;
     this.hotpoints.hotpoint3.active = false;
+    this.hotpoints.hotpoint31.active = false;
     this.hotpoints.hotpoint5.active = false;
     this.hotpoints.hotpoint6.active = false;
+    this.hotpoints.hotpoint7.active = false;
 
     // hit the juke box
     this.jukebox(this.audio.musics.act2);
@@ -33,7 +35,11 @@ class Act2 extends GamePlay {
     this.spawnEnemy(type, 
       TileMapConsts.pos(tx) - halfSize + offsetX, 
       TileMapConsts.pos(ty) + halfSize + offsetY, 
-      this.level);
+      this.level,
+      // engage from far away
+      {
+        ai: { ENGAGE_RANGE: 1000 * 1000 }
+      });
   }
 
   update() {
@@ -65,6 +71,7 @@ class Act2 extends GamePlay {
       this._addEnemy(TileMapConsts.ACTORS.K1, 4, 1, -2);
       this._addEnemy(TileMapConsts.ACTORS.K1, 4, 1, -4, 4);
       this._addEnemy(TileMapConsts.ACTORS.P1, 4, 1, 3, 3);
+      this._addEnemy(TileMapConsts.ACTORS.K1, 5, 5);
     }
 
     /**
@@ -80,6 +87,21 @@ class Act2 extends GamePlay {
       this._addEnemy(TileMapConsts.ACTORS.P1, 8, 1, -1);
       this._addEnemy(TileMapConsts.ACTORS.K1, 8, 1, 4, 8);
       this._addEnemy(TileMapConsts.ACTORS.P1, 8, 1, 5, 2);
+      // behind
+      this._addEnemy(TileMapConsts.ACTORS.P1, 6, 5);
+      this._addEnemy(TileMapConsts.ACTORS.P1, 5, 3);
+    }
+
+    /**
+     * Hotpoint #3.1
+     */
+    if (!this.hotpoints.hotpoint31.active && 
+      this.player.sprite.x > this.hotpoints.hotpoint31.x) {
+      this.hotpoints.hotpoint31.active = true;
+      this.hotpointsDone += 1;
+      this._addEnemy(TileMapConsts.ACTORS.K1, 9, 2);
+      this._addEnemy(TileMapConsts.ACTORS.K1, 9, 3);
+      this._addEnemy(TileMapConsts.ACTORS.K1, 10, 5);
     }
 
     /**
@@ -92,8 +114,10 @@ class Act2 extends GamePlay {
       // door opens
       this.addDoor(16, 1);
       // spawn enemies
-      this._addEnemy(TileMapConsts.ACTORS.P1, 17, 1, 5, 2);
-      this._addEnemy(TileMapConsts.ACTORS.K1, 17, 1, -3, 4);
+      this._addEnemy(TileMapConsts.ACTORS.K2, 17, 1, 5, 2);
+      this._addEnemy(TileMapConsts.ACTORS.P1, 17, 1, -3, 4);
+      this._addEnemy(TileMapConsts.ACTORS.K1, 15, 5);
+      this._addEnemy(TileMapConsts.ACTORS.P1, 17, 5);
     }
 
     /**
@@ -109,12 +133,29 @@ class Act2 extends GamePlay {
       this._addEnemy(TileMapConsts.ACTORS.K1, 25, 1, 7, 1);
       this._addEnemy(TileMapConsts.ACTORS.K1, 25, 1, -4, 2);
       this._addEnemy(TileMapConsts.ACTORS.K1, 25, 1, 1, 1);
+      // spawn enemies attacking from behind
+      this._addEnemy(TileMapConsts.ACTORS.P1, 27, 2);
+      this._addEnemy(TileMapConsts.ACTORS.P1, 26, 5);
+      // spawn enemies attacking from front
+      this._addEnemy(TileMapConsts.ACTORS.K1, 28, 2, 8, 8);
+    }
+
+    /**
+     * Hotpoint #7
+     */
+    if (!this.hotpoints.hotpoint7.active && 
+      this.player.sprite.x > this.hotpoints.hotpoint7.x) {
+      this.hotpoints.hotpoint7.active = true;
+      this.hotpointsDone += 1;
+      // spawn enemies attacking from behind
+      this._addEnemy(TileMapConsts.ACTORS.P1, 29, 5);
+      this._addEnemy(TileMapConsts.ACTORS.P1, 27, 3);
     }
 
     /**
      * All bad guys dead => get the exit open
      */
-    if (super.isEnemiesDead() && this.hotpointsDone === 5) {
+    if (super.isEnemiesDead() && this.hotpointsDone === 7) {
       if (!this.isGoHand) {
         this.playerHud.showThisWay();
         // fixe a go hand to exit door

@@ -247,9 +247,9 @@ class GamePlay extends Renderer {
     }
   }
 
-  spawnEnemy(ACTOR, x, y, level) {
+  spawnEnemy(ACTOR, x, y, level, options = {}) {
     const actor = new ACTOR.classType(this.game, this.game.add.sprite(x, y,
-      'atlas_sprites', ''), level);
+      'atlas_sprites', ''), level, options);
     this.actors.push(actor);
     this.enemies.push(actor);
     this.addSpriteToLayer(actor.sprite, true);

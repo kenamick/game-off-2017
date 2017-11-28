@@ -57,7 +57,7 @@ class Actor {
    */
   damage(amount) {
     if (this._sprite.health - amount <= 0) {
-      this._sprite.health = 1;
+      this._sprite.health = 0;
       //this.kill();
       return true;
     } else {
@@ -73,7 +73,7 @@ class Actor {
     }
   }
 
-  kill() {
+  kill(flicker = true) {
     // set dying flag
     // hit collisions check for 'dying' actors should be disabled!
     this._dying = true;
@@ -83,10 +83,13 @@ class Actor {
       this._sprite.frameName = this._dyingFrameName;
     }
 
-    const tween = this.game.add.tween(this._sprite).to({ alpha: 0 }, 
-      80, Phaser.Easing.Linear.None , true, 0, 7, true);
-
-    tween.onComplete.add(() => this._sprite.kill());
+    if (!flicker) {
+      this.game.time.events.add(1500, () => this._sprite.kill());
+    } else {
+      const tween = this.game.add.tween(this._sprite).to({ alpha: 0 }, 
+        80, Phaser.Easing.Linear.None , true, 0, 7, true);
+      tween.onComplete.add(() => this._sprite.kill());
+    }
   }
 
   knockBack(xpos, distance) {

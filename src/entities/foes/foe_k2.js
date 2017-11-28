@@ -5,32 +5,44 @@ import { Animations } from './animations';
 
 class FoeK2 extends Npc {
 
-  constructor(game, sprite, level = 1) {
+  constructor(game, sprite, level = 1, options = {}) {
     super(game, sprite, {
       // entity health
       maxHealth: 70,
+
+      // make entity bigger in size
+      scale: 1.25,
+
       // entity AI behavior & control
       ai: {
         LEVEL: level,
         SPEED: 30,
-        ENGAGE_RANGE: 72 * 72, // 72 pixels
-        ATTACK_RANGE: 12 * 12, // 12 pixels,
+        DAMAGE: 22,
+        ENGAGE_RANGE: 96 * 96, // 96 pixels
+        ATTACK_RANGE: 16 * 16, // 12 pixels,
         ATTACK_SPEED: 2000, // ms
-        ENGAGE_TRESHOLD: 3, // engage only when no more than X enemies are already engaging
+        COOLDOWN: 1300, // ms
+        ENGAGE_TRESHOLD: 5, // engage only when no more than X enemies are already engaging
 
         // x and y offset to stop before approaching the player
         // plus random positioning offsets
         EPSILON_X: 5 + game.rnd.integerInRange(0, 6),
-        EPSILON_Y: 1
+        EPSILON_Y: 1,
+
+        // custom options override
+        ...options.ai
       },
+
       // AABB walking collision boxes
       collisions: {
+        weight: 2,
+        torsobody: [12, 22, 9, 9],
+        attackbody: [12, 10, 18, 24],
         walkbody: [16, 8, 15, 40] 
       },
+
       // entity specific animations
       anims: Animations.k1(sprite),
-      // make entity bigger in size
-      scale: 1.25,
     });
 
   }

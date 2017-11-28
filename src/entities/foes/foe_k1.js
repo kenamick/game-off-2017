@@ -5,10 +5,11 @@ import { Animations } from './animations';
 
 class FoeK1 extends Npc {
 
-  constructor(game, sprite, level = 1) {
+  constructor(game, sprite, level = 1, options = {}) {
     super(game, sprite, {
-      // entity health
-      maxHealth: 50,
+      // entity health (2 punches + 1 kick)
+      maxHealth: 35,
+
       // entity AI behavior & control
       ai: {
         LEVEL: level,
@@ -18,13 +19,17 @@ class FoeK1 extends Npc {
         ATTACK_RANGE: 16 * 16, // 12 pixels,
         ATTACK_SPEED: 1300, // ms
         COOLDOWN: 1300, // ms
-        ENGAGE_TRESHOLD: 2, // engage only when no more than X enemies are already engaging
+        ENGAGE_TRESHOLD: 5, // engage only when no more than X enemies are already engaging
 
         // x and y offset to stop before approaching the player
         // plus random positioning offsets
         EPSILON_X: 8 + game.rnd.integerInRange(0, 12),
         EPSILON_Y: 1 + game.rnd.integerInRange(0, 2),
+
+        // custom options override
+        ...options.ai
       },
+
       // AABB walking collision boxes
       collisions: {
         weight: 1,
@@ -32,6 +37,7 @@ class FoeK1 extends Npc {
         attackbody: [12, 10, 18, 24],
         walkbody: [16, 8, 15, 40] 
       },
+      
       // entity specific animations
       anims: Animations.k1(sprite),
     });
