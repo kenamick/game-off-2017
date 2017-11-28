@@ -8,6 +8,7 @@ const HeroConsts = {
   KICK_DAMAGE: 15,
   HEALTH: 100,
   SPEED: 40,
+  WEIGHT: 1, // plays a role when player's being knocked back afer being hit
   KNOCKOUT_TIME: 600, // ms
   KNOCKBACK: 5, // pixels
   // types
@@ -31,9 +32,9 @@ class Hero extends Actor {
       walk: anims.add('walk', Phaser.Animation.generateFrameNames(
         'hero_walk_', 1, 6, '', 2), 14, true),
       punch: anims.add('punch', Phaser.Animation.generateFrameNames(
-        'hero_combo_', 1, 4, '', 2), 10, false),
+        'hero_combo_', 1, 4, '', 2), 12, false),
       kick: anims.add('kick', Phaser.Animation.generateFrameNames(
-        'hero_combo_', 5, 6, '', 2), 8, false),
+        'hero_combo_', 5, 6, '', 2), 6, false),
       jump: anims.add('jump', Phaser.Animation.generateFrameNames(
         'hero_jump_', 1, 3, '', 2), 10, false),
       airkick: anims.add('airkick', Phaser.Animation.generateFrameNames(
@@ -63,16 +64,20 @@ class Hero extends Actor {
     this._sprite.events.onKilled.add(() => this.game.state.start('gameover'));
 
     // reset actions
-    this.attack = {
+    this.state = {
+      isHit: false,
+      isKnockedOut: false,
+      // attack stuff
       isAttacking: false,
       damage: 0,
       checkHits: HeroConsts.NO_HIT
     };
-
-    this._isHit = false;
   }
 
   _setupBody() {
+    // weight factor when being knocked back
+    this.weight = HeroConsts.WEIGHT;
+
     // walk body
     this.game.physics.arcade.enable(this._sprite);
     this._sprite.body.setSize(18, 8, 15, 40);
@@ -122,9 +127,9 @@ class Hero extends Actor {
       // play sfx
       this.game.audio.play(this.game.audio.sfx.hero.punch, true);
       
-      this.attack.isAttacking = false;
-      this.attack.damage = HeroConsts.PUNCH_DAMAGE;
-      this.attack.checkHits = HeroConsts.PUNCH_HIT;
+      this.state.isAttacking = false;
+      this.state.damage = HeroConsts.PUNCH_DAMAGE;
+      this.state.checkHits = HeroConsts.PUNCH_HIT;
     });
     this.anims.kick.onComplete.add(() => {
       // reset animation frame to start
@@ -133,9 +138,9 @@ class Hero extends Actor {
       // play sfx
       this.game.audio.play(this.game.audio.sfx.hero.kick, true);
 
-      this.attack.isAttacking = false;
-      this.attack.damage = HeroConsts.KICK_DAMAGE;
-      this.attack.checkHits = HeroConsts.KICK_HIT;
+      this.state.isAttacking = false;
+      this.state.damage = HeroConsts.KICK_DAMAGE;
+      this.state.checkHits = HeroConsts.KICK_HIT;
     });
   }
 
@@ -160,13 +165,13 @@ class Hero extends Actor {
 
       // don't move
       this._controlsEnabled = false;
-      this._isHit = true;
+      this.state.isHit = true;
 
       // respawn move
       this.game.time.events.add(HeroConsts.KNOCKOUT_TIME, () => {
         this._controlsEnabled = true;
         // player can hit again
-        this.attack.isAttacking = false;
+        this.state.isAttacking = false;
 
         // leave the player some time to move out of the mele
         const tween = this.game.add.tween(this._sprite).to({ alpha: 0 }, 
@@ -174,14 +179,14 @@ class Hero extends Actor {
           HeroConsts.KNOCKOUT_TIME / 100, true);
 
         tween.onComplete.add(() => {
-          this._isHit = false;
+          this.state.isHit = false;
         });
       });
     }
   }
 
   get isHit() {
-    return this._isHit;
+    return this.state.isHit;
   }
 
   get controlsEnabled() {
@@ -198,14 +203,6 @@ class Hero extends Actor {
   stand() {
     this._sprite.animations.stop();
     this._sprite.frameName = 'hero_stand_01';
-  }
-
-  knockBack(xpos, distance = HeroConsts.KNOCKBACK) {
-    if (xpos < this._sprite.x) {
-      this._sprite.x += distance;
-    } else {
-      this._sprite.x -= distance;
-    }
   }
 
   faceLeft() {
@@ -235,43 +232,50 @@ class Hero extends Actor {
 
     const game = this.game;
 
-    if (this.attack.checkHits !== HeroConsts.NO_HIT) {
+    if (this.state.checkHits !== HeroConsts.NO_HIT && !this.state.isHit) {
       // test against punch or kick hit box
       // XXX don't use array indexes but constants or object names
-      const hitbox = this.attack.checkHits === HeroConsts.PUNCH_HIT ? 
-        this.hitboxes.children[0] : this.hitboxes.children[1];
+      let knockbackFactor = HeroConsts.KNOCKBACK;
+      let hitbox;
+      if (this.state.checkHits === HeroConsts.PUNCH_HIT) {
+        hitbox = this.hitboxes.children[0];
+      } else {
+        hitbox = this.hitboxes.children[1];
+        knockbackFactor = 2 * HeroConsts.KNOCKBACK;
+      }
 
       // test enemies
       // TODO: maybe only test those that are in close proximity
       for (const actor of enemies) {
         if (!actor.hit && !actor.dead) {
           game.physics.arcade.collide(hitbox, actor.torso, (o1, o2) => {
-            actor.damage(this.attack.damage);
+            actor.damage(this.state.damage);
+            actor.knockBack(this._sprite.x, knockbackFactor);
           });
         }
       }
 
       // reset test
-      this.attack.checkHits = HeroConsts.NO_HIT;
+      this.state.checkHits = HeroConsts.NO_HIT;
     }
 
-    if (!this.attack.isAttacking) {
+    if (!this.state.isAttacking) {
       if (this.controls.punch) {
-        this.attack.isAttacking = true;
+        this.state.isAttacking = true;
         this.anims.punch.play();
       } else if (this.controls.kick) {
-        this.attack.isAttacking = true;
+        this.state.isAttacking = true;
         this.anims.kick.play();
       }
 
-      if (this.attack.isAttacking) {
+      if (this.state.isAttacking) {
         // reset movement vector when attacking
         this._sprite.body.velocity.x = 0;
         this._sprite.body.velocity.y = 0;
       }
     }
 
-    if (!this.attack.isAttacking) {
+    if (!this.state.isAttacking) {
       let moving = false;
 
       // The idea here is not to be able to move while fighting

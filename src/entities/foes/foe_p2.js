@@ -1,4 +1,4 @@
-// p2.js - Type P2 foe
+// foe_p2.js - Type P2 foe
 import Globals from '../../globals';
 import { Npc } from './npc';
 import { Animations } from './animations';
@@ -27,6 +27,9 @@ class FoeP2 extends Npc {
       },
       // AABB walking collision boxes
       collisions: {
+        weight: 2,
+        torsobody: [14, 22, 8, 9],
+        attackbody: [14, 10, 21, 14],
         walkbody: [16, 8, 15, 40] 
       },
       // entity specific animations

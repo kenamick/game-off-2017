@@ -1,4 +1,4 @@
-// k2.js - Type K2 foe
+// foe_k2.js - Type K2 foe
 import Globals from '../../globals';
 import { Npc } from './npc';
 import { Animations } from './animations';

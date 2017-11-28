@@ -58,6 +58,9 @@ class Npc extends Actor {
   }
 
   _setupBody(options) {
+    // weight factor when being knocked back
+    this.weight = options.collisions.weight;
+    
     this.game.physics.arcade.enable(this._sprite);
     this._sprite.body.setSize(...options.collisions.walkbody);
     // this._sprite.body.collideWorldBounds = true;
@@ -70,13 +73,13 @@ class Npc extends Actor {
     // attack
     const attack = hitboxes.create(0, 0, null);
     attack.anchor.set(0.5);
-    attack.body.setSize(14, 10, 21, 14);
+    attack.body.setSize(...options.collisions.attackbody);
     attack.name = 'attack';
 
     // torso
     const torso = hitboxes.create(0, 0, null);
     torso.anchor.set(0.5);
-    torso.body.setSize(14, 22, 8, 9);
+    torso.body.setSize(...options.collisions.torsobody);
     torso.name = 'torso';
 
     for (const h of hitboxes.children) {
@@ -297,7 +300,7 @@ class Npc extends Actor {
         this.game.physics.arcade.collide(this.hitboxes.children[0], 
           player.torso, (o1, o2) => {
             player.damage(this.ai.DAMAGE, this._sprite.x);
-            player.knockBack(this._sprite.x);
+            player.knockBack(this._sprite.x, 5 * this.weight);
         });
       }
 

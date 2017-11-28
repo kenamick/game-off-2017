@@ -8,6 +8,7 @@ class Actor {
     this._sprite = sprite;
 
     this._dying = false;
+    this._weight = 1;
     //this.resetHealth(sprite.maxHealth);
 
     // this is what is being shown when the actor die+blink activates
@@ -37,6 +38,14 @@ class Actor {
 
   get dying() {
     return this._dying;
+  }
+
+  get weight() {
+    return this._weight;
+  }
+
+  set weight(value) {
+    this._weight = value;
   }
 
   /**
@@ -78,6 +87,14 @@ class Actor {
       80, Phaser.Easing.Linear.None , true, 0, 7, true);
 
     tween.onComplete.add(() => this._sprite.kill());
+  }
+
+  knockBack(xpos, distance) {
+    if (xpos < this._sprite.x) {
+      this._sprite.x += distance / this._weight;
+    } else {
+      this._sprite.x -= distance / this._weight;
+    }
   }
 
   faceLeft() {
