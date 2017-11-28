@@ -10,7 +10,7 @@ import {
   FoeP1, FoeK1, FoeP2, FoeK2, Arkian
 } from '../entities';
 // Ui components
-import DialogBox from '../ui/containers/dialogBox';
+import DialogBox from '../ui/containers/dialog-box';
 import Hud from '../ui/containers/hud';
 
 const TileMapConsts = {
@@ -368,7 +368,12 @@ class GamePlay extends Renderer {
     // Hangs everything else updates dialog box only
     if(this.dialogBox) {
       this.dialogBox.update();
-      return;
+      if(this.dialogBox.active)
+        return;
+
+      // end of dialog
+      this.dialogBox.destroy();
+      this.dialogBox = null;
     }
 
     if (this.player) {
@@ -409,7 +414,21 @@ class GamePlay extends Renderer {
       } else if (this.controls.debug('healHero')) {
         this.player.heal(25);
       } else if (this.controls.debug('showDialog')) {
-        this.dialogBox = new DialogBox(this.game, null, ['Lorem ipsum dolor sit amet,', 'consectetur adipisicing elit.', 'Deserunt veritatis mollitia,', 'sed eveniet veniam impedit cupiditate molestiae']);
+        const dialog = [
+          {
+            character_avatar: '',
+            text: ['Lorem ipsum dolor sit amet.', 'Placeat ipsam ad in recusandae.', 'Soluta at eum deserunt repudiandae.']
+          },
+          {
+            character_avatar: '',
+            text: ['Tempora iste qui debitis, veniam.', 'Officia cum voluptas nesciunt quam?', 'Commodi provident, facilis numquam ipsa.']
+          },
+          {
+            character_avatar: '',
+            text: ['Provident, odio est necessitatibus vero.', 'Nesciunt dolorem hic sit consequuntur!', 'Voluptatibus neque id tenetur magnam.' ]
+          },
+        ];
+        this.dialogBox = new DialogBox(this.game, dialog);
       }
     }
   }
