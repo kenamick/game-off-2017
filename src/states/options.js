@@ -36,18 +36,32 @@ class Options extends Renderer {
     leftArrow.angle = -90;
     leftArrow.scale.setTo(0.035);
 
-    const arrowLegend = this.game.add.bitmapText(this.game.world.width / 3, 60, Globals.bitmapFont, 'MOVEMENT', 12);
+    console.log(this.game.input.gamepad.pad1.enabled)
+    if (this.game.input.gamepad.pad1.connected) {
+      const gamePad = this.game.add.bitmapText(this.game.world.width / 3 - 20, 50, Globals.bitmapFont, 'GAMEPAD DETECTED', 12);
+      const arrowLegend = this.game.add.bitmapText(this.game.world.width / 3 - 20, 70, Globals.bitmapFont, 'MOVEMENT', 12);
 
-    
-    // add hit jump instructions
-    const hitKey = this.game.add.bitmapText(6, 105, Globals.bitmapFont, 'H / O / ENTER', 10);
-    hitKey.tint = 0x000000;
-    const kitKeyLegend = this.game.add.bitmapText(this.game.world.width / 2, 105, Globals.bitmapFont, 'PUNCH', 12)
+      // add hit jump instructions
+      const hitKey = this.game.add.bitmapText(6, 105, Globals.bitmapFont, 'X / 1', 10);
+      hitKey.tint = 0x000000;
+      const kitKeyLegend = this.game.add.bitmapText(this.game.world.width / 3, 105, Globals.bitmapFont, 'PUNCH', 12);
 
-    const jumpKey = this.game.add.bitmapText(6, 130, Globals.bitmapFont, 'J / P / BACKSP', 10);
-    jumpKey.tint = 0x000000;
-    const jumpKeyLegend = this.game.add.bitmapText(this.game.world.width / 2, 130, Globals.bitmapFont, 'KICK', 12)
+      const jumpKey = this.game.add.bitmapText(6, 130, Globals.bitmapFont, 'A / 2', 10);
+      jumpKey.tint = 0x000000;
+      const jumpKeyLegend = this.game.add.bitmapText(this.game.world.width / 3, 130, Globals.bitmapFont, 'KICK', 12);
 
+    } else {
+      const arrowLegend = this.game.add.bitmapText(this.game.world.width / 3, 60, Globals.bitmapFont, 'MOVEMENT', 12);
+
+      // add hit jump instructions
+      const hitKey = this.game.add.bitmapText(6, 105, Globals.bitmapFont, 'H / O / ENTER', 10);
+      hitKey.tint = 0x000000;
+      const kitKeyLegend = this.game.add.bitmapText(this.game.world.width / 2, 105, Globals.bitmapFont, 'PUNCH', 12);
+
+      const jumpKey = this.game.add.bitmapText(6, 130, Globals.bitmapFont, 'J / P / BACKSP', 10);
+      jumpKey.tint = 0x000000;
+      const jumpKeyLegend = this.game.add.bitmapText(this.game.world.width / 2, 130, Globals.bitmapFont, 'KICK', 12);
+    }
 
     // leave text
     const leaveText = this.game.add.bitmapText(this.game.world.centerX, 155, Globals.bitmapFont, '(Press Punch key to continue)', 8);

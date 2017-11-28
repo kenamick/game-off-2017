@@ -6,6 +6,8 @@ import Actor from '../actor';
 const HeroConsts = {
   PUNCH_DAMAGE: 15,
   KICK_DAMAGE: 10,
+  PUNCH_COOLDOWN: 100, // ms
+  KICK_COOLDOWN: 80, // ms
   HEALTH: 100,
   SPEED: 40,
   WEIGHT: 1, // plays a role when player's being knocked back afer being hit
@@ -126,7 +128,10 @@ class Hero extends Actor {
       // reset animation frame to start
       this.anims.punch.stop(true);
 
-      this.state.isAttacking = false;
+      this.game.time.events.add(HeroConsts.PUNCH_COOLDOWN, 
+        () => this.state.isAttacking = false);
+
+      // this.state.isAttacking = false;
       this.state.damage = HeroConsts.PUNCH_DAMAGE;
       this.state.checkHits = HeroConsts.PUNCH_HIT;
       this.state.knockback = HeroConsts.KNOCKBACK_PUNCH;
@@ -138,7 +143,10 @@ class Hero extends Actor {
       // reset animation frame to start
       this.anims.kick.stop(true);
 
-      this.state.isAttacking = false;
+      this.game.time.events.add(HeroConsts.KICK_COOLDOWN, 
+        () => this.state.isAttacking = false);
+
+      //this.state.isAttacking = false;
       this.state.damage = HeroConsts.KICK_DAMAGE;
       this.state.checkHits = HeroConsts.KICK_HIT;
       this.state.knockback = HeroConsts.KNOCKBACK_KICK;

@@ -13,10 +13,10 @@ class Credits extends Renderer {
     const creditsTitle = this.game.add.bitmapText(this.game.world.centerX, 24, Globals.bitmapFont, 'CREDITS', 24);
     creditsTitle.anchor.setTo(0.5);
 
-    this.game.add.bitmapText(10, 50, Globals.bitmapFont, 'Level Design: ', 12);
+    this.game.add.bitmapText(10, 50, Globals.bitmapFont, 'Producer: ', 12);
     this.game.add.bitmapText(this.game.world.width / 3, 65, Globals.bitmapFont, 'Petar', 10);
 
-    this.game.add.bitmapText(10, 85, Globals.bitmapFont, 'Audio Design: ', 12);
+    this.game.add.bitmapText(10, 85, Globals.bitmapFont, 'Audio Designer: ', 12);
     this.game.add.bitmapText(this.game.world.width / 3, 100, Globals.bitmapFont, 'LampEight', 10);
 
     this.game.add.bitmapText(10, 120, Globals.bitmapFont, 'Programmers: ', 12);

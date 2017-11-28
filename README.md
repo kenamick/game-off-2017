@@ -29,9 +29,9 @@ Ok, ok. There's no bubble gum in this game, ...yet! :smiling_imp:
 
 Here are some hints.
 
-  * Don't let enemies surround you. Try to stack them together and hit them.
+  * Move, move, move. Don't let the enemies surround you. Try to stack them together and then hit them.
   * Kicks knock enemies back farther than punches, but they do less damage.
-  * Eat food to heal yourself. The bigger the dish, the more hitpoints it will restore.
+  * Get food to heal yourself. The bigger the dish, the more hitpoints you'll get restored. Also, make sure you look behind the objects in each level.
 
 # Development
 
