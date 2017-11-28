@@ -66,6 +66,7 @@ Notable tools used to create this game.
   * [Tiled](http://www.mapeditor.org) - Your free, easy to use and flexible tile map editor.
   * [TexturePacker](https://www.codeandweb.com/texturepacker) - Be smart - Let TexturePacker collect the sprites.
   * [GIMP](https://www.gimp.org) - The Free & Open Source Image Editor.
+  * [Visual Studio Code](https://code.visualstudio.com/) - Free & Open Source code editor.
 
 # Licensing
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
