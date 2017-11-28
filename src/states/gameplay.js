@@ -93,6 +93,15 @@ class GamePlay extends Renderer {
       this.player.sprite.y - TileMapConsts.TILE_SIZE * 0.5, 'Go!', 4000);
   }
 
+  goLevel(act) {
+    this.specialFx.screenFade(() => {
+      if (sessionStorage) {
+        sessionStorage.setItem('playerHealth', this.player.sprite.health);
+      }
+      this.state.start('loading', true, false, act)
+    });
+  }
+
   get level() {
     return this._level;
   }
@@ -103,9 +112,18 @@ class GamePlay extends Renderer {
   }
 
   /**
+   * Sets health from last level
+   */
+  adjustPlayer() {
+    if (sessionStorage && sessionStorage.getItem('playerHealth')) {
+      this.player.sprite.health = sessionStorage.getItem('playerHealth');
+    }
+  }
+
+  /**
    * Brings game layers to their default arrangement positions
    */
-  arrangeLayers() {
+  adjustLayers() {
     this.game.world.bringToTop(this.behindGroup);
     this.game.world.bringToTop(this.middleGroup);
     this.game.world.bringToTop(this.frontGroup);

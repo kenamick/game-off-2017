@@ -11,7 +11,8 @@ class Act2 extends GamePlay {
     super.create(DIFFICULTY_LEVEL);
 
     this.createLevel('act2');
-    this.arrangeLayers();
+    this.adjustLayers();
+    this.adjustPlayer();
     this.attachHud();
 
     // reset state
@@ -132,8 +133,7 @@ class Act2 extends GamePlay {
         this.player.sprite.bottom < TileMapConsts.WALK_CONSTRAINT_Y + 6 && 
         this.player.sprite.x > TileMapConsts.pos(27) + 14 &&
         this.player.sprite.x < TileMapConsts.pos(28) - 14) {
-          this.specialFx.screenFade(
-            () => this.state.start('loading', true, false, 'act5'));
+          this.goLevel('act5');
       }
     }
 

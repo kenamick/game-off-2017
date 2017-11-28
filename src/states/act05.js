@@ -11,7 +11,8 @@ class Act5 extends GamePlay {
     super.create(DIFFICULTY_LEVEL);
 
     this.createLevel('act5');
-    this.arrangeLayers();
+    this.adjustLayers();
+    this.adjustPlayer();
     this.attachHud();
 
     this.gloria.standAngry();

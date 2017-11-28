@@ -11,7 +11,7 @@ class Act1 extends GamePlay {
     super.create(DIFFICULTY_LEVEL);
 
     this.createLevel('act1');
-    this.arrangeLayers();
+    this.adjustLayers();
     this.attachHud();
 
     this.isGoHand = false;
@@ -33,8 +33,7 @@ class Act1 extends GamePlay {
         this.playerHud.showThisWay();
       }
       if (this.player.sprite.x > this.nextLevelOffset) {
-        this.specialFx.screenFade(
-          () => this.state.start('loading', true, false, 'act2'));
+        this.goLevel('act2');
       }
     }
 
