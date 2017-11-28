@@ -409,7 +409,7 @@ class GamePlay extends Renderer {
       } else if (this.controls.debug('healHero')) {
         this.player.heal(25);
       } else if (this.controls.debug('showDialog')) {
-        this.dialogBox = new DialogBox(this.game, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt veritatis mollitia, sed eveniet veniam impedit cupiditate molestiae, numquam consequuntur aliquam similique reiciendis earum distinctio dolorem velit quia nam! Placeat, inventore.');
+        this.dialogBox = new DialogBox(this.game, null, ['Lorem ipsum dolor sit amet,', 'consectetur adipisicing elit.', 'Deserunt veritatis mollitia,', 'sed eveniet veniam impedit cupiditate molestiae']);
       }
     }
   }
