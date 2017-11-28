@@ -33,11 +33,13 @@ class Controls {
       ],
       punches: [
         game.input.keyboard.addKey(Phaser.Keyboard.H),
+        game.input.keyboard.addKey(Phaser.Keyboard.O),
         game.input.keyboard.addKey(Phaser.Keyboard.ENTER)
       ],
       kicks: [
         game.input.keyboard.addKey(Phaser.Keyboard.J),
-        game.input.keyboard.addKey(Phaser.Keyboard.SPACE)
+        game.input.keyboard.addKey(Phaser.Keyboard.P),
+        game.input.keyboard.addKey(Phaser.Keyboard.BACKSPACE)
       ],
       jumps: [
         game.input.keyboard.addKey(Phaser.Keyboard.J),

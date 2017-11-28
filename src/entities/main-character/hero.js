@@ -4,13 +4,14 @@ import Controls from '../../controls';
 import Actor from '../actor';
 
 const HeroConsts = {
-  PUNCH_DAMAGE: 10,
-  KICK_DAMAGE: 15,
+  PUNCH_DAMAGE: 15,
+  KICK_DAMAGE: 10,
   HEALTH: 100,
   SPEED: 40,
   WEIGHT: 1, // plays a role when player's being knocked back afer being hit
   KNOCKOUT_TIME: 600, // ms
-  KNOCKBACK: 5, // pixels
+  KNOCKBACK_PUNCH: 3, // pixels
+  KNOCKBACK_KICK: 10, // pixels
   // types
   NO_HIT: false,
   PUNCH_HIT: 1,
@@ -70,6 +71,7 @@ class Hero extends Actor {
       // attack stuff
       isAttacking: false,
       damage: 0,
+      knockback: 0,
       checkHits: HeroConsts.NO_HIT
     };
   }
@@ -127,6 +129,7 @@ class Hero extends Actor {
       this.state.isAttacking = false;
       this.state.damage = HeroConsts.PUNCH_DAMAGE;
       this.state.checkHits = HeroConsts.PUNCH_HIT;
+      this.state.knockback = HeroConsts.KNOCKBACK_PUNCH;
 
       // play sfx
       this.game.audio.play(this.game.audio.sfx.hero.punch, true);
@@ -138,6 +141,7 @@ class Hero extends Actor {
       this.state.isAttacking = false;
       this.state.damage = HeroConsts.KICK_DAMAGE;
       this.state.checkHits = HeroConsts.KICK_HIT;
+      this.state.knockback = HeroConsts.KNOCKBACK_KICK;
 
       // play sfx
       this.game.audio.play(this.game.audio.sfx.hero.kick, true);
@@ -234,19 +238,17 @@ class Hero extends Actor {
     const game = this.game;
 
     if (this.state.checkHits !== HeroConsts.NO_HIT && !this.state.isHit) {
-      // reset test
-      this.state.checkHits = HeroConsts.NO_HIT;
-
       // test against punch or kick hit box
       // XXX don't use array indexes but constants or object names
-      let knockbackFactor = HeroConsts.KNOCKBACK;
       let hitbox;
       if (this.state.checkHits === HeroConsts.PUNCH_HIT) {
         hitbox = this.hitboxes.children[0];
       } else {
         hitbox = this.hitboxes.children[1];
-        knockbackFactor = 2 * HeroConsts.KNOCKBACK;
       }
+
+      // reset test
+      this.state.checkHits = HeroConsts.NO_HIT;
 
       // hit test enemies
       for (const actor of enemies) {
@@ -257,7 +259,7 @@ class Hero extends Actor {
           if (yDist < 16) { // 4 pixels distance
             game.physics.arcade.collide(hitbox, actor.torso, (o1, o2) => {
               actor.damage(this.state.damage);
-              actor.knockBack(this._sprite.x, knockbackFactor);
+              actor.knockBack(this._sprite.x, this.state.knockback);
             });
           }
         }

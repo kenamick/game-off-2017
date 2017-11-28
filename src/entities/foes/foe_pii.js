@@ -7,7 +7,7 @@ class FoeP2 extends Npc {
 
   constructor(game, sprite, level = 1, options = {}) {
     super(game, sprite, {
-      // entity health (3 punches and 2 kicks, or 4 kicks)
+      // entity health (4 punches)
       maxHealth: 60,
 
       // make entity bigger in size

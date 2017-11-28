@@ -7,8 +7,8 @@ class FoeK1 extends Npc {
 
   constructor(game, sprite, level = 1, options = {}) {
     super(game, sprite, {
-      // entity health (4 punches and 2 kicks, or 5 kicks)
-      maxHealth: 65,
+      // entity health (3 punches or 2 punches + 1 kick)
+      maxHealth: 35,
 
       // entity AI behavior & control
       ai: {

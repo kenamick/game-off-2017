@@ -7,7 +7,7 @@ class FoeP1 extends Npc {
 
   constructor(game, sprite, level = 1, options = {}) {
     super(game, sprite, {
-      // entity health (3 punches or 2 kicks)
+      // entity health (2 punches or 3 kicks)
       maxHealth: 30,
 
       // entity AI behavior & control

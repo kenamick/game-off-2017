@@ -14,15 +14,15 @@ class Arkian extends Npc {
         LEVEL: level,
         SPEED: 20,
         DAMAGE: 25,
-        ENGAGE_RANGE: 96 * 96, // 96 pixels
-        ATTACK_RANGE: 16 * 16, // 12 pixels,
-        ATTACK_SPEED: 300, // ms
-        COOLDOWN: 800, // ms
+        ENGAGE_RANGE: 144 * 144,
+        ATTACK_RANGE: 22 * 22,
+        ATTACK_SPEED: 1500, // ms
+        COOLDOWN: 1000, // ms
         ENGAGE_TRESHOLD: 99, // engage only when no more than X enemies are already engaging
 
         // x and y offset to stop before approaching the player
         // plus random positioning offsets
-        EPSILON_X: 4 + game.rnd.integerInRange(0, 6),
+        EPSILON_X: 1,
         EPSILON_Y: 1
       },
       // AABB walking collision boxes
