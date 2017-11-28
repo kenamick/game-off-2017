@@ -93,11 +93,15 @@ class Actor {
   }
 
   knockBack(xpos, distance) {
+    let toX = this._sprite.x;
     if (xpos < this._sprite.x) {
-      this._sprite.x += distance / this._weight;
+      toX += distance / this._weight;
     } else {
-      this._sprite.x -= distance / this._weight;
+      toX -= distance / this._weight;
     }
+    // make it slide baby
+    this.game.add.tween(this._sprite).to({ x: toX }, 
+      100, Phaser.Easing.Linear.None, true);
   }
 
   faceLeft() {

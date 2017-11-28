@@ -7,25 +7,26 @@ class FoeP2 extends Npc {
 
   constructor(game, sprite, level = 1, options = {}) {
     super(game, sprite, {
-      // entity health
+      // entity health (3 punches and 2 kicks, or 4 kicks)
       maxHealth: 60,
+
       // make entity bigger in size
       scale: 1.25,
 
       // entity AI behavior & control
       ai: {
         LEVEL: level,
-        SPEED: 30,
-        DAMAGE: 20,
-        ENGAGE_RANGE: 96 * 96, // 72 pixels
-        ATTACK_RANGE: 16 * 16, // 10 pixels,
-        ATTACK_SPEED: 2500, // ms
-        COOLDOWN: 1500, // ms
+        SPEED: 25,
+        DAMAGE: 15,
+        ENGAGE_RANGE: 96 * 96, // default 96 pixels
+        ATTACK_RANGE: 27 * 27, // 27 pixels,
+        ATTACK_SPEED: 1800, // ms
+        COOLDOWN: 1200, // ms (pause after they get hit)
         ENGAGE_TRESHOLD: 5, // engage only when no more than X enemies are already engaging
 
         // x and y offset to stop before approaching the player
         // plus random positioning offsets
-        EPSILON_X: 4 + game.rnd.integerInRange(0, 6),
+        EPSILON_X: 16 + game.rnd.integerInRange(0, 10),
         EPSILON_Y: 1,
 
         // custom options override

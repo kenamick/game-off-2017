@@ -7,8 +7,8 @@ class FoeK1 extends Npc {
 
   constructor(game, sprite, level = 1, options = {}) {
     super(game, sprite, {
-      // entity health (2 punches + 1 kick)
-      maxHealth: 35,
+      // entity health (4 punches and 2 kicks, or 5 kicks)
+      maxHealth: 65,
 
       // entity AI behavior & control
       ai: {
@@ -16,7 +16,7 @@ class FoeK1 extends Npc {
         SPEED: 25,
         DAMAGE: 12,
         ENGAGE_RANGE: 96 * 96, // 96 pixels
-        ATTACK_RANGE: 16 * 16, // 12 pixels,
+        ATTACK_RANGE: 16 * 16, // pixels,
         ATTACK_SPEED: 1300, // ms
         COOLDOWN: 1300, // ms
         ENGAGE_TRESHOLD: 5, // engage only when no more than X enemies are already engaging
@@ -37,7 +37,7 @@ class FoeK1 extends Npc {
         attackbody: [12, 10, 18, 24],
         walkbody: [16, 8, 15, 40] 
       },
-      
+
       // entity specific animations
       anims: Animations.k1(sprite),
     });

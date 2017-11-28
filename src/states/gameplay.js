@@ -345,8 +345,6 @@ class GamePlay extends Renderer {
     }
   }
 
-  // TODO: maybe move this in the hero.js class and also
-  // only check against the player's movement body and not the complete/rigid body
   updatePlayerCollisions(sprite) {
     this.physics.arcade.collide(sprite, this.collectables, (o1, o2) => {
       const food = TileMapConsts.COLLECTABLES[o2.name];
@@ -411,14 +409,20 @@ class GamePlay extends Renderer {
     if (Globals.debug) {
       if (this.controls.debug('warpAtEnd')) {
         // teleport player at the end of the level
-        this.player.sprite.x = this.game.world.width - TileMapConsts.TILE_SIZE * 1.5;
+        //this.player.sprite.x = this.game.world.width - TileMapConsts.TILE_SIZE * 1.5;
+        this.player.sprite.x += TileMapConsts.TILE_SIZE * 2;
       } else if (this.controls.debug('killAll')) {
         // kill all existing enemies on the map
         this.enemies.forEach(o => o.kill());
       } else if (this.controls.debug('killNearby')) {
-        // kill nearest enemy
         this.enemies.forEach((actor) => {
           if (actor.isInAttackRange(this.player.sprite.x, this.player.sprite.y)) {
+            actor.kill();
+          }
+        });
+      } else if (this.controls.debug('killVisible')) {
+        this.enemies.forEach((actor) => {
+          if (actor.isInEngageRange(this.player.sprite.x, this.player.sprite.y)) {
             actor.kill();
           }
         });

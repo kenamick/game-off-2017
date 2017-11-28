@@ -50,8 +50,9 @@ class Controls {
     if (Globals.debug) {
       this.keys = {
         ...this.keys,
-        killAll: game.input.keyboard.addKey(Phaser.Keyboard.V),
+        killAll: game.input.keyboard.addKey(Phaser.Keyboard.X),
         killNearby: game.input.keyboard.addKey(Phaser.Keyboard.C),
+        killVisible: game.input.keyboard.addKey(Phaser.Keyboard.V),
         warpAtEnd: game.input.keyboard.addKey(Phaser.Keyboard.B),
         hurtHero: game.input.keyboard.addKey(Phaser.Keyboard.N),
         healHero: game.input.keyboard.addKey(Phaser.Keyboard.M),

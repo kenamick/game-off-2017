@@ -20,9 +20,11 @@ class Act5 extends GamePlay {
     // reset state
     this.isGoHand = false;
     this.hotpointsDone = 0;
+    this.hotpoints.hotpoint0.active = false;
     this.hotpoints.hotpoint1.active = false;
     this.hotpoints.hotpoint2.active = false;
     this.hotpoints.hotpoint3.active = false;
+    this.hotpoints.hotpoint4.active = false;
 
     // hit the juke box
     this.jukebox(this.audio.musics.act3);
@@ -33,10 +35,41 @@ class Act5 extends GamePlay {
     this.spawnEnemy(type, 
       TileMapConsts.pos(tx) - halfSize + offsetX, 
       TileMapConsts.pos(ty) + halfSize + offsetY, 
-      this.level);
+      this.level,
+      // engage from far away
+      {
+        ai: { ENGAGE_RANGE: 1000 * 1000 }
+      });
   }
 
   update() {
+    /**
+     * Hotpoint #0
+     * Spawn enemies from behind
+     */
+    if (!this.hotpoints.hotpoint0.active && 
+      this.player.sprite.x > this.hotpoints.hotpoint0.x) {
+      this.hotpoints.hotpoint0.active = true;
+      this.hotpointsDone += 1;
+      // spawn enemies
+      this._addEnemy(TileMapConsts.ACTORS.K1, 0, 3, -24);
+      this._addEnemy(TileMapConsts.ACTORS.K1, 0, 5);
+      //this._addEnemy(TileMapConsts.ACTORS.K2, 1, 5);
+    }
+
+    /**
+     * Hotpoint #4
+     * Spawn enemy from behind
+     */
+    if (!this.hotpoints.hotpoint4.active && 
+      this.player.sprite.x > this.hotpoints.hotpoint4.x) {
+      this.hotpoints.hotpoint4.active = true;
+      this.hotpointsDone += 1;
+      // spawn enemies
+      this._addEnemy(TileMapConsts.ACTORS.P2, 5, 3, -4);
+      this._addEnemy(TileMapConsts.ACTORS.P1, 3, 5);
+    }
+
     /**
      * Hotpoint #1
      * Open door and spawn enemies
@@ -48,10 +81,12 @@ class Act5 extends GamePlay {
       // door opens
       this.addDoor(22, 2);
       // spawn enemies
-      this._addEnemy(TileMapConsts.ACTORS.K1, 23, 2);
+      this._addEnemy(TileMapConsts.ACTORS.K2, 23, 2);
       this._addEnemy(TileMapConsts.ACTORS.P1, 23, 2, -5, 1);
       this._addEnemy(TileMapConsts.ACTORS.K1, 23, 2, 4, 2);
-      this._addEnemy(TileMapConsts.ACTORS.K1, 23, 2, 4, 2);
+      // behind
+      this._addEnemy(TileMapConsts.ACTORS.P2, 19, 5);
+      this._addEnemy(TileMapConsts.ACTORS.K1, 18, 2);
     }
 
     /**
@@ -66,6 +101,8 @@ class Act5 extends GamePlay {
       this._addEnemy(TileMapConsts.ACTORS.P1, 23, 2, -2);
       this._addEnemy(TileMapConsts.ACTORS.P1, 23, 2, -4, 4);
       this._addEnemy(TileMapConsts.ACTORS.K1, 23, 2, 3, 3);
+      // behind
+      this._addEnemy(TileMapConsts.ACTORS.K2, 24, 5);
     }
 
     /**
@@ -81,14 +118,42 @@ class Act5 extends GamePlay {
       this.audio.play(this.audio.musics.boss);
       // start barking Dido
       this.dido.stand();
-      // spawn enemies
-      // TODO
+
+      // spawn enemies every 30 sec. for 5 minutes
+      this.spawnTimer = this.game.time.events.repeat(30 * 1000, 10, () => {
+        if (!this.bossSpawn1) {
+          this.bossSpawn1 = 1;
+          this.bossSpawn2 = 1;
+        }
+        // spawn 1 big enemy every 3rd time
+        if (this.bossSpawn1 % 3 === 0) {
+          if (this.bossSpawn2 % 2 === 0) {
+            this._addEnemy(TileMapConsts.ACTORS.P2, 23, 2);
+          } else {
+            this._addEnemy(TileMapConsts.ACTORS.K2, 23, 2);
+          }
+          this.bossSpawn2 += 1;
+        } else if (this.bossSpawn1 % 2 === 0) {
+          this._addEnemy(TileMapConsts.ACTORS.P1, 27, 5);
+          this._addEnemy(TileMapConsts.ACTORS.P1, 23, 2);
+        } else {
+          this._addEnemy(TileMapConsts.ACTORS.K1, 27, 5);
+          this._addEnemy(TileMapConsts.ACTORS.K1, 23, 2);
+        }
+        this.bossSpawn1 += 1;
+      });
+    }
+
+    // seize spawning enemies
+    if (this.arkian.dead && this.spawnTimer) {
+      this.game.time.events.remove(this.spawnTimer);
+      this.spawnTimer = null;
     }
 
     /**
      * All bad guys dead => get the exit open
      */
-    if (!this.isGoHand && super.isEnemiesDead() && this.hotpointsDone === 3) {
+    if (!this.isGoHand && super.isEnemiesDead() && this.hotpointsDone === 5) {
         this.isGoHand = true;
 
         // This whole think below is held by ducktape

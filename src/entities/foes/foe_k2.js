@@ -16,17 +16,17 @@ class FoeK2 extends Npc {
       // entity AI behavior & control
       ai: {
         LEVEL: level,
-        SPEED: 30,
-        DAMAGE: 22,
-        ENGAGE_RANGE: 96 * 96, // 96 pixels
-        ATTACK_RANGE: 16 * 16, // 12 pixels,
+        SPEED: 22,
+        DAMAGE: 20,
+        ENGAGE_RANGE: 96 * 96, // default 96 pixels
+        ATTACK_RANGE: 22 * 22, // 27 pixels,
         ATTACK_SPEED: 2000, // ms
-        COOLDOWN: 1300, // ms
+        COOLDOWN: 1200, // ms
         ENGAGE_TRESHOLD: 5, // engage only when no more than X enemies are already engaging
 
         // x and y offset to stop before approaching the player
         // plus random positioning offsets
-        EPSILON_X: 5 + game.rnd.integerInRange(0, 6),
+        EPSILON_X: 8 + game.rnd.integerInRange(0, 12),
         EPSILON_Y: 1,
 
         // custom options override

@@ -8,16 +8,16 @@ class Arkian extends Npc {
   constructor(game, sprite, level = 1, options = {}) {
     super(game, sprite, {
       // entity health
-      maxHealth: 500,
+      maxHealth: 100,
       // entity AI behavior & control
       ai: {
         LEVEL: level,
-        SPEED: 30,
-        DAMAGE: 22,
+        SPEED: 20,
+        DAMAGE: 25,
         ENGAGE_RANGE: 96 * 96, // 96 pixels
         ATTACK_RANGE: 16 * 16, // 12 pixels,
-        ATTACK_SPEED: 2000, // ms
-        COOLDOWN: 1300, // ms
+        ATTACK_SPEED: 300, // ms
+        COOLDOWN: 800, // ms
         ENGAGE_TRESHOLD: 99, // engage only when no more than X enemies are already engaging
 
         // x and y offset to stop before approaching the player
