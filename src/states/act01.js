@@ -1,6 +1,7 @@
 // act01.js - level 1 implementation
 
 import Renderer from './renderer';
+import DialogBox from '../ui/containers/dialog-box';
 import { GamePlay, TileMapConsts } from './gameplay';
 
 const DIFFICULTY_LEVEL = 1;
@@ -21,6 +22,10 @@ class Act1 extends GamePlay {
 
     // hit the juke box
     this.jukebox(this.audio.musics.maintheme);
+
+    const dialog = this.game.cache.getJSON('dialog1');
+
+    this.dialogBox = new DialogBox(this.game, dialog);
   }
 
   update() {

@@ -31,6 +31,9 @@ class Preloader extends Renderer {
       require('../assets/fonts/standard-0753/standard-0753.png'),
       require('file-loader!../assets/fonts/standard-0753/standard-0753.xml'));
 
+    // load JSON files
+    this.game.load.json('dialog1', require('file-loader!../assets/dialogs/dialog1.json'));
+
     // load images
     this.game.load.image('arrow', require('../assets/images/arrow.png'));
 
