@@ -14,6 +14,7 @@ Brian faces the bad guys in fight and after defeating them continues down on Sha
   * Google Chrome - 62+ (:star: **Recommended**)
   * Firefox - 57+
   * Safari - 11.0.2
+  * Opera - 49.0
 
 # Controls
 
