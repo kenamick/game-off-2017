@@ -23,7 +23,7 @@ class Credits extends Renderer {
     this.game.add.bitmapText(this.game.world.width / 3, 135, Globals.bitmapFont, 'Alexey, Carlos, Petar', 10);
 
     // leave text
-    const leaveText = this.game.add.bitmapText(this.game.world.centerX, 155, Globals.bitmapFont, '(Press Enter or Space to leave)', 8);
+    const leaveText = this.game.add.bitmapText(this.game.world.centerX, 155, Globals.bitmapFont, '(Press Punch key to continue)', 8);
     leaveText.anchor.setTo(0.5);
     leaveText.alpha = 0;
 

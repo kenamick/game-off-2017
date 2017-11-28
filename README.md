@@ -14,14 +14,24 @@ Brian faces the bad guys in fight and after defeating them continues down on Sha
   * Google Chrome - 62+ (:star: **Recommended**)
   * Firefox - 57+
   * Safari - 11.0.2
+  * Opera - 49.0
 
 # Controls
 
-It's time to kick ass and chew bubble gum. :fist: Ok, ok, there's no bubble gum in this game. Yet! :smiling_imp:
+It's time to kick ass and chew bubble gum. :fist: 
+
+Ok, ok. There's no bubble gum in this game, ...yet! :smiling_imp:
 
   * :video_game: *Use the Gamepad Luke!* No seriously, the game can be played with a gamepad, so go ahead and try it.
   * :running: `Arrow Keys` or `WASD` keys to move.
-  * :arrow_up: Press `H` or `Enter` to punch.
+  * :facepunch: Press `H`, `O` or `Enter` to punch.
+  * :rage3: Press `J`, `P` or `Backspace` to kick.
+
+Here are some hints.
+
+  * Don't let enemies surround you. Try to stack them together and hit them.
+  * Kicks knock enemies back farther than punches, but they do less damage.
+  * Eat food to heal yourself. The bigger the dish, the more hitpoints it will restore.
 
 # Development
 
@@ -64,6 +74,7 @@ Notable tools used to create this game.
   * [Tiled](http://www.mapeditor.org) - Your free, easy to use and flexible tile map editor.
   * [TexturePacker](https://www.codeandweb.com/texturepacker) - Be smart - Let TexturePacker collect the sprites.
   * [GIMP](https://www.gimp.org) - The Free & Open Source Image Editor.
+  * [Visual Studio Code](https://code.visualstudio.com/) - Free & Open Source code editor.
 
 # Licensing
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -77,6 +88,6 @@ see [./node_modules/](./node_modules)*%dependency-name%/LICENSE* after their ins
 Assets are under CC BY 4.0 license, if no respective LICENSE file is present in [./src/assets](./src/assets) subdirectories.
 
 ---
-(GAME NAME) is a GitHub [Game Off 2017](itch.io/jam/game-off-2017) entry.
+(GAME NAME) is a GitHub [Game Off 2017](https://itch.io/jam/game-off-2017) entry.
 
 ![GitHub Game Off 2017 Game Jam](https://user-images.githubusercontent.com/18125109/31239479-d554f29c-a9c2-11e7-8138-71483d537ca9.gif)

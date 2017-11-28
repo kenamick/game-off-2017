@@ -3,9 +3,14 @@
 // import Avatar from '../components/avatar';
 import Globals from '../../globals';
 
+const DialogBoxConsts = {
+  LETTER_DELAY: 100, // ms
+  LINE_DELAY: 200, // ms
+};
+
 class DialogBox {
 
-  constructor(game, text) {
+  constructor(game, avatar, text) {
     this.game = game;
     this.avatar = null; // TODO: add avatar
     this.text = text;
@@ -38,9 +43,33 @@ class DialogBox {
     const wrapwidth = this._boxSprite.width / 4;
     
     // TODO: add avatar here
-    this._text = this.game.add.bitmapText(wrapwidth, this._boxSprite.top + 5, Globals.bitmapFont, this.text, 12);
+    this._currentLine = 0;
+    this._currentLetter = 0;
+    this._text = this.game.add.bitmapText(wrapwidth, this._boxSprite.top + 5, Globals.bitmapFont, '', 12);
     this._text.maxWidth = wrapwidth * 3;
 
+    this.nextLine();
+  }
+
+  nextLine() {
+    if(this._currenLine == this.text.length)
+      return;
+
+    const line = this.text[this._currentLine];
+
+    this._currentLetter = 0;
+
+    this.game.time.events.repeat(DialogBoxConsts.LETTER_DELAY, line.length, this.writeLine, this, line);
+  }
+
+  writeLine(line) {
+    this._text.text = this._text.text + line[this._currentLetter];
+    this._currentLetter++;
+
+    if(this._currentLetter == line.length) {
+      this._text.text += '\n';
+      this.game.time.events.add(DialogBoxConsts.LINE_DELAY, this.nextLine, this);
+    }
   }
 
   update() {
