@@ -79,6 +79,6 @@ see [./node_modules/](./node_modules)*%dependency-name%/LICENSE* after their ins
 Assets are under CC BY 4.0 license, if no respective LICENSE file is present in [./src/assets](./src/assets) subdirectories.
 
 ---
-(GAME NAME) is a GitHub [Game Off 2017](itch.io/jam/game-off-2017) entry.
+(GAME NAME) is a GitHub [Game Off 2017](https://itch.io/jam/game-off-2017) entry.
 
 ![GitHub Game Off 2017 Game Jam](https://user-images.githubusercontent.com/18125109/31239479-d554f29c-a9c2-11e7-8138-71483d537ca9.gif)
