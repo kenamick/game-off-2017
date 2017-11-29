@@ -128,7 +128,7 @@ const devServer = {
 module.exports = {
   devtool:
     process.env.DEVTOOL ||
-    isDevelopment ? `cheap-module-eval-source-map` : `source-map`,
+    isDevelopment ? `cheap-module-eval-source-map` : undefined,
   entry: isDevelopment ? {
     ...entry,
     app: [
