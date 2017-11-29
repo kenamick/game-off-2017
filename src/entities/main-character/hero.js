@@ -31,17 +31,16 @@ class Hero extends Actor {
     const anims = this._sprite.animations;
     this.anims = {
       stand: anims.add('stand', Phaser.Animation.generateFrameNames(
-        'hero_stand_', 1, 3, '', 2), 8, true),
+        'hero_stand_', 1, 4, '', 2), 8, true),
       walk: anims.add('walk', Phaser.Animation.generateFrameNames(
-        'hero_walk_', 1, 6, '', 2), 14, true),
+        'hero_walk_', 1, 4, '', 2), 8, true),
       punch: anims.add('punch', Phaser.Animation.generateFrameNames(
-        'hero_combo_', 1, 4, '', 2), 12, false),
+        'hero_punch_', 1, 3, '', 2), 12, false),
       kick: anims.add('kick', Phaser.Animation.generateFrameNames(
-        'hero_combo_', 5, 6, '', 2), 6, false),
+        'hero_kick_', 1, 3, '', 2), 8, false),
       jump: anims.add('jump', Phaser.Animation.generateFrameNames(
         'hero_jump_', 1, 3, '', 2), 10, false),
-      airkick: anims.add('airkick', Phaser.Animation.generateFrameNames(
-        'hero_airkick_', 1, 1, '', 2), 10, false),
+      airkick: anims.add('airkick', ['hero_airkick_01'], 1, false),
       hit: anims.add('hit', ['hero_hit_01'], 1, true)
     };
     this._attachAnimEvents();
@@ -101,7 +100,7 @@ class Hero extends Actor {
     // kick
     const kick = hitboxes.create(0, 0, null);
     kick.anchor.set(0.5);
-    kick.body.setSize(17, 10, 22, 18); // reach=39
+    kick.body.setSize(14, 10, 24, 18); // reach=36
     kick.name = 'kick';
 
     // torso
