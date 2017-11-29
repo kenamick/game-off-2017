@@ -406,7 +406,7 @@ class GamePlay extends Renderer {
         // kill nearest enemy
         this.enemies.forEach((actor) => {
           if (actor.isInAttackRange(this.player.sprite.x, this.player.sprite.y)) {
-            this.game.camera.shake(0.01, 300);
+            this.game.camera.shake(0.001, 100);
             actor.kill();
           }
         });
