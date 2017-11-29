@@ -1,5 +1,5 @@
 // act01.js - level 1 implementation
-
+import Globals from '../globals';
 import Renderer from './renderer';
 import DialogBox from '../ui/containers/dialog-box';
 import { GamePlay, TileMapConsts } from './gameplay';
@@ -29,9 +29,10 @@ class Act1 extends GamePlay {
     // hit the juke box
     this.jukebox(this.audio.musics.maintheme);
 
-    const dialog = this.game.cache.getJSON('dialog1');
-
-    this.dialogBox = new DialogBox(this.game, dialog);
+    if (Globals.debug && !Globals.noDialogs) {
+      const dialog = this.game.cache.getJSON('dialog1');
+      this.dialogBox = new DialogBox(this.game, dialog);
+    }
   }
 
   _addEnemy(type, tx, ty, offsetX = 0, offsetY = 0) {

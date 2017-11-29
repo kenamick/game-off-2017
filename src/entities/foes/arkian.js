@@ -45,6 +45,9 @@ class Arkian extends Npc {
     // play sfx
     this.game.audio.play(this.sfx.death, true);
 
+    // shake the screen 
+    this.game.camera.shake(0.01, 250);
+
     // make the player sprite kind of lying on the ground
     this._sprite.angle = -90;
     this._sprite.y += this._sprite.height * 0.35;
