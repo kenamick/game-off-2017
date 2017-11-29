@@ -1,4 +1,4 @@
-// hero.js - Brian Freezby 
+// hero.js - Brian Freezby
 import Globals from '../../globals';
 import Controls from '../../controls';
 import Actor from '../actor';
@@ -23,24 +23,34 @@ const HeroConsts = {
 class Hero extends Actor {
 
   constructor(game, sprite) {
-    super(game, sprite, 'hero_stand_01'); 
+    super(game, sprite, 'hero_stand_01');
 
     this.resetHealth(HeroConsts.HEALTH);
 
     // bind animation frames
     const anims = this._sprite.animations;
     this.anims = {
-      stand: anims.add('stand', Phaser.Animation.generateFrameNames(
-        'hero_stand_', 1, 4, '', 2), 8, true),
-      walk: anims.add('walk', Phaser.Animation.generateFrameNames(
-        'hero_walk_', 1, 4, '', 2), 8, true),
-      punch: anims.add('punch', Phaser.Animation.generateFrameNames(
-        'hero_punch_', 1, 3, '', 2), 12, false),
-      kick: anims.add('kick', Phaser.Animation.generateFrameNames(
-        'hero_kick_', 1, 3, '', 2), 8, false),
-      jump: anims.add('jump', Phaser.Animation.generateFrameNames(
-        'hero_jump_', 1, 3, '', 2), 10, false),
-      airkick: anims.add('airkick', ['hero_airkick_01'], 1, false),
+      stand: anims.add('stand', [
+        ...Phaser.Animation.generateFrameNames('hero_stand_', 1, 4, '', 2),
+        ...Phaser.Animation.generateFrameNames('hero_stand_', 3, 2, '', 2),
+      ], 8, true),
+      walk: anims.add('walk', [
+        ...Phaser.Animation.generateFrameNames('hero_walk_', 1, 4, '', 2),
+        ...Phaser.Animation.generateFrameNames('hero_walk_', 3, 2, '', 2),
+      ], 8, true),
+      punch: anims.add('punch', [
+        ...Phaser.Animation.generateFrameNames('hero_punch_', 1, 3, '', 2),
+        'hero_punch_02',
+      ], 12, false),
+      kick: anims.add('kick', [
+        ...Phaser.Animation.generateFrameNames('hero_kick_', 1, 3, '', 2),
+        'hero_kick_02',
+      ], 8, false),
+      jump: anims.add('jump', [
+        ...Phaser.Animation.generateFrameNames('hero_jump_', 1, 3, '', 2),
+        'hero_jump_02',
+      ], 10, false),
+      divekick: anims.add('divekick', ['hero_divekick_01'], 1, false),
       hit: anims.add('hit', ['hero_hit_01'], 1, true)
     };
     this._attachAnimEvents();
@@ -127,7 +137,7 @@ class Hero extends Actor {
       // reset animation frame to start
       this.anims.punch.stop(true);
 
-      this.game.time.events.add(HeroConsts.PUNCH_COOLDOWN, 
+      this.game.time.events.add(HeroConsts.PUNCH_COOLDOWN,
         () => this.state.isAttacking = false);
 
       // this.state.isAttacking = false;
@@ -142,7 +152,7 @@ class Hero extends Actor {
       // reset animation frame to start
       this.anims.kick.stop(true);
 
-      this.game.time.events.add(HeroConsts.KICK_COOLDOWN, 
+      this.game.time.events.add(HeroConsts.KICK_COOLDOWN,
         () => this.state.isAttacking = false);
 
       //this.state.isAttacking = false;
@@ -189,8 +199,8 @@ class Hero extends Actor {
 
         // leave the player some time to move out of the mele
         this._sprite.alpha = 1;
-        const tween = this.game.add.tween(this._sprite).to({ alpha: 0 }, 
-          HeroConsts.KNOCKOUT_TIME / 5, Phaser.Easing.Linear.None, true, 0, 
+        const tween = this.game.add.tween(this._sprite).to({ alpha: 0 },
+          HeroConsts.KNOCKOUT_TIME / 5, Phaser.Easing.Linear.None, true, 0,
           HeroConsts.KNOCKOUT_TIME / 100, true);
 
         tween.onComplete.add(() => {
@@ -264,7 +274,7 @@ class Hero extends Actor {
       for (const actor of enemies) {
         if (!actor.hit && !actor.dead) {
           // only register hits at enemies in close proximity
-          const yDist = this.game.math.distanceSq(0, this._sprite.y, 
+          const yDist = this.game.math.distanceSq(0, this._sprite.y,
             0, actor.sprite.y);
           if (yDist < 16) { // 4 pixels distance
             game.physics.arcade.collide(hitbox, actor.torso, (o1, o2) => {
