@@ -13,14 +13,25 @@ class Credits extends Renderer {
     const creditsTitle = this.game.add.bitmapText(this.game.world.centerX, 24, Globals.bitmapFont, 'CREDITS', 24);
     creditsTitle.anchor.setTo(0.5);
 
-    this.game.add.bitmapText(10, 50, Globals.bitmapFont, 'Producer: ', 12);
-    this.game.add.bitmapText(this.game.world.width / 3, 65, Globals.bitmapFont, 'Petar', 10);
+    this.game.add.bitmapText(5, 50, Globals.bitmapFont, 'Producer:', 10);
+    this.game.add.bitmapText(10, 65, Globals.bitmapFont, 'Petar', 12);
 
-    this.game.add.bitmapText(10, 85, Globals.bitmapFont, 'Audio Designer: ', 12);
-    this.game.add.bitmapText(this.game.world.width / 3, 100, Globals.bitmapFont, 'LampEight', 10);
+    this.game.add.bitmapText(5, 85, Globals.bitmapFont, 'Audio Designer:', 10);
+    this.game.add.bitmapText(10, 100, Globals.bitmapFont, 'LampEight', 12);
 
-    this.game.add.bitmapText(10, 120, Globals.bitmapFont, 'Programmers: ', 12);
-    this.game.add.bitmapText(this.game.world.width / 3, 135, Globals.bitmapFont, 'Alexey, Carlos, Petar', 10);
+    this.game.add.bitmapText(
+      this.game.world.width / 2 - 5, 50,
+      Globals.bitmapFont, 'Visuals:', 10);
+    this.game.add.bitmapText(
+      this.game.world.width / 2, 65,
+      Globals.bitmapFont, 'Petar, PsyBack', 12);
+
+    this.game.add.bitmapText(
+      this.game.world.width / 2 - 5, 85,
+      Globals.bitmapFont, 'Programmers:', 10);
+    this.game.add.bitmapText(
+      this.game.world.width / 2, 100,
+      Globals.bitmapFont, `Alexey, Carlos, \nPetar`, 12);
 
     // leave text
     const leaveText = this.game.add.bitmapText(this.game.world.centerX, 155, Globals.bitmapFont, '(Press Punch key to continue)', 8);
