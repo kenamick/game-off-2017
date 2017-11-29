@@ -15,7 +15,7 @@ Brian faces the bad guys in fight and after defeating them continues down on Sha
   * Firefox - 57+
   * Safari - 11.0.2
   * Opera - 49.0
-  * *Microsoft Edge 41.16299.15.0* (anti-aliasing is forced by browser)
+  * *Microsoft Edge 41.16299.15.0* (anti-aliasing is forced by the browser)
 
 # Controls
 
