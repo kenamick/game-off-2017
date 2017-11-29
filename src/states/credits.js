@@ -33,7 +33,7 @@ class Credits extends Renderer {
 
     this.addText('Visuals:', column2Left, columnsTop);
     this.addText(
-      'Petar Petrovsss\nPavel Antonov',
+      'Petar Petrov\nPavel Antonov',
       column2Padding, columnsTop + 15);
 
     this.addText('Programmers:', column2Left, columnsTop + 45);
