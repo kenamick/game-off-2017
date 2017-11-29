@@ -2,6 +2,7 @@
 import Globals from '../../globals';
 import { Npc, AIStates } from './npc';
 import { Animations } from './animations';
+import { Sounds } from './sounds';
 
 class Arkian extends Npc {
 
@@ -36,6 +37,9 @@ class Arkian extends Npc {
       anims: Animations.k1(sprite),
       // make entity bigger in size
       scale: 1.4,
+
+      // boss sfx
+      sfx: Sounds.boss(game.audio)
     });
   }
 

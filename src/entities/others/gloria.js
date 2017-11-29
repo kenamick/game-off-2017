@@ -51,6 +51,10 @@ class Gloria extends Actor {
 
     this.animsEvent = this.game.time.events.loop(2000, () => {
       this._sprite.frameName = 'gloria_angry_0' + this.game.rnd.integerInRange(1, 4);
+      // play sfx
+      if (this.game.rnd.integerInRange(0, 10) > 7) {
+        this.game.audio.play(this.game.audio.sfx.npc.gloria.cheer);
+      }
     });
   }
 

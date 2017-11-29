@@ -15,7 +15,7 @@ class Act5 extends GamePlay {
     this.adjustPlayer();
     this.attachHud();
 
-    this.gloria.standAngry();
+    this.gloria.stand();
 
     // reset state
     this.isGoHand = false;
@@ -124,6 +124,10 @@ class Act5 extends GamePlay {
       this.audio.play(this.audio.musics.boss);
       // start barking Dido
       this.dido.stand();
+      this.gloria.standAngry();
+
+      // play sfx - Arkian's laughter
+      this.game.audio.play(this.game.audio.sfx.npc.boss.mock, true);
 
       // spawn enemies every 20 sec. for 5 minutes
       this.spawnTimer = this.game.time.events.repeat(20 * 1000, 15, () => {
@@ -172,6 +176,9 @@ class Act5 extends GamePlay {
           this.game.time.events.add(6000, part2);
         };
         const part2 = () => {
+          // plax sfx
+          this.game.audio.play(this.game.audio.sfx.npc.gloria.win);
+          // play end music
           this.audio.play(this.audio.musics.maintheme);
 
           this.dido.moveTo(this.player, () => this.dido.stand());
@@ -192,6 +199,8 @@ class Act5 extends GamePlay {
         this.player.controlsEnabled = false;
 
         this.game.time.events.add(3000, () => {
+          // play gloria sfx
+          this.game.audio.play(this.game.audio.sfx.npc.gloria.win);
 
           this.specialFx.screenFade(() => {
             // align actors

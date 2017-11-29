@@ -38,6 +38,17 @@ class Audio {
     game.load.audio('dog1', require('./assets/sfx/Dog1.m4a'));
     game.load.audio('dog2', require('./assets/sfx/Dog2.m4a'));
     game.load.audio('dog3', require('./assets/sfx/Dog3.m4a'));
+    game.load.audio('grunt1', require('./assets/sfx/Pain1.m4a'));
+    game.load.audio('grunt2', require('./assets/sfx/Pain2.m4a'));
+    game.load.audio('grunt3', require('./assets/sfx/Pain3.m4a'));
+    game.load.audio('grunt4', require('./assets/sfx/Pain4.m4a'));
+    game.load.audio('grunt5', require('./assets/sfx/Pain5.m4a'));
+    game.load.audio('bossgrunt1', require('./assets/sfx/BossPain1.m4a'));
+    game.load.audio('bossgrunt2', require('./assets/sfx/BossPain2.m4a'));
+    game.load.audio('bossgrunt3', require('./assets/sfx/BossPain3.m4a'));
+    game.load.audio('bosssight', require('./assets/sfx/BossSight.m4a'));
+    game.load.audio('gloriacheer', require('./assets/sfx/GloriaCheer.m4a'));
+    game.load.audio('gloriawin', require('./assets/sfx/GloriaWin.m4a'));
   }
 
   static loadMusic(game, level) {
@@ -111,7 +122,26 @@ class Audio {
           game.add.audio('death2'),
           game.add.audio('death3'),
           game.add.audio('death4')
-        ]
+        ],
+        grunts: [
+          game.add.audio('grunt1'),
+          game.add.audio('grunt2'),
+          game.add.audio('grunt3'),
+          game.add.audio('grunt4'),
+          game.add.audio('grunt5'),
+        ],
+        boss: {
+          grunts: [
+            game.add.audio('bossgrunt1'),
+            game.add.audio('bossgrunt2'),
+            game.add.audio('bossgrunt3'),
+          ],
+          mock: game.add.audio('bosssight')
+        },
+        gloria: {
+          cheer: game.add.audio('gloriacheer'),
+          win: game.add.audio('gloriawin'),
+        }
       },
       breakglass: [
         game.add.audio('breakglass1'),
