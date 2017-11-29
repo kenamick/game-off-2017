@@ -1,13 +1,13 @@
 Game-Off 2017
 ============================
 
-(GAME NAME) is an old school Beat-'em-up game. Get your fighting skills tested by defeating all enemies in this 3 level action game.
+KickPunch is an old school Beat-'em-up game. Get your fighting skills tested by defeating all enemies in this 3 level action game.
 
 It's a beautiful Sunday afternoon. Brian and Gloria Freezby are back in their home town for the weekend and are taking a stroll on Shaker St. together with their dog Dido. Suddenly, they are approached by a group of hooligans blocking their way forwards. One of them, visibly bigger than the others, steps out of the group. It is Brian’s old school rival - Arkian Joel. Arkian does some smack talk and orders a bunch of hooligans to grab Gloria and Dido. He then orders his gang members to take care of the "Brian problem" and leaves.
 
 Brian faces the bad guys in fight and after defeating them continues down on Shaker St. determined to find Arkian and save his wife and dog.
 
-![Kickpunch](https://i.imgur.com/sy4ssuw.png)
+![KickPunch](https://i.imgur.com/sy4ssuw.png)
 
 # Supported Browsers
 
@@ -19,7 +19,7 @@ Brian faces the bad guys in fight and after defeating them continues down on Sha
 
 # Controls
 
-It's time to kick ass and chew bubble gum. :fist: 
+It's time to kick ass and chew bubble gum. :fist:
 
 Ok, ok. There's no bubble gum in this game, ...yet! :smiling_imp:
 
@@ -89,6 +89,6 @@ see [./node_modules/](./node_modules)*%dependency-name%/LICENSE* after their ins
 Assets are under CC BY 4.0 license, if no respective LICENSE file is present in [./src/assets](./src/assets) subdirectories.
 
 ---
-(GAME NAME) is a GitHub [Game Off 2017](https://itch.io/jam/game-off-2017) entry.
+KickPunch is a GitHub [Game Off 2017](https://itch.io/jam/game-off-2017) entry.
 
 ![GitHub Game Off 2017 Game Jam](https://user-images.githubusercontent.com/18125109/31239479-d554f29c-a9c2-11e7-8138-71483d537ca9.gif)

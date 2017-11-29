@@ -43,7 +43,7 @@ class MainMenu extends Renderer {
 
   playIntro(screenCenter) {
     // TODO: add some cool fx when the real game name is set
-    const menuTitle = this.game.add.bitmapText(screenCenter, 24, Globals.bitmapFont, 'GAME NAME', 24);
+    const menuTitle = this.game.add.bitmapText(screenCenter, 30, Globals.bitmapFont, 'KickPunch', 30);
     menuTitle.anchor.setTo(0.5);
   }
 
@@ -69,7 +69,7 @@ class MainMenu extends Renderer {
       this.selectedOption++;
       this.audio.play(this.audio.sfx.hero.punch, 1);
     }
-    else if(this.controls.punch || this.controls.jump || this.controls.kick) 
+    else if(this.controls.punch || this.controls.jump || this.controls.kick)
       this.chooseOption();
 
     if(this.selectedOption < 0)
