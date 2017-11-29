@@ -41,6 +41,17 @@
       border-top: 4px solid rgb(100, 100, 100);
       border-right: 4px solid rgb(150, 150, 150);
       border-bottom: 4px solid rgb(150, 150, 150);
+
+      /* Use nearest neighbor interpolation */
+      /* https://stackoverflow.com/questions/7615009/disable-interpolation-when-scaling-a-canvas */
+      /* https://stackoverflow.com/questions/14068103/disable-antialising-when-scaling-images */
+      image-rendering: optimizeSpeed;             /* Older versions of FF          */
+      image-rendering: -moz-crisp-edges;          /* FF 6.0+                       */
+      image-rendering: -webkit-optimize-contrast; /* Safari                        */
+      image-rendering: -o-crisp-edges;            /* OS X & Windows Opera (12.02+) */
+      image-rendering: crisp-edges;                 /* Awesome future-browsers       */
+      image-rendering: optimize-contrast;         /* CSS3 Proposed                 */
+      -ms-interpolation-mode: nearest-neighbor;   /* IE                            */
     }
   </style>
 </head>
