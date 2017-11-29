@@ -83,7 +83,7 @@ class Hero extends Actor {
 
     // walk body
     this.game.physics.arcade.enable(this._sprite);
-    this._sprite.body.setSize(18, 8, 15, 40);
+    this._sprite.body.setSize(17, 8, 16, 40);
     this._sprite.body.collideWorldBounds = true;
 
     // fight hit boxes
