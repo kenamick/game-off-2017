@@ -49,6 +49,21 @@ class Npc extends Actor {
       isAttacking: false
     };
 
+    // setup difficulty stats
+    // Makes enemies faster and more resilient with each level.
+    if (this.ai.LEVEL > 1) {
+      const aggroInv = this.ai.LEVEL / 10;
+      const aggro = 1.0 + aggroInv;
+
+      this.resetHealth(options.maxHealth * aggro);
+
+      this.ai.SPEED *= aggro;
+      this.ai.DAMAGE *= aggro;
+      this.ai.ATTACK_SPEED -= this.ai.ATTACK_SPEED * aggroInv;
+      this.ai.COOLDOWN -= this.ai.COOLDOWN * aggroInv;
+      this.ai.ENGAGE_TRESHOLD += this.ai.LEVEL;
+    }
+
     // default is always idle
     this.idle = true;
 

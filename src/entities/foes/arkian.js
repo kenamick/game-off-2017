@@ -8,13 +8,13 @@ class Arkian extends Npc {
   constructor(game, sprite, level = 1, options = {}) {
     super(game, sprite, {
       // entity health
-      maxHealth: 100,
+      maxHealth: 500,
       // entity AI behavior & control
       ai: {
         LEVEL: level,
         SPEED: 20,
         DAMAGE: 25,
-        ENGAGE_RANGE: 144 * 144,
+        ENGAGE_RANGE: 136 * 136,
         ATTACK_RANGE: 22 * 22,
         ATTACK_SPEED: 1500, // ms
         COOLDOWN: 1000, // ms

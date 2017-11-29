@@ -536,14 +536,14 @@
                 }, 
                 {
                  "height":48,
-                 "id":66,
+                 "id":67,
                  "name":"arkian",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":48,
-                 "x":114.666666666667,
-                 "y":114.666666666667
+                 "x":1392.33333333333,
+                 "y":154
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -585,8 +585,8 @@
                  "type":"",
                  "visible":true,
                  "width":6.33333,
-                 "x":1242.833335,
-                 "y":96.5001666666667
+                 "x":1257.50000166667,
+                 "y":95.1668333333333
                 }, 
                 {
                  "height":144.333,
@@ -616,7 +616,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":67,
+ "nextobjectid":68,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.0.3",

@@ -55,8 +55,11 @@ class Act2 extends GamePlay {
       this.addDoor(3, 1);
       // spawn enemies
       this._addEnemy(TileMapConsts.ACTORS.K1, 4, 1);
-      this._addEnemy(TileMapConsts.ACTORS.K1, 4, 1, -5, 1);
-      this._addEnemy(TileMapConsts.ACTORS.K1, 4, 1, 4, 2);
+
+      this.game.time.events.add(750, () => 
+        this._addEnemy(TileMapConsts.ACTORS.K1, 4, 1, -5, 1));
+      this.game.time.events.add(1500, () => 
+        this._addEnemy(TileMapConsts.ACTORS.K1, 4, 1, 4, 2));
     }
 
     /**
@@ -69,9 +72,11 @@ class Act2 extends GamePlay {
       this.hotpointsDone += 1;
       // spawn enemies
       this._addEnemy(TileMapConsts.ACTORS.K1, 4, 1, -2);
-      this._addEnemy(TileMapConsts.ACTORS.K1, 4, 1, -4, 4);
-      this._addEnemy(TileMapConsts.ACTORS.P1, 4, 1, 3, 3);
       this._addEnemy(TileMapConsts.ACTORS.K1, 5, 5);
+      this.game.time.events.add(1200, () => {
+        this._addEnemy(TileMapConsts.ACTORS.P1, 4, 1, 3, 3);
+        this._addEnemy(TileMapConsts.ACTORS.K1, 4, 1, -4, 4);
+      });
     }
 
     /**
@@ -85,8 +90,10 @@ class Act2 extends GamePlay {
       this.addDoor(7, 1);
       // spawn enemies
       this._addEnemy(TileMapConsts.ACTORS.P1, 8, 1, -1);
-      this._addEnemy(TileMapConsts.ACTORS.K1, 8, 1, 4, 8);
-      this._addEnemy(TileMapConsts.ACTORS.P1, 8, 1, 5, 2);
+      this.game.time.events.add(2000, () => {
+        this._addEnemy(TileMapConsts.ACTORS.K1, 8, 1, 4, 8);
+        this._addEnemy(TileMapConsts.ACTORS.P1, 8, 1, 5, 2);
+      });
       // behind
       this._addEnemy(TileMapConsts.ACTORS.P1, 6, 5);
       this._addEnemy(TileMapConsts.ACTORS.P1, 5, 3);
@@ -115,7 +122,10 @@ class Act2 extends GamePlay {
       this.addDoor(16, 1);
       // spawn enemies
       this._addEnemy(TileMapConsts.ACTORS.K2, 17, 1, 5, 2);
-      this._addEnemy(TileMapConsts.ACTORS.P1, 17, 1, -3, 4);
+      this.game.time.events.repeat(3000, 3, () => {
+        this._addEnemy(TileMapConsts.ACTORS.P1, 17, 1, -3, 4);
+      });
+      // behind
       this._addEnemy(TileMapConsts.ACTORS.K1, 15, 5);
       this._addEnemy(TileMapConsts.ACTORS.P1, 17, 5);
     }
@@ -131,8 +141,9 @@ class Act2 extends GamePlay {
       this.addDoor(24, 1);
       // spawn enemies
       this._addEnemy(TileMapConsts.ACTORS.K1, 25, 1, 7, 1);
-      this._addEnemy(TileMapConsts.ACTORS.K1, 25, 1, -4, 2);
-      this._addEnemy(TileMapConsts.ACTORS.K1, 25, 1, 1, 1);
+      this.game.time.events.repeat(2500, 3, () => {
+        this._addEnemy(TileMapConsts.ACTORS.K1, 25, 1, -4, 2);
+      });
       // spawn enemies attacking from behind
       this._addEnemy(TileMapConsts.ACTORS.P1, 27, 2);
       this._addEnemy(TileMapConsts.ACTORS.P1, 26, 5);

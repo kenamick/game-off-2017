@@ -100,7 +100,13 @@ class Act5 extends GamePlay {
       // spawn enemies
       this._addEnemy(TileMapConsts.ACTORS.P1, 23, 2, -2);
       this._addEnemy(TileMapConsts.ACTORS.P1, 23, 2, -4, 4);
-      this._addEnemy(TileMapConsts.ACTORS.K1, 23, 2, 3, 3);
+      this.game.time.events.add(5000, () => {
+        this._addEnemy(TileMapConsts.ACTORS.K1, 23, 2, -4, 4);
+        this._addEnemy(TileMapConsts.ACTORS.K1, 23, 2, 3, 3);
+      });
+      this.game.time.events.add(4500, () => {
+        this._addEnemy(TileMapConsts.ACTORS.P1, 24, 5);
+      });
       // behind
       this._addEnemy(TileMapConsts.ACTORS.K2, 24, 5);
     }
@@ -119,8 +125,8 @@ class Act5 extends GamePlay {
       // start barking Dido
       this.dido.stand();
 
-      // spawn enemies every 30 sec. for 5 minutes
-      this.spawnTimer = this.game.time.events.repeat(30 * 1000, 10, () => {
+      // spawn enemies every 20 sec. for 5 minutes
+      this.spawnTimer = this.game.time.events.repeat(20 * 1000, 15, () => {
         if (!this.bossSpawn1) {
           this.bossSpawn1 = 1;
           this.bossSpawn2 = 1;
