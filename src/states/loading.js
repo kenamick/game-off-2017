@@ -23,9 +23,9 @@ class Loading extends Renderer {
     // stop all audios
     const audio = new Audio(this.game);
 
-    if (nextState !== 'act1') {
+    //if (nextState !== 'act1') {
       audio.stop();
-    }
+    //}
 
     // play transition tune
     audio.play(audio.musics.fanfare);
@@ -46,7 +46,11 @@ class Loading extends Renderer {
 
     // load audios
     let nextStateText = '';
-    if(this.nextState == 'act1') {
+    if(this.nextState == 'intro') {
+      Audio.loadMusic(this.game, 'maintheme');
+      nextStateText = 'INTRO';
+    }
+    else if(this.nextState == 'act1') {
       Audio.loadMusic(this.game, 'maintheme');
       nextStateText = 'ACT 1';
     }

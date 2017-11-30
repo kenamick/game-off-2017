@@ -8,13 +8,15 @@ const DialogBoxConsts = {
   LETTER_DELAY: 75, // ms
   LINE_DELAY: 200, // ms
   DIALOG_DELAY: 300, // ms
+  TEXT_SIZE: 12,
 };
 
 class DialogBox {
 
-  constructor(game, dialog) {
+  constructor(game, dialog, listener, startDialog = 0) {
     this.game = game;
     this._dialog = dialog;
+    this._listener = listener;
 
     const boxSprite = this.game.add.graphics();
     boxSprite.beginFill(Phaser.Color.hexToRGB(Globals.palette.bricks2.hex),  1)
@@ -37,12 +39,13 @@ class DialogBox {
 
     // start this dialog box as active
     this.active = true;
-    this._currentDialog = 0;
+    this._currentDialog = startDialog;
   }
 
   destroy() {
     this._boxSprite.destroy();
     this.bitmapText.destroy();
+    this.nameText.destroy();
   }
 
   showMessage() {
@@ -55,14 +58,28 @@ class DialogBox {
 
     this._currentLine = 0;
     this._currentLetter = 0;
-    this.bitmapText = this.game.add.bitmapText(wrapwidth, this._boxSprite.top + 5, Globals.bitmapFont, '', 12);
+    //this.bitmapText = this.game.add.bitmapText(5, this._boxSprite.top + 5, 
+    this.bitmapText = this.game.add.bitmapText(5, this.game.height - 50, 
+      Globals.bitmapFont, '', DialogBoxConsts.TEXT_SIZE);
     this.bitmapText.maxWidth = wrapwidth * 3;
+    this.bitmapText.fixedToCamera = true;
+
+    if (!this.nameText) {
+      // this.nameText = this.game.add.bitmapText(2, this._boxSprite.top - 16, 
+      this.nameText = this.game.add.bitmapText(5, this.game.height - 68, 
+        Globals.bitmapFont, this._name, DialogBoxConsts.TEXT_SIZE - 1);
+      this.nameText.fixedToCamera = true;
+    }
 
     this.nextDialog();
 
     // add controls
     this.controls = new Controls(this.game, true);
 
+  }
+
+  get currentLine() {
+    return this._currentLine;
   }
 
   nextDialog() {
@@ -73,12 +90,22 @@ class DialogBox {
 
     // get current dialog
     const dialog = this._dialog[this._currentDialog];
+    if (this._listener) {
+      this._listener(dialog);
+    }
 
     // reset text from start
     this._currentLine = 0;
 
     // update avatar
     // TODO: update avatar
+
+    // update name
+    this._name = dialog.actor;
+
+    if (this.nameText) {
+      this.nameText.text = this._name;
+    }
 
     this._text = dialog.text;
     this.nextLine();
@@ -105,12 +132,15 @@ class DialogBox {
   }
 
   update() {
-    if(this.controls != null && (this.controls.punch || this.controls.jump)) {
+    if(this.controls != null && 
+      (this.controls.punch || this.controls.jump || this.controls.kick)) {
       // stop current writing
       this.game.time.events.destroy();
 
       // reset text to empty
       this.bitmapText.text = '';
+
+      //this.nameText.text = '';
 
       // go to next line with a little delay
       this._currentLine++;

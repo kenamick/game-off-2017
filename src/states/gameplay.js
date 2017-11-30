@@ -83,14 +83,18 @@ class GamePlay extends Renderer {
     this.hotpoints = {};
   }
 
-  jukebox(music) {
+  jukebox(music, playGo = true) {
     this.audio.stop();
+
     // play level music
     this.audio.play(music);
+
     // play ready sound
-    this.audio.play(this.audio.sfx.go);
-    this.specialFx.textdraw.fadingUp(this.player.sprite.x, 
-      this.player.sprite.y - TileMapConsts.TILE_SIZE * 0.5, 'Go!', 4000);
+    if (playGo) {
+      this.audio.play(this.audio.sfx.go);
+      this.specialFx.textdraw.fadingUp(this.player.sprite.x, 
+        this.player.sprite.y - TileMapConsts.TILE_SIZE * 0.5, 'Go!', 4000);
+    }
   }
 
   goLevel(act) {

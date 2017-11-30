@@ -9,6 +9,7 @@ import {
   Options,
   Credits,
   Loading,
+  Intro,
   Act1,
   Act2,
   Act5,
@@ -26,6 +27,7 @@ window.onload = function () {
   game.state.add('options', Options);
   game.state.add('credits', Credits);
   game.state.add('loading', Loading);
+  game.state.add('intro', Intro);
   game.state.add('act1', Act1);
   game.state.add('act2', Act2);
   game.state.add('act5', Act5);

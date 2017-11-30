@@ -224,10 +224,15 @@ class Hero extends Actor {
       this.stop();
     }
   }
-
+  
   stand() {
     this._sprite.animations.stop();
     this._sprite.frameName = 'hero_stand_01';
+  }
+
+  relax() {
+    this._sprite.animations.stop();
+    this._sprite.frameName = 'hero_walk_01';
   }
 
   faceLeft() {

@@ -40,6 +40,9 @@ class Preloader extends Renderer {
     // load levels
     this.game.load.image('gd-tiles', require('../assets/levels/gd-tileset.png'));
 
+    this.game.load.tilemap('intro',
+      require('file-loader!../assets/levels/intro.json'), null,
+      Phaser.Tilemap.TILED_JSON);
     this.game.load.tilemap('act1',
       require('file-loader!../assets/levels/act1.json'), null,
       Phaser.Tilemap.TILED_JSON);

@@ -1,14 +1,91 @@
 [
   {
-    "character_avatar": "arkian",
-    "text": ["Hey Brian!", "Long time no see you my FRIEND!"]
-  },
-  {
+    "id": 0,
     "character_avatar": "hero",
-    "text": ["Arkian?!", "What are you doing here?", "What do you want?!"]
+    "actor": "Brian",
+    "text": ["Wow!", "We are finally back here Gloria, aren't we?"]
   },
   {
+    "id": 1,
+    "character_avatar": "gloria",
+    "actor": "Gloria",
+    "text": ["Yeah! After all these years, Brian.", 
+      "It's my good old Golden Bay City. Much like I remember it."]
+  },
+  {
+    "id": 2,
+    "character_avatar": "hero",
+    "actor": "Brian",
+    "text": ["Don't you mean much like WE both remember it?", 
+      "We did meet on this very street you know?"]
+  },
+  {
+    "id": 3,
+    "character_avatar": "gloria",
+    "actor": "Gloria",
+    "text": ["Can't say much about that.", "You know what the bars around here do to my memory."]
+  },
+  {
+    "id": 4,
+    "character_avatar": "hero",
+    "actor": "Brian",
+    "text": ["Yeah, that much is true.", "We're married after all."]
+  },
+  {
+    "id": 5,
+    "character_avatar": "gloria",
+    "actor": "Gloria",
+    "text": ["..."]
+  },
+  {
+    "id": 6,
+    "character_avatar": "hero",
+    "actor": "Brian",
+    "text": ["Alright, let's go down on Shaker St. then.", "Let's get some icecream or something.", 
+      "Hey Dido! Stop that boy!", "Who's car is that anyway?"]
+  },
+  {
+    "id": 7,
+    "character_avatar": "dido",
+    "actor": "Dido",
+    "text": ["Woof-woof! [uncaring]"]
+  },
+  {
+    "id": 8,
+    "character_avatar": "thug",
+    "actor": "Thug",
+    "text": ["That's my car asshole!", "Get that mutt off my tires.", "NOW!"]
+  },
+  {
+    "id": 9,
+    "character_avatar": "hero",
+    "actor": "Brian",
+    "text": ["Wow! Take it easy buddy. It's just a dog."]
+  },
+  {
+    "id": 10,
     "character_avatar": "arkian",
-    "text": ["I came back to find my revenge!"]
+    "actor": "Arkian",
+    "text": ["Well, well, well!", "Look what the cat dragged in.", 
+      "Little Brian and a hottie.", "You wanna have some fun with a real gentleman, luv?"]
+  },
+  {
+    "id": 11,
+    "character_avatar": "gloria",
+    "actor": "Gloria",
+    "text": ["Sure thing, creep!", "Where is he?"]
+  },
+  {
+    "id": 12,
+    "character_avatar": "hero",
+    "actor": "Brian",
+    "text": ["Back off, Arkian!", "The old days are over. You have no place on these streets any more."]
+  },
+  {
+    "id": 13,
+    "character_avatar": "arkian",
+    "actor": "Arkian",
+    "text": ["Are they over, Brian?", "I'll take your hottie while you ponder on that."]
   }
+
 ]
