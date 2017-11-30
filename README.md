@@ -1,13 +1,15 @@
-Game-Off 2017
+KickPunch
 ============================
 
-KickPunch is an old school Beat-'em-up game. Get your fighting skills tested by defeating all enemies in this 3 level action game.
+:video_game: [game-off-2017](itch.io/jam/game-off-2017) challenge entry.
+
+KickPunch is an old school Beat-'em-up game. Get your fighting skills tested by defeating all enemies in this three level action game.
 
 It's a beautiful Sunday afternoon. Brian and Gloria Freezby are back in their home town for the weekend and are taking a stroll on Shaker St. together with their dog Dido. Suddenly, they are approached by a group of hooligans blocking their way forwards. One of them, visibly bigger than the others, steps out of the group. It is Brian’s old school rival - Arkian Joel. Arkian does some smack talk and orders a bunch of hooligans to grab Gloria and Dido. He then orders his gang members to take care of the "Brian problem" and leaves.
 
 Brian faces the bad guys in fight and after defeating them continues down on Shaker St. determined to find Arkian and save his wife and dog.
 
-![KickPunch](https://i.imgur.com/sy4ssuw.png)
+![KickPunch](https://i.imgur.com/yL9JkAg.png)
 
 # Supported Browsers
 
