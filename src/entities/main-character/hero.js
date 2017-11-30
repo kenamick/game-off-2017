@@ -35,8 +35,8 @@ class Hero extends Actor {
         ...Phaser.Animation.generateFrameNames('hero_stand_', 3, 2, '', 2),
       ], 8, true),
       walk: anims.add('walk', [
-        ...Phaser.Animation.generateFrameNames('hero_walk_', 1, 4, '', 2),
-        ...Phaser.Animation.generateFrameNames('hero_walk_', 3, 2, '', 2),
+        ...Phaser.Animation.generateFrameNames('hero_walk_', 1, 3, '', 2),
+        'hero_walk_02'
       ], 8, true),
       punch: anims.add('punch', [
         ...Phaser.Animation.generateFrameNames('hero_punch_', 1, 3, '', 2),

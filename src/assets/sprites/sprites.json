@@ -521,14 +521,6 @@
 	"sourceSize": {"w":48,"h":48}
 },
 {
-	"filename": "hero_walk_04",
-	"frame": {"x":192,"y":198,"w":48,"h":48},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":48},
-	"sourceSize": {"w":48,"h":48}
-},
-{
 	"filename": "meatloaf_01",
 	"frame": {"x":0,"y":0,"w":30,"h":16},
 	"rotated": false,
