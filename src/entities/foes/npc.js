@@ -134,9 +134,6 @@ class Npc extends Actor {
     });
 
     this.anims.hit.onComplete.add(() => {
-      // play sfx
-      this.game.audio.play(this.sfx.grunt, true);
-
       // reset the canAttack timer, so animation can be played again in attack()
       this.game.time.events.add(this.ai.COOLDOWN, () => {
         // reset animation frame to start
@@ -272,7 +269,7 @@ class Npc extends Actor {
 
     if (!this.dying && !this.anims.hit.isPlaying) {
       // play sfx
-      // this.game.audio.play(this.sfx.grunt, true);
+      this.game.audio.play(this.sfx.grunt, true);
       // set flag that this NPC attacks atm
       this.ai.canAttack = false;
       this.ai.isHit = true;
