@@ -86,11 +86,21 @@ class Controls {
     return this.pad1.isDown(button);
   }
 
+  _stickMoved(isAxisOverTreshold) {
+    if (this.justPressed) {
+      return false;
+    }
+
+    return isAxisOverTreshold;
+  }
+
   get up () {
     return (
       this._keyPressed(this.keys.ups) ||
       this._padPressed(Phaser.Gamepad.XBOX360_DPAD_UP) ||
-      this.pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < -stickThreshold
+      this._stickMoved(
+        this.pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < -stickThreshold
+      )
     );
   }
 
@@ -98,7 +108,9 @@ class Controls {
     return (
       this._keyPressed(this.keys.downs) ||
       this._padPressed(Phaser.Gamepad.XBOX360_DPAD_DOWN) ||
-      this.pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > stickThreshold
+      this._stickMoved(
+        this.pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > stickThreshold
+      )
     );
   }
 
@@ -106,7 +118,9 @@ class Controls {
     return (
       this._keyPressed(this.keys.lefts) ||
       this._padPressed(Phaser.Gamepad.XBOX360_DPAD_LEFT) ||
-      this.pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -stickThreshold
+      this._stickMoved(
+        this.pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -stickThreshold
+      )
     );
   }
 
@@ -114,7 +128,9 @@ class Controls {
     return (
       this._keyPressed(this.keys.rights) ||
       this._padPressed(Phaser.Gamepad.XBOX360_DPAD_RIGHT) ||
-      this.pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > stickThreshold
+      this._stickMoved(
+        this.pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > stickThreshold
+      )
     );
   }
 
