@@ -3,7 +3,7 @@
     "id": 0,
     "character_avatar": "hero",
     "actor": "Brian",
-    "text": ["Wow!", "We are finally back here Gloria, aren't we?"]
+    "text": ["Hey!", "We are finally back here Gloria, aren't we?"]
   },
   {
     "id": 1,
@@ -29,7 +29,7 @@
     "id": 4,
     "character_avatar": "hero",
     "actor": "Brian",
-    "text": ["Yeah, that much is true.", "We're married after all."]
+    "text": ["Yeah, that much is true.", "We are married after all."]
   },
   {
     "id": 5,

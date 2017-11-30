@@ -36,7 +36,6 @@ class Options extends Renderer {
     leftArrow.angle = -90;
     leftArrow.scale.setTo(0.035);
 
-    console.log(this.game.input.gamepad.pad1.enabled)
     if (this.game.input.gamepad.pad1.connected) {
       const gamePad = this.game.add.bitmapText(this.game.world.width / 3 - 20, 50, Globals.bitmapFont, 'GAMEPAD DETECTED', 12);
       const arrowLegend = this.game.add.bitmapText(this.game.world.width / 3 - 20, 70, Globals.bitmapFont, 'MOVEMENT', 12);
