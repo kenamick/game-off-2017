@@ -51,7 +51,8 @@ class Npc extends Actor {
 
     // setup difficulty stats
     // Makes enemies faster and more resilient with each level.
-    if (this.ai.LEVEL > 1) {
+    if (this.ai.LEVEL > 1 && !options.special) {
+      console.log(this._sprite.name)
       const aggroInv = this.ai.LEVEL / 10;
       const aggro = 1.0 + aggroInv;
 

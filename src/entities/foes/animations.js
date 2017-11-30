@@ -44,6 +44,23 @@ class Animations {
     };
   }
 
+  static get standFrameArkian() {
+    return 'arkian_stand_01';
+  }
+
+  static arkian(sprite) {
+    return {
+      dyingFrame: 'arkian_down_01',
+      stand: sprite.animations.add('stand', Phaser.Animation.generateFrameNames(
+        'arkian_stand_', 1, 3, '', 2), 8, true),
+      walk: sprite.animations.add('walk', Phaser.Animation.generateFrameNames(
+        'arkian_walk_', 1, 6, '', 2), 6, true),
+      hit: sprite.animations.add('hit', ['arkian_hit_01'], 5, false),
+      attack: sprite.animations.add('attack', Phaser.Animation.generateFrameNames(
+        'arkian_punch_', 1, 3, '', 2), 8, false)
+    };
+  }
+
 }
 
 export { Animations };

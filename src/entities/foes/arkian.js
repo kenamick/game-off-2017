@@ -10,13 +10,20 @@ class Arkian extends Npc {
     super(game, sprite, {
       // entity health
       maxHealth: 500,
+
+      // special bosses don't have aggro factors applied on their stats!
+      special: true,
+
+      // make entity bigger in size
+      scale: 1.3,
+
       // entity AI behavior & control
       ai: {
         LEVEL: level,
-        SPEED: 20,
+        SPEED: 25,
         DAMAGE: 25,
         ENGAGE_RANGE: 136 * 136,
-        ATTACK_RANGE: 22 * 22,
+        ATTACK_RANGE: 32 * 32,
         ATTACK_SPEED: 1500, // ms
         COOLDOWN: 70, // ms
         ENGAGE_TRESHOLD: 99, // engage only when no more than X enemies are already engaging
@@ -30,17 +37,28 @@ class Arkian extends Npc {
       collisions: {
         weight: 3,
         torsobody: [12, 22, 9, 9],
-        attackbody: [12, 10, 18, 24],
+        //attackbody: [12, 10, 18, 24],
+        attackbody: [16, 12, 24, 12],
         walkbody: [16, 8, 15, 40]
       },
       // entity specific animations
-      anims: Animations.k1(sprite),
-      // make entity bigger in size
-      scale: 1.4,
+      anims: Animations.arkian(sprite),
 
       // boss sfx
       sfx: Sounds.boss(game.audio)
     });
+  }
+
+  faceRight() {
+    if (this._sprite.scale.x > 0) {
+      this._sprite.scale.x = -this._sprite.scale.x;
+    }
+  }
+
+  faceLeft() {
+    if (this._sprite.scale.x < 0) {
+      this._sprite.scale.x = -this._sprite.scale.x;
+    }
   }
 
   kill() {
