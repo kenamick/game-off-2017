@@ -18,7 +18,7 @@ class Arkian extends Npc {
         ENGAGE_RANGE: 136 * 136,
         ATTACK_RANGE: 22 * 22,
         ATTACK_SPEED: 1500, // ms
-        COOLDOWN: 1000, // ms
+        COOLDOWN: 70, // ms
         ENGAGE_TRESHOLD: 99, // engage only when no more than X enemies are already engaging
 
         // x and y offset to stop before approaching the player
@@ -31,7 +31,7 @@ class Arkian extends Npc {
         weight: 3,
         torsobody: [12, 22, 9, 9],
         attackbody: [12, 10, 18, 24],
-        walkbody: [16, 8, 15, 40] 
+        walkbody: [16, 8, 15, 40]
       },
       // entity specific animations
       anims: Animations.k1(sprite),
@@ -49,7 +49,7 @@ class Arkian extends Npc {
     // play sfx
     this.game.audio.play(this.sfx.death, true);
 
-    // shake the screen 
+    // shake the screen
     this.game.camera.shake(0.01, 250);
 
     // make the player sprite kind of lying on the ground
@@ -59,13 +59,13 @@ class Arkian extends Npc {
     // set dying flag
     // hit collisions check for 'dying' actors should be disabled!
     this._dying = true;
-    
+
     if (this._dyingFrameName) {
       this._sprite.animations.stop();
       this._sprite.frameName = this._dyingFrameName;
     }
 
-    const tween = this.game.add.tween(this._sprite).to({ alpha: 0 }, 
+    const tween = this.game.add.tween(this._sprite).to({ alpha: 0 },
       80, Phaser.Easing.Linear.None , true, 0, 7, true);
 
     //tween.onComplete.add(() => this._sprite.kill());

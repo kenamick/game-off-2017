@@ -11,7 +11,7 @@ const HeroConsts = {
   HEALTH: 100,
   SPEED: 40,
   WEIGHT: 1, // plays a role when player's being knocked back afer being hit
-  KNOCKOUT_TIME: 600, // ms
+  KNOCKOUT_TIME: 500, // ms
   KNOCKBACK_PUNCH: 3, // pixels
   KNOCKBACK_KICK: 10, // pixels
   // types

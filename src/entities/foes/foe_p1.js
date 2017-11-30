@@ -18,7 +18,7 @@ class FoeP1 extends Npc {
         ENGAGE_RANGE: 96 * 96, // default 96 pixels
         ATTACK_RANGE: 20 * 20, // 20 pixels,
         ATTACK_SPEED: 1500, // ms
-        COOLDOWN: 1300, // ms (pause after they get hit)
+        COOLDOWN: 100, // ms (pause after they get hit)
         ENGAGE_TRESHOLD: 5, // engage only when no more than X enemies are already engaging
 
         // x and y offset to stop before approaching the player

@@ -21,7 +21,7 @@ class FoeK2 extends Npc {
         ENGAGE_RANGE: 96 * 96, // default 96 pixels
         ATTACK_RANGE: 22 * 22, // 27 pixels,
         ATTACK_SPEED: 2000, // ms
-        COOLDOWN: 1000, // ms
+        COOLDOWN: 70, // ms
         ENGAGE_TRESHOLD: 5, // engage only when no more than X enemies are already engaging
 
         // x and y offset to stop before approaching the player
@@ -38,7 +38,7 @@ class FoeK2 extends Npc {
         weight: 2,
         torsobody: [12, 22, 9, 9],
         attackbody: [12, 10, 18, 24],
-        walkbody: [16, 8, 15, 40] 
+        walkbody: [16, 8, 15, 40]
       },
 
       // entity specific animations
