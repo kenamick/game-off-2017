@@ -27,6 +27,8 @@ class Intro extends GamePlay {
 
     // init scene
     this.player.relax();
+    this.player.controlsEnabled = false;
+
     for (const actor of this.enemies) {
       actor.sprite.animations.stop();
     }
