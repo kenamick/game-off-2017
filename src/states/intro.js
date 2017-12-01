@@ -17,6 +17,7 @@ class Intro extends GamePlay {
 
     // skip dalogs
     this.skipKey = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
+    this.pad1 = this.game.input.gamepad.pad1;
 
     // reset state
     this.isGoHand = false;
@@ -165,7 +166,10 @@ class Intro extends GamePlay {
   }
 
   update() {
-    if (this.skipKey.justPressed()) {
+    if (
+      this.skipKey.justPressed() ||
+      this.pad1.justPressed(Phaser.Gamepad.XBOX360_START)
+    ) {
       this.goLevel('act1');
     }
 
