@@ -13,7 +13,7 @@ class Intro extends GamePlay {
 
     this.createLevel('intro');
     this.adjustLayers();
-    this.attachHud();
+    //this.attachHud();
 
     // skip dalogs
     this.skipKey = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
