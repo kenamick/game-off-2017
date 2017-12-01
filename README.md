@@ -43,6 +43,7 @@ Here are some hints.
 
 * [Node 8.6.0](https://nodejs.org)
 * [npm 5.5.1](https://www.npmjs.com/package/npm)
+* [Git LFS](https://git-lfs.github.com/)
 
 ### Installation
 
