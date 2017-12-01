@@ -177,7 +177,7 @@
 	"sourceSize": {"w":48,"h":48}
 },
 {
-	"filename": "elite1_kick_01",
+	"filename": "elite1_punch_01",
 	"frame": {"x":192,"y":438,"w":48,"h":48},
 	"rotated": false,
 	"trimmed": false,
@@ -185,7 +185,7 @@
 	"sourceSize": {"w":48,"h":48}
 },
 {
-	"filename": "elite1_kick_02",
+	"filename": "elite1_punch_02",
 	"frame": {"x":96,"y":438,"w":48,"h":48},
 	"rotated": false,
 	"trimmed": false,
@@ -241,7 +241,7 @@
 	"sourceSize": {"w":48,"h":48}
 },
 {
-	"filename": "elite2_punch_01",
+	"filename": "elite2_kick_01",
 	"frame": {"x":96,"y":630,"w":48,"h":48},
 	"rotated": false,
 	"trimmed": false,
@@ -249,7 +249,7 @@
 	"sourceSize": {"w":48,"h":48}
 },
 {
-	"filename": "elite2_punch_02",
+	"filename": "elite2_kick_02",
 	"frame": {"x":144,"y":630,"w":48,"h":48},
 	"rotated": false,
 	"trimmed": false,
@@ -775,6 +775,6 @@
 	"format": "RGBA8888",
 	"size": {"w":240,"h":879},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:b978278540c0e93229c5a7a7fdd0b841:4615c59e738f8a4042af89bada352bf2:1eabdf11f75e3a4fe3147baf7b5be24b$"
+	"smartupdate": "$TexturePacker:SmartUpdate:a27de805ac9c88d08089fec2508b3114:7601883f4a3f1c0ad2171bd3aada0c20:1eabdf11f75e3a4fe3147baf7b5be24b$"
 }
 }
