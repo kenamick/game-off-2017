@@ -10,7 +10,7 @@ It's a beautiful Sunday afternoon. Brian and Gloria Freezby are back in their ho
 
 Brian faces the bad guys in fight and after defeating them continues down on Shaker St. determined to find Arkian and save his wife and dog.
 
-![KickPunch](https://i.imgur.com/yL9JkAg.png)
+![KickPunch](https://i.imgur.com/fDKuk7n.png)
 
 # Supported Browsers
 
