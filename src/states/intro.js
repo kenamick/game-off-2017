@@ -83,6 +83,9 @@ class Intro extends GamePlay {
         if (!this._scriptArkian) {
           this._scriptArkian = true;
 
+          // play sfx - Arkian's laughter
+          this.game.audio.play(this.game.audio.sfx.npc.boss.mock, true);
+
           this.game.camera.follow(null);
 
           this.arkian.faceRight();
