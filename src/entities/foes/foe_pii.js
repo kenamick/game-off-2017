@@ -42,7 +42,7 @@ class FoeP2 extends Npc {
       },
 
       // entity specific animations
-      anims: Animations.p1(sprite),
+      anims: Animations.p2(sprite),
     });
   }
 

@@ -38,10 +38,10 @@ const TileMapConsts = {
     GLORIA: { name: 'gloria', classType: Gloria, frame: 'gloria_stand_01' },
     DIDO: { name: 'dido', classType: Dido, frame: 'dog_stand_01' },
     P1: { name: 'p1', classType: FoeP1, frame: 'foe_stand_01' },
-    P2: { name: 'p2', classType: FoeP2, frame: 'foe_stand_01' },
+    P2: { name: 'p2', classType: FoeP2, frame: 'elite1_stand_01' },
     K1: { name: 'k1', classType: FoeK1, frame: 'foe2_stand_01' },
-    K2: { name: 'k2', classType: FoeK2, frame: 'foe2_stand_01' },
-    ARKIAN: { name: 'arkian', classType: Arkian, frame: 'foe2_stand_01' },
+    K2: { name: 'k2', classType: FoeK2, frame: 'elite2_stand_01' },
+    ARKIAN: { name: 'arkian', classType: Arkian, frame: 'arkian_stand_01' },
   }
 };
 
@@ -92,7 +92,7 @@ class GamePlay extends Renderer {
     // play ready sound
     if (playGo) {
       this.audio.play(this.audio.sfx.go);
-      this.specialFx.textdraw.fadingUp(this.player.sprite.x, 
+      this.specialFx.textdraw.fadingUp(this.player.sprite.x,
         this.player.sprite.y - TileMapConsts.TILE_SIZE * 0.5, 'Go!', 4000);
     }
   }
@@ -203,7 +203,7 @@ class GamePlay extends Renderer {
     // define foods physics bodies
     for (const sprite of this.collectables) {
       if (sprite.name.indexOf('food') > -1) {
-        sprite.body.setSize(sprite.width - 4, sprite.height * 0.6, 
+        sprite.body.setSize(sprite.width - 4, sprite.height * 0.6,
           2, sprite.height * 0.4);
       }
     }
