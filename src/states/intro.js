@@ -15,6 +15,9 @@ class Intro extends GamePlay {
     this.adjustLayers();
     this.attachHud();
 
+    // skip dalogs
+    this.skipKey = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
+
     // reset state
     this.isGoHand = false;
 
@@ -63,7 +66,7 @@ class Intro extends GamePlay {
           this._scriptBrian1 = true;
 
           this.game.camera.follow(null);
-          this.game.camera.focusOn(this.player.sprite);
+          this.game.camera.focusOn(this.dido.sprite);
             
           // reset dialog box
           this.dialogBox.destroy();
@@ -162,7 +165,7 @@ class Intro extends GamePlay {
   }
 
   update() {
-    if (this.controls.kick) {
+    if (this.skipKey.justPressed()) {
       this.goLevel('act1');
     }
 

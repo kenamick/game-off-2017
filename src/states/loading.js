@@ -28,7 +28,9 @@ class Loading extends Renderer {
     //}
 
     // play transition tune
-    audio.play(audio.musics.fanfare);
+    if (nextState !== 'intro') {
+      audio.play(audio.musics.fanfare);
+    }
 
     this.audio = audio;
   }
@@ -77,6 +79,13 @@ class Loading extends Renderer {
     this.text.anchor.setTo(0.5);
 
     this.timer.start();
+
+    // skip dialogs tex
+    if (this.nextState === 'intro') {
+      const leaveText = this.game.add.bitmapText(this.game.world.centerX, 155, Globals.bitmapFont, '(Press ESC key to skip intro)', 9);
+      leaveText.anchor.setTo(0.5);
+      leaveText.alpha = 1;
+    }
   }
 
   update() {
@@ -90,11 +99,13 @@ class Loading extends Renderer {
   }
 
   loadComplete() {
-    const skipText = this.game.add.bitmapText(this.game.world.width - 16, this.game.world.height - 16, Globals.bitmapFont, 'SKIP', 12);
-    skipText.anchor.setTo(1);
-    skipText.alpha = 0;
+    if (this.nextState !== 'intro') {
+      const skipText = this.game.add.bitmapText(this.game.world.width - 16, this.game.world.height - 16, Globals.bitmapFont, 'SKIP', 12);
+      skipText.anchor.setTo(1);
+      skipText.alpha = 0;
 
-    this.game.add.tween(skipText).to({ alpha: 1 }, 1000, Phaser.Easing.Linear.None, true, 0, -1, true);
+      this.game.add.tween(skipText).to({ alpha: 1 }, 1000, Phaser.Easing.Linear.None, true, 0, -1, true);
+    }
 
     this.controls = new Controls(this.game, true);
 

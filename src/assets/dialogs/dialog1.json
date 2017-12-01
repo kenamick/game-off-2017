@@ -17,7 +17,7 @@
     "character_avatar": "hero",
     "actor": "Brian",
     "text": ["Don't you mean much like WE both remember it?", 
-      "We did meet on this very street you know?"]
+      "We did meet on this very street, you know?"]
   },
   {
     "id": 3,
@@ -29,7 +29,7 @@
     "id": 4,
     "character_avatar": "hero",
     "actor": "Brian",
-    "text": ["Yeah, that much is true.", "We are married after all."]
+    "text": ["Yeah, that's true.", "We are married after all."]
   },
   {
     "id": 5,
@@ -41,7 +41,8 @@
     "id": 6,
     "character_avatar": "hero",
     "actor": "Brian",
-    "text": ["Alright, let's go down on Shaker St. then.", "Let's get some icecream or something.", 
+    "text": ["Alright, let's go down on Shaker St. then.", 
+      "Let's get some icecream or something.", 
       "Hey Dido! Stop that boy!", "Whose car is that anyway?"]
   },
   {
@@ -54,26 +55,26 @@
     "id": 8,
     "character_avatar": "thug",
     "actor": "Thug",
-    "text": ["That's my car asshole!", "Get that mutt off my tires.", "NOW!"]
+    "text": ["That's my car you moron!", "Get that mutt off my tires. NOW!"]
   },
   {
     "id": 9,
     "character_avatar": "hero",
     "actor": "Brian",
-    "text": ["Wow! Take it easy buddy. It's just a dog."]
+    "text": ["Wow! Take it easy buddy. He means no harm."]
   },
   {
     "id": 10,
     "character_avatar": "arkian",
     "actor": "Arkian",
-    "text": ["Well, well, well!", "Look what the cat dragged in.", 
-      "Little Brian and a hottie.", "You wanna have some fun with a real gentleman, luv?"]
+    "text": ["Well, well, well! Look what the cat dragged in.", 
+      "Little Brian and a hottie!", "You wanna have some fun with a real gentleman, luv?"]
   },
   {
     "id": 11,
     "character_avatar": "gloria",
     "actor": "Gloria",
-    "text": ["Sure thing, creep!", "Where is he?"]
+    "text": ["Sure thing, creep.", "Where is he?"]
   },
   {
     "id": 12,
@@ -85,7 +86,7 @@
     "id": 13,
     "character_avatar": "arkian",
     "actor": "Arkian",
-    "text": ["Are they over, Brian?", "I'll take your hottie while you ponder on that."]
+    "text": ["Are they over, Brian?", "I'll show your hottie a good time while you ponder on that."]
   }
 
 ]
