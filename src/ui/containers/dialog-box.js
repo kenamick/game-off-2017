@@ -19,7 +19,7 @@ class DialogBox {
     this._listener = listener;
 
     const boxSprite = this.game.add.graphics();
-    boxSprite.beginFill(Phaser.Color.hexToRGB(Globals.palette.bricks2.hex),  1)
+    boxSprite.beginFill(Phaser.Color.hexToRGB(Globals.palette.background.hex),  1)
              .lineStyle(3, Phaser.Color.hexToRGB(Globals.palette.bricks1.hex), 1)
              .drawRect(0, 0, game.width - 3, game.height / 3)
              .endFill();
@@ -71,10 +71,10 @@ class DialogBox {
       this.nameText.fixedToCamera = true;
     }
 
-    this.skipTip = this.game.add.bitmapText(this.game.width - 2, 2,
-      Globals.bitmapFont, 'Punch or Kick - next\nESC or Start - skip', DialogBoxConsts.TEXT_SIZE - 4);
-    this.skipTip.fixedToCamera = true;
-    this.skipTip.anchor.setTo(1, 0);
+    // this.skipTip = this.game.add.bitmapText(this.game.width - 2, 2,
+    //   Globals.bitmapFont, 'PUNCH/KICK - NEXT\nESC/START - SKIP', 6);
+    // this.skipTip.fixedToCamera = true;
+    // this.skipTip.anchor.setTo(1, 0);
 
     this.nextDialog();
 
