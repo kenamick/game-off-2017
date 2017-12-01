@@ -25,22 +25,48 @@ class Animations {
         'foe_attack_', 1, 3, '', 2), 8, false)
     };
   }
-  
+
+  static p2(sprite) {
+    return {
+      dyingFrame: 'foe_hit_02',
+      stand: sprite.animations.add('stand', Phaser.Animation.generateFrameNames(
+        'foe_stand_', 1, 4, '', 2), 8, true),
+      walk: sprite.animations.add('walk', Phaser.Animation.generateFrameNames(
+        'foe_walk_', 1, 4, '', 2), 6, true),
+      hit: sprite.animations.add('hit', Phaser.Animation.generateFrameNames(
+        'foe_hit_', 1, 2, '', 2), 5, false),
+      attack: sprite.animations.add('attack', Phaser.Animation.generateFrameNames(
+        'foe_attack_', 1, 3, '', 2), 8, false)
+    };
+  }
+
   static get standFrameK1() {
     return 'foe2_stand_01';
   }
 
   static k1(sprite) {
     return {
-      dyingFrame: 'foe2_hit_02',
+      dyingFrame: 'elite1_hit_01',
       stand: sprite.animations.add('stand', Phaser.Animation.generateFrameNames(
-        'foe2_stand_', 1, 4, '', 2), 8, true),
+        'elite1_stand_', 1, 3, '', 2), 8, true),
       walk: sprite.animations.add('walk', Phaser.Animation.generateFrameNames(
-        'foe2_walk_', 1, 4, '', 2), 6, true),
-      hit: sprite.animations.add('hit', Phaser.Animation.generateFrameNames(
-        'foe2_hit_', 1, 2, '', 2), 5, false),
+        'elite1_walk_', 1, 2, '', 2), 6, true),
+      hit: sprite.animations.add('hit', ['elite1_hit_01'], 5, false),
       attack: sprite.animations.add('attack', Phaser.Animation.generateFrameNames(
-        'foe2_attack_', 1, 3, '', 2), 8, false)
+        'elite1_kick_', 1, 2, '', 2), 8, false)
+    };
+  }
+
+  static k2(sprite) {
+    return {
+      dyingFrame: 'elite2_hit_01',
+      stand: sprite.animations.add('stand', Phaser.Animation.generateFrameNames(
+        'elite2_stand_', 1, 3, '', 2), 8, true),
+      walk: sprite.animations.add('walk', Phaser.Animation.generateFrameNames(
+        'elite2_walk_', 1, 2, '', 2), 6, true),
+      hit: sprite.animations.add('hit', ['elite2_hit_01'], 5, false),
+      attack: sprite.animations.add('attack', Phaser.Animation.generateFrameNames(
+        'elite2_punch_', 1, 2, '', 2), 8, false)
     };
   }
 
@@ -50,14 +76,14 @@ class Animations {
 
   static arkian(sprite) {
     return {
-      dyingFrame: 'arkian_down_01',
+      dyingFrame: 'arkian_hit_02',
       stand: sprite.animations.add('stand', Phaser.Animation.generateFrameNames(
         'arkian_stand_', 1, 3, '', 2), 8, true),
       walk: sprite.animations.add('walk', Phaser.Animation.generateFrameNames(
-        'arkian_walk_', 1, 6, '', 2), 6, true),
+        'arkian_walk_', 1, 2, '', 2), 6, true),
       hit: sprite.animations.add('hit', ['arkian_hit_01'], 5, false),
       attack: sprite.animations.add('attack', Phaser.Animation.generateFrameNames(
-        'arkian_punch_', 1, 3, '', 2), 8, false)
+        'arkian_punch_', 1, 2, '', 2), 8, false)
     };
   }
 
