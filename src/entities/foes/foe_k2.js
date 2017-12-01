@@ -36,9 +36,9 @@ class FoeK2 extends Npc {
       // AABB walking collision boxes
       collisions: {
         weight: 2,
-        torsobody: [14, 22, 9, 9],
-        attackbody: [14, 10, 22, 11],
-        walkbody: [20, 8, 14, 39]
+        torsobody: [12, 22, 9, 9],
+        attackbody: [18, 12, 16, 20],
+        walkbody: [17, 8, 14, 40]
       },
 
       // entity specific animations
