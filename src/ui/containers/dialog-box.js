@@ -58,18 +58,23 @@ class DialogBox {
 
     this._currentLine = 0;
     this._currentLetter = 0;
-    //this.bitmapText = this.game.add.bitmapText(5, this._boxSprite.top + 5, 
-    this.bitmapText = this.game.add.bitmapText(5, this.game.height - 50, 
+    //this.bitmapText = this.game.add.bitmapText(5, this._boxSprite.top + 5,
+    this.bitmapText = this.game.add.bitmapText(5, this.game.height - 50,
       Globals.bitmapFont, '', DialogBoxConsts.TEXT_SIZE);
     this.bitmapText.maxWidth = wrapwidth * 3;
     this.bitmapText.fixedToCamera = true;
 
     if (!this.nameText) {
-      // this.nameText = this.game.add.bitmapText(2, this._boxSprite.top - 16, 
-      this.nameText = this.game.add.bitmapText(5, this.game.height - 68, 
+      // this.nameText = this.game.add.bitmapText(2, this._boxSprite.top - 16,
+      this.nameText = this.game.add.bitmapText(5, this.game.height - 68,
         Globals.bitmapFont, this._name, DialogBoxConsts.TEXT_SIZE - 1);
       this.nameText.fixedToCamera = true;
     }
+
+    this.skipTip = this.game.add.bitmapText(this.game.width - 2, 2,
+      Globals.bitmapFont, 'Punch or Kick - next\nESC or Start - skip', DialogBoxConsts.TEXT_SIZE - 4);
+    this.skipTip.fixedToCamera = true;
+    this.skipTip.anchor.setTo(1, 0);
 
     this.nextDialog();
 
@@ -132,7 +137,7 @@ class DialogBox {
   }
 
   update() {
-    if(this.controls != null && 
+    if(this.controls != null &&
       (this.controls.punch || this.controls.jump || this.controls.kick)) {
       // stop current writing
       this.game.time.events.destroy();

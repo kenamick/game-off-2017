@@ -53,11 +53,11 @@ class Intro extends GamePlay {
 
           this.game.camera.follow(null);
           this.game.camera.focusOn(this.enemies[0].sprite);
-          
+
           // reset dialog box
           this.dialogBox.destroy();
-          this.dialogBox = new DialogBox(this.game, 
-            this.game.cache.getJSON('dialog1'), 
+          this.dialogBox = new DialogBox(this.game,
+            this.game.cache.getJSON('dialog1'),
             this._dialogEvents, 8);
         }
       break;
@@ -68,11 +68,11 @@ class Intro extends GamePlay {
 
           this.game.camera.follow(null);
           this.game.camera.focusOn(this.dido.sprite);
-            
+
           // reset dialog box
           this.dialogBox.destroy();
-          this.dialogBox = new DialogBox(this.game, 
-            this.game.cache.getJSON('dialog1'), 
+          this.dialogBox = new DialogBox(this.game,
+            this.game.cache.getJSON('dialog1'),
             this._dialogEvents, 9);
         }
       break;
@@ -102,8 +102,8 @@ class Intro extends GamePlay {
 
           // reset dialog box
           this.dialogBox.destroy();
-          this.dialogBox = new DialogBox(this.game, 
-            this.game.cache.getJSON('dialog1'), 
+          this.dialogBox = new DialogBox(this.game,
+            this.game.cache.getJSON('dialog1'),
             this._dialogEvents, 10);
         }
       break;
@@ -113,11 +113,11 @@ class Intro extends GamePlay {
           this._scriptGloria1 = true;
 
           this.game.camera.focusOn(this.gloria.sprite);
-            
+
           // reset dialog box
           this.dialogBox.destroy();
-          this.dialogBox = new DialogBox(this.game, 
-            this.game.cache.getJSON('dialog1'), 
+          this.dialogBox = new DialogBox(this.game,
+            this.game.cache.getJSON('dialog1'),
             this._dialogEvents, 11);
         }
       break;
@@ -127,11 +127,11 @@ class Intro extends GamePlay {
           this._scriptBrian2 = true;
 
           this.game.camera.focusOn(this.player.sprite);
-            
+
           // reset dialog box
           this.dialogBox.destroy();
-          this.dialogBox = new DialogBox(this.game, 
-            this.game.cache.getJSON('dialog1'), 
+          this.dialogBox = new DialogBox(this.game,
+            this.game.cache.getJSON('dialog1'),
             this._dialogEvents, 12);
         }
       break;
@@ -141,11 +141,11 @@ class Intro extends GamePlay {
           this._scriptArkian2 = true;
 
           this.game.camera.focusOn(this.arkian.sprite);
-            
+
           // reset dialog box
           this.dialogBox.destroy();
-          this.dialogBox = new DialogBox(this.game, 
-            this.game.cache.getJSON('dialog1'), 
+          this.dialogBox = new DialogBox(this.game,
+            this.game.cache.getJSON('dialog1'),
             this._dialogEvents, 13);
         }
       break;
@@ -155,10 +155,10 @@ class Intro extends GamePlay {
 
   _addEnemy(type, tx, ty, offsetX = 0, offsetY = 0) {
     const halfSize = TileMapConsts.TILE_SIZE * 0.5;
-    this.spawnEnemy(type, 
-      TileMapConsts.pos(tx) - halfSize + offsetX, 
-      TileMapConsts.pos(ty) + halfSize + offsetY, 
-      this.level, 
+    this.spawnEnemy(type,
+      TileMapConsts.pos(tx) - halfSize + offsetX,
+      TileMapConsts.pos(ty) + halfSize + offsetY,
+      this.level,
       // engage from far away
       {
         ai: { ENGAGE_RANGE: 1000 * 1000 }

@@ -69,7 +69,7 @@ class Loading extends Renderer {
     }
 
     // add text to screen
-    const stateText = this.game.add.bitmapText(this.game.world.centerX, 
+    const stateText = this.game.add.bitmapText(this.game.world.centerX,
       this.game.world.centerY - 48, Globals.bitmapFont, nextStateText, 24);
     stateText.anchor.setTo(0.5);
     stateText.scale.setTo(0);
@@ -79,13 +79,6 @@ class Loading extends Renderer {
     this.text.anchor.setTo(0.5);
 
     this.timer.start();
-
-    // skip dialogs tex
-    if (this.nextState === 'intro') {
-      const leaveText = this.game.add.bitmapText(this.game.world.centerX, 155, Globals.bitmapFont, '(Press ESC key to skip intro)', 9);
-      leaveText.anchor.setTo(0.5);
-      leaveText.alpha = 1;
-    }
   }
 
   update() {
@@ -99,13 +92,11 @@ class Loading extends Renderer {
   }
 
   loadComplete() {
-    if (this.nextState !== 'intro') {
-      const skipText = this.game.add.bitmapText(this.game.world.width - 16, this.game.world.height - 16, Globals.bitmapFont, 'SKIP', 12);
-      skipText.anchor.setTo(1);
-      skipText.alpha = 0;
+    const skipText = this.game.add.bitmapText(this.game.world.width - 8, this.game.world.height - 8, Globals.bitmapFont, 'Punch or Kick - SKIP', 12);
+    skipText.anchor.setTo(1);
+    skipText.alpha = 0;
 
-      this.game.add.tween(skipText).to({ alpha: 1 }, 1000, Phaser.Easing.Linear.None, true, 0, -1, true);
-    }
+    this.game.add.tween(skipText).to({ alpha: 1 }, 1000, Phaser.Easing.Linear.None, true, 0, -1, true);
 
     this.controls = new Controls(this.game, true);
 
