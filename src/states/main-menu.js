@@ -45,6 +45,8 @@ class MainMenu extends Renderer {
     // TODO: add some cool fx when the real game name is set
     const menuTitle = this.game.add.bitmapText(screenCenter, 30, Globals.bitmapFont, 'KickPunch', 30);
     menuTitle.anchor.setTo(0.5);
+    menuTitle.right = 0;
+    this.game.add.tween(menuTitle).to({ x: screenCenter }, 2000, Phaser.Easing.Bounce.Out, true);
   }
 
   update() {
