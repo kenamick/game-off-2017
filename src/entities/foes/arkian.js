@@ -15,7 +15,7 @@ class Arkian extends Npc {
       special: true,
 
       // make entity bigger in size
-      scale: 1.3,
+      scale: 1,
 
       // entity AI behavior & control
       ai: {
@@ -36,10 +36,9 @@ class Arkian extends Npc {
       // AABB walking collision boxes
       collisions: {
         weight: 3,
-        torsobody: [12, 22, 9, 9],
-        //attackbody: [12, 10, 18, 24],
-        attackbody: [16, 12, 24, 12],
-        walkbody: [16, 8, 15, 40]
+        torsobody: [16, 23, 8, 6],
+        attackbody: [20, 12, 20, 8],
+        walkbody: [22, 8, 15, 40]
       },
       // entity specific animations
       anims: Animations.arkian(sprite),

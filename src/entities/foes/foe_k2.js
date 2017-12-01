@@ -11,7 +11,7 @@ class FoeK2 extends Npc {
       maxHealth: 70,
 
       // make entity bigger in size
-      scale: 1.25,
+      scale: 1,
 
       // entity AI behavior & control
       ai: {
@@ -36,9 +36,9 @@ class FoeK2 extends Npc {
       // AABB walking collision boxes
       collisions: {
         weight: 2,
-        torsobody: [12, 22, 9, 9],
-        attackbody: [12, 10, 18, 24],
-        walkbody: [16, 8, 15, 40]
+        torsobody: [14, 22, 9, 9],
+        attackbody: [14, 10, 22, 11],
+        walkbody: [20, 8, 14, 39]
       },
 
       // entity specific animations

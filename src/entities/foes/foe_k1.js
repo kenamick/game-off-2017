@@ -34,8 +34,8 @@ class FoeK1 extends Npc {
       collisions: {
         weight: 1,
         torsobody: [12, 22, 9, 9],
-        attackbody: [12, 10, 18, 24],
-        walkbody: [16, 8, 15, 40]
+        attackbody: [16, 12, 18, 20],
+        walkbody: [17, 8, 14, 40]
       },
 
       // entity specific animations

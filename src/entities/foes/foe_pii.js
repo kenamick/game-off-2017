@@ -11,7 +11,7 @@ class FoeP2 extends Npc {
       maxHealth: 60,
 
       // make entity bigger in size
-      scale: 1.25,
+      scale: 1.05,
 
       // entity AI behavior & control
       ai: {
