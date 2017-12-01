@@ -27,9 +27,9 @@ It's time to kick ass and chew bubble gum. :fist:
 Ok, ok. There's no bubble gum in this game, ...yet! :smiling_imp:
 
   * :video_game: *Use the Gamepad Luke!* No seriously, the game can be played with a gamepad (xinput), so go ahead and try it.
-  * :running: `Arrow Keys` or `WASD` keys to move.
-  * :facepunch: Press `H`, `O` or `Enter` to punch.
-  * :rage3: Press `J`, `P` or `Backspace` to kick.
+  * :running: `D-Pad`, `Left Stick`, `Arrow Keys` or `WASD` keys to move.
+  * :facepunch: Press `X (xbox)`, `H`, `O` or `Enter` to punch.
+  * :rage3: Press `A (xbox)`, `J`, `P` or `Backspace` to kick.
 
 Here are some hints.
 
