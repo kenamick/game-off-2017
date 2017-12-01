@@ -92,16 +92,20 @@ class Loading extends Renderer {
   }
 
   loadComplete() {
-    const skipText = this.game.add.bitmapText(this.game.world.width - 8, this.game.world.height - 8, Globals.bitmapFont, 'Punch or Kick - SKIP', 12);
-    skipText.anchor.setTo(1);
+    const skipText = this.game.add.bitmapText(this.game.world.centerX, 
+      this.game.world.height - 8, 
+      Globals.bitmapFont, 'Press Punch or Kick to skip', 12);
+    skipText.anchor.setTo(0.5);
     skipText.alpha = 0;
 
     this.game.add.tween(skipText).to({ alpha: 1 }, 1000, Phaser.Easing.Linear.None, true, 0, -1, true);
 
     this.controls = new Controls(this.game, true);
 
-    // ready to go
-    this.game.time.events.add(3000, () => this.audio.play(this.audio.sfx.ready));
+    if (this.nextState !== 'intro') {
+      // ready to go
+      this.game.time.events.add(3000, () => this.audio.play(this.audio.sfx.ready));
+    }
   }
 
   changeState() {

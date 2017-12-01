@@ -53,7 +53,8 @@ class GameOver extends Renderer {
         Phaser.Easing.Linear.None, true, 0, 0, false);
 
       // leave text
-      const leaveText = this.game.add.bitmapText(this.game.world.centerX, 155, Globals.bitmapFont, '(Press Punch key to continue)', 8);
+      const leaveText = this.game.add.bitmapText(this.game.world.centerX, 155, 
+        Globals.bitmapFont, '(Press Punch to continue)', 8);
       leaveText.anchor.setTo(0.5);
       leaveText.alpha = 0;
 
