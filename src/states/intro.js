@@ -26,8 +26,8 @@ class Intro extends GamePlay {
     this.jukebox(this.audio.musics.maintheme, false);
 
     // init scene
-    this.player.relax();
     this.player.controlsEnabled = false;
+    this.player.relax();
 
     for (const actor of this.enemies) {
       actor.sprite.animations.stop();
