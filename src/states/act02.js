@@ -176,8 +176,11 @@ class Act2 extends GamePlay {
         // door opens
         this.addDoor(27, 1);
       } else if (this.isGoHand && this.player.sprite.x > TileMapConsts.pos(27)) {
-        // hide signal hand, if pass the exit door
-        this.playerHud.hideThisWay();
+        // fix pointer direction to level exit
+        this.playerHud.thisWay.faceLeft();
+      } else if (this.isGoHand && this.player.sprite.x < TileMapConsts.pos(27)) {
+        // fix pointer direction to level exit
+        this.playerHud.thisWay.faceRight();
       }
 
       // warp dat dude

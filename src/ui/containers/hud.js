@@ -16,8 +16,13 @@ class Hud {
     this._healthbar = new HealthBar(game, sprite, options);
   }
 
-  showThisWay() {
+  get thisWay() {
+    return this.hand;
+  }
+
+  showThisWay(actor) {
     this.hand = new GoHand(this.game);
+    return this.hand;
   }
 
   hideThisWay() {

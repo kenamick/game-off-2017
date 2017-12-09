@@ -5,8 +5,8 @@ import SpecialFx from '../../specialfx';
 class GoHand {
 
   constructor(game) {
-    this.hand = new SpecialFx(game).signals.hand(game.width - 25, 15, 'right');
-    this.hand.fixedToCamera = true;
+    this._sprite = new SpecialFx(game).signals.hand(game.width - 25, 15, 'right');
+    this._sprite.fixedToCamera = true;
 
     // play sfx
     game.time.events.loop(800, () => {
@@ -17,7 +17,19 @@ class GoHand {
   }
 
   get sprite() {
-    return this.hand;
+    return this._sprite;
+  }
+
+  faceLeft() {
+    if (this._sprite.scale.y > 0) {
+      this._sprite.scale.y = -this._sprite.scale.y;
+    }
+  }
+
+  faceRight() {
+    if (this._sprite.scale.y < 0) {
+      this._sprite.scale.y = -this._sprite.scale.y;
+    }
   }
 
 }
