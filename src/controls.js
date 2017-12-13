@@ -59,6 +59,7 @@ class Controls {
         hurtHero: game.input.keyboard.addKey(Phaser.Keyboard.N),
         healHero: game.input.keyboard.addKey(Phaser.Keyboard.M),
         showDialog: game.input.keyboard.addKey(Phaser.Keyboard.Q),
+        makeRain: game.input.keyboard.addKey(Phaser.Keyboard.R),
       };
     }
   }

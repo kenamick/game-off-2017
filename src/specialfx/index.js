@@ -2,6 +2,7 @@
 
 import TextDraw from './textdraw';
 import Signals from './signals';
+import Weather from './weather';
 
 class SpecialFx {
 
@@ -9,6 +10,7 @@ class SpecialFx {
     this.game = game;
     this._textdraw = new TextDraw(game);
     this._signals = new Signals(game);
+    this._weather = new Weather(game);
   }
 
   screenFade(callback, time = 1500) {
@@ -29,6 +31,10 @@ class SpecialFx {
 
   get signals() {
     return this._signals;
+  }
+
+  get weather() {
+    return this._weather;
   }
 
 }

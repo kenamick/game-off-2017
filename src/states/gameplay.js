@@ -457,6 +457,8 @@ class GamePlay extends Renderer {
           },
         ];
         this.dialogBox = new DialogBox(this.game, dialog);
+      } else if(this.controls.debug('makeRain')) {
+        this.specialFx.weather.addRain();
       }
     }
   }
