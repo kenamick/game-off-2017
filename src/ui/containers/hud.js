@@ -8,10 +8,12 @@ class Hud {
   constructor(game, sprite) {
     this.game = game;
 
+    // create health bar
     const options = {
         x: 10,
         y: 10,
-        fixedToCamera: true
+        fixedToCamera: true,
+        visible: true
     };
     this._healthbar = new HealthBar(game, sprite, options);
   }

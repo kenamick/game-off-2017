@@ -1,4 +1,5 @@
 // npc.js - Base Foe NPC routines
+import HealthBar from '../../ui/components/health-bar';
 import Globals from '../../globals';
 import Actor from '../actor';
 import { Sounds } from './sounds';
@@ -24,6 +25,13 @@ class Npc extends Actor {
     this.faceLeft();
 
     this.resetHealth(options.maxHealth);
+
+    // create health bar
+    const healthBarOptions = {
+        width: 20,
+        height: 2,
+    };
+    this._healthbar = new HealthBar(game, sprite, healthBarOptions);
 
     // binds all foe animation frames
     this.anims = options.anims;
@@ -302,6 +310,9 @@ class Npc extends Actor {
   }
 
   update(player, engaging) {
+    // update foe's health bar
+    this._healthbar.update();
+
     if (!super.update()) {
       // stop movement, but don't play stand animation
       // this is usually the case when this actor's dying
@@ -341,8 +352,11 @@ class Npc extends Actor {
         this.attack(player);
       break;
 
-      case AIStates.IDLE:
       case AIStates.HIT:
+        this._healthbar.visible = true;
+      break;
+
+      case AIStates.IDLE:
       case AIStates.DEAD:
       default:
         // Doh! Do nothing. Stay there like a goon.
