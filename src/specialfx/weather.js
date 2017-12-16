@@ -11,7 +11,7 @@ class Weather {
   addRain() {
     const raindropSprite = this.game.add.graphics();
     raindropSprite.beginFill(Phaser.Color.hexToRGB(Globals.palette.sky.hex), 1)
-             .drawRect(0, 0, 6, 20)
+             .drawRect(0, 0, 4, 45)
              .endFill();
 
     const raindropTexture = raindropSprite.generateTexture();
@@ -31,9 +31,7 @@ class Weather {
     this.emitter.minRotation = 0;
     this.emitter.maxRotation = 0;
 
-    this.emitter.flow(2000, 5, 5, -1);
-
-    //this.emitter.fixedToCamera = true;
+    this.emitter.flow(1100, 5, 5, -1);
   }
 
 }
