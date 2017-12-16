@@ -154,6 +154,12 @@ class Npc extends Actor {
         // go to idle mode as soon as animation ends
         this.idle = true;
       });
+
+      // hides npc health status after 3 seconds
+      this.game.time.events.add(3000, () => {
+        this._healthbar.visible = false;
+      });
+
     });
   }
 
