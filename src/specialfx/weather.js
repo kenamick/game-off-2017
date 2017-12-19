@@ -10,8 +10,7 @@ class Weather {
 
   addRain() {
     if (this.emitter) {
-      // this.emitter.revive();
-      this.emitter.flow(1100, 5, 5, -1);
+      this.emitter.on = true;
     } else {
       const raindropSprite = this.game.add.graphics();
       raindropSprite.beginFill(Phaser.Color.hexToRGB(Globals.palette.sky.hex), 1)
@@ -41,7 +40,7 @@ class Weather {
 
   stopRain() {
     if (this.emitter) {
-      this.emitter.kill();
+      this.emitter.on = false;
     }
   }
 
