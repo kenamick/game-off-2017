@@ -97,6 +97,8 @@ class Act5 extends GamePlay {
       this.player.sprite.x > this.hotpoints.hotpoint2.x) {
       this.hotpoints.hotpoint2.active = true;
       this.hotpointsDone += 1;
+      // it's raining
+      this.specialFx.weather.addRain();
       // spawn enemies
       this._addEnemy(TileMapConsts.ACTORS.P1, 23, 2, -2);
       this._addEnemy(TileMapConsts.ACTORS.P1, 23, 2, -4, 4);
@@ -158,6 +160,7 @@ class Act5 extends GamePlay {
     if (this.arkian.dead && this.spawnTimer) {
       this.game.time.events.remove(this.spawnTimer);
       this.spawnTimer = null;
+      this.specialFx.weather.stopRain();
     }
 
     /**
