@@ -4,8 +4,8 @@ import Controls from '../../controls';
 import Actor from '../actor';
 
 const HeroConsts = {
-  PUNCH_DAMAGE: 15,
-  KICK_DAMAGE: 10,
+  PUNCH_DAMAGE: 10,
+  KICK_DAMAGE: 15,
   PUNCH_COOLDOWN: 100, // ms
   KICK_COOLDOWN: 80, // ms
   HEALTH: 100,
@@ -45,7 +45,7 @@ class Hero extends Actor {
       kick: anims.add('kick', [
         ...Phaser.Animation.generateFrameNames('hero_kick_', 1, 3, '', 2),
         'hero_kick_02',
-      ], 8, false),
+      ], 9, false),
       jump: anims.add('jump', [
         ...Phaser.Animation.generateFrameNames('hero_jump_', 1, 3, '', 2),
         'hero_jump_02',
