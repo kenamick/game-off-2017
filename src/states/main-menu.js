@@ -11,6 +11,7 @@ const MainMenuConsts = {
   options: [
     'PLAY',
     'CONTROLS',
+    'AUDIO',
     'CREDITS',
   ],
 };
@@ -105,8 +106,14 @@ class MainMenu extends Renderer {
       this.state.start('options');
     }
 
+    // start audio controls state
+    if (this.selectedOption == 2) {
+      this.audio.play(this.audio.sfx.hero.punch, 2);
+      this.state.start('options-audio');
+    }
+
     // start credits state
-    if(this.selectedOption == 2) {
+    if(this.selectedOption == 3) {
       this.audio.play(this.audio.sfx.hero.punch, 2);
       this.state.start('credits');
     }

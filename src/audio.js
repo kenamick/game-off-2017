@@ -2,6 +2,8 @@
 
 import Globals from './globals';
 
+const DEFAULT_FADEOUT = 2500;
+
 class Audio {
 
   static loadSfx(game) {
@@ -66,6 +68,9 @@ class Audio {
 
   constructor(game) {
     this.game = game;
+
+    this._soundsOn = Globals.noSounds == false;
+    this._musicOn = Globals.noMusic == false;
 
     this._current = null;
 
@@ -169,8 +174,21 @@ class Audio {
     };
   }
 
+  _canPlay(audio) {
+    if (!audio) 
+      return true;
+
+    if (audio && audio.name in this.musics) {
+      return this._musicOn;
+    }
+
+    return this._soundsOn;
+  }
+
   play(audio, key = 0) {
-    if (Globals.noSfx) return;
+    if (!this._canPlay(audio)) {
+      return;
+    }
 
     if(Array.isArray(audio)) {
       if (key === true) {
@@ -188,7 +206,9 @@ class Audio {
   }
 
   stop(audio = null, key = 0) {
-    if (Globals.noSfx) return;
+    if (!this._canPlay(audio)) {
+      return;
+    }
 
     if(audio) {
       if(Array.isArray(audio))
@@ -203,20 +223,34 @@ class Audio {
   }
 
   fadeOut(audio, key = 0) {
-    if (Globals.noSfx) return;
-
-    const FADEOUT = 2500;
+    if (!this._canPlay(audio)) {
+      return;
+    }
 
     if(audio) {
       if(Array.isArray(audio))
         audio[key].stop();
       else
-        audio.fadeOut(FADEOUT);
+        audio.fadeOut(DEFAULT_FADEOUT);
     }
     else if(this._current) {
-      this._current.fadeOut(FADEOUT);
+      this._current.fadeOut(DEFAULT_FADEOUT);
     }
+  }
 
+  set soundsOn(value) {
+    this._soundsOn = value;
+    localStorage.setItem(`noSounds`, !value);
+  }
+  get soundsOn() {
+    return this._soundsOn;
+  }
+  set musicOn(value) {
+    this._musicOn = value;
+    localStorage.setItem(`noMusic`, !value);
+  }
+  get musicOn() {
+    return this._musicOn;
   }
 }
 

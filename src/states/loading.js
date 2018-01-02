@@ -48,7 +48,7 @@ class Loading extends Renderer {
 
     // load audios
     let nextStateText = '';
-    if(this.nextState == 'intro') {
+    if (this.nextState == 'intro' || this.nextState == 'options-audio') {
       Audio.loadMusic(this.game, 'maintheme');
       nextStateText = 'INTRO';
     }

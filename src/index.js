@@ -6,6 +6,7 @@ import {
   Bootstrap,
   Preloader,
   MainMenu,
+  OptionsAudio,
   Options,
   Credits,
   Loading,
@@ -25,6 +26,7 @@ window.onload = function () {
   game.state.add('preload', Preloader);
   game.state.add('mainmenu', MainMenu);
   game.state.add('options', Options);
+  game.state.add('options-audio', OptionsAudio);
   game.state.add('credits', Credits);
   game.state.add('loading', Loading);
   game.state.add('intro', Intro);

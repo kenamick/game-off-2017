@@ -13,6 +13,8 @@ const Globals = {
   debug: checkStringBoolean(localStorage.getItem(`debug`)),
   debugPhysics: checkStringBoolean(localStorage.getItem(`debugPhysics`)),
   showFPS: checkStringBoolean(localStorage.getItem(`showFPS`)),
+  noSounds: checkStringBoolean(localStorage.getItem(`noSounds`)),
+  noMusic: checkStringBoolean(localStorage.getItem(`noMusic`)),
   // maybe add dev-* key to items' names so we can cycle through options
   // list and assign values automatically
   ...URLOptions, // url options override localSotrage values
