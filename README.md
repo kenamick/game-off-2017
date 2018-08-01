@@ -84,6 +84,7 @@ Notable tools used to create this game.
 # Licensing
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpetarov%2Fgame-off-2017.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpetarov%2Fgame-off-2017?ref=badge_shield)
 
 Source code is under MIT license, see [LICENSE](./LICENSE).
 
@@ -96,3 +97,6 @@ Assets are under CC BY 4.0 license, if no respective LICENSE file is present in 
 KickPunch is a GitHub [Game Off 2017](https://itch.io/jam/game-off-2017) entry.
 
 ![GitHub Game Off 2017 Game Jam](https://user-images.githubusercontent.com/18125109/31239479-d554f29c-a9c2-11e7-8138-71483d537ca9.gif)
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpetarov%2Fgame-off-2017.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpetarov%2Fgame-off-2017?ref=badge_large)
