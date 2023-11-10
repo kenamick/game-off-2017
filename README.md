@@ -2,7 +2,7 @@ KickPunch
 ============================
 
 :video_game: [game-off-2017](https://itch.io/jam/game-off-2017) challenge entry. 
-[**Play now**](https://kenamick.itch.io/kickpunch) | [**Watch Video**](https://www.youtube.com/watch?v=I8-4hi568uE)
+[**Play on itch.io**](https://kenamick.itch.io/kickpunch) | [**Play on Newgrounds**](https://www.newgrounds.com/portal/view/721880) | [**Watch Video**](https://www.youtube.com/watch?v=I8-4hi568uE)
 
 KickPunch is an old school Beat-'em-up game. Get your fighting skills tested by defeating all enemies in this three level action game.
 
